@@ -4,6 +4,6 @@ namespace Twins.Models
 {
     partial class Deck
     {
-        List<Card> cards;
+        public List<Card> Cards { get; }
     }
 }
