@@ -10,7 +10,7 @@ namespace Twins
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new Views.BoardView();
         }
 
         protected override void OnStart()
