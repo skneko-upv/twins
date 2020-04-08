@@ -8,9 +8,44 @@
 
     <StackLayout>
         <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+        <ImageButton Source="C:\Users\juanc\source\repos\skneko\twins\Twins\Twins\Images\options.jpg"
+                HorizontalOptions="Start" 
+                VerticalOptions="Start"
+                ScaleX="0.1"
+                ScaleY="0.1"
+        />
+        <Image Source="C:\Users\juanc\source\repos\skneko\twins\Twins\Twins\Images\Title.jpg"
+            HorizontalOptions="Center"
+               VerticalOptions="Start"/>
+        
+        <Button Text="HISTORIA" 
+           HorizontalOptions="Center" 
+           VerticalOptions="Center"
+                ScaleX="1.6"
+        />
+        <Button Text="JUEGO LIBRE" 
+            HorizontalOptions="CenterAndExpand" 
+            VerticalOptions="Center"
+                ScaleX="1.3"
+        />
+        <Button Text="MULTIJUGADOR" 
+            HorizontalOptions="CenterAndExpand" 
+            VerticalOptions="Center"
+                ScaleX="1.1"
+        />
+        <Button Text="DESAFIOS" 
+            HorizontalOptions="CenterAndExpand" 
+            VerticalOptions="Center"
+                ScaleX="1.6"
+        />
+        <Button Text="MIS BARAJAS" 
+            HorizontalOptions="CenterAndExpand" 
+            VerticalOptions="Center"
+            ScaleY="0.8"
+            ScaleX="1.3"
+        />
+
     </StackLayout>
+   
 
 </ContentPage>
