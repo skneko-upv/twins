@@ -3,50 +3,60 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Text;
+using Xamarin.Forms;
 
 namespace Twins.Logic
 {
     //Clase que implementa la funcionalidad de cronómetro y temporizador 
     public class Clock
     {
-        private Stopwatch clock = null;
-        // Variable usada por el temporizador
-        private TimeSpan timeLimit = TimeSpan.MaxValue;
-        private int turn = 1;
+        private readonly Stopwatch clock = null;
 
-        //Inicializa el Stopwatch
-        private void initializeStopwatch() { clock = new Stopwatch(); }
+        // Variable usada por el temporizador
+        private TimeSpan timeLimit;
+        public bool IsCountingDown { get; private set; } = false;
+        public event Action TimedOut;
+
 
         //Inicializa el cronómetro
-        public Clock() { initializeStopwatch(); }
+        public Clock() { clock = new Stopwatch(); }
 
         //Inicializa el temporizador
-        public Clock(String maxTime) {
-            initializeStopwatch();
-            timeLimit = stringToTimeSpan(maxTime);
+        public Clock(TimeSpan maxTime) : this() {
+            IsCountingDown = true;
+            timeLimit = maxTime;
+            
+            Device.StartTimer(TimeSpan.FromMilliseconds(500.0), () => {
+                if (clock.ElapsedMilliseconds >= timeLimit.TotalMilliseconds) {
+                    TimedOut();
+                    return false;
+                }
+                return true;
+            });
         }
         
-        //Devuelve referencia al cronómetro
-        public Stopwatch getStopwatch() { return clock; }
 
-        public void startStopwatch() { clock.Start(); }
+        public void Start() { clock.Start(); }
 
-        public void stopStopwatch() { clock.Stop(); }
+        public void Stop() { clock.Stop(); }
 
-        public void restartStopwatch() { clock.Restart(); }
+        public void Restart() { clock.Restart(); }
 
-        public void nextTurn() {
-            turn++;
-            restartStopwatch();
-        }
+        public void Reset() { clock.Reset(); }
 
-        public int getTurn() { return turn; }
+        public bool IsRunning() { return clock.IsRunning; }
 
         //Convierte el tiempo actual del Stopwatch en TimeSpan y lo devuelve
-        public TimeSpan getTimeSpan(Stopwatch reloj) { return new TimeSpan(0, 0, 0, 0, (int)reloj.ElapsedMilliseconds); }
+        public TimeSpan GetTimeSpan() {
+            var elapsedTime = new TimeSpan(0, 0, 0, 0, (int)clock.ElapsedMilliseconds);
+            return IsCountingDown ? timeLimit - elapsedTime : elapsedTime;
+        }
 
+
+
+        /*
         //Necesita un formato MM:SS o MM:SS:mmm
-        public static TimeSpan stringToTimeSpan(String time) {
+        public static TimeSpan StringToTimeSpan(String time) {
             string[] separateNumbers = time.Split(':');
             if (separateNumbers.Length < 2 || separateNumbers.Length > 3) { throw new FormatException(); }
 
@@ -56,7 +66,7 @@ namespace Twins.Logic
 
         //Transforma un TimeSpan proporcionado a String de formato MM:SS:mmm
         //Anotación: Acepta un formato HH:MM:SS:mmm, los dias no se cuentan
-        public String timeSpanToString(TimeSpan tiempo) {
+        public String TimeSpanToString(TimeSpan tiempo) {
             String minutesElapsed = ((System.Convert.ToInt32(tiempo.Hours.ToString())) * 60
                                     + (System.Convert.ToInt32(tiempo.Minutes.ToString())).ToString().Length) < 2 ?
                                                             "0" + tiempo.Minutes.ToString() : tiempo.Minutes.ToString();
@@ -67,10 +77,11 @@ namespace Twins.Logic
         }
 
         //Devuelve el tiempo transcurrido o restante dependiendo si es cronómetro o temporizador en MM:SS:mmm
-        public String toString() {
+        public String ToString() {
             //Para diferenciar si es cronómetro o temporizador se usa la variable 'timeLimit' 
             // inicializada al MaxValue de TimeSpan para selañar que es un cronómetro
-            return timeSpanToString(timeLimit.Equals(TimeSpan.MaxValue) ? getTimeSpan(clock) : timeLimit - getTimeSpan(clock));
+            return timeSpanToString(timeLimit.Equals(TimeSpan.MaxValue) ? getTimeSpan() : timeLimit - getTimeSpan());
         }
+        */
     }
 }
