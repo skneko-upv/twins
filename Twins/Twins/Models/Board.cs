@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Diagnostics;
 
 namespace Twins.Models
 {
@@ -8,9 +8,6 @@ namespace Twins.Models
     {
         public static bool IsValidSize(int height, int width)
             => height * width % 2 == 0;
-
-        public static bool IsDeckBigEnough(Deck deck, int height, int width)
-            => deck.Cards.Count >= height * width / 2;
 
         public int Height { get; }
 
@@ -20,33 +17,131 @@ namespace Twins.Models
 
         public Deck Deck { get; }
 
+        /// <summary>
+        /// The reference card shown to the player to help them achieve
+        /// successful matches.
+        /// </summary>
         public Card ReferenceCard {
-            get => referenceCard;
+            get => _referenceCard;
             set {
-                referenceCard = value;
-                ReferenceChanged(value);
+                _referenceCard = value;
+                ReferenceCardChanged(value);
             } 
         }
-        private Card referenceCard;
+        private Card _referenceCard;
 
-        public Cell FlippedCard { get; private set; }
+        /// <summary>
+        /// The cells temporarily flipped by the player in this time unit, e.g. the current turn.
+        /// </summary>
+        /// <remarks>
+        /// This list does not include cells locked in a revealed position.
+        /// </remarks>
+        public ICollection<Cell> FlippedCells { get; private set; }
 
-        public event Action<Card> ReferenceChanged;
+        /// <summary>
+        /// Occurs when the reference card to display has changed.
+        /// </summary>
+        public event Action<Card> ReferenceCardChanged;
 
-        public event Action<Cell> CardFlipped;
+        /// <summary>
+        /// Occurs when a cell is flipped by the player.
+        /// </summary>
+        public event Action<Cell> CellFlipped;
 
-        public event Action<Cell, bool> RevealedCardsChanged;
+        /// <summary>
+        /// Occurs when a cell is put back by the player.
+        /// </summary>
+        public event Action<Cell> CellUnflipped;
 
-        public IReadOnlyCollection<Cell> Cells => cellMap.Values;
+        /// <summary>
+        /// Occurs when a cell is locked in a revealed position, or when this status is reversed.
+        /// </summary>
+        /// <remarks>
+        /// A cell locked in a revealed position will remain flipped independently of the game
+        /// logic, and the player will not be able to put it back.
+        /// The boolean value passed to the event handler will be <c>true</c> if the cell has been
+        /// locked into a revealed position, or <c>false</c> if it is no longer locked.
+        /// </remarks>
+        public event Action<Cell, bool> CellKeepRevealedStatusChanged;
 
-        public Board(int height, int width, Game game, Deck deck)
+        public Cell[,] Cells { get; private set; }
+
+        readonly IBoardPopulationStrategy populationStrategy;
+
+        /// <summary>
+        /// Create a new board populated randomly.
+        /// </summary>
+        public Board(int height, int width, Game game, Deck deck, IBoardPopulationStrategy populationStrategy)
         {
+            Debug.Assert(IsValidSize(height, width));
+
             Height = height;
             Width = width;
             Game = game;
             Deck = deck;
 
-            Initialize();
+            this.populationStrategy = populationStrategy;
+            Populate();
+        }
+
+        /// <summary>
+        /// Create a new board from the given cell matrix.
+        /// </summary>
+        public Board(int height, int width, Game game, Deck deck, Cell[,] cells)
+        {
+            Debug.Assert(IsValidSize(height, width));
+
+            Height = height;
+            Width = width;
+            Game = game;
+            Deck = deck;
+            Cells = cells;
+        }
+
+        public Cell this[int row, int column]
+            => Cells[row, column];
+
+        public void FlipCell(int row, int column)
+        {
+            var flipped = this[row, column];
+
+            if (flipped.KeepRevealed)
+            {
+                throw new InvalidOperationException();
+            }
+
+            FlippedCells.Add(flipped);
+            CellFlipped(flipped);
+        }
+
+        public void UnflipCell(int row, int column)
+        {
+            var flipped = this[row, column];
+
+            if (flipped.KeepRevealed || !FlippedCells.Contains(flipped))
+            {
+                throw new InvalidOperationException();
+            }
+
+            FlippedCells.Remove(flipped);
+            CellUnflipped(flipped);
+        }
+
+        public void UnflipAllCells()
+        {
+            foreach (Cell cell in FlippedCells)
+            {
+                CellUnflipped(cell);
+            }
+            FlippedCells.Clear();
+        }
+
+        public void SetCellKeepRevealed(int row, int column, bool keepRevealed)
+        {
+            var cell = this[row, column];
+
+            cell.KeepRevealed = keepRevealed;
+            CellKeepRevealedStatusChanged(cell, keepRevealed);
         }
     }
 }
