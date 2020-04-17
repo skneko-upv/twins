@@ -131,7 +131,10 @@ namespace Twins.Models
         {
             foreach (Cell cell in FlippedCells)
             {
-                CellUnflipped(cell);
+                if (!cell.KeepRevealed)
+                {
+                    CellUnflipped(cell);
+                }
             }
             FlippedCells.Clear();
         }
