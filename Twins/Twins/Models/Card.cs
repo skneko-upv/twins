@@ -7,10 +7,9 @@ namespace Twins.Models
 {
     public partial class Card
     {
-        private ImageSource image;
-        private bool flipped;
-
-        public bool Flipped { get => flipped; set => flipped = value; }
-        public ImageSource Image { get => image; set => image = value; }
+        public ImageSource Image { get; set; }
+        public bool Flipped { get; set; }
+        public int Id { get; set; }
+        public Card Pair { get; set; }
     }
 }

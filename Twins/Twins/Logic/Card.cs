@@ -26,7 +26,7 @@ namespace Twins.Models
 
         public bool Equals(Card otherCard) 
         {
-            return Image.Equals(otherCard.Image);
+            return this.Id == otherCard.Id;
         }
     }
 }

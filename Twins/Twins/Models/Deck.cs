@@ -7,10 +7,8 @@ namespace Twins.Models
 {
     public partial class Deck
     {
-        private ImageSource backImage;
-        private List<Card> cards;
-
-        public ImageSource BackImage { get => backImage; set => backImage = value; }
-        public List<Card> Cards { get => cards; set => cards = value; }
+        public ImageSource BackImage { get; set; }
+        public List<Card> Cards { get; set; }
+    
     }
 }

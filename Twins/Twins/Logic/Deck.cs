@@ -10,12 +10,18 @@ namespace Twins.Models
         public Deck(ImageSource backImage, Queue<ImageSource> imageCards) 
         {
             this.BackImage = backImage;
-            this.cards = new List<Card>();
+            this.Cards = new List<Card>();
+
+            Card cardA, cardB;
 
             foreach (ImageSource image in imageCards) 
             {
-                this.cards.Add(new Card(image));
-                this.cards.Add(new Card(image));
+                cardA = new Card(image);
+                cardB = new Card(image);
+                cardA.Pair = cardB;
+                cardB.Pair = cardA;
+                this.Cards.Add(cardA);
+                this.Cards.Add(cardB);
             }
         }
     }
