@@ -2,6 +2,6 @@
 {
     abstract partial class Game
     {
-
+        public Board Board;
     }
 }
