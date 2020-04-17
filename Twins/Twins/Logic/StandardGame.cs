@@ -7,14 +7,18 @@ namespace Twins.Models
     {
         const int GroupSize = 2;
 
-        int remainingMatches;
+        public Deck Deck { get; }
+
+        public int RemainingMatches { get; private set; }
 
         public StandardGame(int height, int width, Deck deck)
         {
             var populationStrategy = new CyclicRandomPopulationStrategy(GroupSize);
             Board = new Board(height, width, this, deck, populationStrategy);
 
-            remainingMatches = height * width / GroupSize;
+            Deck = deck;
+
+            RemainingMatches = height * width / GroupSize;
 
             Board.CellFlipped += OnCellFlipped;
         }
@@ -38,12 +42,14 @@ namespace Twins.Models
 
             if (isMatch)
             {
+                MatchSuccesses++;
+
                 foreach (var cell in Board.FlippedCells) {
                     Board.SetCellKeepRevealed(cell.Row, cell.Column, true);
                 }
 
-                remainingMatches--;
-                if (remainingMatches <= 0)
+                RemainingMatches--;
+                if (RemainingMatches <= 0)
                 {
                     Win();
                 }
@@ -51,6 +57,7 @@ namespace Twins.Models
             }
             else
             {
+                MatchFailures++;
                 // TODO
             }
 
