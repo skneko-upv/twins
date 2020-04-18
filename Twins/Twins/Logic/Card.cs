@@ -8,10 +8,11 @@ namespace Twins.Models
 {
     public partial class Card
     {
-        public Card(ImageSource image) 
+        public Card(ImageSource image, int id) 
         {
             this.Image = image;
             this.Flipped = false;
+            this.Id = id;
         }
 
         public void Flip() 

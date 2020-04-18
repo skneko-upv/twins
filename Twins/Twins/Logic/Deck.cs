@@ -13,15 +13,17 @@ namespace Twins.Models
             this.Cards = new List<Card>();
 
             Card cardA, cardB;
-
+            
+            int i = 0;
             foreach (ImageSource image in imageCards) 
             {
-                cardA = new Card(image);
-                cardB = new Card(image);
+                cardA = new Card(image, i);
+                cardB = new Card(image, i);
                 cardA.Pair = cardB;
                 cardB.Pair = cardA;
                 this.Cards.Add(cardA);
                 this.Cards.Add(cardB);
+                i++;
             }
         }
     }
