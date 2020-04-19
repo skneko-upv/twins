@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using Twins.Views.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,28 +8,13 @@ namespace Twins.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BoardView : ContentPage
     {
-        static double GetWidth(RelativeLayout parent, View view) =>
-            view?.Measure(parent.Width, parent.Height).Request.Width ?? -1;
-        static double GetHeight(RelativeLayout parent, View view) =>
-            view?.Measure(parent.Width, parent.Height).Request.Height ?? -1;
-
         private double UsableBoardAreaSize { get { return Math.Min(boardArea.Width, boardArea.Height); } }
 
         public BoardView()
         {
             InitializeComponent();
 
-            boardArea.LayoutChanged += EnforceBoardAspectRatio;
-
-            boardArea.Children.Add(cardPreviewFrame,
-                /* X */
-                Constraint.RelativeToParent(parent => parent.Width / 2 - GetWidth(parent, cardPreviewFrame) / 2),
-                /* Y */
-                Constraint.RelativeToParent(parent => 0),
-                /* Width */
-                Constraint.RelativeToParent(_ => board.Children.First().Width),
-                /* Height */
-                Constraint.RelativeToParent(_ => board.Children.First().Height));
+            boardArea.LayoutChanged += EnforceBoardAspectRatio;   
         }
 
         private void EnforceBoardAspectRatio(object sender = null, EventArgs e = null)
@@ -51,6 +32,16 @@ namespace Twins.Views
                 board.HeightRequest = cellSide * rows;
                 InvalidateMeasure();
             }
+        }
+
+        private void OnPause(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnMute(object sender, EventArgs e)
+        {
+
         }
     }
 }
