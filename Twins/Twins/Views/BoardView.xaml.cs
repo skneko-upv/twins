@@ -1,5 +1,5 @@
 ﻿using System;
-using Twins.Views.Utils;
+//using Twins.Views.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
