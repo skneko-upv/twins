@@ -5,26 +5,29 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Twins.MainPage">
-    <StackLayout Orientation="Vertical">
-    <StackLayout VerticalOptions="Start">
-        <ImageButton
-                Source="C:\Users\juanc\Source\Repos\skneko\twins\Twins\Twins.UWP\Assets\Icons\logout.png"
-                Padding="15"
-                HorizontalOptions="Start"
-                VerticalOptions="Start"
-                />
-        <ImageButton
-            Source="C:\Users\juanc\Source\Repos\skneko\twins\Twins\Twins.UWP\Assets\Icons\Options.png" 
-                Padding="15"
-                HorizontalOptions="Start"
-                VerticalOptions="Start"
-                />
-        <ImageButton
-                Source="C:\Users\juanc\Source\Repos\skneko\twins\Twins\Twins.UWP\Assets\Icons\volume.png" 
-                 Padding="15"
-                HorizontalOptions="EndAndExpand"
-                VerticalOptions="Start"/>
-
+    <StackLayout>
+        <StackLayout VerticalOptions="Start" Orientation="Horizontal">
+            <ImageButton
+                    BackgroundColor="Black"
+                    Source="Assets\Icons\logout.png"
+                    Padding="15"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    />
+            <ImageButton
+                BackgroundColor="Black"
+                Source="Assets\Icons\Options.png" 
+                    Padding="15"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    />
+            <ImageButton
+                BackgroundColor="Black"
+                    Source="Assets\Icons\volume.png" 
+                     Padding="15"
+                    HorizontalOptions="EndAndExpand"
+                    VerticalOptions="Start"/>
+        </StackLayout>
         <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
 
             <Label Text="TWINS" FontSize="Header" VerticalOptions="StartAndExpand" HorizontalOptions="Center"/>
@@ -54,7 +57,6 @@
                 />
             </StackLayout>
         </StackLayout>
-    </StackLayout>
     </StackLayout>
 
 </ContentPage>
