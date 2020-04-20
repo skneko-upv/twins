@@ -5,47 +5,56 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Twins.MainPage">
-
-    <StackLayout>
-        <!-- Place new controls here -->
-        <ImageButton Source="C:\Users\juanc\source\repos\skneko\twins\Twins\Twins\Images\options.jpg"
-                HorizontalOptions="Start" 
+    <StackLayout Orientation="Vertical">
+    <StackLayout VerticalOptions="Start">
+        <ImageButton
+                Source="C:\Users\juanc\Source\Repos\skneko\twins\Twins\Twins.UWP\Assets\Icons\logout.png"
+                Padding="15"
+                HorizontalOptions="Start"
                 VerticalOptions="Start"
-                ScaleX="0.1"
-                ScaleY="0.1"
-        />
-        <Image Source="C:\Users\juanc\source\repos\skneko\twins\Twins\Twins\Images\Title.jpg"
-            HorizontalOptions="Center"
-               VerticalOptions="Start"/>
-        
-        <Button Text="HISTORIA" 
-           HorizontalOptions="Center" 
-           VerticalOptions="Center"
-                ScaleX="1.6"
-        />
-        <Button Text="JUEGO LIBRE" 
-            HorizontalOptions="CenterAndExpand" 
-            VerticalOptions="Center"
-                ScaleX="1.3"
-        />
-        <Button Text="MULTIJUGADOR" 
-            HorizontalOptions="CenterAndExpand" 
-            VerticalOptions="Center"
-                ScaleX="1.1"
-        />
-        <Button Text="DESAFIOS" 
-            HorizontalOptions="CenterAndExpand" 
-            VerticalOptions="Center"
-                ScaleX="1.6"
-        />
-        <Button Text="MIS BARAJAS" 
-            HorizontalOptions="CenterAndExpand" 
-            VerticalOptions="Center"
-            ScaleY="0.8"
-            ScaleX="1.3"
-        />
+                />
+        <ImageButton
+            Source="C:\Users\juanc\Source\Repos\skneko\twins\Twins\Twins.UWP\Assets\Icons\Options.png" 
+                Padding="15"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                />
+        <ImageButton
+                Source="C:\Users\juanc\Source\Repos\skneko\twins\Twins\Twins.UWP\Assets\Icons\volume.png" 
+                 Padding="15"
+                HorizontalOptions="EndAndExpand"
+                VerticalOptions="Start"/>
 
+        <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+
+            <Label Text="TWINS" FontSize="Header" VerticalOptions="StartAndExpand" HorizontalOptions="Center"/>
+
+            <StackLayout HorizontalOptions="Center" >
+
+                <Button Text="HISTORIA" 
+                    HorizontalOptions="Center" 
+                    VerticalOptions="End"
+               />
+                <Button Text="JUEGO LIBRE" 
+                    HorizontalOptions="Center" 
+                    VerticalOptions="End"
+                />
+                <Button Text="MULTIJUGADOR" 
+                    HorizontalOptions="Center" 
+                    VerticalOptions="End"
+                />
+                <Button Text="DESAFIOS" 
+                    HorizontalOptions="Center" 
+                    VerticalOptions="End"
+                />
+                <Button Text="MIS BARAJAS" 
+                    HorizontalOptions="Center" 
+                    VerticalOptions="End"
+                    ScaleY="0.8"
+                />
+            </StackLayout>
+        </StackLayout>
     </StackLayout>
-   
+    </StackLayout>
 
 </ContentPage>
