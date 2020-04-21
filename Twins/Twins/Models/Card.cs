@@ -2,7 +2,7 @@
 
 namespace Twins.Models
 {
-    partial class Card : IEquatable<Card>
+    public partial class Card : IEquatable<Card>
     {
         readonly int id;
 

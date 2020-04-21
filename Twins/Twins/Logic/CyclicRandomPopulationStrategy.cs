@@ -5,7 +5,7 @@ using static Twins.Models.Board;
 
 namespace Twins.Logic
 {
-    class CyclicRandomPopulationStrategy : IBoardPopulationStrategy
+    public class CyclicRandomPopulationStrategy : IBoardPopulationStrategy
     {
         /// <summary>
         /// The size of the groups of cards to match.

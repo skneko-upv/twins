@@ -1,6 +1,6 @@
 ﻿namespace Twins.Models
 {
-    abstract partial class Game
+    public abstract partial class Game
     {
         public int Turn { get; protected set; } = 1;
         public int MatchSuccesses { get; protected set; } = 0;

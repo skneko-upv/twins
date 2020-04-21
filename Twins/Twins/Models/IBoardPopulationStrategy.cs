@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Twins.Models
 {
-    interface IBoardPopulationStrategy
+    public interface IBoardPopulationStrategy
     {
         Board.Cell[,] Populate(int height, int width, Deck deck);
     }

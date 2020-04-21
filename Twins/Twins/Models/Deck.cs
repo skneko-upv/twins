@@ -2,7 +2,7 @@
 
 namespace Twins.Models
 {
-    partial class Deck
+    public partial class Deck
     {
         public List<Card> Cards { get; }
     }
