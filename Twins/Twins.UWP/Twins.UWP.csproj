@@ -103,6 +103,14 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Backgrounds\menuprincipal.png" />
+    <Content Include="Assets\Backgrounds\menuprincipal2.png" />
+    <Content Include="Assets\Icons\logout.png" />
+    <Content Include="Assets\Icons\mute.png" />
+    <Content Include="Assets\Icons\Options.png" />
+    <Content Include="Assets\Icons\title.png" />
+    <Content Include="Assets\Icons\title2.png" />
+    <Content Include="Assets\Icons\volume.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
@@ -153,6 +161,7 @@
       <Name>Twins</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

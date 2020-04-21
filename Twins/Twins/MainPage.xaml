@@ -4,39 +4,62 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Twins.MainPage">
+             x:Class="Twins.MainPage"
+             BackgroundImageSource="Assets/Backgrounds/menuprincipal2.png">
+    <ContentPage.Resources>
+        <Style x:Key="baseButtonStyle" TargetType="buttons:SfButton">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="CornerRadius" Value="20" />
+            <Setter Property="BackgroundColor" Value="White" />
+            <Setter Property="BorderColor" Value="Black" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="mouseOverButtonStyle" BaseResourceKey="baseButtonStyle" TargetType="buttons:SfButton">
+            <Setter Property="BackgroundColor" Value="WhiteSmoke"/>
+        </Style>
+    </ContentPage.Resources>
+
     <StackLayout>
+        
         <StackLayout VerticalOptions="Start" Orientation="Horizontal">
             <ImageButton
-                    BackgroundColor="Black"
+
                     Source="Assets\Icons\logout.png"
                     Padding="15"
                     HorizontalOptions="Start"
                     VerticalOptions="Start"
                     />
             <ImageButton
-                BackgroundColor="Black"
+
                 Source="Assets\Icons\Options.png" 
                     Padding="15"
                     HorizontalOptions="Start"
                     VerticalOptions="Start"
                     />
             <ImageButton
-                BackgroundColor="Black"
                     Source="Assets\Icons\volume.png" 
                      Padding="15"
                     HorizontalOptions="EndAndExpand"
                     VerticalOptions="Start"/>
         </StackLayout>
-        <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+        <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="50">
 
-            <Label Text="TWINS" FontSize="Header" VerticalOptions="StartAndExpand" HorizontalOptions="Center"/>
+            <!-- <Label Text="TWINS" FontSize="Header" VerticalOptions="StartAndExpand" HorizontalOptions="Center"/> -->
+
+            <Image Source="Assets/Icons/title.png"  
+                   VerticalOptions="StartAndExpand" 
+                   HorizontalOptions="Center"
+                   HeightRequest="150"/>
 
             <StackLayout HorizontalOptions="Center" >
 
+                <Button:
+                
                 <Button Text="HISTORIA" 
                     HorizontalOptions="Center" 
                     VerticalOptions="End"
+                    
                />
                 <Button Text="JUEGO LIBRE" 
                     HorizontalOptions="Center" 
