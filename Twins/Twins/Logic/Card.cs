@@ -11,18 +11,7 @@ namespace Twins.Models
         public Card(ImageSource image, int id) 
         {
             this.Image = image;
-            this.Flipped = false;
             this.Id = id;
-        }
-
-        public void Flip() 
-        {
-            this.Flipped = true;
-        }
-
-        public void Unflip()
-        {
-            this.Flipped = false;
         }
 
         public bool Equals(Card otherCard) 

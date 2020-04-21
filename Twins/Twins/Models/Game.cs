@@ -1,6 +1,6 @@
 ﻿namespace Twins.Models
 {
-    abstract partial class Game
+    public abstract partial class Game
     {
         public Board Board;
     }

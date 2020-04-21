@@ -9,7 +9,6 @@
     <Button
             x:Name="button"
             BackgroundColor="Transparent"
-            ImageSource="Assets/Cards/backimage.png"
             
             BorderRadius="10"
             VerticalOptions="Center"

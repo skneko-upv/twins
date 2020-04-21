@@ -12,25 +12,27 @@ namespace Twins.Components
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CardComponent : StackLayout
     {
-        private Card Card { get; }
-        private ImageSource BackImage { get; }
+        private Board.Cell CellBoard { get; }
+        private Deck Deck { get; }
+        private bool Flipped { get; set; }
 
         public CardComponent()
         {
             InitializeComponent();
-            BackImage = ImageSource.FromFile("Assets/Cards/backimage.png");
         }
 
-        public CardComponent(Card card)
+        public CardComponent(Board.Cell cell, Deck deck)
         {
             InitializeComponent();
-            BackImage = ImageSource.FromFile("Assets/Cards/backimage.png");
-            Card = card;
+            Deck = deck;
+            CellBoard = cell;
+            Flipped = false;
+            button.ImageSource = deck.BackImage;
         }
 
         private async void CardClicked(object sender, EventArgs e)
         {
-            if (!Card.Flipped)
+            if (!Flipped)
             {
                 await CardFlip();
             }
@@ -44,17 +46,17 @@ namespace Twins.Components
 
         public async Task CardFlip() 
         {
-            Card.Flipped = true;
+            Flipped = true;
             await AnimationFlip(90, 150);
-            button.ImageSource = Card.Image;
+            button.ImageSource = CellBoard.Card.Image;
             await AnimationFlip(180, 150);
         }
 
         public async Task CardUnflip()
         {
-            Card.Flipped = false;
+            Flipped = false;
             await AnimationFlip(90, 150);
-            button.ImageSource = BackImage;
+            button.ImageSource = Deck.BackImage;
             await AnimationFlip(0, 150);
         }
 
