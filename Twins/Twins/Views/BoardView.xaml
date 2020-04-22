@@ -7,8 +7,8 @@
              x:Class="Twins.Views.BoardView">
     <ContentPage.Content>
         <AbsoluteLayout BackgroundColor="{StaticResource backgroundColor}">
-            <StackLayout Orientation="Horizontal"
-                         AbsoluteLayout.LayoutBounds=".5,.03,.95,.1"
+            <Grid
+                AbsoluteLayout.LayoutBounds=".5,.03,.95,.25"
                          AbsoluteLayout.LayoutFlags="All">
                 <StackLayout Orientation="Horizontal"
                              VerticalOptions="Start">
@@ -17,11 +17,23 @@
                     <Button Text="Silenciar"
                             Clicked="OnMute" />
                 </StackLayout>
-                <BoxView Color="Red"
-                         HeightRequest="150"
-                         WidthRequest="150"
-                         HorizontalOptions="Center">
-                </BoxView>
+                <Grid
+                      BackgroundColor="Black"
+                      HeightRequest="175"
+                      WidthRequest="175"
+                      HorizontalOptions="Center"
+                      VerticalOptions="Center">
+                    <Grid
+                        BackgroundColor="{StaticResource backgroundColor}"
+                        HeightRequest="170"
+                        WidthRequest="170"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center">
+                        
+                        <!-- Mete aqui la carta seleccionada! -->
+                        
+                    </Grid>
+                </Grid>
                 <StackLayout Orientation="Vertical"
                          HorizontalOptions="EndAndExpand"
                          VerticalOptions="Start"
@@ -44,8 +56,8 @@
                         <Label>00</Label>
                     </StackLayout>
                 </StackLayout>
-            </StackLayout>
-            <ContentView AbsoluteLayout.LayoutBounds=".5,.75,.9,.75"
+            </Grid>
+            <ContentView AbsoluteLayout.LayoutBounds=".5,.75,.9,.60"
                          AbsoluteLayout.LayoutFlags="All">
                 <RelativeLayout x:Name="boardArea">
                     <Grid x:Name="board"
