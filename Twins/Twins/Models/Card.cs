@@ -4,6 +4,8 @@ namespace Twins.Models
 {
     public partial class Card : IEquatable<Card>
     {
+        public Deck Deck { get; }
+
         readonly int id;
 
         public bool Equals(Card other) 

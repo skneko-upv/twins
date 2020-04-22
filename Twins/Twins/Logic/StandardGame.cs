@@ -13,8 +13,8 @@ namespace Twins.Models
 
         public StandardGame(int height, int width, Deck deck)
         {
-            var populationStrategy = new CyclicRandomPopulationStrategy(GroupSize);
-            Board = new Board(height, width, this, deck, populationStrategy);
+            var populationStrategy = new CyclicRandomPopulationStrategy(GroupSize, deck);
+            Board = new Board(height, width, this, populationStrategy);
 
             Deck = deck;
 
@@ -65,9 +65,19 @@ namespace Twins.Models
             Board.ReferenceCard = null;
         }
 
-        public void Win()
+        public override void Win()
         {
-            // TODO
+            throw new System.NotImplementedException();
+        }
+
+        public override void Resume()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pause()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

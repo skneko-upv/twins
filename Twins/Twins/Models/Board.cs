@@ -6,16 +6,11 @@ namespace Twins.Models
 {
     public partial class Board
     {
-        public static bool IsValidSize(int height, int width)
-            => height * width % 2 == 0;
-
         public int Height { get; }
 
         public int Width { get; }
 
         public Game Game { get; }
-
-        public Deck Deck { get; }
 
         /// <summary>
         /// The reference card shown to the player to help them achieve
@@ -71,14 +66,11 @@ namespace Twins.Models
         /// <summary>
         /// Create a new board populated randomly.
         /// </summary>
-        public Board(int height, int width, Game game, Deck deck, IBoardPopulationStrategy populationStrategy)
+        public Board(int height, int width, Game game, IBoardPopulationStrategy populationStrategy)
         {
-            Debug.Assert(IsValidSize(height, width));
-
             Height = height;
             Width = width;
             Game = game;
-            Deck = deck;
 
             this.populationStrategy = populationStrategy;
             Populate();
@@ -89,12 +81,9 @@ namespace Twins.Models
         /// </summary>
         public Board(int height, int width, Game game, Deck deck, Cell[,] cells)
         {
-            Debug.Assert(IsValidSize(height, width));
-
             Height = height;
             Width = width;
             Game = game;
-            Deck = deck;
             Cells = cells;
         }
 

@@ -5,7 +5,7 @@ namespace Twins.Models
 {
     public interface IBoardPopulationStrategy
     {
-        Board.Cell[,] Populate(int height, int width, Deck deck);
+        Board.Cell[,] Populate(int height, int width);
     }
 
     public static class CollectionExtensions

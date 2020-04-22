@@ -4,7 +4,7 @@
     {
         void Populate()
         {
-            Cells = populationStrategy.Populate(Height, Width, Deck);
+            Cells = populationStrategy.Populate(Height, Width);
         }
     }
 }
