@@ -15,7 +15,7 @@ namespace Twins.Components
         public static BasicDeck CreateBasicDeck() 
         {
             Queue<ImageSource> imageCards = new Queue<ImageSource>();
-            for (int i = 1; i < 10; i++)
+            for (int i = 1; i < 13; i++)
                 imageCards.Enqueue(ImageSource.FromFile("Assets/Cards/card" + i + ".png"));
             return new BasicDeck(ImageSource.FromFile("Assets/Cards/backimage.png"), imageCards);
         }
