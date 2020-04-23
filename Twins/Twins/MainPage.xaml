@@ -8,25 +8,26 @@
     <StackLayout>
         <StackLayout VerticalOptions="Start" Orientation="Horizontal">
             <ImageButton
-                    BackgroundColor="Black"
-                    Source="Assets\Icons\logout.png"
+                    Source="\Assets\Icons\Options.png"
                     Padding="15"
                     HorizontalOptions="Start"
                     VerticalOptions="Start"
+                    Clicked="OnOption"
                     />
             <ImageButton
-                BackgroundColor="Black"
-                Source="Assets\Icons\Options.png" 
+                    Source="Assets\Icons\mute.png" 
                     Padding="15"
                     HorizontalOptions="Start"
                     VerticalOptions="Start"
+                    Clicked ="OnMute"
                     />
             <ImageButton
-                BackgroundColor="Black"
-                    Source="Assets\Icons\volume.png" 
-                     Padding="15"
+                    Source="Assets\Icons\logout.png" 
+                    Padding="15"
                     HorizontalOptions="EndAndExpand"
-                    VerticalOptions="Start"/>
+                    VerticalOptions="Start"
+                    Clicked="OnLogout"
+                    />
         </StackLayout>
         <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
 
@@ -37,23 +38,28 @@
                 <Button Text="HISTORIA" 
                     HorizontalOptions="Center" 
                     VerticalOptions="End"
+                    Clicked="OnHistoryGame"
                />
                 <Button Text="JUEGO LIBRE" 
                     HorizontalOptions="Center" 
                     VerticalOptions="End"
+                    Clicked="OnFreeGame"
                 />
                 <Button Text="MULTIJUGADOR" 
                     HorizontalOptions="Center" 
                     VerticalOptions="End"
+                    Clicked="OnMultiplayerGame"
                 />
                 <Button Text="DESAFIOS" 
                     HorizontalOptions="Center" 
                     VerticalOptions="End"
+                    Clicked="OnChallengeGame"
                 />
                 <Button Text="MIS BARAJAS" 
                     HorizontalOptions="Center" 
                     VerticalOptions="End"
                     ScaleY="0.8"
+                    Clicked="OnDesck"
                 />
             </StackLayout>
         </StackLayout>

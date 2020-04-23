@@ -18,5 +18,39 @@ namespace Twins
             InitializeComponent();
         }
 
+        void OnOption(object sender, EventArgs e)
+        {
+           /// Aqui va el codigo para abrir el menu de opciones
+        }
+        void OnMute(object sender, EventArgs e)
+        {
+            //Aqui va el codigo para solenciar la musica
+        }
+        void OnLogout(object sender, EventArgs e)
+        {
+            ///Aqui va el codigo para cerrar la aplicacion
+        }
+
+        void OnHistoryGame(object sender, EventArgs e)
+        {
+            (sender as Button).Text = "Click me again!";
+        }
+        void OnFreeGame(object sender, EventArgs e)
+        {
+            (sender as Button).Text = "Click me again!";
+        }
+        void OnMultiplayerGame(object sender, EventArgs e)
+        {
+            (sender as Button).Text = "Click me again!";
+        }
+        void OnChallengeGame(object sender, EventArgs e)
+        {
+            (sender as Button).Text = "Click me again!";
+        }
+        void OnDesck(object sender, EventArgs e)
+        {
+            (sender as Button).Text = "Click me again!";
+        }
+
     }
 }
