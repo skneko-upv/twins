@@ -8,21 +8,21 @@
     <StackLayout>
         <StackLayout VerticalOptions="Start" Orientation="Horizontal">
             <ImageButton
-                    Source="\Assets\Icons\Options.png"
+                    Source="Assets\Icons2\Options.png"
                     Padding="15"
                     HorizontalOptions="Start"
                     VerticalOptions="Start"
                     Clicked="OnOption"
                     />
             <ImageButton
-                    Source="Assets\Icons\mute.png" 
+                    Source="Assets\Icons2\mute.png" 
                     Padding="15"
                     HorizontalOptions="Start"
                     VerticalOptions="Start"
                     Clicked ="OnMute"
                     />
             <ImageButton
-                    Source="Assets\Icons\logout.png" 
+                    Source="Assets\Icons2\logout.png" 
                     Padding="15"
                     HorizontalOptions="EndAndExpand"
                     VerticalOptions="Start"
