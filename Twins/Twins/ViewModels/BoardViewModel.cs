@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using Twins.Components;
 using Twins.Models;
 
 namespace Twins.ViewModels
@@ -28,27 +29,27 @@ namespace Twins.ViewModels
 
             foreach (var cell in Board.Cells)
             {
-                CardComponents[cell] = new CardComponentMatrix(Board.Height, Board.Width);
+                CardComponents = new CardComponentMatrix(Board.Height, Board.Width);
             }
 
-            Board.CellFlipped += cell => {
-                CardComponents[cell].Flip();
+            Board.CellFlipped += async cell => {
+                await CardComponents[cell].Flip();
             };
 
-            Board.CellUnflipped += cell =>
+            Board.CellUnflipped += async cell =>
             {
-                CardComponents[cell].Unflip();
+                await CardComponents[cell].Unflip();
             };
 
-            Board.CellKeepRevealedStatusChanged += (cell, reveal) =>
+            Board.CellKeepRevealedStatusChanged += async (cell, reveal) =>
             {
                 if (reveal)
                 {
-                    CardComponents[cell].Flip();
+                    await CardComponents[cell].Flip();
                 }
                 else
                 {
-                    CardComponents[cell].Unflip();
+                    await CardComponents[cell].Unflip();
                 }
             };
 
