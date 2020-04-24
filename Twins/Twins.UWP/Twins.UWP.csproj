@@ -113,6 +113,7 @@
     <Content Include="Assets\Cards\card7.png" />
     <Content Include="Assets\Cards\card8.png" />
     <Content Include="Assets\Cards\card9.png" />
+    <Content Include="Assets\Icons\alert.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
