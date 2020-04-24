@@ -6,6 +6,6 @@
              mc:Ignorable="d"
              x:Class="Twins.App">
     <Application.Resources>
-
+        <Color x:Key="backgroundColor">#eee</Color>
     </Application.Resources>
 </Application>

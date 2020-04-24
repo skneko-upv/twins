@@ -11,7 +11,7 @@ namespace Twins
         {
             InitializeComponent();
 
-            MainPage = new Pause(true);
+            MainPage = new Views.BoardView();
         }
 
         protected override void OnStart()

@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Twins.Views.BoardView">
+    <ContentPage.Content>
+        <AbsoluteLayout BackgroundColor="{StaticResource backgroundColor}">
+            <Grid
+                AbsoluteLayout.LayoutBounds=".5,.03,.95,.25"
+                         AbsoluteLayout.LayoutFlags="All">
+                <StackLayout Orientation="Horizontal"
+                             VerticalOptions="Start">
+                    <Button Text="Pausa"
+                            Clicked="OnPause" />
+                    <Button Text="Silenciar"
+                            Clicked="OnMute" />
+                </StackLayout>
+                <Grid
+                      BackgroundColor="Black"
+                      HeightRequest="145"
+                      WidthRequest="145"
+                      HorizontalOptions="Center"
+                      VerticalOptions="Center">
+                    <Grid
+                        BackgroundColor="{StaticResource backgroundColor}"
+                        HeightRequest="140"
+                        WidthRequest="140"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center">
+                        
+                        <!-- Mete aqui la carta seleccionada! -->
+                        
+                    </Grid>
+                </Grid>
+                <StackLayout Orientation="Vertical"
+                         HorizontalOptions="EndAndExpand"
+                         VerticalOptions="Start"
+                         Spacing="4">
+                    <StackLayout Orientation="Horizontal"
+                                 Spacing="1">
+                        <Label FontSize="40">00</Label>
+                        <Label FontSize="40">:</Label>
+                        <Label FontSize="40">00</Label>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="EndAndExpand"
+                                 Spacing="1">
+                        <Label Margin="0,0,5,0"
+                               FontAttributes="Bold">
+                            Turno:
+                        </Label>
+                        <Label>0</Label>
+                        <Label>:</Label>
+                        <Label>00</Label>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+            <ContentView AbsoluteLayout.LayoutBounds=".5,.6,1,0.5"
+                         AbsoluteLayout.LayoutFlags="All">
+                <StackLayout x:Name="boardArea">
+                    <Grid x:Name="board"
+                      VerticalOptions="Center"
+                      HorizontalOptions="Center"
+                      BackgroundColor="#55ff0000">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="120" />
+                            <RowDefinition Height="120" />
+                            <RowDefinition Height="120" />
+                            <RowDefinition Height="120" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="120" />
+                        </Grid.ColumnDefinitions>
+
+                    </Grid>
+                </StackLayout>
+            </ContentView>
+            <ContentView x:Name="FondoGris" IsVisible="False"
+                         AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+                         AbsoluteLayout.LayoutFlags="All">
+                <StackLayout BackgroundColor="#595959" Opacity="0.6"
+                                  WidthRequest="2000" HeightRequest="2000"/>
+            </ContentView>
+            <ContentView x:Name="MenuPausa" IsVisible="False">
+                <!-- Aqui el componente del menu pausa -->
+            </ContentView>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
