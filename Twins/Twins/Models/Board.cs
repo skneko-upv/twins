@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace Twins.Models
 {
-    partial class Board
+    public partial class Board
     {
         public static bool IsValidSize(int height, int width)
             => height * width % 2 == 0;

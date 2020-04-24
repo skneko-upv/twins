@@ -3,7 +3,7 @@ using Twins.Logic;
 
 namespace Twins.Models
 {
-    class StandardGame : Game
+    public class StandardGame : Game
     {
         const int GroupSize = 2;
 

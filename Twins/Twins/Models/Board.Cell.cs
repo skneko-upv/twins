@@ -1,6 +1,6 @@
 ﻿namespace Twins.Models
 {
-    partial class Board
+    public partial class Board
     {
         public class Cell
         {

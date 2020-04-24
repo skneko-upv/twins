@@ -1,9 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Xamarin.Forms;
 
 namespace Twins.Models
 {
-    partial class Deck
+    public partial class Deck
     {
-        public List<Card> Cards { get; }
+        public ImageSource BackImage { get; set; }
+        public List<Card> Cards { get; set; }
+    
     }
 }

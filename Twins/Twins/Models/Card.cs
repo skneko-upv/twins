@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Xamarin.Forms;
 
 namespace Twins.Models
 {
-    partial class Card : IEquatable<Card>
+    public partial class Card
     {
-        readonly int id;
-
-        public bool Equals(Card other) 
-            => id == other.id;
+        public ImageSource Image { get; set; }
+        public int Id { get; set; }
+        public Card Pair { get; set; }
     }
 }
