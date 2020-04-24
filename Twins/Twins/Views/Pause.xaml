@@ -1,40 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<StackLayout x:Name="MenuPausa"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Twins.Views.Pause" IsVisible="True">
-    <ContentPage.Content>
-        <StackLayout BackgroundColor="Gray" Padding="20">
-        <StackLayout BackgroundColor="White"
+             x:Class="Twins.Views.Pause" IsVisible="True"
+             BackgroundColor="White"
              HeightRequest="300"
              WidthRequest="275"
              Padding="20"
              VerticalOptions="Center"
              HorizontalOptions="Center">
-        <Label Text="Pausa" FontSize="Medium" 
+    <Label Text="Pausa" FontSize="Medium" 
                    HorizontalOptions="Center"/>
-                <StackLayout x:Name="notPause"
+        <StackLayout x:Name="notPause"
                              Orientation="Horizontal" 
                              Spacing="10" 
                              BackgroundColor="#FFB3B3"
                              HorizontalOptions="Center"
                              Margin="20,5"
                              Padding="5">
-                    <Image Source="Assets/Icons/alert.png"/>
-                    <Label x:Name="textoSinPausa"
+            <Image Source="Assets/Icons/alert.png"/>
+            <Label x:Name="textoSinPausa"
                        Text="El juego no se ha detenido"
                        HorizontalOptions="Center"
                        TextColor="Red"/>
-                </StackLayout>
-                <Button Text="Reaunudar" 
+        </StackLayout>
+        <Button Text="Reaunudar"
+                Clicked="RenaunudarClicked"
                     Margin="50,20"/>
         <Button Text="Opciones"
                     Margin="50,20"/>
-        <Button Text="Abandonar"
+    <Button Text="Abandonar"
                     Margin="50,20"/>
-            </StackLayout>
-        </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+</StackLayout>

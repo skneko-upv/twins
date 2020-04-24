@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vistaPausa="clr-namespace:Twins.Views"
              mc:Ignorable="d"
              x:Class="Twins.Views.BoardView">
     <ContentPage.Content>
@@ -89,8 +90,9 @@
                 <StackLayout BackgroundColor="#595959" Opacity="0.6"
                                   WidthRequest="2000" HeightRequest="2000"/>
             </ContentView>
-            <ContentView x:Name="MenuPausa" IsVisible="False">
-                <!-- Aqui el componente del menu pausa -->
+            <ContentView AbsoluteLayout.LayoutBounds="0.5,0.5,0.5,0.5"
+                         AbsoluteLayout.LayoutFlags="All">
+                <vistaPausa:Pause x:Name="MenuPausa" IsVisible="False"></vistaPausa:Pause>
             </ContentView>
         </AbsoluteLayout>
     </ContentPage.Content>
