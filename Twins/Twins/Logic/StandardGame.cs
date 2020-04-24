@@ -23,19 +23,38 @@ namespace Twins.Models
             Board.CellFlipped += OnCellFlipped;
         }
 
-        public void OnCellFlipped(Board.Cell cell)
+        public override void Win()
         {
-            if (Board.FlippedCells.Count >= GroupSize - 1)
+            throw new System.NotImplementedException();
+        }
+
+        public override void Resume()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Pause()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void CheckMatches()
+        {
+            if (Board.FlippedCells.Count > GroupSize - 1)
             {
                 TryMatch();
             }
-            else
+        }
+
+        private void OnCellFlipped(Board.Cell cell)
+        {
+            if (Board.ReferenceCard == null)
             {
                 Board.ReferenceCard = cell.Card;
             }
         }
 
-        public void TryMatch()
+        public override bool TryMatch()
         {
             var reference = Board.FlippedCells.First().Card;
             bool isMatch = Board.FlippedCells.All(c => c.Card == reference);
@@ -53,31 +72,15 @@ namespace Twins.Models
                 {
                     Win();
                 }
-                // TODO
             }
             else
             {
                 MatchFailures++;
-                // TODO
             }
 
             Board.UnflipAllCells();
             Board.ReferenceCard = null;
-        }
-
-        public override void Win()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void Resume()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void Pause()
-        {
-            throw new System.NotImplementedException();
+            return isMatch;
         }
     }
 }

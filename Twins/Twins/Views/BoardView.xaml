@@ -3,13 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:twinsc="clr-namespace:Twins.Components"
              mc:Ignorable="d"
              x:Class="Twins.Views.BoardView">
     <ContentPage.Content>
         <AbsoluteLayout BackgroundColor="{StaticResource backgroundColor}">
-            <Grid
-                AbsoluteLayout.LayoutBounds=".5,.03,.95,.25"
-                         AbsoluteLayout.LayoutFlags="All">
+            <Grid AbsoluteLayout.LayoutBounds=".5,.03,.95,.25"
+                  AbsoluteLayout.LayoutFlags="All">
                 <StackLayout Orientation="Horizontal"
                              VerticalOptions="Start">
                     <Button Text="Pausa"
@@ -17,21 +17,17 @@
                     <Button Text="Silenciar"
                             Clicked="OnMute" />
                 </StackLayout>
-                <Grid
-                      BackgroundColor="Black"
+                <Grid BackgroundColor="Black"
                       HeightRequest="175"
                       WidthRequest="175"
                       HorizontalOptions="Center"
                       VerticalOptions="Center">
-                    <Grid
-                        BackgroundColor="{StaticResource backgroundColor}"
-                        HeightRequest="170"
-                        WidthRequest="170"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center">
-                        
-                        <!-- Mete aqui la carta seleccionada! -->
-                        
+                    <Grid BackgroundColor="{StaticResource backgroundColor}"
+                          HeightRequest="170"
+                          WidthRequest="170"
+                          HorizontalOptions="Center"
+                          VerticalOptions="Center">
+                        <twinsc:CardComponent x:Name="referenceCard" />
                     </Grid>
                 </Grid>
                 <StackLayout Orientation="Vertical"
@@ -71,27 +67,6 @@
                       HorizontalOptions="CenterAndExpand"
                       VerticalOptions="CenterAndExpand"
                       BackgroundColor="#55ff0000">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Button BackgroundColor="Red"
-                            Grid.Row="0" Grid.Column="0" />
-                        <Button BackgroundColor="Green"
-                            Grid.Row="0" Grid.Column="1" />
-                        <Button BackgroundColor="Aqua"
-                            Grid.Row="1" Grid.Column="0" />
-                        <Button BackgroundColor="Purple"
-                            Grid.Row="1" Grid.Column="1" />
-                        <Button BackgroundColor="Beige"
-                            Grid.Row="2" Grid.Column="0" />
-                        <Button BackgroundColor="Azure"
-                            Grid.Row="2" Grid.Column="1" />
                     </Grid>
                 </RelativeLayout>
             </ContentView>

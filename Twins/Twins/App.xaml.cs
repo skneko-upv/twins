@@ -1,6 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms;
 
 namespace Twins
 {
@@ -10,7 +8,8 @@ namespace Twins
         {
             InitializeComponent();
 
-            MainPage = new Views.BoardView();
+            var game = new Models.StandardGame(6, 4, Components.BasicDeck.CreateBasicDeck());
+            MainPage = new Views.BoardView(game.Board);
         }
 
         protected override void OnStart()

@@ -12,8 +12,10 @@ namespace Twins.Components
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CardComponent : StackLayout
     {
-        readonly Card card;
-        bool flipped;
+        public Card Card { get; set; }
+        public bool Flipped { get; private set; }
+
+        public event Action Clicked;
 
         public CardComponent()
         {
@@ -24,24 +26,24 @@ namespace Twins.Components
         {
             InitializeComponent();
 
-            this.card = card;
-            flipped = false;
+            this.Card = card;
+            Flipped = false;
             button.ImageSource = card.Deck.BackImage;
         }
 
         public async Task Flip() 
         {
-            flipped = true;
+            Flipped = true;
             await AnimationFlip(90, 150);
-            button.ImageSource = card.Image;
+            button.ImageSource = Card.Image;
             await AnimationFlip(180, 150);
         }
 
         public async Task Unflip()
         {
-            flipped = false;
+            Flipped = false;
             await AnimationFlip(90, 150);
-            button.ImageSource = card.Deck.BackImage;
+            button.ImageSource = Card.Deck.BackImage;
             await AnimationFlip(0, 150);
         }
 
@@ -52,12 +54,9 @@ namespace Twins.Components
             button.RotationY = 0;
         }
 
-        private async void CardClicked(object sender, EventArgs e)
+        private void OnClicked(object sender, EventArgs e)
         {
-            if (!flipped)
-            {
-                await Flip();
-            }
+            Clicked();
         }
 
         private async Task AnimationFlip(int angle, uint seconds)

@@ -26,10 +26,15 @@ namespace Twins.Logic
         public Cell[,] Populate(int height, int width)
         {
             Cell[,] cells = new Cell[height, width];
-            List<(int, int)> emptyPositions = Enumerable.Range(0, height - 1)
-                                            .Zip(Enumerable.Range(0, width - 1),
-                                                 (r, c) => (r, c))
-                                            .ToList();
+            List<(int, int)> emptyPositions = new List<(int, int)>(height * width);
+            for (int r = 0; r < height; r++)
+            {
+                for (int c = 0; c < width; c++)
+                {
+                    emptyPositions.Add((r, c));
+                }
+            }
+
             List<Card> availableCards = Deck.Cards;
 
             while (emptyPositions.Count >= 2)

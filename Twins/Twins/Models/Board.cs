@@ -71,6 +71,7 @@ namespace Twins.Models
             Height = height;
             Width = width;
             Game = game;
+            FlippedCells = new List<Cell>(height * width);
 
             this.populationStrategy = populationStrategy;
             Populate();
