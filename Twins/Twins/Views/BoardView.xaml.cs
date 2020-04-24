@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Linq;
+using Twins.Components;
+using Twins.Models;
 //using Twins.Views.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -14,7 +17,7 @@ namespace Twins.Views
         {
             InitializeComponent();
 
-            boardArea.LayoutChanged += EnforceBoardAspectRatio;   
+            //boardArea.LayoutChanged += EnforceBoardAspectRatio;   
         }
 
         private void EnforceBoardAspectRatio(object sender = null, EventArgs e = null)
@@ -36,12 +39,19 @@ namespace Twins.Views
 
         private void OnPause(object sender, EventArgs e)
         {
-
+            FondoGris.IsVisible = true;
+            MenuPausa.IsVisible = true;
         }
 
         private void OnMute(object sender, EventArgs e)
         {
 
+        }
+
+        public void ClickReanudar(object sender, EventArgs e) 
+        {
+            FondoGris.IsVisible = false;
+            MenuPausa.IsVisible = false;
         }
     }
 }

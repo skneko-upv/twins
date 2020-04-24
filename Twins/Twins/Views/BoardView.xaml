@@ -19,14 +19,14 @@
                 </StackLayout>
                 <Grid
                       BackgroundColor="Black"
-                      HeightRequest="175"
-                      WidthRequest="175"
+                      HeightRequest="145"
+                      WidthRequest="145"
                       HorizontalOptions="Center"
                       VerticalOptions="Center">
                     <Grid
                         BackgroundColor="{StaticResource backgroundColor}"
-                        HeightRequest="170"
-                        WidthRequest="170"
+                        HeightRequest="140"
+                        WidthRequest="140"
                         HorizontalOptions="Center"
                         VerticalOptions="Center">
                         
@@ -57,43 +57,40 @@
                     </StackLayout>
                 </StackLayout>
             </Grid>
-            <ContentView AbsoluteLayout.LayoutBounds=".5,.75,.9,.60"
+            <ContentView AbsoluteLayout.LayoutBounds=".5,.6,1,0.5"
                          AbsoluteLayout.LayoutFlags="All">
-                <RelativeLayout x:Name="boardArea">
+                <StackLayout x:Name="boardArea">
                     <Grid x:Name="board"
-                      RelativeLayout.HeightConstraint=
-                        "{ConstraintExpression Type=RelativeToParent,
-                                               Property=Height}"
-                      RelativeLayout.WidthConstraint=
-                        "{ConstraintExpression Type=RelativeToParent,
-                                               Property=Width}"
-                      Padding="10"
-                      HorizontalOptions="CenterAndExpand"
-                      VerticalOptions="CenterAndExpand"
+                      VerticalOptions="Center"
+                      HorizontalOptions="Center"
                       BackgroundColor="#55ff0000">
+
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
+                            <RowDefinition Height="120" />
+                            <RowDefinition Height="120" />
+                            <RowDefinition Height="120" />
+                            <RowDefinition Height="120" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="120" />
                         </Grid.ColumnDefinitions>
-                        <Button BackgroundColor="Red"
-                            Grid.Row="0" Grid.Column="0" />
-                        <Button BackgroundColor="Green"
-                            Grid.Row="0" Grid.Column="1" />
-                        <Button BackgroundColor="Aqua"
-                            Grid.Row="1" Grid.Column="0" />
-                        <Button BackgroundColor="Purple"
-                            Grid.Row="1" Grid.Column="1" />
-                        <Button BackgroundColor="Beige"
-                            Grid.Row="2" Grid.Column="0" />
-                        <Button BackgroundColor="Azure"
-                            Grid.Row="2" Grid.Column="1" />
+
                     </Grid>
-                </RelativeLayout>
+                </StackLayout>
+            </ContentView>
+            <ContentView x:Name="FondoGris" IsVisible="False"
+                         AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+                         AbsoluteLayout.LayoutFlags="All">
+                <StackLayout BackgroundColor="#595959" Opacity="0.6"
+                                  WidthRequest="2000" HeightRequest="2000"/>
+            </ContentView>
+            <ContentView x:Name="MenuPausa" IsVisible="False">
+                <!-- Aqui el componente del menu pausa -->
             </ContentView>
         </AbsoluteLayout>
     </ContentPage.Content>
