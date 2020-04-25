@@ -10,7 +10,7 @@
                  WidthRequest="2000" HeightRequest="2000" 
                  AbsoluteLayout.LayoutBounds=".5,.5,1.0,1.0"
                  AbsoluteLayout.LayoutFlags="All"/>
-    <StackLayout BackgroundColor="White"
+    <StackLayout BackgroundColor="{StaticResource backgroundColor}"
                  HeightRequest="300"
                  WidthRequest="275"
                  Padding="20"
@@ -18,7 +18,7 @@
                  HorizontalOptions="Center"
                  AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
                  AbsoluteLayout.LayoutFlags="All">
-    <Label Text="Pausa" FontSize="Medium" 
+    <Label Text="Pausa" FontSize="Medium" FontAttributes="Bold" 
                    HorizontalOptions="Center"/>
         <StackLayout x:Name="timeNotHaltedWarning"
                      Orientation="Horizontal" 
