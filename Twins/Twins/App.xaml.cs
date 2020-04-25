@@ -8,8 +8,9 @@ namespace Twins
         {
             InitializeComponent();
 
-            var game = new Models.StandardGame(6, 4, Components.BasicDeck.CreateBasicDeck());
-            MainPage = new Views.BoardView(game.Board);
+            //var game = new Models.StandardGame(6, 4, Components.BasicDeck.CreateBasicDeck());
+            //MainPage = new Views.BoardView(game.Board);
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()

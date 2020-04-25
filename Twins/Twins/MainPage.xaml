@@ -14,6 +14,8 @@
                 <Setter Property="BackgroundColor" Value="White" />
                 <Setter Property="BorderColor" Value="Black" />
                 <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontFamily" Value="Medium" />
+                <Setter Property="Padding" Value="10" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -49,7 +51,7 @@
                    VerticalOptions="StartAndExpand" 
                    HorizontalOptions="Center"
                    HeightRequest="150"/>
-            <StackLayout HorizontalOptions="Center" >
+            <StackLayout HorizontalOptions="Center" Margin="15" Spacing="10" >
                 
                     <Button 
                         ClassId="ButtonPlay"
