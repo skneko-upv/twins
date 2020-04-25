@@ -9,8 +9,9 @@ using Xamarin.Forms.Xaml;
 namespace Twins.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Pause : StackLayout
+    public partial class Pause : AbsoluteLayout
     {
+
         public Pause(bool pausaTiempo)
         {
             InitializeComponent();
@@ -23,6 +24,7 @@ namespace Twins.Views
             notPause.IsVisible = false;
         }
 
-        public void RenaunudarClicked(object sender, EventArgs e) { MenuPausa.IsVisible = false; }
+        public void OnResume(object sender, EventArgs e) { MenuPausa.IsVisible = false; }
+        public void OnPause() { MenuPausa.IsVisible = true;  }
     }
 }

@@ -1,17 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<StackLayout x:Name="MenuPausa"
+<AbsoluteLayout x:Name="MenuPausa"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Twins.Views.Pause" IsVisible="True"
-             BackgroundColor="White"
-             HeightRequest="300"
-             WidthRequest="275"
-             Padding="20"
-             VerticalOptions="Center"
-             HorizontalOptions="Center">
+             >
+    <StackLayout BackgroundColor="#595959" Opacity="0.6"
+                 WidthRequest="2000" HeightRequest="2000" 
+                 AbsoluteLayout.LayoutBounds=".5,.5,1.0,1.0"
+                 AbsoluteLayout.LayoutFlags="All"/>
+    <StackLayout BackgroundColor="White"
+                 HeightRequest="300"
+                 WidthRequest="275"
+                 Padding="20"
+                 VerticalOptions="Center"
+                 HorizontalOptions="Center"
+                 AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                 AbsoluteLayout.LayoutFlags="All">
     <Label Text="Pausa" FontSize="Medium" 
                    HorizontalOptions="Center"/>
         <StackLayout x:Name="notPause"
@@ -28,10 +35,11 @@
                        TextColor="Red"/>
         </StackLayout>
         <Button Text="Reaunudar"
-                Clicked="RenaunudarClicked"
+                Clicked="OnResume"
                     Margin="50,20"/>
         <Button Text="Opciones"
                     Margin="50,20"/>
     <Button Text="Abandonar"
                     Margin="50,20"/>
-</StackLayout>
+    </StackLayout>
+</AbsoluteLayout>

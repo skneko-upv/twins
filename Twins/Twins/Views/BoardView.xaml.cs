@@ -39,19 +39,12 @@ namespace Twins.Views
 
         private void OnPause(object sender, EventArgs e)
         {
-            FondoGris.IsVisible = true;
-            MenuPausa.IsVisible = true;
+            MenuPausa.OnPause();
         }
 
         private void OnMute(object sender, EventArgs e)
         {
 
-        }
-
-        public void ClickReanudar(object sender, EventArgs e) 
-        {
-            FondoGris.IsVisible = false;
-            MenuPausa.IsVisible = false;
         }
     }
 }
