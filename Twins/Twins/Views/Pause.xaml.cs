@@ -24,7 +24,7 @@ namespace Twins.Views
             notPause.IsVisible = false;
         }
 
-        public void OnResume(object sender, EventArgs e) { MenuPausa.IsVisible = false; }
-        public void OnPause() { MenuPausa.IsVisible = true;  }
+        public void OnResume(object sender, EventArgs e) { PauseView.IsVisible = false; }
+        public void OnPause() { PauseView.IsVisible = true;  }
     }
 }

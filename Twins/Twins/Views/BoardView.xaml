@@ -85,7 +85,7 @@
                     </Grid>
                 </StackLayout>
             </ContentView>
-            <vistaPausa:Pause x:Name="MenuPausa" AbsoluteLayout.LayoutBounds="0.5,0.5,1.0,1.0"
+            <vistaPausa:Pause x:Name="PauseView" AbsoluteLayout.LayoutBounds="0.5,0.5,1.0,1.0"
                          AbsoluteLayout.LayoutFlags="All" IsVisible="False"/>
         </AbsoluteLayout>
     </ContentPage.Content>

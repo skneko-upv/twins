@@ -41,7 +41,7 @@ namespace Twins.Views
 
         private void OnPause(object sender, EventArgs e)
         {
-            MenuPausa.OnPause();
+            PauseView.OnPause();
         }
 
         private void OnMute(object sender, EventArgs e)
