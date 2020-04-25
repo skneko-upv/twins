@@ -14,9 +14,9 @@
                          AbsoluteLayout.LayoutFlags="All">
                 <StackLayout Orientation="Horizontal"
                              VerticalOptions="Start">
-                    <Button Text="Pausa"
+                    <Button ImageSource="Assets/Icons/pause.png"
                             Clicked="OnPause" />
-                    <Button Text="Silenciar"
+                    <Button ImageSource="Assets/Icons/volume.png" x:Name="MuteButton"
                             Clicked="OnMute" />
                 </StackLayout>
                 <Grid

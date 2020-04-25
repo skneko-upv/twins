@@ -11,10 +11,12 @@ namespace Twins.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BoardView : ContentPage
     {
+        private bool IsMuted { get; set; }
         private double UsableBoardAreaSize { get { return Math.Min(boardArea.Width, boardArea.Height); } }
 
         public BoardView()
         {
+            IsMuted = false;
             InitializeComponent();
 
             //boardArea.LayoutChanged += EnforceBoardAspectRatio;   
@@ -44,7 +46,11 @@ namespace Twins.Views
 
         private void OnMute(object sender, EventArgs e)
         {
-
+            if(!IsMuted)
+                MuteButton.ImageSource=ImageSource.FromFile("Assets/Icons/mute.png");
+            else
+                MuteButton.ImageSource = ImageSource.FromFile("Assets/Icons/volume.png");
+            IsMuted = !IsMuted;
         }
     }
 }
