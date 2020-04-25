@@ -4,25 +4,39 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Twins.MainPage">
+             x:Class="Twins.MainPage"
+             BackgroundImageSource="Assets/Backgrounds/menuprincipal2.png">
+  <ContentPage.Resources>
+        <Style x:Key="baseButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="CornerRadius" Value="20" />
+            <Setter Property="BackgroundColor" Value="White" />
+            <Setter Property="BorderColor" Value="Black" />
+            <Setter Property="FontAttributes" Value="Bold" />
+             
+        </Style>
+        <Style x:Key="mouseOverButtonStyle" BaseResourceKey="Button" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="WhiteSmoke"/>
+        </Style>
+    </ContentPage.Resources>
     <StackLayout>
         <StackLayout VerticalOptions="Start" Orientation="Horizontal">
             <ImageButton
-                    Source="Assets\Icons2\Options.png"
+                    Source="Assets\Icons\Options.png"
                     Padding="15"
                     HorizontalOptions="Start"
                     VerticalOptions="Start"
                     Clicked="OnOption"
                     />
             <ImageButton
-                    Source="Assets\Icons2\mute.png" 
+                    Source="Assets\Icons\mute.png" 
                     Padding="15"
                     HorizontalOptions="Start"
                     VerticalOptions="Start"
                     Clicked ="OnMute"
                     />
             <ImageButton
-                    Source="Assets\Icons2\logout.png" 
+                    Source="Assets\Icons\logout.png" 
                     Padding="15"
                     HorizontalOptions="EndAndExpand"
                     VerticalOptions="Start"
@@ -31,36 +45,50 @@
         </StackLayout>
         <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
 
-            <Label Text="TWINS" FontSize="Header" VerticalOptions="StartAndExpand" HorizontalOptions="Center"/>
-
+            <!-- <Label Text="TWINS" FontSize="Header" VerticalOptions="StartAndExpand" HorizontalOptions="Center"/>-->
+            <Image Source="Assets/Icons/title.png"  
+                   VerticalOptions="StartAndExpand" 
+                   HorizontalOptions="Center"
+                   HeightRequest="150"/>
             <StackLayout HorizontalOptions="Center" >
-
-                <Button Text="HISTORIA" 
-                    HorizontalOptions="Center" 
-                    VerticalOptions="End"
-                    Clicked="OnHistoryGame"
-               />
-                <Button Text="JUEGO LIBRE" 
-                    HorizontalOptions="Center" 
-                    VerticalOptions="End"
-                    Clicked="OnFreeGame"
-                />
-                <Button Text="MULTIJUGADOR" 
-                    HorizontalOptions="Center" 
-                    VerticalOptions="End"
-                    Clicked="OnMultiplayerGame"
-                />
-                <Button Text="DESAFIOS" 
-                    HorizontalOptions="Center" 
-                    VerticalOptions="End"
-                    Clicked="OnChallengeGame"
-                />
-                <Button Text="MIS BARAJAS" 
-                    HorizontalOptions="Center" 
-                    VerticalOptions="End"
-                    ScaleY="0.8"
-                    Clicked="OnDesck"
-                />
+                
+                    <Button 
+                        ClassId="ButtonPlay"
+                        Text="HISTORIA" 
+                        HorizontalOptions="Center" 
+                        VerticalOptions="End"
+                        Clicked="OnHistoryGame"
+                   />
+                    <Button 
+                        ClassId="ButtonPlay"
+                        Text="JUEGO LIBRE" 
+                        HorizontalOptions="Center" 
+                        VerticalOptions="End"
+                        Clicked="OnFreeGame"
+                    />
+                    <Button 
+                        ClassId="ButtonPlay"
+                        Text="MULTIJUGADOR" 
+                        HorizontalOptions="Center" 
+                        VerticalOptions="End"
+                        Clicked="OnMultiplayerGame"
+                    />
+                    <Button 
+                        ClassId="ButtonPlay"
+                        Text="DESAFIOS" 
+                        HorizontalOptions="Center" 
+                        VerticalOptions="End"
+                        Clicked="OnChallengeGame"
+                    />
+                    <Button 
+                        ClassId="ButtonPlay"
+                        Text="MIS BARAJAS" 
+                        HorizontalOptions="Center" 
+                        VerticalOptions="End"
+                        ScaleY="0.8"
+                        Clicked="OnDesck"
+                    />
+                
             </StackLayout>
         </StackLayout>
     </StackLayout>
