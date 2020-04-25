@@ -1,4 +1,5 @@
-﻿using Twins.Model;
+﻿using System.Collections.Generic;
+using Twins.Model;
 
 namespace Twins.Models
 {
@@ -19,5 +20,13 @@ namespace Twins.Models
         public abstract void Pause();
 
         public abstract void Win();
+
+        public abstract bool ShouldTryMatch();
+
+        public abstract IEnumerable<Board.Cell> TryMatch();
+
+        public abstract bool ShouldEndTurn();
+
+        public abstract void EndTurn();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Twins.Logic;
 
 namespace Twins.Models
@@ -38,27 +39,12 @@ namespace Twins.Models
             throw new System.NotImplementedException();
         }
 
-        public override void CheckMatches()
-        {
-            if (Board.FlippedCells.Count > GroupSize - 1)
-            {
-                TryMatch();
-            }
-        }
-
-        private void OnCellFlipped(Board.Cell cell)
-        {
-            if (Board.ReferenceCard == null)
-            {
-                Board.ReferenceCard = cell.Card;
-            }
-        }
-
-        public override bool TryMatch()
+        public override IEnumerable<Board.Cell> TryMatch()
         {
             var reference = Board.FlippedCells.First().Card;
             bool isMatch = Board.FlippedCells.All(c => c.Card == reference);
 
+            IEnumerable<Board.Cell> matched;
             if (isMatch)
             {
                 MatchSuccesses++;
@@ -68,19 +54,39 @@ namespace Twins.Models
                 }
 
                 RemainingMatches--;
-                if (RemainingMatches <= 0)
-                {
-                    Win();
-                }
+                matched = new List<Board.Cell>(Board.FlippedCells);
             }
             else
             {
                 MatchFailures++;
+                matched = Enumerable.Empty<Board.Cell>();
             }
 
+            return matched;
+        }
+
+        public override bool ShouldTryMatch()
+        {
+            return Board.FlippedCells.Count > GroupSize - 1;
+        }
+
+        public override bool ShouldEndTurn()
+        {
+            return true;
+        }
+
+        public override void EndTurn()
+        {
             Board.UnflipAllCells();
             Board.ReferenceCard = null;
-            return isMatch;
+        }
+
+        private void OnCellFlipped(Board.Cell cell)
+        {
+            if (Board.ReferenceCard == null)
+            {
+                Board.ReferenceCard = cell.Card;
+            }
         }
     }
 }
