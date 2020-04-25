@@ -38,6 +38,6 @@
         <Button Text="Opciones"
                 Margin="50,20" />
     <Button Text="Abandonar"
-            Margin="50,20" />
+            Margin="50,20" Clicked="OnAbandon" />
     </StackLayout>
 </AbsoluteLayout>

@@ -18,6 +18,9 @@ namespace Twins.Views
 
         public void OnResume(object sender, EventArgs e) { window.IsVisible = false; }
 
-        public void OnPause() { window.IsVisible = true;  }
+        public void OnPause() { window.IsVisible = true; }
+
+        public void OnAbandon(object sender, EventArgs e) {
+        }
     }
 }

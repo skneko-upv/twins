@@ -17,22 +17,26 @@ namespace Twins.Components
 
         public event Action Clicked;
 
+        public bool IsBlocked { get; set; }
+
         public CardComponent()
         {
             InitializeComponent();
         }
 
-        public CardComponent(Card card)
+        public CardComponent(Card card, bool isBlocked = false)
         {
             InitializeComponent();
 
             this.Card = card;
             Flipped = false;
             button.ImageSource = card.Deck.BackImage;
+            IsBlocked = isBlocked;
         }
 
         public async Task Flip() 
         {
+            if (!IsBlocked) IsEnabled = false;
             Flipped = true;
             await AnimationFlip(90, 150);
             button.ImageSource = Card.Image;
@@ -41,6 +45,7 @@ namespace Twins.Components
 
         public async Task Unflip()
         {
+            if(!IsBlocked) IsEnabled = true;
             Flipped = false;
             await AnimationFlip(90, 150);
             button.ImageSource = Card.Deck.BackImage;

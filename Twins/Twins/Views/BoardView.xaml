@@ -6,29 +6,37 @@
              xmlns:twins="clr-namespace:Twins.Views"
              xmlns:twinsc="clr-namespace:Twins.Components"
              mc:Ignorable="d"
-             x:Class="Twins.Views.BoardView">
+             x:Class="Twins.Views.BoardView"
+             BackgroundColor="{StaticResource backgroundColor}">
     <ContentPage.Content>
-        <AbsoluteLayout BackgroundColor="{StaticResource backgroundColor}">
-            <Grid AbsoluteLayout.LayoutBounds=".5,.03,.95,.25"
-                  AbsoluteLayout.LayoutFlags="All">
+        <AbsoluteLayout>
+            <StackLayout  Margin="20" AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+                             AbsoluteLayout.LayoutFlags="All">
+            <Grid HeightRequest="150" HorizontalOptions="FillAndExpand">
                 <StackLayout Orientation="Horizontal"
-                             VerticalOptions="Start">
+                             VerticalOptions="Start"
+                             >
                     <Button ImageSource="Assets/Icons/pause.png"
-                            Clicked="OnPause" />
+                            Clicked="OnPause" 
+                            BackgroundColor="Transparent"
+                            />
                     <Button ImageSource="Assets/Icons/volume.png" x:Name="MuteButton"
-                            Clicked="OnMute" />
+                            Clicked="OnMute"
+                            BackgroundColor="Transparent"/>
                 </StackLayout>
-                <Grid BackgroundColor="Black"
+                    <Grid BackgroundColor="#262626"
                       HeightRequest="145"
                       WidthRequest="145"
                       HorizontalOptions="Center"
-                      VerticalOptions="Center">
+                      VerticalOptions="Start"
+                      >
                     <Grid BackgroundColor="{StaticResource backgroundColor}"
-                          HeightRequest="140"
-                          WidthRequest="140"
+                          HeightRequest="145"
+                          WidthRequest="145"
                           HorizontalOptions="Center"
-                          VerticalOptions="Center">
-                        <twinsc:CardComponent x:Name="referenceCard" />
+                          VerticalOptions="Start"
+                          Margin="5">
+                        <twinsc:CardComponent x:Name="referenceCard" IsEnabled="False" IsBlocked="true"/>
                     </Grid>
                 </Grid>
                 <StackLayout Orientation="Vertical"
@@ -36,14 +44,15 @@
                              VerticalOptions="Start"
                              Spacing="4">
                     <StackLayout Orientation="Horizontal"
-                                 Spacing="1">
+                                 Spacing="1" BackgroundColor="{StaticResource backgroundColor}">
                         <Label FontSize="40">00</Label>
                         <Label FontSize="40">:</Label>
                         <Label FontSize="40">00</Label>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal"
                                  HorizontalOptions="EndAndExpand"
-                                 Spacing="1">
+                                 Spacing="1"
+                                 BackgroundColor="{StaticResource backgroundColor}">
                         <Label Margin="0,0,5,0"
                                FontAttributes="Bold">
                             Turno:
@@ -54,34 +63,44 @@
                     </StackLayout>
                 </StackLayout>
             </Grid>
-            <ContentView AbsoluteLayout.LayoutBounds=".5,.6,1,0.5"
-                         AbsoluteLayout.LayoutFlags="All">
-                <StackLayout x:Name="boardArea">
-                    <Grid x:Name="board"
+            <ScrollView x:Name="boardArea"
                       VerticalOptions="Center"
                       HorizontalOptions="Center"
-                      BackgroundColor="#55ff0000">
+                      Orientation="Both"
+                      >
+                <Grid x:Name="board"
+                      ColumnSpacing="2"
+                      RowSpacing="2"
+                      BackgroundColor="{StaticResource backgroundColor}"                      
+                      VerticalOptions="Center"
+                      HorizontalOptions="Center"
+                      HeightRequest="488"
+                      WidthRequest="732"
+                      
+                      >
 
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="120" />
-                            <RowDefinition Height="120" />
-                            <RowDefinition Height="120" />
-                            <RowDefinition Height="120" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="120" />
-                            <ColumnDefinition Width="120" />
-                            <ColumnDefinition Width="120" />
-                            <ColumnDefinition Width="120" />
-                            <ColumnDefinition Width="120" />
-                            <ColumnDefinition Width="120" />
-                        </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="120"  />
+                        <RowDefinition Height="120" />
+                        <RowDefinition Height="120" />
+                        <RowDefinition Height="120" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="120" />
+                    </Grid.ColumnDefinitions>
 
-                    </Grid>
-                </StackLayout>
-            </ContentView>
-            <twins:PauseView x:Name="PauseMenu" AbsoluteLayout.LayoutBounds="0.5,0.5,1.0,1.0"
-                             AbsoluteLayout.LayoutFlags="All" IsVisible="False"/>
+                </Grid>
+            </ScrollView>
+            </StackLayout>
+            <twins:PauseView x:Name="PauseMenu" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="False"
+                             AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+                             AbsoluteLayout.LayoutFlags="All"/>
+        
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

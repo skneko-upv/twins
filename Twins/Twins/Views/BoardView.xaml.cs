@@ -1,4 +1,5 @@
 ﻿using System;
+using Twins.Components;
 using Twins.Models;
 using Twins.ViewModels;
 using Xamarin.Forms;
@@ -38,7 +39,10 @@ namespace Twins.Views
             var viewModel = (BoardViewModel)BindingContext;
             foreach (var cell in viewModel.Board.Cells)
             {
-                board.Children.Add(viewModel.CardComponents[cell], cell.Row, cell.Column);
+                CardComponent card = viewModel.CardComponents[cell];
+                card.VerticalOptions = LayoutOptions.Center;
+                card.HorizontalOptions = LayoutOptions.Center;
+                board.Children.Add(card, cell.Row, cell.Column);
             }
         }
 
