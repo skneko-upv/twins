@@ -103,6 +103,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Backgrounds\menuprincipal2.png" />
     <Content Include="Assets\Cards\backimage.png" />
     <Content Include="Assets\Cards\card1.png" />
     <Content Include="Assets\Cards\card10.png" />
