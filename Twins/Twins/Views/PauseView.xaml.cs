@@ -14,13 +14,10 @@ namespace Twins.Views
             timeNotHaltedWarning.IsVisible = isTimeHalted;
         }
 
-        public PauseView()
-        {
-            InitializeComponent();
-            timeNotHaltedWarning.IsVisible = false;
-        }
+        public PauseView() : this(false) { }
 
-        public void OnResume(object sender, EventArgs e) { MenuPausa.IsVisible = false; }
-        public void OnPause() { MenuPausa.IsVisible = true;  }
+        public void OnResume(object sender, EventArgs e) { window.IsVisible = false; }
+
+        public void OnPause() { window.IsVisible = true;  }
     }
 }

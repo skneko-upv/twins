@@ -1,12 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<AbsoluteLayout x:Name="MenuPausa"
-             xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="Twins.Views.PauseView" IsVisible="True"
-             >
+<AbsoluteLayout x:Name="window"
+                xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                mc:Ignorable="d"
+                x:Class="Twins.Views.PauseView" IsVisible="True">
     <StackLayout BackgroundColor="#595959" Opacity="0.6"
                  WidthRequest="2000" HeightRequest="2000" 
                  AbsoluteLayout.LayoutBounds=".5,.5,1.0,1.0"
@@ -22,24 +21,23 @@
     <Label Text="Pausa" FontSize="Medium" 
                    HorizontalOptions="Center"/>
         <StackLayout x:Name="timeNotHaltedWarning"
-                             Orientation="Horizontal" 
-                             Spacing="10" 
-                             BackgroundColor="#FFB3B3"
-                             HorizontalOptions="Center"
-                             Margin="20,5"
-                             Padding="5">
+                     Orientation="Horizontal" 
+                     Spacing="10" 
+                     BackgroundColor="#FFB3B3"
+                     HorizontalOptions="Center"
+                     Margin="20,5"
+                     Padding="5">
             <Image Source="Assets/Icons/alert.png"/>
-            <Label x:Name="textoSinPausa"
-                       Text="El juego no se ha detenido"
-                       HorizontalOptions="Center"
-                       TextColor="Red"/>
+            <Label Text="El juego no se ha detenido"
+                   HorizontalOptions="Center"
+                   TextColor="Red" />
         </StackLayout>
         <Button Text="Reaunudar"
                 Clicked="OnResume"
-                    Margin="50,20"/>
+                Margin="50,20" />
         <Button Text="Opciones"
-                    Margin="50,20"/>
+                Margin="50,20" />
     <Button Text="Abandonar"
-                    Margin="50,20"/>
+            Margin="50,20" />
     </StackLayout>
 </AbsoluteLayout>
