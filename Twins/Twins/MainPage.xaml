@@ -7,18 +7,17 @@
              x:Class="Twins.MainPage"
              BackgroundImageSource="Assets/Backgrounds/menuprincipal2.png">
   <ContentPage.Resources>
-        <Style x:Key="baseButtonStyle" TargetType="Button">
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="CornerRadius" Value="20" />
-            <Setter Property="BackgroundColor" Value="White" />
-            <Setter Property="BorderColor" Value="Black" />
-            <Setter Property="FontAttributes" Value="Bold" />
-             
-        </Style>
-        <Style x:Key="mouseOverButtonStyle" BaseResourceKey="Button" TargetType="Button">
-            <Setter Property="BackgroundColor" Value="WhiteSmoke"/>
-        </Style>
+        <ResourceDictionary>
+            <Style x:Key="buttonStyle" TargetType="Button">
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="CornerRadius" Value="20" />
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="BorderColor" Value="Black" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+        </ResourceDictionary>
     </ContentPage.Resources>
+    
     <StackLayout>
         <StackLayout VerticalOptions="Start" Orientation="Horizontal">
             <ImageButton
@@ -58,6 +57,8 @@
                         HorizontalOptions="Center" 
                         VerticalOptions="End"
                         Clicked="OnHistoryGame"
+                        Style="{StaticResource buttonStyle}"
+                        
                    />
                     <Button 
                         ClassId="ButtonPlay"
@@ -65,6 +66,7 @@
                         HorizontalOptions="Center" 
                         VerticalOptions="End"
                         Clicked="OnFreeGame"
+                        Style="{StaticResource buttonStyle}"
                     />
                     <Button 
                         ClassId="ButtonPlay"
@@ -72,6 +74,7 @@
                         HorizontalOptions="Center" 
                         VerticalOptions="End"
                         Clicked="OnMultiplayerGame"
+                        Style="{StaticResource buttonStyle}"
                     />
                     <Button 
                         ClassId="ButtonPlay"
@@ -79,6 +82,7 @@
                         HorizontalOptions="Center" 
                         VerticalOptions="End"
                         Clicked="OnChallengeGame"
+                        Style="{StaticResource buttonStyle}"
                     />
                     <Button 
                         ClassId="ButtonPlay"
@@ -87,6 +91,7 @@
                         VerticalOptions="End"
                         ScaleY="0.8"
                         Clicked="OnDesck"
+                        Style="{StaticResource buttonStyle}"
                     />
                 
             </StackLayout>
