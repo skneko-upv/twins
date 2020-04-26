@@ -1,4 +1,5 @@
 ﻿using System;
+using Twins.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,7 +11,7 @@ namespace Twins
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new FreeModeForm();
         }
 
         protected override void OnStart()

@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Twins.Views;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals; 
 
 namespace Twins
 {
@@ -16,6 +19,7 @@ namespace Twins
         public MainPage()
         {
             InitializeComponent();
+
         }
 
 
@@ -47,7 +51,9 @@ namespace Twins
         {
             ///resume
             ///Open Free Game menu
+            
         }
+
         void OnMultiplayerGame(object sender, EventArgs e)
         {
             ///resume
