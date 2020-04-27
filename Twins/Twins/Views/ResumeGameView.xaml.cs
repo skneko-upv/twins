@@ -54,12 +54,22 @@ namespace Twins.Views
 
         }
 
-        public void SetStadistics(int score, int tries, int succeses, string time)
+        public void SetStadistics(int score, int tries, int succeses, string time, bool isVictory)
         {
             Score = score;
             Tries = tries;
             Succeses = succeses;
             Time = time;
+            if (isVictory)
+            {
+                ResultLabel.Text = "Victoria";
+                ResultLabel.TextColor = Color.Green;
+            }
+            else 
+            {
+                ResultLabel.Text = "Derrota";
+                ResultLabel.TextColor = Color.Red;
+            }
         }
 
         public async void OnHome(object sender, EventArgs e)
