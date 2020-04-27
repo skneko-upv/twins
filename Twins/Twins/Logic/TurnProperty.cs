@@ -8,8 +8,8 @@ namespace Twins.Logic
 {
     public class TurnProperty : INotifyPropertyChanged
     {
-        public string turn;
-        public string Turn 
+        public int turn;
+        public int Turn 
         {
             get { return turn; }
             set 
@@ -25,7 +25,7 @@ namespace Twins.Logic
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public TurnProperty(String turn = "1") {
+        public TurnProperty(int turn = 1) {
             Turn = turn;
         }
 
