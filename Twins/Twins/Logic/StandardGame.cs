@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Twins.Logic;
+using Twins.Model;
 
 namespace Twins.Models
 {
@@ -13,7 +14,7 @@ namespace Twins.Models
 
         public int RemainingMatches { get; private set; }
 
-        public StandardGame(int height, int width, Deck deck)
+        public StandardGame(int height, int width, Deck deck, TimeSpan timeLimit, TimeSpan turnLimit) : base(timeLimit, turnLimit)
         {
             var populationStrategy = new CyclicRandomPopulationStrategy(GroupSize, deck);
             Board = new Board(height, width, this, populationStrategy);
@@ -29,21 +30,6 @@ namespace Twins.Models
 
             TurnClock = new Model.Clock(new TimeSpan(0, 0, 5));
             
-        }
-
-        public override void Win()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void Resume()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void Pause()
-        {
-            throw new System.NotImplementedException();
         }
 
         public override IEnumerable<Board.Cell> TryMatch()
@@ -84,6 +70,8 @@ namespace Twins.Models
 
         public override void EndTurn()
         {
+            base.EndTurn();
+
             Board.UnflipAllCells();
             Board.ReferenceCard = null;
             Turn.Turn++;

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Twins.Logic;
 using Twins.Model;
 
@@ -18,11 +19,47 @@ namespace Twins.Models
 
         public Board Board { get; protected set; }
 
-        public abstract void Resume();
+        public event Action TurnTimedOut;
 
-        public abstract void Pause();
+        public Game(TimeSpan? timeLimit, TimeSpan? turnLimit)
+        {
+            if (timeLimit != null)
+            {
+                GameClock = new Clock((TimeSpan)timeLimit);
+            } 
+            else
+            {
+                GameClock = new Clock();
+            }
+            GameClock.TimedOut += () => EndGame(false);
 
-        public abstract void Win();
+            if (turnLimit != null)
+            {
+                TurnClock = new Clock((TimeSpan)turnLimit);
+            }
+            else
+            {
+                TurnClock = new Clock();
+            }
+            TurnClock.TimedOut += () => TurnTimedOut();
+        }
+
+        public virtual void Resume()
+        {
+            GameClock.Start();
+            TurnClock.Start();
+        }
+
+        public virtual void Pause()
+        {
+            GameClock.Stop();
+            TurnClock.Stop();
+        }
+
+        public virtual void EndGame(bool victory)
+        {
+            // TODO
+        }
 
         public abstract bool ShouldTryMatch();
 
@@ -30,6 +67,9 @@ namespace Twins.Models
 
         public abstract bool ShouldEndTurn();
 
-        public abstract void EndTurn();
+        public virtual void EndTurn()
+        {
+            TurnClock.Reset();
+        }
     }
 }

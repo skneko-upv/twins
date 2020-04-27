@@ -32,7 +32,6 @@ namespace Twins.Model
                 TimeLeft.Time = GetTimeSpan().ToString(@"hh\:mm\:ss");
                 if (clock.ElapsedMilliseconds >= timeLimit.TotalMilliseconds) {
                     TimedOut();
-                    return false;
                 }
                 return true;
             });
