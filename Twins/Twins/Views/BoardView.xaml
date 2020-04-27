@@ -108,7 +108,7 @@
                              AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
                              AbsoluteLayout.LayoutFlags="All"/>
             <twinsc:NotImplementedMessage x:Name="CommingSoonView"/>
-            <twins:ResumeGameView  IsVisible="False"/>
+            <twins:ResumeGameView x:Name="EndGameModal" IsVisible="False"/>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -41,7 +41,13 @@ namespace Twins.Views
 
         private void OnGameEnded(bool victory)
         {
-            // TODO
+            var game = ((BoardViewModel)BindingContext).Board.Game;
+            EndGameModal.SetStadistics(
+                0,
+                game.MatchAttempts,
+                game.MatchSuccesses.Match,
+                game.GameClock.GetTimeSpan());
+            EndGameModal.IsVisible = true;
         }
 
         private void FillBoard(int height, int width)

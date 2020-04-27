@@ -67,25 +67,25 @@ namespace Twins.ViewModels
             }
         }
 
-         void OnCellFlipped(Board.Cell cell)
+         async void OnCellFlipped(Board.Cell cell)
         {
-             CardComponents[cell].Flip();
+             await CardComponents[cell].Flip();
         }
 
-         void OnCellUnflipped(Board.Cell cell)
+         async void OnCellUnflipped(Board.Cell cell)
         {
-             CardComponents[cell].Unflip();
+             await CardComponents[cell].Unflip();
         }
 
-         void OnCellKeepRevealedStatusChanged(Board.Cell cell, bool reveal)
+         async void OnCellKeepRevealedStatusChanged(Board.Cell cell, bool reveal)
         {
             if (reveal)
             {
-                 CardComponents[cell].Flip();
+                 await CardComponents[cell].Flip();
             }
             else
             {
-                 CardComponents[cell].Unflip();
+                 await CardComponents[cell].Unflip();
             }
         }
 

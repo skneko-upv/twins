@@ -15,32 +15,28 @@ namespace Twins.Views
         public int Score {
             set
             {
-                Score = value;
-                PointsLabel.Text = ""+value;
+                PointsLabel.Text = "" + value;
             }
         }
         public int Tries 
         {
             set 
             {
-                Tries = value;
                 TriesLabel.Text = "" + value;
             }
         }
-        public int Succeses
+        public int Successes
         {
             set
             {
-                Succeses = value;
                 SuccessLabel.Text = "" + value;
             }
         }
-        public String Time
+        public TimeSpan Time
         {
             set
             {
-                Time = value;
-                TimeLabel.Text = value;
+                TimeLabel.Text = string.Format("{0:D2}:{1:D2}", value.Minutes, value.Seconds);
             }
         }
 
@@ -58,7 +54,7 @@ namespace Twins.Views
         {
             Score = score;
             Tries = tries;
-            Succeses = succeses;
+            Successes = successes;
             Time = time;
             if (isVictory)
             {
@@ -76,6 +72,7 @@ namespace Twins.Views
         {
             await Navigation.PopToRootAsync();
         }
+
         public async void OnNext(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
