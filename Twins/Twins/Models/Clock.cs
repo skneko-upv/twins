@@ -15,6 +15,7 @@ namespace Twins.Model
 
         // Variable usada por el temporizador
         private TimeSpan timeLimit;
+        public TimeProperty TimeLeft;
         public bool IsCountingDown { get; private set; } = false;
         public event Action TimedOut;
 
@@ -26,7 +27,9 @@ namespace Twins.Model
         public Clock(TimeSpan maxTime) : this() {
             IsCountingDown = true;
             timeLimit = maxTime;
+            TimeLeft = new TimeProperty();
             Device.StartTimer(TimeSpan.FromMilliseconds(500.0), () => {
+                TimeLeft.Time = GetTimeSpan().ToString(@"hh\:mm\:ss");
                 if (clock.ElapsedMilliseconds >= timeLimit.TotalMilliseconds) {
                     TimedOut();
                     return false;

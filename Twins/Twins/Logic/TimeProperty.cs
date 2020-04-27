@@ -5,24 +5,14 @@ namespace Twins.Logic
 {
     public class TimeProperty : INotifyPropertyChanged
     {
-        public int minutes;
-        public int Minutes
+        public string time;
+        public string Time
         {
-            get { return minutes; }
+            get { return time; }
             set
             {
-                minutes = value;
-                OnPropertyChanged(nameof(minutes));
-            }
-        }
-        public int seconds;
-        public int Seconds
-        {
-            get { return seconds; }
-            set
-            {
-                seconds = value;
-                OnPropertyChanged(nameof(seconds));
+                time = value.Substring(3);
+                OnPropertyChanged(nameof(Time));
             }
         }
 
@@ -32,10 +22,9 @@ namespace Twins.Logic
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public TimeProperty(int minutes = 0, int seconds = 0)
+        public TimeProperty(string time = "00:00")
         {
-            Minutes = minutes;
-            Seconds = seconds;
+            Time = time;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

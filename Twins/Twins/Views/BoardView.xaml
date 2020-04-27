@@ -48,10 +48,8 @@
                              Spacing="4">
                     <StackLayout Orientation="Horizontal"
                                  Spacing="1" >
-                        <Label FontSize="40" x:Name="GlobalMinLabel">00</Label>
-                        <Label FontSize="40">:</Label>
-                        <Label FontSize="40" x:Name="GlobalSecLabel">00</Label>
-                    </StackLayout>
+                            <Label FontSize="40" x:Name="GlobalTimeLabel">00</Label>
+                        </StackLayout>
                     <StackLayout Orientation="Horizontal"
                                  HorizontalOptions="EndAndExpand"
                                  Spacing="1"
@@ -62,10 +60,8 @@
                         </Label>
                             <Label Text="" FontAttributes="Bold" x:Name="TurnLabel"/>
                             <Label Text=":" FontAttributes="Bold" Margin="0,0,5,0"/>
-                            <Label x:Name="TurnMinLabel">0</Label>
-                        <Label>:</Label>
-                            <Label x:Name="TurnSecLabel">00</Label>
-                    </StackLayout>
+                            <Label x:Name="TurnTimeLabel"/>
+                        </StackLayout>
                 </StackLayout>
             </Grid>
             <ScrollView x:Name="boardArea"

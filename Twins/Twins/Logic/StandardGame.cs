@@ -24,8 +24,11 @@ namespace Twins.Models
 
             Board.CellFlipped += OnCellFlipped;
 
-            GlobalTime = new TimeProperty(1, 30);
-            TurnTime = new TimeProperty(0, 5);
+            GameClock = new Model.Clock(new TimeSpan(0,1,30));
+            GameClock.Start();
+
+            TurnClock = new Model.Clock(new TimeSpan(0, 0, 5));
+            
         }
 
         public override void Win()
