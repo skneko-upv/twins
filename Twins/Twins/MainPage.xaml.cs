@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Twins.Views;
 using Xamarin.Forms;
-using Xamarin.Forms.Internals; 
 
 namespace Twins
 {
@@ -22,28 +15,29 @@ namespace Twins
 
         }
 
-
-        void OnOption(object sender, EventArgs e)
+        private void OnOption(object sender, EventArgs e)
         {
 
             /// resume
             /// Open Option menu
             CommingSoonView.ButtonNotImplemented();
         }
-        void OnMute(object sender, EventArgs e)
+
+        private void OnMute(object sender, EventArgs e)
         {
             ///resume
             ///Mute music
             CommingSoonView.ButtonNotImplemented();
         }
-        void OnLogout(object sender, EventArgs e)
+
+        private void OnLogout(object sender, EventArgs e)
         {
             ///resume
             ///Finish app
             System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
 
-        void OnHistoryGame(object sender, EventArgs e)
+        private void OnHistoryGame(object sender, EventArgs e)
         {
             ///resume
             ///Open History menu
@@ -51,7 +45,8 @@ namespace Twins
 
 
         }
-        async void OnFreeGame(object sender, EventArgs e)
+
+        private async void OnFreeGame(object sender, EventArgs e)
         {
             ///resume
             ///Open Free Game menu
@@ -60,19 +55,21 @@ namespace Twins
 
         }
 
-        void OnMultiplayerGame(object sender, EventArgs e)
+        private void OnMultiplayerGame(object sender, EventArgs e)
         {
             ///resume
             ///Open Multiplayer menu
             CommingSoonView.ButtonNotImplemented();
         }
-        void OnChallengeGame(object sender, EventArgs e)
+
+        private void OnChallengeGame(object sender, EventArgs e)
         {
             ///resume
             ///Open Challenge menu
             CommingSoonView.ButtonNotImplemented();
         }
-        void OnDesck(object sender, EventArgs e)
+
+        private void OnDesck(object sender, EventArgs e)
         {
             ///resume
             ///Open Desck menu

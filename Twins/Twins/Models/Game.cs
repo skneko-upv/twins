@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using Twins.Logic;
 using Twins.Model;
+using Twins.Models.Properties;
 
 namespace Twins.Models
 {
     public abstract partial class Game
     {
         public TimeProperty GlobalTime { get; set; }
-        public TimeProperty TurnTime {get; set;}
+        public TimeProperty TurnTime { get; set; }
         public TurnProperty Turn { get; set; } = new TurnProperty();
-        public TurnProperty MatchSuccesses { get; protected set; } = new TurnProperty(1,0);
+        public TurnProperty MatchSuccesses { get; protected set; } = new TurnProperty(1, 0);
         public int MatchFailures { get; protected set; } = 0;
-        public int MatchAttempts { get => MatchSuccesses.Match + MatchFailures; }
+        public int MatchAttempts => MatchSuccesses.Match + MatchFailures;
 
         public Clock GameClock { get; protected set; }
         public Clock TurnClock { get; protected set; }
@@ -27,7 +27,7 @@ namespace Twins.Models
             if (timeLimit != null)
             {
                 GameClock = new Clock((TimeSpan)timeLimit);
-            } 
+            }
             else
             {
                 GameClock = new Clock();

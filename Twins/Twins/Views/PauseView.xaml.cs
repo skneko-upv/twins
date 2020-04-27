@@ -16,14 +16,16 @@ namespace Twins.Views
 
         public PauseView() : this(false) { }
 
-        public void OnResume(object sender, EventArgs e) {
+        public void OnResume(object sender, EventArgs e)
+        {
             ((BoardViewModel)BindingContext).Board.Game.Resume();
             window.IsVisible = false;
         }
 
         public void OnPause() { window.IsVisible = true; }
 
-        public async void OnAbandon(object sender, EventArgs e) {
+        public async void OnAbandon(object sender, EventArgs e)
+        {
             await Navigation.PopToRootAsync();
         }
 

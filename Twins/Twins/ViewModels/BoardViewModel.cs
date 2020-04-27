@@ -11,7 +11,7 @@ namespace Twins.ViewModels
     {
         public class CardComponentMatrix
         {
-            readonly CardComponent[,] cardComponents;
+            private readonly CardComponent[,] cardComponents;
 
             public CardComponentMatrix(int height, int width)
             {
@@ -22,9 +22,9 @@ namespace Twins.ViewModels
                 get => cardComponents[cell.Row, cell.Column];
                 set => cardComponents[cell.Row, cell.Column] = value;
             }
-                
+
         }
-        
+
         public CardComponentMatrix CardComponents { get; }
 
         public Board Board { get; }
@@ -32,13 +32,14 @@ namespace Twins.ViewModels
         public bool InteractionAllowed { get; private set; }
 
 
-        public BoardViewModel(Board board) {
+        public BoardViewModel(Board board)
+        {
             Board = board;
 
             CardComponents = new CardComponentMatrix(Board.Height, Board.Width);
-            foreach (var cell in Board.Cells)
+            foreach (Board.Cell cell in Board.Cells)
             {
-                var component = new CardComponent(cell.Card);
+                CardComponent component = new CardComponent(cell.Card);
                 component.Clicked += () => OnCellClicked(cell);
                 CardComponents[cell] = component;
             }
@@ -59,39 +60,42 @@ namespace Twins.ViewModels
             Board.Game.Resume();
         }
 
-        private async void OnCellsMatched(IEnumerable<Board.Cell> cells)
+        private void OnCellsMatched(IEnumerable<Board.Cell> cells)
         {
-            foreach (var cell in cells)
+            foreach (Board.Cell cell in cells)
             {
-                CardComponents[cell].Matched();
+                _ = CardComponents[cell].Matched();
             }
         }
 
-         async void OnCellFlipped(Board.Cell cell)
+        private async void OnCellFlipped(Board.Cell cell)
         {
-             await CardComponents[cell].Flip();
+            await CardComponents[cell].Flip();
         }
 
-         async void OnCellUnflipped(Board.Cell cell)
+        private async void OnCellUnflipped(Board.Cell cell)
         {
-             await CardComponents[cell].Unflip();
+            await CardComponents[cell].Unflip();
         }
 
-         async void OnCellKeepRevealedStatusChanged(Board.Cell cell, bool reveal)
+        private async void OnCellKeepRevealedStatusChanged(Board.Cell cell, bool reveal)
         {
             if (reveal)
             {
-                 await CardComponents[cell].Flip();
+                await CardComponents[cell].Flip();
             }
             else
             {
-                 await CardComponents[cell].Unflip();
+                await CardComponents[cell].Unflip();
             }
         }
 
-        async void OnCellClicked(Board.Cell cell)
+        private async void OnCellClicked(Board.Cell cell)
         {
-            if (!InteractionAllowed) return;
+            if (!InteractionAllowed)
+            {
+                return;
+            }
 
             try
             {
@@ -104,7 +108,7 @@ namespace Twins.ViewModels
                 InteractionAllowed = false;
                 Board.Game.Pause();
 
-                var matched = Board.Game.TryMatch();
+                IEnumerable<Board.Cell> matched = Board.Game.TryMatch();
                 if (matched.Any())
                 {
                     OnCellsMatched(matched);

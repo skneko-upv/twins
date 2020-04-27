@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -16,18 +12,19 @@ namespace Twins.Views
         {
             InitializeComponent();
         }
-        async void OnBackMainMenu(object sender, EventArgs e)
+
+        private async void OnBackMainMenu(object sender, EventArgs e)
         {
             ///resume
             ///Go Back to Main Menu
             await Navigation.PopAsync();
         }
 
-        async void OnStartGame(object sender, EventArgs e)
+        private async void OnStartGame(object sender, EventArgs e)
         {
             ///resume
             ///Start the game with de parameter of the form
-            var game = new Models.StandardGame(6, 4, 
+            Models.StandardGame game = new Models.StandardGame(6, 4,
                 Components.BasicDeck.CreateBasicDeck(),
                 TimeSpan.FromMinutes(1),
                 TimeSpan.FromSeconds(5));

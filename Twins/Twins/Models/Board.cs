@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using Twins.Models.Strategies;
 
 namespace Twins.Models
 {
@@ -21,7 +21,7 @@ namespace Twins.Models
             set {
                 _referenceCard = value;
                 ReferenceCardChanged(value);
-            } 
+            }
         }
         private Card _referenceCard;
 
@@ -61,7 +61,7 @@ namespace Twins.Models
 
         public Cell[,] Cells { get; private set; }
 
-        readonly IBoardPopulationStrategy populationStrategy;
+        private readonly IBoardPopulationStrategy populationStrategy;
 
         /// <summary>
         /// Create a new board populated randomly.
@@ -93,7 +93,7 @@ namespace Twins.Models
 
         public void FlipCell(int row, int column)
         {
-            var flipped = this[row, column];
+            Cell flipped = this[row, column];
 
             if (flipped.KeepRevealed)
             {
@@ -106,7 +106,7 @@ namespace Twins.Models
 
         public void UnflipCell(int row, int column)
         {
-            var flipped = this[row, column];
+            Cell flipped = this[row, column];
 
             if (flipped.KeepRevealed || !FlippedCells.Contains(flipped))
             {
@@ -131,10 +131,15 @@ namespace Twins.Models
 
         public void SetCellKeepRevealed(int row, int column, bool keepRevealed)
         {
-            var cell = this[row, column];
+            Cell cell = this[row, column];
 
             cell.KeepRevealed = keepRevealed;
             CellKeepRevealedStatusChanged(cell, keepRevealed);
+        }
+
+        private void Populate()
+        {
+            Cells = populationStrategy.Populate(Height, Width);
         }
     }
 }

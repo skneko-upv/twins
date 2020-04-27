@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Twins.Models;
 using static Twins.Models.Board;
 
-namespace Twins.Logic
+namespace Twins.Models.Strategies
 {
     public class CyclicRandomPopulationStrategy : IBoardPopulationStrategy
     {
@@ -45,11 +44,11 @@ namespace Twins.Logic
                     // reuse the same deck to introduce duplicate pairs.
                     availableCards = Deck.Cards;
                 }
-                var card = availableCards.PickAndRemoveRandom();
+                Card card = availableCards.PickAndRemoveRandom();
 
                 for (int i = 0; i < GroupSize; i++)
                 {
-                    var (row, column) = emptyPositions.PickAndRemoveRandom();
+                    (int row, int column) = emptyPositions.PickAndRemoveRandom();
                     cells[row, column] = new Cell(row, column, card);
                 }
             }

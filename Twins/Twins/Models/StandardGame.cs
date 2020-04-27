@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Twins.Logic;
-using Twins.Model;
+using Twins.Models.Strategies;
 
 namespace Twins.Models
 {
     public class StandardGame : Game
     {
-        const int GroupSize = 2;
+        private const int GroupSize = 2;
 
         public Deck Deck { get; }
 
@@ -16,7 +15,7 @@ namespace Twins.Models
 
         public StandardGame(int height, int width, Deck deck, TimeSpan timeLimit, TimeSpan turnLimit) : base(timeLimit, turnLimit)
         {
-            var populationStrategy = new CyclicRandomPopulationStrategy(GroupSize, deck);
+            CyclicRandomPopulationStrategy populationStrategy = new CyclicRandomPopulationStrategy(GroupSize, deck);
             Board = new Board(height, width, this, populationStrategy);
 
             Deck = deck;
@@ -28,7 +27,7 @@ namespace Twins.Models
 
         public override IEnumerable<Board.Cell> TryMatch()
         {
-            var reference = Board.FlippedCells.First().Card;
+            Card reference = Board.FlippedCells.First().Card;
             bool isMatch = Board.FlippedCells.All(c => c.Card == reference);
 
             IEnumerable<Board.Cell> matched;
@@ -36,7 +35,8 @@ namespace Twins.Models
             {
                 MatchSuccesses.Match++;
 
-                foreach (var cell in Board.FlippedCells) {
+                foreach (Board.Cell cell in Board.FlippedCells)
+                {
                     Board.SetCellKeepRevealed(cell.Row, cell.Column, true);
                 }
 

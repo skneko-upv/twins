@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using Twins.Components;
 using Twins.Models;
 using Twins.ViewModels;
@@ -16,7 +15,7 @@ namespace Twins.Views
             InitializeComponent();
             BoardViewModel boardViewModel = new BoardViewModel(board);
             BindingContext = boardViewModel;
-            
+
             TurnLabel.SetBinding(Label.TextProperty, "Turn");
             TurnLabel.BindingContext = boardViewModel.Board.Game.Turn;
 
@@ -32,7 +31,7 @@ namespace Twins.Views
             FillBoard(board.Height, board.Width);
 
             board.ReferenceCardChanged += OnReferenceCardChanged;
-            referenceCard.Clicked += () => {};
+            referenceCard.Clicked += () => { };
 
             board.Game.GameEnded += OnGameEnded;
 
@@ -41,7 +40,7 @@ namespace Twins.Views
 
         private void OnGameEnded(bool victory)
         {
-            var game = ((BoardViewModel)BindingContext).Board.Game;
+            Game game = ((BoardViewModel)BindingContext).Board.Game;
             EndGameModal.SetStadistics(
                 0,
                 game.MatchAttempts,
@@ -62,8 +61,8 @@ namespace Twins.Views
                 board.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             }
 
-            var viewModel = (BoardViewModel)BindingContext;
-            foreach (var cell in viewModel.Board.Cells)
+            BoardViewModel viewModel = (BoardViewModel)BindingContext;
+            foreach (Board.Cell cell in viewModel.Board.Cells)
             {
                 CardComponent card = viewModel.CardComponents[cell];
                 card.VerticalOptions = LayoutOptions.Center;
@@ -72,7 +71,7 @@ namespace Twins.Views
             }
         }
 
-        async void OnReferenceCardChanged(Card card)
+        private async void OnReferenceCardChanged(Card card)
         {
             if (card != null)
             {

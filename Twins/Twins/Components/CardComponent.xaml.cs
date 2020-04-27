@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Twins.Models;
 using Xamarin.Forms;
@@ -28,15 +25,19 @@ namespace Twins.Components
         {
             InitializeComponent();
 
-            this.Card = card;
+            Card = card;
             Flipped = false;
             button.ImageSource = card.Deck.BackImage;
             IsBlocked = isBlocked;
         }
 
-        public async Task Flip() 
+        public async Task Flip()
         {
-            if (!IsBlocked) IsEnabled = false;
+            if (!IsBlocked)
+            {
+                IsEnabled = false;
+            }
+
             Flipped = true;
             await AnimationFlip(90, 150);
             button.ImageSource = Card.Image;
@@ -45,14 +46,18 @@ namespace Twins.Components
 
         public async Task Unflip()
         {
-            if(!IsBlocked) IsEnabled = true;
+            if (!IsBlocked)
+            {
+                IsEnabled = true;
+            }
+
             Flipped = false;
             await AnimationFlip(90, 150);
             button.ImageSource = Card.Deck.BackImage;
             await AnimationFlip(0, 150);
         }
 
-        public async Task Matched() 
+        public async Task Matched()
         {
             button.RotationY = 0;
             await AnimationFlip(360, 250);

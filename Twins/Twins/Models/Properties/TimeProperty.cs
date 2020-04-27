@@ -1,16 +1,14 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Twins.Logic
+namespace Twins.Models.Properties
 {
     public class TimeProperty : INotifyPropertyChanged
     {
         public string time;
-        public string Time
-        {
-            get { return time; }
-            set
-            {
+        public string Time {
+            get => time;
+            set {
                 time = value.Substring(3);
                 OnPropertyChanged(nameof(Time));
             }

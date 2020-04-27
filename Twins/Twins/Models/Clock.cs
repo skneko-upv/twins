@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading;
-using System.Text;
+using Twins.Models.Properties;
 using Xamarin.Forms;
-using Twins.Logic;
 
 namespace Twins.Model
 {
@@ -24,19 +21,22 @@ namespace Twins.Model
         public Clock() { clock = new Stopwatch(); }
 
         //Inicializa el temporizador
-        public Clock(TimeSpan maxTime) : this() {
+        public Clock(TimeSpan maxTime) : this()
+        {
             IsCountingDown = true;
             timeLimit = maxTime;
             TimeLeft = new TimeProperty();
-            Device.StartTimer(TimeSpan.FromMilliseconds(500.0), () => {
+            Device.StartTimer(TimeSpan.FromMilliseconds(500.0), () =>
+            {
                 TimeLeft.Time = GetTimeSpan().ToString(@"hh\:mm\:ss");
-                if (clock.ElapsedMilliseconds >= timeLimit.TotalMilliseconds) {
+                if (clock.ElapsedMilliseconds >= timeLimit.TotalMilliseconds)
+                {
                     TimedOut();
                 }
                 return true;
             });
         }
-        
+
 
         public void Start() { clock.Start(); }
 
@@ -49,8 +49,9 @@ namespace Twins.Model
         public bool IsRunning() { return clock.IsRunning; }
 
         //Convierte el tiempo actual del Stopwatch en TimeSpan y lo devuelve
-        public TimeSpan GetTimeSpan() {
-            var elapsedTime = new TimeSpan(0, 0, 0, 0, (int)clock.ElapsedMilliseconds);
+        public TimeSpan GetTimeSpan()
+        {
+            TimeSpan elapsedTime = new TimeSpan(0, 0, 0, 0, (int)clock.ElapsedMilliseconds);
             return IsCountingDown ? timeLimit - elapsedTime : elapsedTime;
         }
 
