@@ -24,12 +24,6 @@ namespace Twins.Models
             RemainingMatches = height * width / GroupSize;
 
             Board.CellFlipped += OnCellFlipped;
-
-            GameClock = new Model.Clock(new TimeSpan(0,1,30));
-            GameClock.Start();
-
-            TurnClock = new Model.Clock(new TimeSpan(0, 0, 5));
-            
         }
 
         public override IEnumerable<Board.Cell> TryMatch()
@@ -48,6 +42,11 @@ namespace Twins.Models
 
                 RemainingMatches--;
                 matched = new List<Board.Cell>(Board.FlippedCells);
+
+                if (RemainingMatches <= 0)
+                {
+                    EndGame(true);
+                }
             }
             else
             {

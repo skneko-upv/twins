@@ -31,6 +31,13 @@ namespace Twins.Views
 
             board.ReferenceCardChanged += OnReferenceCardChanged;
             referenceCard.Clicked += () => {};
+
+            board.Game.GameEnded += OnGameEnded;
+        }
+
+        private void OnGameEnded(bool victory)
+        {
+            // TODO
         }
 
         private void FillBoard(int height, int width)

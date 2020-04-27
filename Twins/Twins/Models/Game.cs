@@ -20,6 +20,7 @@ namespace Twins.Models
         public Board Board { get; protected set; }
 
         public event Action TurnTimedOut;
+        public event Action<bool> GameEnded;
 
         public Game(TimeSpan? timeLimit, TimeSpan? turnLimit)
         {
@@ -58,7 +59,8 @@ namespace Twins.Models
 
         public virtual void EndGame(bool victory)
         {
-            // TODO
+            Pause();
+            GameEnded(victory);
         }
 
         public abstract bool ShouldTryMatch();
