@@ -47,8 +47,17 @@ namespace Twins.ViewModels
             Board.CellFlipped += OnCellFlipped;
             Board.CellUnflipped += OnCellUnflipped;
             Board.CellKeepRevealedStatusChanged += OnCellKeepRevealedStatusChanged;
+            Board.Game.TurnTimedOut += OnTurnTimedOut;
 
+            Board.Game.Resume();
             InteractionAllowed = true;
+        }
+
+        private void OnTurnTimedOut()
+        {
+            Board.Game.Pause();
+            Board.Game.EndTurn();
+            Board.Game.Resume();
         }
 
         private async void OnCellsMatched(IEnumerable<Board.Cell> cells)
@@ -94,6 +103,7 @@ namespace Twins.ViewModels
             if (Board.Game.ShouldTryMatch())
             {
                 InteractionAllowed = false;
+                Board.Game.Pause();
 
                 var matched = Board.Game.TryMatch();
                 if (matched.Any())
@@ -112,6 +122,7 @@ namespace Twins.ViewModels
                 }
 
                 InteractionAllowed = true;
+                Board.Game.Resume();
             }
         }
     }

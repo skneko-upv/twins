@@ -29,7 +29,6 @@ namespace Twins.Model
             Device.StartTimer(TimeSpan.FromMilliseconds(500.0), () => {
                 if (clock.ElapsedMilliseconds >= timeLimit.TotalMilliseconds) {
                     TimedOut();
-                    return false;
                 }
                 return true;
             });

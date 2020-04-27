@@ -29,7 +29,9 @@ namespace Twins.Views
         public async void OnNext(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
-            var game = new Models.StandardGame(6, 4, Components.BasicDeck.CreateBasicDeck());
+            var game = new Models.StandardGame(6, 4, Components.BasicDeck.CreateBasicDeck(),
+                TimeSpan.FromMinutes(1),
+                TimeSpan.FromSeconds(5));
             await Navigation.PushAsync(new Views.BoardView(game.Board));
         }
     }
