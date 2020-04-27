@@ -112,7 +112,7 @@ namespace Twins.ViewModels
                 if (matched.Any())
                 {
                     OnCellsMatched(matched);
-                    //await Task.Delay(1500);
+                    await Task.Delay(1500);
                 }
                 else
                 {
@@ -124,8 +124,11 @@ namespace Twins.ViewModels
                     Board.Game.EndTurn();
                 }
 
-                InteractionAllowed = true;
-                Board.Game.Resume();
+                if (!Board.Game.IsFinished)
+                {
+                    InteractionAllowed = true;
+                    Board.Game.Resume();
+                }
             }
         }
     }
