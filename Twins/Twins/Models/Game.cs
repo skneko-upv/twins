@@ -10,9 +10,9 @@ namespace Twins.Models
         public TimeProperty GlobalTime { get; set; }
         public TimeProperty TurnTime {get; set;}
         public TurnProperty Turn { get; set; } = new TurnProperty();
-        public int MatchSuccesses { get; protected set; } = 0;
+        public TurnProperty MatchSuccesses { get; protected set; } = new TurnProperty(1,0);
         public int MatchFailures { get; protected set; } = 0;
-        public int MatchAttempts { get => MatchSuccesses + MatchFailures; }
+        public int MatchAttempts { get => MatchSuccesses.Match + MatchFailures; }
 
         public Clock GameClock { get; protected set; }
         public Clock TurnClock { get; protected set; }

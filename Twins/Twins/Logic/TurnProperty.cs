@@ -16,14 +16,26 @@ namespace Twins.Logic
             }
         }
 
+        public int match;
+        public int Match
+        {
+            get { return match; }
+            set
+            {
+                match = value;
+                OnPropertyChanged(nameof(Match));
+            }
+        }
+
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public TurnProperty(int turn = 1) {
+        public TurnProperty(int turn = 1, int match = 0) {
             Turn = turn;
+            Match = match;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

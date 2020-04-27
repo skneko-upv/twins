@@ -34,7 +34,7 @@ namespace Twins.Models
             IEnumerable<Board.Cell> matched;
             if (isMatch)
             {
-                MatchSuccesses++;
+                MatchSuccesses.Match++;
 
                 foreach (var cell in Board.FlippedCells) {
                     Board.SetCellKeepRevealed(cell.Row, cell.Column, true);
