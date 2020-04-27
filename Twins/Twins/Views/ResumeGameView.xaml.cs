@@ -50,7 +50,7 @@ namespace Twins.Views
 
         }
 
-        public void SetStadistics(int score, int tries, int succeses, string time, bool isVictory)
+        public void SetStadistics(int score, int tries, int successes, TimeSpan time, bool isVictory)
         {
             Score = score;
             Tries = tries;

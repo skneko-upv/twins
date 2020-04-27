@@ -46,7 +46,8 @@ namespace Twins.Views
                 0,
                 game.MatchAttempts,
                 game.MatchSuccesses.Match,
-                game.GameClock.GetTimeSpan());
+                game.GameClock.GetTimeSpan(),
+                victory);
             EndGameModal.IsVisible = true;
         }
 
