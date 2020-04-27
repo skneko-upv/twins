@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using Twins.Components;
 using Twins.Models;
 using Twins.ViewModels;
@@ -10,8 +11,6 @@ namespace Twins.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BoardView : ContentPage
     {
-
-
         public BoardView(Board board)
         {
             InitializeComponent();
@@ -26,6 +25,9 @@ namespace Twins.Views
 
             TurnTimeLabel.SetBinding(Label.TextProperty, "Time");
             TurnTimeLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
+
+            SuccesLabel.SetBinding(Label.TextProperty, "Match");
+            SuccesLabel.BindingContext = boardViewModel.Board.Game.MatchSuccesses;
 
             FillBoard(board.Height, board.Width);
 
