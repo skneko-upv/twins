@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using Twins.Logic;
 using Twins.Model;
 
 namespace Twins.Models
 {
     public abstract partial class Game
     {
-        public int Turn { get; protected set; } = 1;
+        public TurnProperty Turn { get; set; } = new TurnProperty();
         public int MatchSuccesses { get; protected set; } = 0;
         public int MatchFailures { get; protected set; } = 0;
         public int MatchAttempts { get => MatchSuccesses + MatchFailures; }

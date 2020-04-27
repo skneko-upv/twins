@@ -32,6 +32,7 @@ namespace Twins.ViewModels
 
         public bool InteractionAllowed { get; private set; }
 
+
         public BoardViewModel(Board board) {
             Board = board;
 

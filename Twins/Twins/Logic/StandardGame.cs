@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Twins.Logic;
 
@@ -79,6 +80,7 @@ namespace Twins.Models
         {
             Board.UnflipAllCells();
             Board.ReferenceCard = null;
+            Turn.Turn = ""+(1+(Int32.Parse(Turn.Turn)));
         }
 
         private void OnCellFlipped(Board.Cell cell)

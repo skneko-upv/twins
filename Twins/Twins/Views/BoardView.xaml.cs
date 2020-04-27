@@ -9,12 +9,17 @@ namespace Twins.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BoardView : ContentPage
-    { 
+    {
+
 
         public BoardView(Board board)
         {
             InitializeComponent();
-            BindingContext = new BoardViewModel(board);
+            BoardViewModel boardViewModel = new BoardViewModel(board);
+            BindingContext = boardViewModel;
+            
+            TurnLabel.SetBinding(Label.TextProperty, "Turn");
+            TurnLabel.BindingContext = boardViewModel.Board.Game.Turn;
 
             FillBoard(board.Height, board.Width);
 

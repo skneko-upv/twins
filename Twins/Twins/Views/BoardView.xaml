@@ -58,9 +58,11 @@
                                  >
                         <Label Margin="0,0,5,0"
                                FontAttributes="Bold">
-                            Turno:
+                            Turno
                         </Label>
-                        <Label>0</Label>
+                            <Label Text="" FontAttributes="Bold" x:Name="TurnLabel"/>
+                            <Label Text=": " FontAttributes="Bold"/>
+                            <Label>0</Label>
                         <Label>:</Label>
                         <Label>00</Label>
                     </StackLayout>
