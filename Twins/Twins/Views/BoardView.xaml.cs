@@ -33,6 +33,8 @@ namespace Twins.Views
             referenceCard.Clicked += () => {};
 
             board.Game.GameEnded += OnGameEnded;
+
+            PauseMenu.BindingContext = boardViewModel;
         }
 
         private void OnGameEnded(bool victory)
@@ -82,6 +84,7 @@ namespace Twins.Views
 
         private void OnPause(object sender, EventArgs e)
         {
+            ((BoardViewModel)BindingContext).Board.Game.Pause();
             PauseMenu.OnPause();
         }
 
