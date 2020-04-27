@@ -23,6 +23,9 @@ namespace Twins.Models
             RemainingMatches = height * width / GroupSize;
 
             Board.CellFlipped += OnCellFlipped;
+
+            GlobalTime = new TimeProperty(1, 30);
+            TurnTime = new TimeProperty(0, 5);
         }
 
         public override void Win()

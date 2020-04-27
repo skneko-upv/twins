@@ -21,6 +21,19 @@ namespace Twins.Views
             TurnLabel.SetBinding(Label.TextProperty, "Turn");
             TurnLabel.BindingContext = boardViewModel.Board.Game.Turn;
 
+
+            GlobalMinLabel.SetBinding(Label.TextProperty, "Minutes", BindingMode.OneWay,null,"{0:D2}");
+            GlobalMinLabel.BindingContext = boardViewModel.Board.Game.GlobalTime;
+
+            GlobalSecLabel.SetBinding(Label.TextProperty, "Seconds", BindingMode.OneWay, null, "{0:D2}");
+            GlobalSecLabel.BindingContext = boardViewModel.Board.Game.GlobalTime;
+
+            TurnMinLabel.SetBinding(Label.TextProperty, "Minutes", BindingMode.OneWay, null, "{0:D2}");
+            TurnMinLabel.BindingContext = boardViewModel.Board.Game.TurnTime;
+
+            TurnSecLabel.SetBinding(Label.TextProperty, "Seconds", BindingMode.OneWay, null, "{0:D2}");
+            TurnSecLabel.BindingContext = boardViewModel.Board.Game.TurnTime;
+
             FillBoard(board.Height, board.Width);
 
             board.ReferenceCardChanged += OnReferenceCardChanged;

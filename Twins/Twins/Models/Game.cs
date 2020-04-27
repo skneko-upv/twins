@@ -6,6 +6,8 @@ namespace Twins.Models
 {
     public abstract partial class Game
     {
+        public TimeProperty GlobalTime { get; set; }
+        public TimeProperty TurnTime {get; set;}
         public TurnProperty Turn { get; set; } = new TurnProperty();
         public int MatchSuccesses { get; protected set; } = 0;
         public int MatchFailures { get; protected set; } = 0;

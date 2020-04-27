@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Text;
 using Xamarin.Forms;
+using Twins.Logic;
 
 namespace Twins.Model
 {
@@ -25,7 +26,6 @@ namespace Twins.Model
         public Clock(TimeSpan maxTime) : this() {
             IsCountingDown = true;
             timeLimit = maxTime;
-            
             Device.StartTimer(TimeSpan.FromMilliseconds(500.0), () => {
                 if (clock.ElapsedMilliseconds >= timeLimit.TotalMilliseconds) {
                     TimedOut();

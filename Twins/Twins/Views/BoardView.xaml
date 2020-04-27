@@ -48,9 +48,9 @@
                              Spacing="4">
                     <StackLayout Orientation="Horizontal"
                                  Spacing="1" >
-                        <Label FontSize="40">00</Label>
+                        <Label FontSize="40" x:Name="GlobalMinLabel">00</Label>
                         <Label FontSize="40">:</Label>
-                        <Label FontSize="40">00</Label>
+                        <Label FontSize="40" x:Name="GlobalSecLabel">00</Label>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal"
                                  HorizontalOptions="EndAndExpand"
@@ -61,10 +61,10 @@
                             Turno
                         </Label>
                             <Label Text="" FontAttributes="Bold" x:Name="TurnLabel"/>
-                            <Label Text=": " FontAttributes="Bold"/>
-                            <Label>0</Label>
+                            <Label Text=":" FontAttributes="Bold" Margin="0,0,5,0"/>
+                            <Label x:Name="TurnMinLabel">0</Label>
                         <Label>:</Label>
-                        <Label>00</Label>
+                            <Label x:Name="TurnSecLabel">00</Label>
                     </StackLayout>
                 </StackLayout>
             </Grid>
