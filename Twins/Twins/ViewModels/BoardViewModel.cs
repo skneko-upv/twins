@@ -63,7 +63,7 @@ namespace Twins.ViewModels
         {
             foreach (var cell in cells)
             {
-               await CardComponents[cell].Matched();
+                CardComponents[cell].Matched();
             }
         }
 
@@ -108,7 +108,7 @@ namespace Twins.ViewModels
                 if (matched.Any())
                 {
                     OnCellsMatched(matched);
-                    await Task.Delay(1500);
+                    //await Task.Delay(1500);
                 }
                 else
                 {
