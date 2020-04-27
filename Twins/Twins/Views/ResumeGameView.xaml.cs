@@ -12,6 +12,38 @@ namespace Twins.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ResumeGameView : AbsoluteLayout
     {
+        public int Score {
+            set
+            {
+                Score = value;
+                PointsLabel.Text = ""+value;
+            }
+        }
+        public int Tries 
+        {
+            set 
+            {
+                Tries = value;
+                TriesLabel.Text = "" + value;
+            }
+        }
+        public int Succeses
+        {
+            set
+            {
+                Succeses = value;
+                SuccessLabel.Text = "" + value;
+            }
+        }
+        public String Time
+        {
+            set
+            {
+                Time = value;
+                TimeLabel.Text = value;
+            }
+        }
+
         public ResumeGameView()
         {
             InitializeComponent();
@@ -20,6 +52,14 @@ namespace Twins.Views
         public void OnRetry(object sender, EventArgs e) 
         {
 
+        }
+
+        public void SetStadistics(int score, int tries, int succeses, string time)
+        {
+            Score = score;
+            Tries = tries;
+            Succeses = succeses;
+            Time = time;
         }
 
         public async void OnHome(object sender, EventArgs e)

@@ -36,9 +36,7 @@
                 <Label Text="0" x:Name="TriesLabel"/>
                 <Label Text="0" x:Name="SuccessLabel"/>
                 <StackLayout Orientation="Horizontal" Spacing="2">
-                    <Label Text="00" />
-                    <Label Text=":"/>
-                    <Label Text="00"/>
+                    <Label Text="" x:Name="TimeLabel" />
                 </StackLayout>
             </StackLayout>
         </StackLayout>
