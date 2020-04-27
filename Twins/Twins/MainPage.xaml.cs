@@ -51,11 +51,13 @@ namespace Twins
 
 
         }
-        void OnFreeGame(object sender, EventArgs e)
+        async void OnFreeGame(object sender, EventArgs e)
         {
             ///resume
             ///Open Free Game menu
-            
+            await Navigation.PushAsync(new Views.FreeModeForm());
+
+
         }
 
         void OnMultiplayerGame(object sender, EventArgs e)

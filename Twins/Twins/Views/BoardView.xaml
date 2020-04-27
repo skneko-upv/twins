@@ -8,7 +8,9 @@
              mc:Ignorable="d"
              x:Class="Twins.Views.BoardView"
              BackgroundColor="{StaticResource backgroundColor}"
-             BackgroundImageSource="Assets/Backgrounds/menuprincipal2.png">
+             BackgroundImageSource="Assets/Backgrounds/menuprincipal2.png"
+             NavigationPage.HasBackButton="False"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <AbsoluteLayout>
             <StackLayout  Margin="20" AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
@@ -102,7 +104,7 @@
                              AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
                              AbsoluteLayout.LayoutFlags="All"/>
             <twinsc:NotImplementedMessage x:Name="CommingSoonView"/>
-            <twins:ResumeGameView/>
+            <twins:ResumeGameView  IsVisible="False"/>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

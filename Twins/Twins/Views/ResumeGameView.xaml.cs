@@ -16,5 +16,21 @@ namespace Twins.Views
         {
             InitializeComponent();
         }
+
+        public void OnRetry(object sender, EventArgs e) 
+        {
+
+        }
+
+        public async void OnHome(object sender, EventArgs e)
+        {
+            await Navigation.PopToRootAsync();
+        }
+        public async void OnNext(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+            var game = new Models.StandardGame(6, 4, Components.BasicDeck.CreateBasicDeck());
+            await Navigation.PushAsync(new Views.BoardView(game.Board));
+        }
     }
 }

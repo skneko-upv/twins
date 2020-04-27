@@ -20,7 +20,8 @@ namespace Twins.Views
 
         public void OnPause() { window.IsVisible = true; }
 
-        public void OnAbandon(object sender, EventArgs e) {
+        public async void OnAbandon(object sender, EventArgs e) {
+            await Navigation.PopToRootAsync();
         }
 
         public void OnOptions(object sender, EventArgs e)

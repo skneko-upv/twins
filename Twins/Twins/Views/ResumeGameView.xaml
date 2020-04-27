@@ -43,9 +43,12 @@
             </StackLayout>
         </StackLayout>
         <Grid Margin="20" >
-            <Button ImageSource="Assets/Icons/restart.png" VerticalOptions="Center" HorizontalOptions="Start" BackgroundColor="Transparent"/>
-            <Button ImageSource="Assets/Icons/home.png" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent"/>
-            <Button ImageSource="Assets/Icons/next.png" VerticalOptions="Center" HorizontalOptions="End" BackgroundColor="Transparent"/>
+            <Button ImageSource="Assets/Icons/restart.png" VerticalOptions="Center" HorizontalOptions="Start" BackgroundColor="Transparent"
+                    Clicked="OnRetry"/>
+            <Button ImageSource="Assets/Icons/home.png" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent"
+                    Clicked="OnHome"/>
+            <Button ImageSource="Assets/Icons/next.png" VerticalOptions="Center" HorizontalOptions="End" BackgroundColor="Transparent"
+                    Clicked="OnNext"/>
         </Grid>
     </StackLayout>
 

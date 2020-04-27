@@ -5,7 +5,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:twinsc="clr-namespace:Twins.Components"
              mc:Ignorable="d"
              x:Class="Twins.MainPage"
-             BackgroundImageSource="Assets/Backgrounds/menuprincipal2.png">
+             BackgroundImageSource="Assets/Backgrounds/menuprincipal2.png"
+             NavigationPage.HasBackButton="False"
+             NavigationPage.HasNavigationBar="False">
   <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="buttonStyle" TargetType="Button">
