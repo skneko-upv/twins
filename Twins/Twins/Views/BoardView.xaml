@@ -21,7 +21,7 @@
                             Clicked="OnPause" 
                             BackgroundColor="Transparent"
                             />
-                    <Button ImageSource="Assets/Icons/volume.png" x:Name="MuteButton"
+                    <Button ImageSource="Assets/Icons/mute.png" x:Name="MuteButton"
                             Clicked="OnMute"
                             BackgroundColor="Transparent"/>
                 </StackLayout>
@@ -101,7 +101,8 @@
             <twins:PauseView x:Name="PauseMenu" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="False"
                              AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
                              AbsoluteLayout.LayoutFlags="All"/>
-        
+            <twinsc:NotImplementedMessage x:Name="CommingSoonView"/>
+            <twins:ResumeGameView/>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

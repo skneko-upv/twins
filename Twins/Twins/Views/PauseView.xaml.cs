@@ -22,5 +22,10 @@ namespace Twins.Views
 
         public void OnAbandon(object sender, EventArgs e) {
         }
+
+        public void OnOptions(object sender, EventArgs e)
+        {
+            CommingSoonView.ButtonNotImplemented();
+        }
     }
 }

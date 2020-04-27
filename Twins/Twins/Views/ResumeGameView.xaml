@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AbsoluteLayout xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Twins.Views.ResumeGameView" 
+             AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+             AbsoluteLayout.LayoutFlags="All">
+    <StackLayout BackgroundColor="#595959" Opacity="0.6"
+                 WidthRequest="2000" HeightRequest="2000" 
+                 AbsoluteLayout.LayoutBounds=".5,.5,1.0,1.0"
+                 AbsoluteLayout.LayoutFlags="All"/>
+    <StackLayout BackgroundColor="{StaticResource backgroundColor}"
+                 HeightRequest="300"
+                 WidthRequest="275"
+                 Padding="20"
+                 Spacing="10"
+                 VerticalOptions="Center"
+                 HorizontalOptions="Center"
+                 AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                 AbsoluteLayout.LayoutFlags="All">
+        <Label Text="Victoria" FontSize="Medium" FontAttributes="Bold" TextColor="Green"
+                HorizontalOptions="Center" x:Name="ResultLabel"/>
+        <Label Text="Modo libre" FontSize="Small" TextColor="Gray"
+                HorizontalOptions="Center"/>
+        <StackLayout Spacing="15" Orientation="Horizontal" Margin="20,0">
+            <StackLayout Spacing="15">
+                <Label Text="Puntos:"/>
+                <Label Text="Intentos:"/>
+                <Label Text="Aciertos:"/>
+                <Label Text="Tiempo:"/>
+            </StackLayout>
+            <StackLayout Spacing="15">
+                <Label Text="0" x:Name="PointsLabel"/>
+                <Label Text="0" x:Name="TriesLabel"/>
+                <Label Text="0" x:Name="SuccessLabel"/>
+                <StackLayout Orientation="Horizontal" Spacing="2">
+                    <Label Text="00" />
+                    <Label Text=":"/>
+                    <Label Text="00"/>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+        <Grid Margin="20" >
+            <Button ImageSource="Assets/Icons/restart.png" VerticalOptions="Center" HorizontalOptions="Start" BackgroundColor="Transparent"/>
+            <Button ImageSource="Assets/Icons/home.png" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent"/>
+            <Button ImageSource="Assets/Icons/next.png" VerticalOptions="Center" HorizontalOptions="End" BackgroundColor="Transparent"/>
+        </Grid>
+    </StackLayout>
+
+    </AbsoluteLayout>

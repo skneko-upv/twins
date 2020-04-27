@@ -21,14 +21,16 @@ namespace Twins
 
         void OnOption(object sender, EventArgs e)
         {
-           
-           /// resume
-           /// Open Option menu
+
+            /// resume
+            /// Open Option menu
+            CommingSoonView.ButtonNotImplemented();
         }
         void OnMute(object sender, EventArgs e)
         {
             ///resume
             ///Mute music
+            CommingSoonView.ButtonNotImplemented();
         }
         void OnLogout(object sender, EventArgs e)
         {
@@ -41,7 +43,9 @@ namespace Twins
         {
             ///resume
             ///Open History menu
-            
+            CommingSoonView.ButtonNotImplemented();
+
+
         }
         void OnFreeGame(object sender, EventArgs e)
         {
@@ -52,16 +56,19 @@ namespace Twins
         {
             ///resume
             ///Open Multiplayer menu
+            CommingSoonView.ButtonNotImplemented();
         }
         void OnChallengeGame(object sender, EventArgs e)
         {
             ///resume
             ///Open Challenge menu
+            CommingSoonView.ButtonNotImplemented();
         }
         void OnDesck(object sender, EventArgs e)
         {
             ///resume
             ///Open Desck menu
+            CommingSoonView.ButtonNotImplemented();
         }
 
     }

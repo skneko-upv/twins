@@ -9,15 +9,12 @@ namespace Twins.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BoardView : ContentPage
-    {
-        private bool IsMuted { get; set; }
+    { 
 
         public BoardView(Board board)
         {
             InitializeComponent();
             BindingContext = new BoardViewModel(board);
-
-            IsMuted = false;
 
             FillBoard(board.Height, board.Width);
 
@@ -72,11 +69,7 @@ namespace Twins.Views
 
         private void OnMute(object sender, EventArgs e)
         {
-            if(!IsMuted)
-                MuteButton.ImageSource = ImageSource.FromFile("Assets/Icons/mute.png");
-            else
-                MuteButton.ImageSource = ImageSource.FromFile("Assets/Icons/volume.png");
-            IsMuted = !IsMuted;
+            CommingSoonView.ButtonNotImplemented();
         }
     }
 }
