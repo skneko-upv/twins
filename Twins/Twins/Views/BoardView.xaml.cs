@@ -26,8 +26,8 @@ namespace Twins.Views
             TurnTimeLabel.SetBinding(Label.TextProperty, "Time");
             TurnTimeLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
 
-            SuccesLabel.SetBinding(Label.TextProperty, "Match");
-            SuccesLabel.BindingContext = boardViewModel.Board.Game.MatchSuccesses;
+            SuccessLabel.SetBinding(Label.TextProperty, "Match");
+            SuccessLabel.BindingContext = boardViewModel.Board.Game.MatchSuccesses;
 
             FillBoard(board.Height, board.Width);
 
