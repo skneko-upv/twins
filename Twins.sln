@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twins.Android", "Twins\Twin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twins.iOS", "Twins\Twins.iOS\Twins.iOS.csproj", "{3B143CDD-535C-414B-B606-0AE0CBA6F322}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twins", "Twins\Twins\Twins.csproj", "{750C6906-5BA2-43A1-BEB1-5ED12F89C605}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Twins", "Twins\Twins\Twins.csproj", "{750C6906-5BA2-43A1-BEB1-5ED12F89C605}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

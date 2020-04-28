@@ -1,0 +1,26 @@
+﻿using System;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Twins.Components
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class NotImplementedMessage : AbsoluteLayout
+    {
+        public NotImplementedMessage()
+        {
+            InitializeComponent();
+        }
+
+        public void OnAcceptButton(object sender, EventArgs e)
+        {
+            CommingSoonView.IsVisible = false;
+        }
+
+        public void ButtonNotImplemented()
+        {
+            CommingSoonView.IsVisible = true;
+        }
+    }
+}

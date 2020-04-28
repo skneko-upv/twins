@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AbsoluteLayout xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Twins.Components.NotImplementedMessage"
+             AbsoluteLayout.LayoutBounds=".5,.5,1,1" AbsoluteLayout.LayoutFlags="All" x:Name="CommingSoonView" IsVisible="False">
+        <StackLayout BackgroundColor="#595959" Opacity="0.6"  WidthRequest="2000" HeightRequest="2000" />
+        <StackLayout AbsoluteLayout.LayoutBounds=".5,.5,.5,.3" AbsoluteLayout.LayoutFlags="All"
+                              Spacing="10"  BackgroundColor="White" Padding="10" Margin="10">
+            <Label Text="Próximamente se implementará!" FontSize="Medium" FontAttributes="Bold" Margin="10" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+            <Button Text="Aceptar" Clicked="OnAcceptButton" HorizontalOptions="Center" VerticalOptions="End" Margin="10"/>
+        </StackLayout>
+    </AbsoluteLayout>

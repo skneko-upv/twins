@@ -103,6 +103,38 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Backgrounds\menuprincipal.png" />
+    <Content Include="Assets\Backgrounds\menuprincipal2.png" />
+    <Content Include="Assets\Icons\home.png" />
+    <Content Include="Assets\Icons\logout.png" />
+    <Content Include="Assets\Icons\mute.png" />
+    <Content Include="Assets\Icons\next.png" />
+    <Content Include="Assets\Icons\Options.png" />
+    <Content Include="Assets\Icons\restart.png" />
+    <Content Include="Assets\Icons\title.png" />
+    <Content Include="Assets\Icons\title2.png" />
+    <Content Include="Assets\Icons\title4.png" />
+    <Content Include="Assets\Icons\volume.png" />
+    <Content Include="Assets\Backgrounds\menuprincipal2.png" />
+    <Content Include="Assets\Cards\backimage.png" />
+    <Content Include="Assets\Cards\card1.png" />
+    <Content Include="Assets\Cards\card10.png" />
+    <Content Include="Assets\Cards\card11.png" />
+    <Content Include="Assets\Cards\card12.png" />
+    <Content Include="Assets\Cards\card2.png" />
+    <Content Include="Assets\Cards\card3.png" />
+    <Content Include="Assets\Cards\card4.png" />
+    <Content Include="Assets\Cards\card5.png" />
+    <Content Include="Assets\Cards\card6.png" />
+    <Content Include="Assets\Cards\card7.png" />
+    <Content Include="Assets\Cards\card8.png" />
+    <Content Include="Assets\Cards\card9.png" />
+    <Content Include="Assets\Icons\alert.png" />
+    <Content Include="Assets\Icons\logout.png" />
+    <Content Include="Assets\Icons\mute.png" />
+    <Content Include="Assets\Icons\Options.png" />
+    <Content Include="Assets\Icons\pause.png" />
+    <Content Include="Assets\Icons\volume.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
@@ -144,7 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.3.0.908675" />
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.9"/>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.9" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +184,11 @@
       <Project>{7505D196-A14A-4525-8048-41E63FDBD3B1}</Project>
       <Name>Twins</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

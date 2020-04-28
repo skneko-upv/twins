@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Twins.Views.FreeModeForm"
+             BackgroundImageSource="Assets/Backgrounds/menuprincipal2.png"
+             NavigationPage.HasBackButton="False"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <Style  TargetType="Button">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="CornerRadius" Value="20" />
+            <Setter Property="BackgroundColor" Value="White" />
+            <Setter Property="BorderColor" Value="Black" />
+            <Setter Property="FontAttributes" Value="Bold" />
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Center">
+            <StackLayout HorizontalOptions="Center">
+            <Label Text="Partida Libre" FontSize="Large"  />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" >
+                <Label Text="Tamaño del tablero: "/>
+                <Entry Keyboard="Numeric" IsEnabled="False" Text="6"/>
+                <Label Text="Columnas"/>
+                <Entry Keyboard="Numeric" IsEnabled="False" Text="4"/>
+                <Label Text="Filas"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" >
+                <CheckBox IsEnabled="False" IsChecked="True" Margin="-10,-10,-100,0"/>
+                <Label Text="Límite de Tiempo: " />
+                <Entry Keyboard="Numeric" IsEnabled="False" Text="1"/>
+                <Label Text="minutos"/>
+                <Entry Keyboard="Numeric" IsEnabled="False" Text="0"/>
+                <Label Text="segundos"/>
+                
+
+            </StackLayout>
+            <StackLayout HorizontalOptions="Center" VerticalOptions="End" Orientation="Horizontal">
+                <Button Text="Atras" Clicked="OnBackMainMenu" />
+                <Button Text="Empezar" Clicked="OnStartGame" />
+            </StackLayout>
+
+        </StackLayout>
+        
+    </ContentPage.Content>
+</ContentPage>

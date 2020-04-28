@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:twins="clr-namespace:Twins.Views"
+             xmlns:twinsc="clr-namespace:Twins.Components"
+             mc:Ignorable="d"
+             x:Class="Twins.Views.BoardView"
+             BackgroundColor="{StaticResource backgroundColor}"
+             BackgroundImageSource="Assets/Backgrounds/menuprincipal2.png"
+             NavigationPage.HasBackButton="False"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <StackLayout  Margin="20" AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+                             AbsoluteLayout.LayoutFlags="All">
+            <Grid HeightRequest="150" HorizontalOptions="FillAndExpand">
+                <StackLayout Orientation="Horizontal"
+                             VerticalOptions="Start"
+                             >
+                    <Button ImageSource="Assets/Icons/pause.png"
+                            Clicked="OnPause" 
+                            BackgroundColor="Transparent"
+                            />
+                    <Button ImageSource="Assets/Icons/mute.png" x:Name="MuteButton"
+                            Clicked="OnMute"
+                            BackgroundColor="Transparent"/>
+                </StackLayout>
+                    <Grid BackgroundColor="#262626"
+                      HeightRequest="145"
+                      WidthRequest="145"
+                      HorizontalOptions="Center"
+                      VerticalOptions="Start"
+                      >
+                    <Grid BackgroundColor="{StaticResource backgroundColor}"
+                          HeightRequest="145"
+                          WidthRequest="145"
+                          HorizontalOptions="Center"
+                          VerticalOptions="Start"
+                          Margin="5">
+                        <twinsc:CardComponent x:Name="referenceCard" IsEnabled="False" IsBlocked="true"/>
+                    </Grid>
+                </Grid>
+                <StackLayout Orientation="Vertical"
+                             HorizontalOptions="EndAndExpand"
+                             VerticalOptions="Start"
+                             Spacing="4">
+                    <StackLayout Orientation="Horizontal"
+                                 Spacing="1" >
+                            <Label FontSize="40" x:Name="GlobalTimeLabel">00</Label>
+                        </StackLayout>
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="EndAndExpand"
+                                 Spacing="1"
+                                 >
+                        <Label Margin="0,0,5,0"
+                               FontAttributes="Bold">
+                            Turno
+                        </Label>
+                            <Label Text="" FontAttributes="Bold" x:Name="TurnLabel"/>
+                            <Label Text=":" FontAttributes="Bold" Margin="0,0,5,0"/>
+                            <Label x:Name="TurnTimeLabel"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="EndAndExpand"
+                                 Spacing="1">
+                            <Label Text="Aciertos: " FontAttributes="Bold"/>
+                            <Label x:Name="SuccessLabel"/>
+                        </StackLayout>
+                </StackLayout>
+            </Grid>
+            <ScrollView x:Name="boardArea"
+                      VerticalOptions="Center"
+                      HorizontalOptions="Center"
+                      Orientation="Both"
+                      >
+                <Grid x:Name="board"
+                      ColumnSpacing="2"
+                      RowSpacing="2"
+                      BackgroundColor="{StaticResource backgroundColor}"                      
+                      VerticalOptions="Center"
+                      HorizontalOptions="Center"
+                      HeightRequest="488"
+                      WidthRequest="732"
+                      
+                      >
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="120"  />
+                        <RowDefinition Height="120" />
+                        <RowDefinition Height="120" />
+                        <RowDefinition Height="120" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="120" />
+                    </Grid.ColumnDefinitions>
+
+                </Grid>
+            </ScrollView>
+            </StackLayout>
+            <twins:PauseView x:Name="PauseMenu" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="False"
+                             AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+                             AbsoluteLayout.LayoutFlags="All"/>
+            <twinsc:NotImplementedMessage x:Name="CommingSoonView"/>
+            <twins:ResumeGameView x:Name="EndGameModal" IsVisible="False"/>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

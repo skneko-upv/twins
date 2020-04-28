@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Twins
@@ -16,6 +12,69 @@ namespace Twins
         public MainPage()
         {
             InitializeComponent();
+
         }
+
+        private void OnOption(object sender, EventArgs e)
+        {
+
+            /// resume
+            /// Open Option menu
+            CommingSoonView.ButtonNotImplemented();
+        }
+
+        private void OnMute(object sender, EventArgs e)
+        {
+            ///resume
+            ///Mute music
+            CommingSoonView.ButtonNotImplemented();
+        }
+
+        private void OnLogout(object sender, EventArgs e)
+        {
+            ///resume
+            ///Finish app
+            System.Diagnostics.Process.GetCurrentProcess().Kill();
+        }
+
+        private void OnHistoryGame(object sender, EventArgs e)
+        {
+            ///resume
+            ///Open History menu
+            CommingSoonView.ButtonNotImplemented();
+
+
+        }
+
+        private async void OnFreeGame(object sender, EventArgs e)
+        {
+            ///resume
+            ///Open Free Game menu
+            await Navigation.PushAsync(new Views.FreeModeForm());
+
+
+        }
+
+        private void OnMultiplayerGame(object sender, EventArgs e)
+        {
+            ///resume
+            ///Open Multiplayer menu
+            CommingSoonView.ButtonNotImplemented();
+        }
+
+        private void OnChallengeGame(object sender, EventArgs e)
+        {
+            ///resume
+            ///Open Challenge menu
+            CommingSoonView.ButtonNotImplemented();
+        }
+
+        private void OnDesck(object sender, EventArgs e)
+        {
+            ///resume
+            ///Open Desck menu
+            CommingSoonView.ButtonNotImplemented();
+        }
+
     }
 }
