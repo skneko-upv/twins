@@ -112,6 +112,7 @@ namespace Twins.ViewModels
                 if (matched.Any())
                 {
                     OnCellsMatched(matched);
+                    Board.ReferenceCard = null;
                     await Task.Delay(1500);
                 }
                 else
