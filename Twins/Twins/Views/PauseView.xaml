@@ -6,7 +6,7 @@
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:twinsc="clr-namespace:Twins.Components"
                 mc:Ignorable="d"
                 x:Class="Twins.Views.PauseView" IsVisible="True">
-    <StackLayout BackgroundColor="#595959" Opacity="0.6"
+    <StackLayout BackgroundColor="#6bc5f3"
                  WidthRequest="2000" HeightRequest="2000" 
                  AbsoluteLayout.LayoutBounds=".5,.5,1.0,1.0"
                  AbsoluteLayout.LayoutFlags="All"/>

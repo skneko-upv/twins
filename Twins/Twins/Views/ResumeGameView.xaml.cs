@@ -11,12 +11,6 @@ namespace Twins.Views
         public int Score {
             set => PointsLabel.Text = "" + value;
         }
-        public int Tries {
-            set => TriesLabel.Text = "" + value;
-        }
-        public int Successes {
-            set => SuccessLabel.Text = "" + value;
-        }
         public TimeSpan Time {
             set => TimeLabel.Text = string.Format("{0:D2}:{1:D2}", value.Minutes, value.Seconds);
         }
@@ -31,11 +25,9 @@ namespace Twins.Views
 
         }
 
-        public void SetStadistics(int score, int tries, int successes, TimeSpan time, bool isVictory)
+        public void SetStadistics(int score, TimeSpan time, bool isVictory)
         {
             Score = score;
-            Tries = tries;
-            Successes = successes;
             Time = time;
             if (isVictory)
             {

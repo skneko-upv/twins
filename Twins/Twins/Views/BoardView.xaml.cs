@@ -43,8 +43,6 @@ namespace Twins.Views
             Game game = ((BoardViewModel)BindingContext).Board.Game;
             EndGameModal.SetStadistics(
                 0,
-                game.MatchAttempts,
-                game.MatchSuccesses.Match,
                 game.GameClock.GetTimeSpan(),
                 victory);
             EndGameModal.IsVisible = true;
