@@ -113,7 +113,9 @@ namespace Twins.ViewModels
                 {
                     OnCellsMatched(matched);
                     Board.ReferenceCard = null;
-                    await Task.Delay(1500);
+                    Board.Game.Pause();
+                    await Task.Delay(500);
+                    Board.Game.Resume();
                 }
                 else
                 {

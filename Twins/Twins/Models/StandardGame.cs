@@ -72,16 +72,16 @@ namespace Twins.Models
             base.EndTurn();
 
             Board.UnflipAllCells();
-            Board.ReferenceCard = null;
+            //Board.ReferenceCard = null;
             Turn.Turn++;
         }
 
         private void OnCellFlipped(Board.Cell cell)
         {
-            if (Board.ReferenceCard == null)
+           /* if (Board.ReferenceCard == null)
             {
                 Board.ReferenceCard = cell.Card;
-            }
+            }*/
         }
     }
 }
