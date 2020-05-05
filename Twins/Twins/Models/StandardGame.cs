@@ -80,10 +80,6 @@ namespace Twins.Models
 
         private void OnCellFlipped(Board.Cell cell)
         {
-            if (Board.ReferenceCard == null)
-            {
-                Board.ReferenceCard = cell.Card;
-            }
         }
     }
 }
