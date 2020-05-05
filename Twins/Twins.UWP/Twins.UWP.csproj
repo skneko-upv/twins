@@ -112,6 +112,7 @@
   <ItemGroup>
     <Content Include="Assets\Backgrounds\menuprincipal.png" />
     <Content Include="Assets\Backgrounds\menuprincipal2.png" />
+    <Content Include="Assets\Icons\cronometro.png" />
     <Content Include="Assets\Icons\home.png" />
     <Content Include="Assets\Icons\logout.png" />
     <Content Include="Assets\Icons\mute.png" />

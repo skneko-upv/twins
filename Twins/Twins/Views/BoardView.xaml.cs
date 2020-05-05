@@ -18,12 +18,18 @@ namespace Twins.Views
 
             TurnLabel.SetBinding(Label.TextProperty, "Turn");
             TurnLabel.BindingContext = boardViewModel.Board.Game.Turn;
-
             GlobalTimeLabel.SetBinding(Label.TextProperty, "Time");
             GlobalTimeLabel.BindingContext = boardViewModel.Board.Game.GameClock.TimeLeft;
 
             TurnTimeLabel.SetBinding(Label.TextProperty, "Time");
+            TurnTimeLabel.SetBinding(Label.TextColorProperty, "Color");
             TurnTimeLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
+
+            Turn2PointLabel.SetBinding(Label.TextColorProperty, "Color");
+            Turn2PointLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
+
+            TurnTextLabel.SetBinding(Label.TextColorProperty, "Color");
+            TurnTextLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
 
             SuccessLabel.SetBinding(Label.TextProperty, "Match");
             SuccessLabel.BindingContext = boardViewModel.Board.Game.MatchSuccesses;
@@ -97,6 +103,11 @@ namespace Twins.Views
         private void OnMute(object sender, EventArgs e)
         {
             CommingSoonView.ButtonNotImplemented();
+        }
+
+        private async void AnimationNearEndTurn()
+        {
+            
         }
     }
 }

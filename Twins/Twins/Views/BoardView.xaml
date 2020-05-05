@@ -54,19 +54,22 @@
                                  HorizontalOptions="EndAndExpand"
                                  VerticalOptions="Start"
                                  Spacing="4">
-                            <StackLayout Orientation="Horizontal">
-                                <Label FontSize="40" x:Name="GlobalTimeLabel" HorizontalOptions="End">00</Label>
+                            <StackLayout Orientation="Horizontal" FlowDirection="RightToLeft">
+                                <Label FontSize="40" x:Name="GlobalTimeLabel" HorizontalOptions="End" HorizontalTextAlignment="End">00</Label>
+                                <Image Source="Assets/Icons/cronometro.png" HeightRequest="32" WidthRequest="32"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal"
                                         Spacing="1"
                                      >
                                 <Label Margin="0,0,5,0"
-                                   FontAttributes="Bold">
+                                   FontAttributes="Bold"
+                                   FontSize="Medium"
+                                   x:Name="TurnTextLabel">
                                     Turno
                                 </Label>
-                                <Label Text="" FontAttributes="Bold" x:Name="TurnLabel"/>
-                                <Label Text=":" FontAttributes="Bold" Margin="0,0,5,0"/>
-                                <Label x:Name="TurnTimeLabel"/>
+                                <Label Text="" FontAttributes="Bold" x:Name="TurnLabel" FontSize="Medium"/>
+                                <Label Text=":" FontAttributes="Bold" Margin="0,0,5,0" FontSize="Medium" x:Name="Turn2PointLabel"/>
+                                <Label x:Name="TurnTimeLabel" FontSize="Medium"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal"
                                      HorizontalOptions="EndAndExpand"
