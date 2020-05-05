@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Twins.Components;
 
 namespace Twins.Models.Builders
@@ -9,7 +7,8 @@ namespace Twins.Models.Builders
     {
         public enum GameKind
         {
-            Standard
+            Standard,
+            ReferenceCard
         }
 
         public int Height { get; private set; }
@@ -20,6 +19,8 @@ namespace Twins.Models.Builders
 
         TimeSpan timeLimit = TimeSpan.FromMinutes(1);
         TimeSpan turnTimeLimit = TimeSpan.FromSeconds(5);
+
+        Board.Cell[,] cells = null;
 
         public GameBuilder(int height, int width)
         {
@@ -45,18 +46,38 @@ namespace Twins.Models.Builders
             return this;
         }
 
+        public GameBuilder WithCellDistribution(Board.Cell[,] cells)
+        {
+            this.cells = cells;
+            return this;
+        }
+
         public Game Build()
         {
-            if (kind == GameKind.Standard)
+            switch (kind)
             {
-                return new StandardGame(
-                    Height,
-                    Width,
-                    deck,
-                    timeLimit,
-                    turnTimeLimit);
+                case GameKind.ReferenceCard:
+                    {
+                        return new ReferenceCardGame(
+                            Height,
+                            Width,
+                            deck,
+                            timeLimit,
+                            turnTimeLimit,
+                            cells);
+                    }
+                case GameKind.Standard:
+                default:
+                    {
+                        return new StandardGame(
+                            Height,
+                            Width,
+                            deck,
+                            timeLimit,
+                            turnTimeLimit,
+                            cells);
+                    }
             }
-            return null; // unreachable
         }
     }
 }

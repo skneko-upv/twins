@@ -15,6 +15,7 @@ namespace Twins.Views
             InitializeComponent();
             BoardViewModel boardViewModel = new BoardViewModel(board);
             BindingContext = boardViewModel;
+            PauseMenu.BindingContext = boardViewModel;
 
             turnLabel.SetBinding(Label.TextProperty, "Value");
             turnLabel.BindingContext = boardViewModel.Board.Game.Turn;
@@ -34,14 +35,18 @@ namespace Twins.Views
             };
             scoreLabel.Text = board.Game.Score.PositiveValue.ToString();
 
-            FillBoard(board.Height, board.Width);
-
-            board.ReferenceCardChanged += OnReferenceCardChanged;
-            referenceCard.Clicked += () => { };
-
             board.Game.GameEnded += OnGameEnded;
 
-            PauseMenu.BindingContext = boardViewModel;
+            referenceCard.Clicked += () => { };
+
+            FillBoard(board.Height, board.Width);
+        }
+
+        protected override void OnAppearing()
+        {
+            var board = ((BoardViewModel)BindingContext).Board;
+            board.ReferenceCardChanged += OnReferenceCardChanged;
+            OnReferenceCardChanged(board.ReferenceCard);
         }
 
         private void OnGameEnded(bool victory)
@@ -79,6 +84,7 @@ namespace Twins.Views
         {
             if (card != null)
             {
+                referenceCardFrame.IsVisible = true;
                 referenceCard.Card = card;
                 if (!referenceCard.Flipped)
                 {

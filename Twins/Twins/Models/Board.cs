@@ -20,7 +20,7 @@ namespace Twins.Models
             get => _referenceCard;
             set {
                 _referenceCard = value;
-                ReferenceCardChanged(value);
+                ReferenceCardChanged?.Invoke(value);
             }
         }
         private Card _referenceCard;

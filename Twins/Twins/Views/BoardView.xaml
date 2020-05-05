@@ -31,7 +31,8 @@
                               VerticalOptions="Start"
                               HeightRequest="488"
                               WidthRequest="732">
-                        <Grid BackgroundColor="#262626"
+                        <Grid x:Name="referenceCardFrame"
+                              BackgroundColor="#262626"
                               HeightRequest="145"
                               WidthRequest="145"
                               HorizontalOptions="Center"
