@@ -59,37 +59,40 @@ namespace Twins.Models
         /// </remarks>
         public event Action<Cell, bool> CellKeepRevealedStatusChanged;
 
-        public Cell[,] Cells { get; private set; }
+        public IList<Cell> Cells { get; private set; }
 
-        private readonly IBoardPopulationStrategy populationStrategy;
+        int[,] cellMap;
 
         /// <summary>
         /// Create a new board populated randomly.
         /// </summary>
         public Board(int height, int width, Game game, IBoardPopulationStrategy populationStrategy)
+            : this(height, width, game, populationStrategy.Populate(height, width))
+        { }
+
+        /// <summary>
+        /// Create a new board from the given cell matrix.
+        /// </summary>
+        public Board(int height, int width, Game game, Cell[,] cells)
         {
             Height = height;
             Width = width;
             Game = game;
             FlippedCells = new List<Cell>(height * width);
 
-            this.populationStrategy = populationStrategy;
-            Populate();
-        }
-
-        /// <summary>
-        /// Create a new board from the given cell matrix.
-        /// </summary>
-        public Board(int height, int width, Game game, Deck deck, Cell[,] cells)
-        {
-            Height = height;
-            Width = width;
-            Game = game;
-            Cells = cells;
+            cellMap = new int[height, width];
+            Cells = new List<Cell>(height * width);
+            int i = 0;
+            foreach (var cell in cells)
+            {
+                Cells.Add(cell);
+                cellMap[cell.Row, cell.Column] = i;
+                i += 1;
+            }
         }
 
         public Cell this[int row, int column]
-            => Cells[row, column];
+            => Cells[cellMap[row, column]];
 
         public void FlipCell(int row, int column)
         {
@@ -137,11 +140,6 @@ namespace Twins.Models
 
             cell.KeepRevealed = keepRevealed;
             CellKeepRevealedStatusChanged(cell, keepRevealed);
-        }
-
-        private void Populate()
-        {
-            Cells = populationStrategy.Populate(Height, Width);
         }
     }
 }
