@@ -55,7 +55,7 @@
                                  VerticalOptions="Start"
                                  Spacing="4">
                             <StackLayout Orientation="Horizontal" FlowDirection="RightToLeft">
-                                <Label FontSize="40" x:Name="GlobalTimeLabel" HorizontalOptions="End" HorizontalTextAlignment="End">00</Label>
+                                <Label FontSize="40" x:Name="globalTimeLabel" HorizontalOptions="End" HorizontalTextAlignment="End">00</Label>
                                 <Image Source="Assets/Icons/cronometro.png" HeightRequest="32" WidthRequest="32"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal"
@@ -67,9 +67,9 @@
                                    x:Name="TurnTextLabel">
                                     Turno
                                 </Label>
-                                <Label Text="" FontAttributes="Bold" x:Name="TurnLabel" FontSize="Medium"/>
+                                <Label Text="" FontAttributes="Bold" x:Name="turnLabel" FontSize="Medium"/>
                                 <Label Text=":" FontAttributes="Bold" Margin="0,0,5,0" FontSize="Medium" x:Name="Turn2PointLabel"/>
-                                <Label x:Name="TurnTimeLabel" FontSize="Medium"/>
+                                <Label x:Name="turnTimeLabel" FontSize="Medium"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal"
                                      HorizontalOptions="EndAndExpand"

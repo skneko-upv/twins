@@ -23,6 +23,7 @@ namespace Twins.Views
             globalTimeLabel.BindingContext = boardViewModel.Board.Game.GameClock.TimeLeft;
 
             turnTimeLabel.SetBinding(Label.TextProperty, "Time");
+            turnTimeLabel.SetBinding(Label.TextColorProperty, "Color");
             turnTimeLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
 
             successLabel.SetBinding(Label.TextProperty, "Value");
@@ -33,14 +34,15 @@ namespace Twins.Views
                 scoreLabel.Text = board.Game.Score.PositiveValue.ToString();
             };
             scoreLabel.Text = board.Game.Score.PositiveValue.ToString();
+
             Turn2PointLabel.SetBinding(Label.TextColorProperty, "Color");
             Turn2PointLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
 
             TurnTextLabel.SetBinding(Label.TextColorProperty, "Color");
             TurnTextLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
 
-            SuccessLabel.SetBinding(Label.TextProperty, "Match");
-            SuccessLabel.BindingContext = boardViewModel.Board.Game.MatchSuccesses;
+            //SuccessLabel.SetBinding(Label.TextProperty, "Match");
+            //SuccessLabel.BindingContext = boardViewModel.Board.Game.MatchSuccesses;
 
             FillBoard(board.Height, board.Width);
 
