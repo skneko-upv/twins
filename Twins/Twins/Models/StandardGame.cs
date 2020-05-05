@@ -33,7 +33,7 @@ namespace Twins.Models
             IEnumerable<Board.Cell> matched;
             if (isMatch)
             {
-                MatchSuccesses.Match++;
+                MatchSuccesses.Value++;
 
                 foreach (Board.Cell cell in Board.FlippedCells)
                 {
@@ -75,7 +75,7 @@ namespace Twins.Models
 
             Board.UnflipAllCells();
             Board.ReferenceCard = null;
-            Turn.Turn++;
+            Turn.Value++;
         }
 
         private void OnCellFlipped(Board.Cell cell)

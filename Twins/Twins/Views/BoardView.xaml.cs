@@ -16,7 +16,7 @@ namespace Twins.Views
             BoardViewModel boardViewModel = new BoardViewModel(board);
             BindingContext = boardViewModel;
 
-            turnLabel.SetBinding(Label.TextProperty, "Turn");
+            turnLabel.SetBinding(Label.TextProperty, "Value");
             turnLabel.BindingContext = boardViewModel.Board.Game.Turn;
 
             globalTimeLabel.SetBinding(Label.TextProperty, "Time");
@@ -25,7 +25,7 @@ namespace Twins.Views
             turnTimeLabel.SetBinding(Label.TextProperty, "Time");
             turnTimeLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
 
-            successLabel.SetBinding(Label.TextProperty, "Match");
+            successLabel.SetBinding(Label.TextProperty, "Value");
             successLabel.BindingContext = boardViewModel.Board.Game.MatchSuccesses;
 
             board.Game.Score.Changed += (_) =>

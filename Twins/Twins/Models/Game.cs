@@ -11,10 +11,10 @@ namespace Twins.Models
         public TimeProperty TurnTime { get; }
 
         public bool IsFinished { get; protected set; } = false;
-        public TurnProperty Turn { get; protected set; } = new TurnProperty();
-        public TurnProperty MatchSuccesses { get; protected set; } = new TurnProperty(1, 0);
+        public Observable<int> Turn { get; protected set; } = new Observable<int>(1);
+        public Observable<int> MatchSuccesses { get; protected set; } = new Observable<int>(0);
         public int MatchFailures { get; protected set; } = 0;
-        public int MatchAttempts => MatchSuccesses.Match + MatchFailures;
+        public int MatchAttempts => MatchSuccesses.Value + MatchFailures;
 
         public Clock GameClock { get; protected set; }
         public Clock TurnClock { get; protected set; }
