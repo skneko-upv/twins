@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,8 +8,9 @@ namespace Twins.Views
     public partial class ResumeGameView : AbsoluteLayout
     {
         public int Score {
-            set => PointsLabel.Text = "" + value;
+            set => PointsLabel.Text = value.ToString();
         }
+
         public TimeSpan Time {
             set => TimeLabel.Text = string.Format("{0:D2}:{1:D2}", value.Minutes, value.Seconds);
         }

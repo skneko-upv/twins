@@ -3,7 +3,7 @@ using Xamarin.Forms;
 
 namespace Twins.Models
 {
-    public class Card : IEquatable<Card>
+    public class Card : IEquatable<Card>, ICloneable
     {
         public int Id { get; }
 
@@ -21,6 +21,11 @@ namespace Twins.Models
         public bool Equals(Card other)
         {
             return Id == other.Id;
+        }
+
+        public object Clone()
+        {
+            return new Card(Id, Deck, Image);
         }
     }
 }
