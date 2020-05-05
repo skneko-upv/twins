@@ -46,7 +46,7 @@
                                       HorizontalOptions="Center"
                                       VerticalOptions="Start"
                                       Margin="5">
-                                    <twinsc:CardComponent x:Name="referenceCard" IsEnabled="False" IsBlocked="true"/>
+                                    <twinsc:CardComponent x:Name="referenceCard" IsEnabled="False" IsBlocked="true" />
                                 </Grid>
                         </Grid>
 
@@ -75,7 +75,13 @@
                                      HorizontalOptions="EndAndExpand"
                                      Spacing="1">
                                 <Label Text="Aciertos: " FontAttributes="Bold"/>
-                                <Label x:Name="SuccessLabel"/>
+                                <Label x:Name="successLabel"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="EndAndExpand"
+                                     Spacing="3">
+                                <Label Text="Puntos:" FontAttributes="Bold" />
+                                <Label x:Name="scoreLabel" />
                             </StackLayout>
                         </StackLayout>
                     </Grid>

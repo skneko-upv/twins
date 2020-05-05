@@ -33,13 +33,14 @@ namespace Twins.Models
             IEnumerable<Board.Cell> matched;
             if (isMatch)
             {
-                MatchSuccesses.Match++;
+                MatchSuccesses.Value++;
 
                 foreach (Board.Cell cell in Board.FlippedCells)
                 {
                     Board.SetCellKeepRevealed(cell.Row, cell.Column, true);
                 }
 
+                Score.IncrementMatchSuccess();
                 RemainingMatches--;
                 matched = new List<Board.Cell>(Board.FlippedCells);
 
@@ -50,6 +51,7 @@ namespace Twins.Models
             }
             else
             {
+                Score.DecrementMatchFail(Board.FlippedCells.Select(cell => cell.FlipCount).ToArray());
                 MatchFailures++;
                 matched = Enumerable.Empty<Board.Cell>();
             }
@@ -72,16 +74,12 @@ namespace Twins.Models
             base.EndTurn();
 
             Board.UnflipAllCells();
-            //Board.ReferenceCard = null;
-            Turn.Turn++;
+            Board.ReferenceCard = null;
+            Turn.Value++;
         }
 
         private void OnCellFlipped(Board.Cell cell)
         {
-           /* if (Board.ReferenceCard == null)
-            {
-                Board.ReferenceCard = cell.Card;
-            }*/
         }
     }
 }

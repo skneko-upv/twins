@@ -100,6 +100,8 @@ namespace Twins.Models
                 throw new InvalidOperationException();
             }
 
+            flipped.FlipCount++;
+
             FlippedCells.Add(flipped);
             CellFlipped(flipped);
         }

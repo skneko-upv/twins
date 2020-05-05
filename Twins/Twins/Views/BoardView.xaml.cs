@@ -16,15 +16,23 @@ namespace Twins.Views
             BoardViewModel boardViewModel = new BoardViewModel(board);
             BindingContext = boardViewModel;
 
-            TurnLabel.SetBinding(Label.TextProperty, "Turn");
-            TurnLabel.BindingContext = boardViewModel.Board.Game.Turn;
-            GlobalTimeLabel.SetBinding(Label.TextProperty, "Time");
-            GlobalTimeLabel.BindingContext = boardViewModel.Board.Game.GameClock.TimeLeft;
+            turnLabel.SetBinding(Label.TextProperty, "Value");
+            turnLabel.BindingContext = boardViewModel.Board.Game.Turn;
 
-            TurnTimeLabel.SetBinding(Label.TextProperty, "Time");
-            TurnTimeLabel.SetBinding(Label.TextColorProperty, "Color");
-            TurnTimeLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
+            globalTimeLabel.SetBinding(Label.TextProperty, "Time");
+            globalTimeLabel.BindingContext = boardViewModel.Board.Game.GameClock.TimeLeft;
 
+            turnTimeLabel.SetBinding(Label.TextProperty, "Time");
+            turnTimeLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
+
+            successLabel.SetBinding(Label.TextProperty, "Value");
+            successLabel.BindingContext = boardViewModel.Board.Game.MatchSuccesses;
+
+            board.Game.Score.Changed += (_) =>
+            {
+                scoreLabel.Text = board.Game.Score.PositiveValue.ToString();
+            };
+            scoreLabel.Text = board.Game.Score.PositiveValue.ToString();
             Turn2PointLabel.SetBinding(Label.TextColorProperty, "Color");
             Turn2PointLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
 
@@ -48,7 +56,7 @@ namespace Twins.Views
         {
             Game game = ((BoardViewModel)BindingContext).Board.Game;
             EndGameModal.SetStadistics(
-                0,
+                game.Score.PositiveValue,
                 game.GameClock.GetTimeSpan(),
                 victory);
             EndGameModal.IsVisible = true;
@@ -103,11 +111,6 @@ namespace Twins.Views
         private void OnMute(object sender, EventArgs e)
         {
             CommingSoonView.ButtonNotImplemented();
-        }
-
-        private async void AnimationNearEndTurn()
-        {
-            
         }
     }
 }
