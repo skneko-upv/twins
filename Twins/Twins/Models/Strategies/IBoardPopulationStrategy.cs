@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Twins.Models.Strategies
 {
@@ -12,12 +13,18 @@ namespace Twins.Models.Strategies
     {
         private static readonly Random random = new Random();
 
-        public static T PickAndRemoveRandom<T>(this List<T> list)
+        public static IList<T> Clone<T>(this IList<T> list) 
+            where T : ICloneable
+        {
+            return list.Select(item => (T)item.Clone()).ToList();
+        }
+
+        public static T PickAndRemoveRandom<T>(this IList<T> list)
         {
             return list.PickAndRemove(random.Next(list.Count));
         }
 
-        public static T PickAndRemove<T>(this List<T> list, int index)
+        public static T PickAndRemove<T>(this IList<T> list, int index)
         {
             T element = list[index];
             list.RemoveAt(index);

@@ -34,7 +34,7 @@ namespace Twins.Models.Strategies
                 }
             }
 
-            List<Card> availableCards = Deck.Cards;
+            IList<Card> availableCards = Deck.Cards.Clone();
 
             while (emptyPositions.Count >= 2)
             {
@@ -42,7 +42,7 @@ namespace Twins.Models.Strategies
                 {
                     // If there are no more cards available to make pairs, we
                     // reuse the same deck to introduce duplicate pairs.
-                    availableCards = Deck.Cards;
+                    availableCards = Deck.Cards.Clone();
                 }
                 Card card = availableCards.PickAndRemoveRandom();
 
