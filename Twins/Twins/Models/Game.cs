@@ -19,6 +19,8 @@ namespace Twins.Models
         public Clock GameClock { get; protected set; }
         public Clock TurnClock { get; protected set; }
 
+        public Score Score { get; protected set; }
+
         public Board Board { get; protected set; }
 
         public event Action TurnTimedOut;
@@ -45,6 +47,9 @@ namespace Twins.Models
                 TurnClock = new Clock();
             }
             TurnClock.TimedOut += () => TurnTimedOut();
+
+            Score = new Score();
+            TurnTimedOut += () => { Score.DecrementTimedOut(); };
         }
 
         public virtual void Resume()

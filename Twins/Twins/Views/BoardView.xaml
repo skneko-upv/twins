@@ -42,34 +42,40 @@
                         <twinsc:CardComponent x:Name="referenceCard" IsEnabled="False" IsBlocked="true"/>
                     </Grid>
                 </Grid>
-                <StackLayout Orientation="Vertical"
+                    <StackLayout Orientation="Vertical"
                              HorizontalOptions="EndAndExpand"
                              VerticalOptions="Start"
                              Spacing="4">
-                    <StackLayout Orientation="Horizontal"
+                        <StackLayout Orientation="Horizontal"
                                  Spacing="1" >
-                            <Label FontSize="40" x:Name="GlobalTimeLabel">00</Label>
-                        </StackLayout>
-                    <StackLayout Orientation="Horizontal"
-                                 HorizontalOptions="EndAndExpand"
-                                 Spacing="1"
-                                 >
-                        <Label Margin="0,0,5,0"
-                               FontAttributes="Bold">
-                            Turno
-                        </Label>
-                            <Label Text="" FontAttributes="Bold" x:Name="TurnLabel"/>
-                            <Label Text=":" FontAttributes="Bold" Margin="0,0,5,0"/>
-                            <Label x:Name="TurnTimeLabel"/>
+                            <Label FontSize="40" x:Name="globalTimeLabel">00</Label>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal"
                                  HorizontalOptions="EndAndExpand"
-                                 Spacing="1">
-                            <Label Text="Aciertos: " FontAttributes="Bold"/>
-                            <Label x:Name="SuccessLabel"/>
+                                 Spacing="1"
+                                 >
+                            <Label Margin="0,0,5,0"
+                               FontAttributes="Bold">
+                                Turno
+                            </Label>
+                            <Label Text="" FontAttributes="Bold" x:Name="turnLabel" />
+                            <Label Text=":" FontAttributes="Bold" Margin="0,0,5,0" />
+                            <Label x:Name="turnTimeLabel" />
                         </StackLayout>
-                </StackLayout>
-            </Grid>
+                        <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="EndAndExpand"
+                                 Spacing="3">
+                            <Label Text="Aciertos:" FontAttributes="Bold" />
+                            <Label x:Name="successLabel" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="EndAndExpand"
+                                     Spacing="3">
+                            <Label Text="Puntos:" FontAttributes="Bold" />
+                            <Label x:Name="scoreLabel" />
+                        </StackLayout>
+                    </StackLayout>
+                </Grid>
             <ScrollView x:Name="boardArea"
                       VerticalOptions="Center"
                       HorizontalOptions="Center"

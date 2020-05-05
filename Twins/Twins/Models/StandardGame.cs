@@ -40,6 +40,7 @@ namespace Twins.Models
                     Board.SetCellKeepRevealed(cell.Row, cell.Column, true);
                 }
 
+                Score.IncrementMatchSuccess();
                 RemainingMatches--;
                 matched = new List<Board.Cell>(Board.FlippedCells);
 
@@ -50,6 +51,7 @@ namespace Twins.Models
             }
             else
             {
+                Score.DecrementMatchFail(Board.FlippedCells.Select(cell => cell.FlipCount).ToArray());
                 MatchFailures++;
                 matched = Enumerable.Empty<Board.Cell>();
             }
