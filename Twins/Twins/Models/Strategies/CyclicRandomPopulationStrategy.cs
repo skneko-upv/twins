@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using static Twins.Models.Board;
+using static Twins.Utils.CollectionExtensions;
 
 namespace Twins.Models.Strategies
 {
