@@ -16,6 +16,5 @@
             HorizontalOptions="Center"
             HeightRequest="120"
             WidthRequest="120"
-        
             Clicked="OnClicked" />
 </StackLayout>

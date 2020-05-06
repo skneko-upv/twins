@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Twins.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Windows.UI.Xaml.Input;
+using Windows.Devices.Input;
 
 namespace Twins.Components
 {
@@ -36,6 +38,7 @@ namespace Twins.Components
             if (!IsBlocked)
             {
                 IsEnabled = false;
+                button.IsEnabled = false;
             }
 
             Flipped = true;
@@ -49,6 +52,7 @@ namespace Twins.Components
             if (!IsBlocked)
             {
                 IsEnabled = true;
+                button.IsEnabled = true;
             }
 
             Flipped = false;
@@ -68,7 +72,6 @@ namespace Twins.Components
         {
             Clicked();
         }
-
         private async Task AnimationFlip(int angle, uint seconds)
         {
             await button.RotateYTo(angle, seconds);
