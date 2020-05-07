@@ -26,6 +26,19 @@ namespace Twins.Models
         private Card _referenceCard;
 
         /// <summary>
+        /// The reference card category shown to the player to help them
+        /// achieve successful matches.
+        /// </summary>
+        public Category ReferenceCategory {
+            get => _referenceCategory;
+            set {
+                _referenceCategory = value;
+                ReferenceCategoryChanged?.Invoke(value);
+            }
+        }
+        private Category _referenceCategory;
+
+        /// <summary>
         /// The cells temporarily flipped by the player in this time unit, e.g. the current turn.
         /// </summary>
         /// <remarks>
@@ -37,6 +50,11 @@ namespace Twins.Models
         /// Occurs when the reference card to display has changed.
         /// </summary>
         public event Action<Card> ReferenceCardChanged;
+
+        /// <summary>
+        /// Occurs when the reference card category to display has changed.
+        /// </summary>
+        public event Action<Category> ReferenceCategoryChanged;
 
         /// <summary>
         /// Occurs when a cell is flipped by the player.

@@ -15,9 +15,7 @@ namespace Twins.Utils
         }
 
         public static T PickAndRemoveRandom<T>(this IList<T> list)
-        {
-            return list.PickAndRemove(random.Next(list.Count));
-        }
+            => list.PickAndRemove(random.Next(list.Count));
 
         public static T PickAndRemove<T>(this IList<T> list, int index)
         {
@@ -25,6 +23,9 @@ namespace Twins.Utils
             list.RemoveAt(index);
             return element;
         }
+
+        public static T PickRandom<T>(this IList<T> list)
+            => list[random.Next(list.Count)];
 
         public static IList<T> Repeat<T>(this IList<T> list, int count)
         {
