@@ -36,7 +36,6 @@ namespace Twins.Components
             if (!IsBlocked)
             {
                 IsEnabled = false;
-                //button.IsEnabled = false;
             }
 
             Flipped = true;
@@ -50,7 +49,6 @@ namespace Twins.Components
             if (!IsBlocked)
             {
                 IsEnabled = true;
-                //button.IsEnabled = true;
             }
 
             Flipped = false;

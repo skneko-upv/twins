@@ -70,11 +70,11 @@ namespace Twins.Views
         {
             for (int i = 0; i < height; i++)
             {
-                board.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+                board.RowDefinitions.Add(new RowDefinition { Height = new GridLength(120) });
             }
             for (int i = 0; i < width; i++)
             {
-                board.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                board.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(120) });
             }
 
             BoardViewModel viewModel = (BoardViewModel)BindingContext;
