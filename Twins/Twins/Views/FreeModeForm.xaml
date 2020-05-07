@@ -2,50 +2,107 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:twinsc="clr-namespace:Twins.Components"
              mc:Ignorable="d"
              x:Class="Twins.Views.FreeModeForm"
              BackgroundImageSource="Assets/Backgrounds/menuprincipal2.png"
              NavigationPage.HasBackButton="False"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Resources>
-        <Style  TargetType="Button">
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="CornerRadius" Value="20" />
-            <Setter Property="BackgroundColor" Value="White" />
-            <Setter Property="BorderColor" Value="Black" />
-            <Setter Property="FontAttributes" Value="Bold" />
-        </Style>
+        <ResourceDictionary>
+            <Style x:Key="buttonStyle" TargetType="Button">
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="CornerRadius" Value="20" />
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="BorderColor" Value="Black" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontFamily" Value="Medium" />
+                <Setter Property="Padding" Value="10" />
+            </Style>
+        </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout VerticalOptions="Center">
-            <StackLayout HorizontalOptions="Center">
-            <Label Text="Partida Libre" FontSize="Large"  />
-            </StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" >
-                <Label Text="Tamaño del tablero: "/>
-                <Entry Keyboard="Numeric" IsEnabled="False" Text="6"/>
-                <Label Text="Columnas"/>
-                <Entry Keyboard="Numeric" IsEnabled="False" Text="4"/>
-                <Label Text="Filas"/>
-            </StackLayout>
-
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" >
-                <CheckBox IsEnabled="False" IsChecked="True" Margin="-10,-10,-100,0"/>
-                <Label Text="Límite de Tiempo: " />
-                <Entry Keyboard="Numeric" IsEnabled="False" Text="1"/>
-                <Label Text="minutos"/>
-                <Entry Keyboard="Numeric" IsEnabled="False" Text="0"/>
-                <Label Text="segundos"/>
+        <AbsoluteLayout>
+            <StackLayout AbsoluteLayout.LayoutBounds=".5,.5,0.5,0.5" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="Center" VerticalOptions="Center">
+                <Label Text="Partida Libre" FontSize="Large" Margin="15" FontAttributes="Bold" HorizontalOptions="Center"/>
+                <StackLayout BackgroundColor="White" HeightRequest="400" WidthRequest="500">
+                    <Label Text="▬ Escoja la configuración para la partida:" FontSize="Small" Margin="15"/>
+                    <StackLayout Orientation="Horizontal" Margin="10">
+                        <StackLayout FlowDirection="RightToLeft" Spacing="20">
+                            <Label Text="Tamaño del tablero: " Margin="0,5,0,0" FontAttributes="Bold" VerticalOptions="Center"/>
+                            <StackLayout Orientation="Horizontal"  Margin="0,5,0,0">
+                                <Label Text="Límite de tiempo: " VerticalOptions="Center" FontAttributes="Bold" />
+                                <CheckBox IsChecked="True" Margin="-95,0,0,0" x:Name="HasTimeLimit"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal"  Margin="0,5,0,0">
+                                <Label Text="Tiempo por turno: " VerticalOptions="Center" FontAttributes="Bold" />
+                                <CheckBox IsChecked="True" Margin="-95,0,0,0" x:Name="HasTimeTLimit"/>
+                            </StackLayout>
+                            <Label Text="Tipo de partida: "  Margin="0,5,0,0" FontAttributes="Bold" VerticalOptions="Center"/>
+                        </StackLayout>
+                        <StackLayout Spacing="20">
+                            <StackLayout Orientation="Horizontal" >
+                                <Entry Keyboard="Numeric" MaxLength="1" FlowDirection="RightToLeft" x:Name="ColumnsEntry" 
+                                       TextChanged="OnlyNumbers" Text="6"/>
+                                <Label Text="Columnas, " VerticalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Entry Keyboard="Numeric" MaxLength="2" FlowDirection="RightToLeft" x:Name="MinutesEntry" TextChanged="OnlyNumbersTime"
+                                       BindingContext="{x:Reference Name=HasTimeLimit}" IsEnabled="{Binding Path=IsChecked}"  Text="2"/>
+                                <Label Text="Minutos, " VerticalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Entry Keyboard="Numeric" MaxLength="2" FlowDirection="RightToLeft" x:Name="TMinutesEntry" TextChanged="OnlyNumbersTime"
+                                       BindingContext="{x:Reference Name=HasTimeTLimit}" IsEnabled="{Binding Path=IsChecked}" Text="0"/>
+                                <Label Text="Minutos, " VerticalOptions="Center"/>
+                            </StackLayout>
+                            <Picker x:Name="CategoryPicker" Margin="0,-20,0,0" SelectedIndexChanged="CategoryPickerChanged">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Estándard</x:String>
+                                        <x:String>Por Carta</x:String>
+                                        <x:String>Por Categoría</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                        </StackLayout >
+                        <StackLayout Margin="5,0" Spacing="20">
+                            <StackLayout Orientation="Horizontal">
+                                <Entry Keyboard="Numeric" MaxLength="1" FlowDirection="RightToLeft" x:Name="RowsEntry"
+                                       TextChanged="OnlyNumbers" Text="4"/>
+                                <Label Text="Filas" VerticalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Entry Keyboard="Numeric" MaxLength="2" FlowDirection="RightToLeft" x:Name="SecondsEntry" TextChanged="OnlyNumbersTime"
+                                       BindingContext="{x:Reference Name=HasTimeLimit}" IsEnabled="{Binding Path=IsChecked}" Text="30"/>
+                                <Label Text="Segundos" VerticalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Entry Keyboard="Numeric" MaxLength="2" FlowDirection="RightToLeft" x:Name="TSecondsEntry" TextChanged="OnlyNumbersTime"
+                                       BindingContext="{x:Reference Name=HasTimeTLimit}" IsEnabled="{Binding Path=IsChecked}" Text="10"/>
+                                <Label Text="Segundos" VerticalOptions="Center"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
                 
-
+                    <!-- añadir aquí más opciones! -->
+                
+                    <StackLayout HorizontalOptions="Center" VerticalOptions="End" Orientation="Horizontal" Margin="20" Spacing="10">
+                        <Button Text="Atras" Clicked="OnBackMainMenu" Style="{StaticResource buttonStyle}"/>
+                        <Button Text="Empezar" Clicked="OnStartGame" Style="{StaticResource buttonStyle}"/>
+                    </StackLayout>
+                </StackLayout>
             </StackLayout>
-            <StackLayout HorizontalOptions="Center" VerticalOptions="End" Orientation="Horizontal">
-                <Button Text="Atras" Clicked="OnBackMainMenu" />
-                <Button Text="Empezar" Clicked="OnStartGame" />
-            </StackLayout>
+            <AbsoluteLayout AbsoluteLayout.LayoutBounds=".5,.5,1,1" AbsoluteLayout.LayoutFlags="All" x:Name="ErrorView" IsVisible="False">
+                <StackLayout BackgroundColor="#595959" Opacity="0.6"  WidthRequest="2000" HeightRequest="2000" />
+                <StackLayout AbsoluteLayout.LayoutBounds=".5,.5,.5,.3" AbsoluteLayout.LayoutFlags="All"
+                              Spacing="10"  BackgroundColor="White" Padding="10" Margin="10">
+                    <Label Text="Próximamente se implementará!" FontSize="Medium" FontAttributes="Bold" Margin="10" HorizontalOptions="Center" HorizontalTextAlignment="Center" x:Name="TextError"
+                           TextColor="Red"/>
+                    <Button Text="Aceptar" Clicked="ErrorViewClicked" HorizontalOptions="Center" VerticalOptions="End" Margin="10"/>
+                </StackLayout>
+            </AbsoluteLayout>
 
-        </StackLayout>
-        
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
