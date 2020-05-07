@@ -25,5 +25,18 @@ namespace Twins.Utils
             list.RemoveAt(index);
             return element;
         }
+
+        public static IList<T> Repeat<T>(this IList<T> list, int count)
+        {
+            var result = new List<T>(list.Count * count);
+            foreach (var item in list)
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    result.Add(item);
+                }
+            }
+            return result;
+        }
     }
 }

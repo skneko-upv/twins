@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using Twins.Components;
+using Twins.Models.Strategies;
 
 namespace Twins.Models.Builders
 {
@@ -21,6 +23,7 @@ namespace Twins.Models.Builders
         TimeSpan turnTimeLimit = TimeSpan.FromSeconds(5);
 
         Board.Cell[,] cells = null;
+        int groupSize = 2;
 
         public GameBuilder(int height, int width)
         {
@@ -46,9 +49,25 @@ namespace Twins.Models.Builders
             return this;
         }
 
-        public GameBuilder WithCellDistribution(Board.Cell[,] cells)
+        public GameBuilder WithCellDistribution(Board.Cell[,] cells, int groupSize)
         {
             this.cells = cells;
+            this.groupSize = groupSize;
+            return this;
+        }
+
+        public GameBuilder WithGroupSize(int groupSize)
+        {
+            this.groupSize = groupSize;
+            return this;
+        }
+
+        /// <summary>
+        /// Makes a game easy to win. Used for tests or tutorials.
+        /// </summary>
+        public GameBuilder WithPredictablePopulation()
+        {
+            cells = new PredictablePopulationStrategy(groupSize, deck).Populate(Height, Width);
             return this;
         }
 
