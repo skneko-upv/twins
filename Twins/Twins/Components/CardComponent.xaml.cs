@@ -3,8 +3,6 @@ using System.Threading.Tasks;
 using Twins.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Windows.UI.Xaml.Input;
-using Windows.Devices.Input;
 
 namespace Twins.Components
 {
