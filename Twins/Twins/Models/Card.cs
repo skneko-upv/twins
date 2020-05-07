@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace Twins.Models
@@ -8,6 +9,8 @@ namespace Twins.Models
         public int Id { get; }
 
         public Deck Deck { get; }
+
+        public ISet<Category> Categories;
 
         public ImageSource Image { get; }
 

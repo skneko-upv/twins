@@ -7,7 +7,9 @@ namespace Twins.Models
     {
         public ImageSource BackImage { get; }
 
-        public List<Card> Cards { get; }
+        public ISet<Category> Categories;
+
+        public IList<Card> Cards { get; }
 
         public Deck(ImageSource backImage, Queue<ImageSource> imageCards)
         {

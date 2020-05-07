@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Twins.Models.Properties;
 using Twins.Models.Strategies;
+using static Twins.Utils.CollectionExtensions;
 
 namespace Twins.Models
 {
@@ -139,5 +140,12 @@ namespace Twins.Models
 
             return matched;
         }
+
+        protected Card RandomHiddenCard()
+            => Board.Cells
+                    .Where(c => !c.KeepRevealed)
+                    .Select(c => c.Card)
+                    .ToList()
+                    .PickAndRemoveRandom();
     }
 }
