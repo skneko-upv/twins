@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using Twins.Model;
+using System.Linq;
 using Twins.Models.Properties;
+using Twins.Models.Strategies;
 
 namespace Twins.Models
 {
-    public abstract partial class Game
+    public abstract class Game
     {
-        public TimeProperty GlobalTime { get; }
-        public TimeProperty TurnTime { get; }
+        private const int GroupSize = 2;
+
+        public Deck Deck { get; }
+
+        public int RemainingMatches { get; private set; }
 
         public bool IsFinished { get; protected set; } = false;
         public Observable<int> Turn { get; protected set; } = new Observable<int>(1);
+
         public Observable<int> MatchSuccesses { get; protected set; } = new Observable<int>(0);
         public int MatchFailures { get; protected set; } = 0;
         public int MatchAttempts => MatchSuccesses.Value + MatchFailures;
@@ -28,7 +31,7 @@ namespace Twins.Models
         public event Action TurnTimedOut;
         public event Action<bool> GameEnded;
 
-        public Game(TimeSpan? timeLimit, TimeSpan? turnLimit)
+        public Game(int height, int width, Deck deck, TimeSpan? timeLimit, TimeSpan? turnLimit, Board.Cell[,] cells = null)
         {
             if (timeLimit != null)
             {
@@ -50,8 +53,34 @@ namespace Twins.Models
             }
             TurnClock.TimedOut += () => TurnTimedOut();
 
+            if (cells != null)
+            {
+                Board = new Board(height, width, this, cells);
+            }
+            else
+            {
+                var populationStrategy = new CyclicRandomPopulationStrategy(GroupSize, deck);
+                Board = new Board(height, width, this, populationStrategy);
+            }
+
+            Deck = deck;
+
+            RemainingMatches = height * width / GroupSize;
+
             Score = new Score();
             TurnTimedOut += () => { Score.DecrementTimedOut(); };
+        }
+
+        public abstract IEnumerable<Board.Cell> TryMatch();
+
+        public virtual bool ShouldTryMatch()
+        {
+            return Board.FlippedCells.Count > GroupSize - 1;
+        }
+
+        public virtual bool ShouldEndTurn()
+        {
+            return true;
         }
 
         public virtual void Resume()
@@ -73,15 +102,42 @@ namespace Twins.Models
             GameEnded(victory);
         }
 
-        public abstract bool ShouldTryMatch();
-
-        public abstract IEnumerable<Board.Cell> TryMatch();
-
-        public abstract bool ShouldEndTurn();
-
         public virtual void EndTurn()
         {
             TurnClock.Reset();
+            Board.UnflipAllCells();
+            Turn.Value++;
+        }
+
+        protected virtual IEnumerable<Board.Cell> HandleMatchResult(bool isMatch)
+        {
+            IEnumerable<Board.Cell> matched;
+            if (isMatch)
+            {
+                MatchSuccesses.Value++;
+
+                foreach (Board.Cell cell in Board.FlippedCells)
+                {
+                    Board.SetCellKeepRevealed(cell.Row, cell.Column, true);
+                }
+
+                Score.IncrementMatchSuccess();
+                RemainingMatches--;
+                matched = new List<Board.Cell>(Board.FlippedCells);
+
+                if (RemainingMatches <= 0)
+                {
+                    EndGame(true);
+                }
+            }
+            else
+            {
+                Score.DecrementMatchFail(Board.FlippedCells.Select(cell => cell.FlipCount).ToArray());
+                MatchFailures++;
+                matched = Enumerable.Empty<Board.Cell>();
+            }
+
+            return matched;
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Diagnostics;
 using Twins.Models.Properties;
 using Xamarin.Forms;
 
-namespace Twins.Model
+namespace Twins.Models
 {
     //Clase que implementa la funcionalidad de cronómetro y temporizador 
     public class Clock

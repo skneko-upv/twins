@@ -31,12 +31,12 @@
                               VerticalOptions="Start"
                               HeightRequest="488"
                               WidthRequest="732">
-                        <Grid BackgroundColor="#262626"
+                        <Grid x:Name="referenceCardFrame"
+                              BackgroundColor="#262626"
                               HeightRequest="145"
                               WidthRequest="145"
                               HorizontalOptions="Center"
                               VerticalOptions="Start"
-                              x:Name="CardReferenceredView"
                               IsVisible="False"
                               
                               >
@@ -59,16 +59,15 @@
                                 <Image Source="Assets/Icons/cronometro.png" HeightRequest="32" WidthRequest="32"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal"
-                                        Spacing="1"
-                                     >
+                                        Spacing="1">
                                 <Label Margin="0,0,5,0"
                                    FontAttributes="Bold"
                                    FontSize="Medium"
-                                   x:Name="TurnTextLabel">
+                                   x:Name="turnTextLabel">
                                     Turno
                                 </Label>
                                 <Label Text="" FontAttributes="Bold" x:Name="turnLabel" FontSize="Medium"/>
-                                <Label Text=":" FontAttributes="Bold" Margin="0,0,5,0" FontSize="Medium" x:Name="Turn2PointLabel"/>
+                                <Label Text=":" FontAttributes="Bold" Margin="0,0,5,0" FontSize="Medium" x:Name="turn2PointLabel"/>
                                 <Label x:Name="turnTimeLabel" FontSize="Medium"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal"
