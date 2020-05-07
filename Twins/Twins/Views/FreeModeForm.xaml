@@ -59,9 +59,9 @@
                             <Picker x:Name="CategoryPicker" Margin="0,-20,0,0" SelectedIndexChanged="CategoryPickerChanged">
                                 <Picker.ItemsSource>
                                     <x:Array Type="{x:Type x:String}">
-                                        <x:String>Estándard</x:String>
-                                        <x:String>Por Carta</x:String>
-                                        <x:String>Por Categoría</x:String>
+                                        <x:String>Estándar</x:String>
+                                        <x:String>Por carta</x:String>
+                                        <x:String>Por categoría</x:String>
                                     </x:Array>
                                 </Picker.ItemsSource>
                             </Picker>
