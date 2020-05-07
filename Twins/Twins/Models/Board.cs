@@ -87,7 +87,7 @@ namespace Twins.Models
             {
                 Cells.Add(cell);
                 cellMap[cell.Row, cell.Column] = i;
-                i += 1;
+                i++;
             }
         }
 

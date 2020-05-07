@@ -13,7 +13,7 @@ namespace Twins.Models
         public override IEnumerable<Board.Cell> TryMatch()
         {
             Card reference = Board.FlippedCells.First().Card;
-            bool isMatch = Board.FlippedCells.All(c => c.Card == reference);
+            bool isMatch = Board.FlippedCells.All(c => c.Card.Equals(reference));
             return HandleMatchResult(isMatch);
         }
 

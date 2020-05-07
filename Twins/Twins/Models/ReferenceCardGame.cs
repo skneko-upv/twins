@@ -15,7 +15,7 @@ namespace Twins.Models
 
         public override IEnumerable<Board.Cell> TryMatch()
         {
-            bool isMatch = Board.FlippedCells.All(c => c.Card == Board.ReferenceCard);
+            bool isMatch = Board.FlippedCells.All(c => c.Card.Equals(Board.ReferenceCard));
             return HandleMatchResult(isMatch);
         }
 
@@ -23,7 +23,7 @@ namespace Twins.Models
         {
             base.EndTurn();
 
-            if (Board.ReferenceCard == null)
+            if (!IsFinished && Board.ReferenceCard == null)
             {
                 Board.ReferenceCard = RandomHiddenCard();
             }
