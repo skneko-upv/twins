@@ -15,6 +15,7 @@ namespace Twins.Views
             InitializeComponent();
             BoardViewModel boardViewModel = new BoardViewModel(board);
             BindingContext = boardViewModel;
+            PauseMenu.BindingContext = boardViewModel;
 
             turnLabel.SetBinding(Label.TextProperty, "Value");
             turnLabel.BindingContext = boardViewModel.Board.Game.Turn;
@@ -35,23 +36,24 @@ namespace Twins.Views
             };
             scoreLabel.Text = board.Game.Score.PositiveValue.ToString();
 
-            Turn2PointLabel.SetBinding(Label.TextColorProperty, "Color");
-            Turn2PointLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
+            turn2PointLabel.SetBinding(Label.TextColorProperty, "Color");
+            turn2PointLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
 
-            TurnTextLabel.SetBinding(Label.TextColorProperty, "Color");
-            TurnTextLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
-
-            //SuccessLabel.SetBinding(Label.TextProperty, "Match");
-            //SuccessLabel.BindingContext = boardViewModel.Board.Game.MatchSuccesses;
-
-            FillBoard(board.Height, board.Width);
-
-            board.ReferenceCardChanged += OnReferenceCardChanged;
-            referenceCard.Clicked += () => { };
+            turnTextLabel.SetBinding(Label.TextColorProperty, "Color");
+            turnTextLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
 
             board.Game.GameEnded += OnGameEnded;
 
-            PauseMenu.BindingContext = boardViewModel;
+            referenceCard.Clicked += () => { };
+
+            FillBoard(board.Height, board.Width);
+        }
+
+        protected override void OnAppearing()
+        {
+            var board = ((BoardViewModel)BindingContext).Board;
+            board.ReferenceCardChanged += OnReferenceCardChanged;
+            OnReferenceCardChanged(board.ReferenceCard);
         }
 
         private void OnGameEnded(bool victory)
@@ -89,6 +91,7 @@ namespace Twins.Views
         {
             if (card != null)
             {
+                referenceCardFrame.IsVisible = true;
                 referenceCard.Card = card;
                 if (!referenceCard.Flipped)
                 {

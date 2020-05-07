@@ -1,5 +1,5 @@
 ﻿using System;
-
+using Twins.Models.Builders;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -24,11 +24,11 @@ namespace Twins.Views
         {
             ///resume
             ///Start the game with de parameter of the form
-            Models.StandardGame game = new Models.StandardGame(6, 4,
-                Components.BasicDeck.CreateBasicDeck(),
-                TimeSpan.FromMinutes(1),
-                TimeSpan.FromSeconds(5));
-            await Navigation.PushAsync(new Views.BoardView(game.Board));
+            var game = new GameBuilder(6, 4)
+                        .OfKind(GameBuilder.GameKind.ReferenceCard)
+                        .WithPredictablePopulation()
+                        .Build();
+            await Navigation.PushAsync(new BoardView(game.Board));
         }
 
     }
