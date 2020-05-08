@@ -68,6 +68,7 @@ namespace Twins.Views
 
         private void FillBoard(int height, int width)
         {
+
             for (int i = 0; i < height; i++)
             {
                 board.RowDefinitions.Add(new RowDefinition { Height = new GridLength(120) });
@@ -85,6 +86,11 @@ namespace Twins.Views
                 card.HorizontalOptions = LayoutOptions.Center;
                 board.Children.Add(card, cell.Row, cell.Column);
             }
+            boardArea.WidthRequest = 122 * height;
+            boardArea.HeightRequest = 122 *  width;
+            board.WidthRequest = 122 * height;
+            board.HeightRequest = 122 *  width;
+
         }
 
         private async void OnReferenceCardChanged(Card card)
