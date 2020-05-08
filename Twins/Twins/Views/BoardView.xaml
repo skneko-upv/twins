@@ -95,9 +95,7 @@
                       RowSpacing="2"
                       BackgroundColor="{StaticResource backgroundColor}"                      
                       VerticalOptions="Center"
-                      HorizontalOptions="Center"
-                      HeightRequest="488"
-                      WidthRequest="732"/>
+                      HorizontalOptions="Center"/>
 
                 </ScrollView>
             </StackLayout>
