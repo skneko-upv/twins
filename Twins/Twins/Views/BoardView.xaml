@@ -15,7 +15,7 @@
         <AbsoluteLayout>
             <StackLayout  Margin="20" AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
                              AbsoluteLayout.LayoutFlags="All">
-            <Grid HeightRequest="150" HorizontalOptions="FillAndExpand">
+            <Grid HeightRequest="220" HorizontalOptions="FillAndExpand">
                 <StackLayout Orientation="Horizontal"
                              VerticalOptions="Start"
                              >

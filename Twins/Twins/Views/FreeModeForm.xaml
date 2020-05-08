@@ -32,11 +32,11 @@
                             <Label Text="Tamaño del tablero: " Margin="0,5,0,0" FontAttributes="Bold" VerticalOptions="Center"/>
                             <StackLayout Orientation="Horizontal"  Margin="0,5,0,0">
                                 <Label Text="Límite de tiempo: " VerticalOptions="Center" FontAttributes="Bold" />
-                                <CheckBox IsChecked="True" Margin="-95,0,0,0" x:Name="HasTimeLimit"/>
+                                <CheckBox IsChecked="True" x:Name="HasTimeLimit"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal"  Margin="0,5,0,0">
                                 <Label Text="Tiempo por turno: " VerticalOptions="Center" FontAttributes="Bold" />
-                                <CheckBox IsChecked="True" Margin="-95,0,0,0" x:Name="HasTimeTLimit"/>
+                                <CheckBox IsChecked="True" x:Name="HasTimeTLimit"/>
                             </StackLayout>
                             <Label Text="Tipo de partida: "  Margin="0,5,0,0" FontAttributes="Bold" VerticalOptions="Center"/>
                         </StackLayout>
@@ -56,7 +56,7 @@
                                        BindingContext="{x:Reference Name=HasTimeTLimit}" IsEnabled="{Binding Path=IsChecked}" Text="0"/>
                                 <Label Text="Minutos, " VerticalOptions="Center"/>
                             </StackLayout>
-                            <Picker x:Name="CategoryPicker" Margin="0,-20,0,0" SelectedIndexChanged="CategoryPickerChanged">
+                            <Picker x:Name="CategoryPicker" SelectedIndexChanged="CategoryPickerChanged">
                                 <Picker.ItemsSource>
                                     <x:Array Type="{x:Type x:String}">
                                         <x:String>Estándar</x:String>
