@@ -38,8 +38,7 @@ namespace Twins.Views
                     throw new Exception("Se necesita un número par de cartas para el tablero. Elija un número de columnas y filas correcto.");
 
                 Game game;
-                var gameBuilder = new GameBuilder(Int32.Parse(ColumnsEntry.Text), Int32.Parse(RowsEntry.Text))
-                            .WithPredictablePopulation();
+                var gameBuilder = new GameBuilder(Int32.Parse(ColumnsEntry.Text), Int32.Parse(RowsEntry.Text));
 
                 SetTypeOfGame(gameBuilder);
                 SetTimeOfGame(gameBuilder);
