@@ -110,6 +110,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Backgrounds\levelBackground.png" />
     <Content Include="Assets\Backgrounds\menuprincipal.png" />
     <Content Include="Assets\Backgrounds\menuprincipal2.png" />
     <Content Include="Assets\Decks\Deck2\backimage.png" />
@@ -140,6 +141,8 @@
     <Content Include="Assets\Decks\Deck3\card9.png" />
     <Content Include="Assets\Icons\cronometro.png" />
     <Content Include="Assets\Icons\home.png" />
+    <Content Include="Assets\Icons\levelBlocked.png" />
+    <Content Include="Assets\Icons\levelPassed.png" />
     <Content Include="Assets\Icons\logout.png" />
     <Content Include="Assets\Icons\mute.png" />
     <Content Include="Assets\Icons\next.png" />

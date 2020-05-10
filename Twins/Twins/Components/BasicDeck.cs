@@ -6,11 +6,11 @@ namespace Twins.Components
 {
     public abstract class BasicDeck
     {
-        public static readonly Deck Deck1 = new Deck(ImageSource.FromFile("Assets/Decks/Deck1/backimage.png"), LoadImages("Assets/Decks/Deck1/"));
+        public static readonly Deck Animales = new Deck(ImageSource.FromFile("Assets/Decks/Deck1/backimage.png"), LoadImages("Assets/Decks/Deck1/"), "Animales");
 
-        public static readonly Deck Deck2 = new Deck(ImageSource.FromFile("Assets/Decks/Deck2/backimage.png"), LoadImages("Assets/Decks/Deck2/"));
+        public static readonly Deck Numeros = new Deck(ImageSource.FromFile("Assets/Decks/Deck2/backimage.png"), LoadImages("Assets/Decks/Deck2/"), "Números");
 
-        public static readonly Deck Deck3 = new Deck(ImageSource.FromFile("Assets/Decks/Deck3/backimage.png"), LoadImages("Assets/Decks/Deck3/"));
+        public static readonly Deck Deportes = new Deck(ImageSource.FromFile("Assets/Decks/Deck3/backimage.png"), LoadImages("Assets/Decks/Deck3/"), "Deportes");
 
         private static Queue<ImageSource> LoadImages(string path)
         {

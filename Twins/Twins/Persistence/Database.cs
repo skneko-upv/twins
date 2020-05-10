@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using SQLite;
-using Twins.Persistence.DataTypes;
+using Twins.Models;
+using Twins.Components;
 
 namespace Twins.Persistence
 {
@@ -17,8 +18,7 @@ namespace Twins.Persistence
         {
             _database = new SQLiteAsyncConnection(dbPath);
             _database.CreateTableAsync<PlayerInfo>().Wait();
-
-
+            this.InitializeDB();
         }
 
         public static Database Instance
@@ -29,13 +29,21 @@ namespace Twins.Persistence
             }
         }
 
-        public Task<PlayerInfo> GetPlayerInfo()
+        public async void InitializeDB() 
         {
-            return _database.GetAsync<PlayerInfo>(1);
+            int numberOfPlayers = await _database.Table<PlayerInfo>().CountAsync();
+
+                _database.InsertOrReplaceAsync(new PlayerInfo()).Wait();
+
         }
-        public Task<int> SavePlayerInfo(PlayerInfo playerInfo) 
+
+        public async Task<PlayerInfo> GetPlayerInfo()
         {
-            return _database.InsertOrReplaceAsync(playerInfo);
+            return await _database.GetAsync<PlayerInfo>(1); ;
+        }
+        public async Task<int> SavePlayerInfo(PlayerInfo playerInfo) 
+        {
+            return await _database.InsertOrReplaceAsync(playerInfo);
         }
     }
 }
