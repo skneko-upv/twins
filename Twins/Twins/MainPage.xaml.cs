@@ -37,11 +37,11 @@ namespace Twins
             System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
 
-        private void OnHistoryGame(object sender, EventArgs e)
+        private async void OnHistoryGame(object sender, EventArgs e)
         {
             // resume
             // Open History menu
-            CommingSoonView.ButtonNotImplemented();
+            await Navigation.PushAsync(new Views.LevelsView());
         }
 
         private async void OnFreeGame(object sender, EventArgs e)
