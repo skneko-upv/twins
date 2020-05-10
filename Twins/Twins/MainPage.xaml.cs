@@ -15,12 +15,12 @@ namespace Twins
 
         }
 
-        private void OnOption(object sender, EventArgs e)
+        private async void OnOption(object sender, EventArgs e)
         {
 
             // resume
             // Open Option menu
-            CommingSoonView.ButtonNotImplemented();
+            await Navigation.PushAsync(new Views.OptionsView());
         }
 
         private void OnMute(object sender, EventArgs e)

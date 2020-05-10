@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Twins.Views.OptionsView"
+             NavigationPage.HasBackButton="False"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundImageSource="Assets/Backgrounds/menuprincipal2.png">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" VerticalOptions="Center" BackgroundColor="WhiteSmoke" HorizontalOptions="Center" Padding="100,20,100,20">
+            <StackLayout VerticalOptions="Start" HorizontalOptions="Center">
+                <Label Text="OPCIONES" FontSize="Header"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Text="Fila"  HorizontalOptions="Center" Padding="0,5,0,0"/>
+                <Entry Keyboard="Numeric" HorizontalOptions="Center" x:Name="DefaultRow"/>
+                <Label Text="Columna"  HorizontalOptions="Center" Padding="0,5,0,0"/>
+                <Entry Keyboard="Numeric" x:Name="DefaultColum" HorizontalOptions="Center"/>
+            </StackLayout>
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center" x:Name="SelectorDeck">
+            </StackLayout>
+            <StackLayout >
+                <Picker Title="Selecciona una canción" HorizontalOptions="Center"
+                        x:Name="SelectSong"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                <Label Text="Volumen" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Image Source="Assets/Icons/volume.png"/>
+            </StackLayout>
+            <StackLayout >
+                <!-- Aqui va el control de volumen de la música-->
+                <Slider x:Name="Volume" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="4" VerticalOptions="Center" 
+                         Minimum="0"  Value="100" Maximum="100"  Margin="5" ValueChanged="Volume_ValueChanged"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center">
+                <Button Text="Aplicar" Clicked="OnApply"/>
+                <Button Text="Cancelar" Clicked="OnCancel"/>
+
+            </StackLayout>
+            </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
