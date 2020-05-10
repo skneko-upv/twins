@@ -1,5 +1,6 @@
 ﻿using System;
 using Twins.Models;
+using Twins.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -39,9 +40,9 @@ namespace Twins.Components
             }
         }
 
-        private void ClickedLevel(object sender, EventArgs e)
+        private async void ClickedLevel(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new BoardView(Game.Board));
         }
     }
 }
