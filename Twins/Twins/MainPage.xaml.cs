@@ -15,6 +15,14 @@ namespace Twins
 
         }
 
+        protected override void OnAppearing()
+        {
+            var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+            player.Load("Sounds\\Solve_The_Puzzle.wav");
+            player.Play();
+        }
+
+
         private void OnOption(object sender, EventArgs e)
         {
 
