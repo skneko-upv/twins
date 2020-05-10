@@ -112,6 +112,32 @@
   <ItemGroup>
     <Content Include="Assets\Backgrounds\menuprincipal.png" />
     <Content Include="Assets\Backgrounds\menuprincipal2.png" />
+    <Content Include="Assets\Decks\Deck2\backimage.png" />
+    <Content Include="Assets\Decks\Deck2\card1.png" />
+    <Content Include="Assets\Decks\Deck2\card10.png" />
+    <Content Include="Assets\Decks\Deck2\card11.png" />
+    <Content Include="Assets\Decks\Deck2\card12.png" />
+    <Content Include="Assets\Decks\Deck2\card2.png" />
+    <Content Include="Assets\Decks\Deck2\card3.png" />
+    <Content Include="Assets\Decks\Deck2\card4.png" />
+    <Content Include="Assets\Decks\Deck2\card5.png" />
+    <Content Include="Assets\Decks\Deck2\card6.png" />
+    <Content Include="Assets\Decks\Deck2\card7.png" />
+    <Content Include="Assets\Decks\Deck2\card8.png" />
+    <Content Include="Assets\Decks\Deck2\card9.png" />
+    <Content Include="Assets\Decks\Deck3\backimage.png" />
+    <Content Include="Assets\Decks\Deck3\card1.png" />
+    <Content Include="Assets\Decks\Deck3\card10.png" />
+    <Content Include="Assets\Decks\Deck3\card11.png" />
+    <Content Include="Assets\Decks\Deck3\card12.png" />
+    <Content Include="Assets\Decks\Deck3\card2.png" />
+    <Content Include="Assets\Decks\Deck3\card3.png" />
+    <Content Include="Assets\Decks\Deck3\card4.png" />
+    <Content Include="Assets\Decks\Deck3\card5.png" />
+    <Content Include="Assets\Decks\Deck3\card6.png" />
+    <Content Include="Assets\Decks\Deck3\card7.png" />
+    <Content Include="Assets\Decks\Deck3\card8.png" />
+    <Content Include="Assets\Decks\Deck3\card9.png" />
     <Content Include="Assets\Icons\cronometro.png" />
     <Content Include="Assets\Icons\home.png" />
     <Content Include="Assets\Icons\logout.png" />
@@ -124,19 +150,19 @@
     <Content Include="Assets\Icons\title4.png" />
     <Content Include="Assets\Icons\volume.png" />
     <Content Include="Assets\Backgrounds\menuprincipal2.png" />
-    <Content Include="Assets\Cards\backimage.png" />
-    <Content Include="Assets\Cards\card1.png" />
-    <Content Include="Assets\Cards\card10.png" />
-    <Content Include="Assets\Cards\card11.png" />
-    <Content Include="Assets\Cards\card12.png" />
-    <Content Include="Assets\Cards\card2.png" />
-    <Content Include="Assets\Cards\card3.png" />
-    <Content Include="Assets\Cards\card4.png" />
-    <Content Include="Assets\Cards\card5.png" />
-    <Content Include="Assets\Cards\card6.png" />
-    <Content Include="Assets\Cards\card7.png" />
-    <Content Include="Assets\Cards\card8.png" />
-    <Content Include="Assets\Cards\card9.png" />
+    <Content Include="Assets\Decks\Deck1\backimage.png" />
+    <Content Include="Assets\Decks\Deck1\card1.png" />
+    <Content Include="Assets\Decks\Deck1\card10.png" />
+    <Content Include="Assets\Decks\Deck1\card11.png" />
+    <Content Include="Assets\Decks\Deck1\card12.png" />
+    <Content Include="Assets\Decks\Deck1\card2.png" />
+    <Content Include="Assets\Decks\Deck1\card3.png" />
+    <Content Include="Assets\Decks\Deck1\card4.png" />
+    <Content Include="Assets\Decks\Deck1\card5.png" />
+    <Content Include="Assets\Decks\Deck1\card6.png" />
+    <Content Include="Assets\Decks\Deck1\card7.png" />
+    <Content Include="Assets\Decks\Deck1\card8.png" />
+    <Content Include="Assets\Decks\Deck1\card9.png" />
     <Content Include="Assets\Icons\alert.png" />
     <Content Include="Assets\Icons\logout.png" />
     <Content Include="Assets\Icons\mute.png" />
@@ -202,6 +228,7 @@
       <Link>.editorconfig</Link>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
