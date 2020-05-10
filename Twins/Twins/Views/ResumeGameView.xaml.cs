@@ -49,7 +49,7 @@ namespace Twins.Views
         public async void OnNext(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
-            Models.StandardGame game = new Models.StandardGame(6, 4, Components.BasicDeck.CreateBasicDeck(),
+            Models.StandardGame game = new Models.StandardGame(6, 4, Components.BasicDeck.Deck1,
                 TimeSpan.FromMinutes(1),
                 TimeSpan.FromSeconds(5));
             await Navigation.PushAsync(new Views.BoardView(game.Board));
