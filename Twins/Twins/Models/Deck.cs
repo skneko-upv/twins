@@ -9,10 +9,13 @@ namespace Twins.Models
 
         public List<Card> Cards { get; }
 
-        public Deck(ImageSource backImage, Queue<ImageSource> imageCards)
+        public string Name { get; }
+
+        public Deck(ImageSource backImage, Queue<ImageSource> imageCards, string name)
         {
             BackImage = backImage;
             Cards = new List<Card>();
+            Name = name;
 
             int i = 0;
             foreach (ImageSource image in imageCards)

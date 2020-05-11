@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Twins.Models;
+using Twins.Persistence;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,6 +10,7 @@ namespace Twins.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ResumeGameView : AbsoluteLayout
     {
+        public ResultOfGame ResultOfGame { get; private set; }
         public int Score {
             set => PointsLabel.Text = value.ToString();
         }
@@ -25,8 +29,9 @@ namespace Twins.Views
 
         }
 
-        public void SetStadistics(int score, TimeSpan time, bool isVictory)
+        public void SetStadistics(int score, TimeSpan time, bool isVictory, ResultOfGame result)
         {
+            ResultOfGame = result;
             Score = score;
             Time = time;
             if (isVictory)
@@ -43,16 +48,23 @@ namespace Twins.Views
 
         public async void OnHome(object sender, EventArgs e)
         {
+            if (ResultOfGame.IsVictory)
+            {
+                var playerInfo = await Database.Instance.GetPlayerInfo();
+                if(((PlayerInfo)playerInfo).LastLevelPassed < ResultOfGame.LevelNumber)
+                    ((PlayerInfo)playerInfo).LastLevelPassed = ResultOfGame.LevelNumber;
+                await Database.Instance.SavePlayerInfo(playerInfo);
+            }
             await Navigation.PopToRootAsync();
         }
 
         public async void OnNext(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
-            Models.StandardGame game = new Models.StandardGame(6, 4, Components.BasicDeck.CreateBasicDeck(),
-                TimeSpan.FromMinutes(1),
-                TimeSpan.FromSeconds(5));
-            await Navigation.PushAsync(new Views.BoardView(game.Board));
+            //Models.StandardGame game = new Models.StandardGame(6, 4, Components.BasicDeck.Animales,
+                //TimeSpan.FromMinutes(1),
+                //TimeSpan.FromSeconds(5));
+            //await Navigation.PushAsync(new Views.BoardView(game.Board));
         }
     }
 }
