@@ -1,6 +1,7 @@
 ﻿using System;
 using Twins.Components;
 using Twins.Models;
+using Twins.Utils;
 using Twins.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -121,7 +122,9 @@ namespace Twins.Views
 
         private void OnMute(object sender, EventArgs e)
         {
-            CommingSoonView.ButtonNotImplemented();
+            var player = new AudioPlayer();
+            if (player.GetVolume() == 0.0) { player.ChangeVolume(100.0); }
+            else { player.ChangeVolume(0.0); }
         }
     }
 }

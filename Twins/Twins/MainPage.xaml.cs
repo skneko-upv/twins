@@ -35,7 +35,9 @@ namespace Twins
         {
             // resume
             // Mute music
-            CommingSoonView.ButtonNotImplemented();
+            var player = new AudioPlayer();
+            if ( player.GetVolume() == 0.0 ) { player.ChangeVolume(100.0); }
+            else { player.ChangeVolume(0.0); }
         }
 
         private void OnLogout(object sender, EventArgs e)
