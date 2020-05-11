@@ -39,7 +39,7 @@ namespace Twins.Views
             SelectSong.SelectedIndex = index;
         }
 
-        private void updateVolume() {
+        private void UpdateVolume() {
             var defaultParameters = DefaultParameters.Instance;
             defaultParameters.Volume = Volume.Value;
         }
@@ -48,7 +48,7 @@ namespace Twins.Views
         {
             await Navigation.PopAsync();
         }
-        private void updateSong() 
+        private void UpdateSong() 
         {
             var defaultparameters = DefaultParameters.Instance;
             defaultparameters.SelectedSong = SelectSong.SelectedItem.ToString();
@@ -76,7 +76,7 @@ namespace Twins.Views
         {
             try
             {
-                var defaultparameters = Twins.Models.DefaultParameters.Instance;
+                var defaultParameters = DefaultParameters.Instance;
                 if (DefaultRow.Text != null || DefaultColum.Text != null)
                 {
                     if (DefaultRow.Text != null && DefaultColum.Text != null)
@@ -84,11 +84,11 @@ namespace Twins.Views
                         if (CheckSizeboard(int.Parse(DefaultColum.Text), int.Parse(DefaultRow.Text)))
                         {
 
-                            defaultparameters.Row = int.Parse(DefaultRow.Text);
-                            defaultparameters.Colum = int.Parse(DefaultColum.Text);
+                            defaultParameters.Row = int.Parse(DefaultRow.Text);
+                            defaultParameters.Column = int.Parse(DefaultColum.Text);
                             SelectorDeck.UpdateDeck();
-                            updateSong();
-                            updateVolume();
+                            UpdateSong();
+                            UpdateVolume();
                             await Navigation.PopAsync();
                         }
                         else throw new Exception("El tamaño del tablero debe de ser Par y de un tamaño mayor que 6.");
@@ -98,8 +98,8 @@ namespace Twins.Views
                 else
                 {
                     SelectorDeck.UpdateDeck();
-                    updateSong();
-                    updateVolume();
+                    UpdateSong();
+                    UpdateVolume();
                     await Navigation.PopAsync();
                 }
             }
@@ -120,9 +120,6 @@ namespace Twins.Views
         {
             //here is the control logic volume
             MainPage.player.ChangeVolume(Volume.Value);
-
-            
-
         }
     }
 }

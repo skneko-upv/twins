@@ -11,11 +11,11 @@ namespace Twins.Models
         private static DefaultParameters _instance = null;
 
 
-        public int Colum { get; set; }
+        public int Column { get; set; }
 
         public int Row { get; set; }
 
-        public List<string> ListDeck { get; set; }
+        public List<string> Decks { get; set; }
         
         public string SelectedDeck { get; set; }
 
@@ -29,9 +29,9 @@ namespace Twins.Models
             decks.Add("Animales");
             decks.Add("Numeros");
             decks.Add("Deportes");
-            Colum = 6;
+            Column = 6;
             Row = 4;
-            ListDeck = decks;
+            Decks = decks;
             SelectedDeck = "Animales";
             SelectedSong = "Solve The Puzzle";
             Volume = 100.0;

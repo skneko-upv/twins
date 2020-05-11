@@ -23,7 +23,7 @@ namespace Twins.Views
         private void InitDefaultParameter()
         {
             var defaultparameter = DefaultParameters.Instance;
-            ColumnsEntry.Text = defaultparameter.Colum.ToString();
+            ColumnsEntry.Text = defaultparameter.Column.ToString();
             RowsEntry.Text = defaultparameter.Row.ToString();
             var index = SongPicker.Items.IndexOf(defaultparameter.SelectedSong);
             SongPicker.SelectedIndex = index;

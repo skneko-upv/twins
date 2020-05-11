@@ -14,7 +14,7 @@ namespace Twins.Utils
 
         public void ChangeVolume(double newVolume) 
         {
-            Volume = newVolume;
+            Volume = newVolume / 100;
             Player.Volume = Volume;
         }
 

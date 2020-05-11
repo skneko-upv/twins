@@ -23,8 +23,8 @@ namespace Twins.Components
         {
             var defaultparameters = Twins.Models.DefaultParameters.Instance;
 
-            SelectDeck.ItemsSource = defaultparameters.ListDeck;
-            var index = defaultparameters.ListDeck.IndexOf(defaultparameters.SelectedDeck);
+            SelectDeck.ItemsSource = defaultparameters.Decks;
+            var index = defaultparameters.Decks.IndexOf(defaultparameters.SelectedDeck);
             SelectDeck.SelectedIndex = index;
             if (defaultparameters.SelectedDeck == "Animales")
             {
