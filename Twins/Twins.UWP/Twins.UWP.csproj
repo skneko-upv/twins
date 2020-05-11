@@ -178,7 +178,8 @@
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SmallTile.scale-200.png" />
     <Content Include="Assets\SmallTile.scale-400.png" />
-    <Content Include="Assets\Sounds\Solve_The_Puzzle.wav" />
+    <Content Include="Assets\Sounds\Chiptronical.wav" />
+    <Content Include="Assets\Sounds\Solve The Puzzle.wav" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-400.png" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using Twins.Components;
 using Twins.Models;
+using Twins.Utils;
 using Twins.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -133,7 +134,17 @@ namespace Twins.Views
 
         private void OnMute(object sender, EventArgs e)
         {
-            CommingSoonView.ButtonNotImplemented();
+            var defaultparameters = DefaultParameters.Instance;
+            if (MainPage.player.GetVolume() == 0.0)
+            {
+                defaultparameters.Volume = 100.0;
+                MainPage.player.ChangeVolume(defaultparameters.Volume);
+            }
+            else
+            {
+                defaultparameters.Volume = 0.0;
+                MainPage.player.ChangeVolume(defaultparameters.Volume);
+            }
         }
 
         public ResumeGameView GetResumeGameView() 

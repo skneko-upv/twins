@@ -23,9 +23,9 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <AbsoluteLayout>
-            <StackLayout AbsoluteLayout.LayoutBounds=".5,.5,0.5,0.5" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="Center" VerticalOptions="Center">
+            <StackLayout AbsoluteLayout.LayoutBounds=".5,.5,1,1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="Center" VerticalOptions="Center">
                 <Label Text="Partida Libre" FontSize="Large" Margin="15" FontAttributes="Bold" HorizontalOptions="Center"/>
-                <StackLayout BackgroundColor="White" HeightRequest="400" WidthRequest="500">
+                <StackLayout BackgroundColor="White" HeightRequest="600" WidthRequest="500">
                     <Label Text="▬ Escoja la configuración para la partida:" FontSize="Small" Margin="15"/>
                     <StackLayout Orientation="Horizontal" Margin="10">
                         <StackLayout FlowDirection="RightToLeft" Spacing="20">
@@ -84,9 +84,22 @@
                             </StackLayout>
                         </StackLayout>
                     </StackLayout>
-                
+                    <Picker x:Name="SongPicker"
+                            Title="Selecciona canción"
+                            TitleColor="Black"
+                            Margin="30,0">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Solve The Puzzle</x:String>
+                                <x:String>Chiptronical</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
                     <!-- añadir aquí más opciones! -->
-                
+                    <StackLayout Orientation="Vertical" HorizontalOptions="Center" >
+                        <twinsc:DeckSelector x:Name="SelectorDeck"/>
+                    </StackLayout>
+
                     <StackLayout HorizontalOptions="Center" VerticalOptions="End" Orientation="Horizontal" Margin="20" Spacing="10">
                         <Button Text="Atras" Clicked="OnBackMainMenu" Style="{StaticResource buttonStyle}"/>
                         <Button Text="Empezar" Clicked="OnStartGame" Style="{StaticResource buttonStyle}"/>

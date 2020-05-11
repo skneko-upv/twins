@@ -11,7 +11,7 @@
                  AbsoluteLayout.LayoutBounds=".5,.5,1.0,1.0"
                  AbsoluteLayout.LayoutFlags="All"/>
     <StackLayout BackgroundColor="{StaticResource backgroundColor}"
-                 HeightRequest="300"
+                 HeightRequest="200"
                  WidthRequest="275"
                  Padding="20"
                  VerticalOptions="Center"
@@ -35,8 +35,7 @@
         <Button Text="Reaunudar"
                 Clicked="OnResume"
                 Margin="50,20" />
-        <Button Text="Opciones"
-                Margin="50,20" Clicked="OnOptions"/>
+        
     <Button Text="Abandonar"
             Margin="50,20" Clicked="OnAbandon" />
     </StackLayout>
