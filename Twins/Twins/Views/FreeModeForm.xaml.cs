@@ -1,4 +1,5 @@
 ﻿using System;
+using Twins.Components;
 using Twins.Models;
 using Twins.Models.Builders;
 using Twins.Utils;
@@ -43,11 +44,14 @@ namespace Twins.Views
 
                 Game game;
                 var gameBuilder = new GameBuilder(Int32.Parse(ColumnsEntry.Text), Int32.Parse(RowsEntry.Text));
-
+                
                 SetTypeOfGame(gameBuilder);
                 SetTimeOfGame(gameBuilder);
                 SetTurnTimeOfGame(gameBuilder);
                 SetSongGame();
+                SetDeck(gameBuilder);
+
+               
 
                 game = gameBuilder.Build();
 
@@ -75,6 +79,22 @@ namespace Twins.Views
             }
         }
 
+        private void SetDeck(GameBuilder gameBuilder)
+        {
+            var defaultParameters = DefaultParameters.Instance;
+            if (defaultParameters.SelectedDeck == "Animales")
+            {
+                gameBuilder.WithDeck(BasicDeck.Animales);
+            }
+            else if (defaultParameters.SelectedDeck == "Numeros")
+            {
+                gameBuilder.WithDeck(BasicDeck.Numeros);
+            }
+            else
+            {
+                gameBuilder.WithDeck(BasicDeck.Deportes);
+            }
+        }
         private void SetTypeOfGame(GameBuilder gameBuilder)
         {
             if (categoryNotSelectedYet) throw new Exception("Elije un tipo de partida antes de jugar, por favor.");

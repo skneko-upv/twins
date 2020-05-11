@@ -28,7 +28,7 @@ namespace Twins.Models
             var decks = new List<string>();
             decks.Add("Animales");
             decks.Add("Numeros");
-            decks.Add("Paisajes");
+            decks.Add("Deportes");
             Colum = 6;
             Row = 4;
             ListDeck = decks;

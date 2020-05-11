@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,7 +24,21 @@ namespace Twins.Components
             var defaultparameters = Twins.Models.DefaultParameters.Instance;
 
             SelectDeck.ItemsSource = defaultparameters.ListDeck;
-            SelectDeck.SelectedIndex = 0;
+            var index = defaultparameters.ListDeck.IndexOf(defaultparameters.SelectedDeck);
+            SelectDeck.SelectedIndex = index;
+            if (defaultparameters.SelectedDeck == "Animales")
+            {
+                ImageCard.Source = "Assets/Decks/Deck1/card1.png";
+            }
+            else if (defaultparameters.SelectedDeck == "Numeros")
+            {
+                ImageCard.Source = "Assets/Decks/Deck2/card1.png";
+            }
+            else
+            {
+                ImageCard.Source = "Assets/Decks/Deck3/card1.png";
+            }
+            
         }
 
         public void UpdateDeck() 
@@ -35,8 +50,21 @@ namespace Twins.Components
 
         private void SelectDeck_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+            
             //Here we have to update ImageCard , with the new image of de deck selected
-            //ImageCard.Source = ""
+            if (SelectDeck.SelectedItem.ToString() == "Animales")
+            {
+                ImageCard.Source = "Assets/Decks/Deck1/card1.png";
+            }
+            else if (SelectDeck.SelectedItem.ToString() == "Numeros")
+            {
+                ImageCard.Source = "Assets/Decks/Deck2/card1.png";
+            }
+            else
+            {
+                ImageCard.Source = "Assets/Decks/Deck3/card1.png";
+            }
         }
     }
 }
