@@ -82,6 +82,7 @@ namespace Twins.Views
         private void SetDeck(GameBuilder gameBuilder)
         {
             var defaultParameters = DefaultParameters.Instance;
+            SelectorDeck.UpdateDeck();
             if (defaultParameters.SelectedDeck == "Animales")
             {
                 gameBuilder.WithDeck(BasicDeck.Animales);

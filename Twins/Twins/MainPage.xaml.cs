@@ -16,7 +16,6 @@ namespace Twins
         public static AudioPlayer player { get; set; }
         public MainPage()
         {
-            player = new AudioPlayer();
             InitializeComponent();
 
         }
@@ -43,9 +42,15 @@ namespace Twins
         {
             // resume
             // Mute music
-            var player = new AudioPlayer();
-            if ( player.GetVolume() == 0.0 ) { player.ChangeVolume(100.0); }
-            else { player.ChangeVolume(0.0); }
+            var defaultparameters = DefaultParameters.Instance;
+            if ( player.GetVolume() == 0.0 ) {
+                defaultparameters.Volume = 100.0;
+                player.ChangeVolume(defaultparameters.Volume); 
+            }
+            else {
+                defaultparameters.Volume = 0.0;
+                player.ChangeVolume(defaultparameters.Volume); 
+            }
         }
 
         private void OnLogout(object sender, EventArgs e)

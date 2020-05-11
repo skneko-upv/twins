@@ -122,9 +122,17 @@ namespace Twins.Views
 
         private void OnMute(object sender, EventArgs e)
         {
-            var player = new AudioPlayer();
-            if (player.GetVolume() == 0.0) { player.ChangeVolume(100.0); }
-            else { player.ChangeVolume(0.0); }
+            var defaultparameters = DefaultParameters.Instance;
+            if (MainPage.player.GetVolume() == 0.0)
+            {
+                defaultparameters.Volume = 100.0;
+                MainPage.player.ChangeVolume(defaultparameters.Volume);
+            }
+            else
+            {
+                defaultparameters.Volume = 0.0;
+                MainPage.player.ChangeVolume(defaultparameters.Volume);
+            }
         }
 
         public ResumeGameView GetResumeGameView() 
