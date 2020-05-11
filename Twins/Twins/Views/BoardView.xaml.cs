@@ -62,7 +62,7 @@ namespace Twins.Views
             EndGameModal.SetStadistics(
                 game.Score.PositiveValue,
                 game.GameClock.GetTimeSpan(),
-                victory);
+                victory, game.ResultOfGame);
             EndGameModal.IsVisible = true;
         }
 
@@ -122,6 +122,11 @@ namespace Twins.Views
         private void OnMute(object sender, EventArgs e)
         {
             CommingSoonView.ButtonNotImplemented();
+        }
+
+        public ResumeGameView GetResumeGameView() 
+        {
+            return EndGameModal;
         }
     }
 }

@@ -10,13 +10,20 @@ namespace Twins.Persistence
 {
     public class Database
     {
+        public const SQLiteOpenFlags Flags =
+            // open the database in read/write mode
+            SQLiteOpenFlags.ReadWrite |
+            // create the database if it doesn't exist
+            SQLiteOpenFlags.Create |
+            // enable multi-threaded database access
+            SQLiteOpenFlags.SharedCache;
         private readonly SQLiteAsyncConnection _database;
         private static readonly Lazy<Database> instance = new Lazy<Database>(() => new Database(Path.Combine(Environment.GetFolderPath(
             Environment.SpecialFolder.LocalApplicationData), "database.db3"))); 
 
         private Database(string dbPath)
         {
-            _database = new SQLiteAsyncConnection(dbPath);
+            _database = new SQLiteAsyncConnection(dbPath, Flags);
             _database.CreateTableAsync<PlayerInfo>().Wait();
             this.InitializeDB();
         }
@@ -32,7 +39,7 @@ namespace Twins.Persistence
         public async void InitializeDB() 
         {
             int numberOfPlayers = await _database.Table<PlayerInfo>().CountAsync();
-
+            if(numberOfPlayers == 0)
                 _database.InsertOrReplaceAsync(new PlayerInfo()).Wait();
 
         }
@@ -43,7 +50,9 @@ namespace Twins.Persistence
         }
         public async Task<int> SavePlayerInfo(PlayerInfo playerInfo) 
         {
-            return await _database.InsertOrReplaceAsync(playerInfo);
+            //return await _database.InsertOrReplaceAsync(playerInfo);
+            await _database.DeleteAsync<PlayerInfo>(1);
+            return await _database.InsertAsync(playerInfo);
         }
     }
 }

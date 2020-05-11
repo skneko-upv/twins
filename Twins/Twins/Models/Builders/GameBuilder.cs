@@ -17,7 +17,8 @@ namespace Twins.Models.Builders
         public int Width { get; private set; }
 
         GameKind kind = GameKind.Standard;
-        readonly Deck deck = BasicDeck.Animales;
+         
+        Deck deck = BasicDeck.Animales;
 
         TimeSpan timeLimit = TimeSpan.FromMinutes(1);
         TimeSpan turnTimeLimit = TimeSpan.FromSeconds(5);
@@ -34,6 +35,12 @@ namespace Twins.Models.Builders
         public GameBuilder OfKind(GameKind kind)
         {
             this.kind = kind;
+            return this;
+        }
+
+        public GameBuilder WithDeck(Deck deck) 
+        {
+            this.deck = deck;
             return this;
         }
 
