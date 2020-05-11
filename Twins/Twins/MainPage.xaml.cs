@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using Twins.Utils;
 using Xamarin.Forms;
 
 namespace Twins
@@ -13,6 +14,13 @@ namespace Twins
         {
             InitializeComponent();
 
+        }
+
+        protected override void OnAppearing()
+        {
+            var player = new AudioPlayer();
+            player.LoadSong("Solve The Puzzle.wav");
+            player.Player.Play();
         }
 
         private void OnOption(object sender, EventArgs e)
