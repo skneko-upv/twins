@@ -67,7 +67,7 @@ namespace Twins.Views
 
                 await Navigation.PushAsync(new BoardView(game.Board));
             } 
-            catch (ApplicationException error) 
+            catch (Exception error) 
             {
                 ErrorView.IsVisible = true;
                 TextError.Text = error.Message;
