@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Twins.Persistence;
+using Xamarin.Forms;
 
 namespace Twins
 {
@@ -8,8 +9,7 @@ namespace Twins
         {
             InitializeComponent();
 
-            //var game = new Models.StandardGame(6, 4, Components.BasicDeck.CreateBasicDeck());
-            //MainPage = new Views.BoardView(game.Board);
+            var _ = Database.Instance;
             MainPage = new NavigationPage(new MainPage());
         }
 

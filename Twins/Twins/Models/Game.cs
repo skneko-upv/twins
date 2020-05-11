@@ -10,7 +10,7 @@ namespace Twins.Models
     public abstract class Game
     {
         private const int GroupSize = 2;
-
+        
         public Deck Deck { get; }
 
         public int RemainingMatches { get; private set; }
@@ -29,10 +29,12 @@ namespace Twins.Models
 
         public Board Board { get; protected set; }
 
-        public event Action TurnTimedOut;
-        public event Action<bool> GameEnded;
+        public int LevelNumber { get; }
 
-        public Game(int height, int width, Deck deck, TimeSpan? timeLimit, TimeSpan? turnLimit, Board.Cell[,] cells = null)
+        public event Action TurnTimedOut;
+        public event Action<GameResult> GameEnded;
+
+        public Game(int height, int width, Deck deck, TimeSpan? timeLimit, TimeSpan? turnLimit, Board.Cell[,] cells = null, int levelNumber = 0)
         {
             if (timeLimit != null)
             {
@@ -70,6 +72,7 @@ namespace Twins.Models
 
             Score = new Score();
             TurnTimedOut += () => { Score.DecrementTimedOut(); };
+            LevelNumber = levelNumber;
         }
 
         public abstract IEnumerable<Board.Cell> TryMatch();
@@ -100,7 +103,8 @@ namespace Twins.Models
         {
             Pause();
             IsFinished = true;
-            GameEnded(victory);
+
+            GameEnded(new GameResult(victory, MatchSuccesses.Value, MatchFailures, LevelNumber, Score.PositiveValue, GameClock.GetTimeSpan()));
         }
 
         public virtual void EndTurn()

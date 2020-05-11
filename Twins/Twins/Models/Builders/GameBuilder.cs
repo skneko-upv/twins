@@ -17,13 +17,16 @@ namespace Twins.Models.Builders
         public int Width { get; private set; }
 
         GameKind kind = GameKind.Standard;
-        readonly Deck deck = BasicDeck.CreateBasicDeck();
+         
+        Deck deck = BasicDeck.Animales;
 
         TimeSpan timeLimit = TimeSpan.FromMinutes(1);
         TimeSpan turnTimeLimit = TimeSpan.FromSeconds(5);
 
         Board.Cell[,] cells = null;
         int groupSize = 2;
+
+        int level = 0;
 
         public GameBuilder(int height, int width)
         {
@@ -34,6 +37,12 @@ namespace Twins.Models.Builders
         public GameBuilder OfKind(GameKind kind)
         {
             this.kind = kind;
+            return this;
+        }
+
+        public GameBuilder WithDeck(Deck deck) 
+        {
+            this.deck = deck;
             return this;
         }
 
@@ -71,6 +80,12 @@ namespace Twins.Models.Builders
             return this;
         }
 
+        public GameBuilder WithLevelNumber(int level)
+        {
+            this.level = level;
+            return this;
+        }
+
         public Game Build()
         {
             switch (kind)
@@ -83,7 +98,8 @@ namespace Twins.Models.Builders
                             deck,
                             timeLimit,
                             turnTimeLimit,
-                            cells);
+                            cells,
+                            level);
                     }
                 case GameKind.Standard:
                 default:
@@ -94,7 +110,8 @@ namespace Twins.Models.Builders
                             deck,
                             timeLimit,
                             turnTimeLimit,
-                            cells);
+                            cells,
+                            level);
                     }
             }
         }

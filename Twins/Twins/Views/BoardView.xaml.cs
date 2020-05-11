@@ -56,25 +56,22 @@ namespace Twins.Views
             OnReferenceCardChanged(board.ReferenceCard);
         }
 
-        private void OnGameEnded(bool victory)
+        private void OnGameEnded(GameResult result)
         {
-            Game game = ((BoardViewModel)BindingContext).Board.Game;
-            EndGameModal.SetStadistics(
-                game.Score.PositiveValue,
-                game.GameClock.GetTimeSpan(),
-                victory);
+            EndGameModal.SetStadistics(result);
             EndGameModal.IsVisible = true;
         }
 
         private void FillBoard(int height, int width)
         {
+
             for (int i = 0; i < height; i++)
             {
-                board.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+                board.RowDefinitions.Add(new RowDefinition { Height = new GridLength(120) });
             }
             for (int i = 0; i < width; i++)
             {
-                board.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                board.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(120) });
             }
 
             BoardViewModel viewModel = (BoardViewModel)BindingContext;
@@ -85,6 +82,11 @@ namespace Twins.Views
                 card.HorizontalOptions = LayoutOptions.Center;
                 board.Children.Add(card, cell.Row, cell.Column);
             }
+            boardArea.WidthRequest = 122 * height;
+            boardArea.HeightRequest = 122 *  width;
+            board.WidthRequest = 122 * height;
+            board.HeightRequest = 122 *  width;
+
         }
 
         private async void OnReferenceCardChanged(Card card)
@@ -116,6 +118,11 @@ namespace Twins.Views
         private void OnMute(object sender, EventArgs e)
         {
             CommingSoonView.ButtonNotImplemented();
+        }
+
+        public ResumeGameView GetResumeGameView() 
+        {
+            return EndGameModal;
         }
     }
 }

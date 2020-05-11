@@ -6,8 +6,8 @@ namespace Twins.Models
 {
     public class StandardGame : Game
     {
-        public StandardGame(int height, int width, Deck deck, TimeSpan timeLimit, TimeSpan turnLimit, Board.Cell[,] cells = null)
-            : base(height, width, deck, timeLimit, turnLimit, cells)
+        public StandardGame(int height, int width, Deck deck, TimeSpan timeLimit, TimeSpan turnLimit, Board.Cell[,] cells = null, int level = 0)
+            : base(height, width, deck, timeLimit, turnLimit, cells, level)
         { }
 
         public override IEnumerable<Board.Cell> TryMatch()

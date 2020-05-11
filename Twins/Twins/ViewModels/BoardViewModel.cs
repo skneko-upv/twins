@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Twins.Components;
 using Twins.Models;
@@ -113,9 +114,7 @@ namespace Twins.ViewModels
                 {
                     OnCellsMatched(matched);
                     Board.ReferenceCard = null;
-                    Board.Game.Pause();
                     await Task.Delay(250);
-                    Board.Game.Resume();
                 }
                 else
                 {

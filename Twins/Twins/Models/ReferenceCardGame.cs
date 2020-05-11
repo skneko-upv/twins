@@ -6,8 +6,8 @@ namespace Twins.Models
 {
     public class ReferenceCardGame : Game
     {
-        public ReferenceCardGame(int height, int width, Deck deck, TimeSpan timeLimit, TimeSpan turnLimit, Board.Cell[,] cells = null)
-            : base(height, width, deck, timeLimit, turnLimit, cells)
+        public ReferenceCardGame(int height, int width, Deck deck, TimeSpan timeLimit, TimeSpan turnLimit, Board.Cell[,] cells = null, int level = 0)
+            : base(height, width, deck, timeLimit, turnLimit, cells, level)
         {
             Board.ReferenceCard = RandomHiddenCard();
         }

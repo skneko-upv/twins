@@ -38,7 +38,7 @@
         </StackLayout>
         <Grid Margin="20" >
             <Button ImageSource="Assets/Icons/restart.png" VerticalOptions="Center" HorizontalOptions="Start" BackgroundColor="Transparent"
-                    Clicked="OnRetry"/>
+                    Clicked="OnRetry" IsVisible="False"/>
             <Button ImageSource="Assets/Icons/home.png" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent"
                     Clicked="OnHome"/>
             <Button ImageSource="Assets/Icons/next.png" VerticalOptions="Center" HorizontalOptions="End" BackgroundColor="Transparent"

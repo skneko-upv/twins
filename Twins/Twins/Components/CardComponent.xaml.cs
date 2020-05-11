@@ -36,13 +36,12 @@ namespace Twins.Components
             if (!IsBlocked)
             {
                 IsEnabled = false;
-                button.IsEnabled = false;
             }
 
             Flipped = true;
             await AnimationFlip(90, 150);
             button.ImageSource = Card.Image;
-            await AnimationFlip(180, 150);
+            await AnimationFlip(0, 150);
         }
 
         public async Task Unflip()
@@ -50,7 +49,6 @@ namespace Twins.Components
             if (!IsBlocked)
             {
                 IsEnabled = true;
-                button.IsEnabled = true;
             }
 
             Flipped = false;
@@ -68,7 +66,8 @@ namespace Twins.Components
 
         private void OnClicked(object sender, EventArgs e)
         {
-            Clicked();
+            if(!Flipped)
+                Clicked();
         }
         private async Task AnimationFlip(int angle, uint seconds)
         {

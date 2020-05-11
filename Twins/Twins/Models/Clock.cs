@@ -32,6 +32,7 @@ namespace Twins.Models
                 if (clock.ElapsedMilliseconds >= timeLimit.TotalMilliseconds)
                 {
                     TimedOut();
+                    return false;
                 }
                 return true;
             });
