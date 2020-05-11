@@ -8,13 +8,10 @@ namespace Twins.Models
 
         public string Name { get; }
 
-        public ICollection<Card> Cards { get; }
-
-        public Category(int id, string name, ICollection<Card> cards)
+        public Category(int id, string name)
         {
             Id = id;
             Name = name;
-            Cards = cards;
         }
     }
 }

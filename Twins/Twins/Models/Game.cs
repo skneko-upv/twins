@@ -150,6 +150,6 @@ namespace Twins.Models
                     .Where(c => !c.KeepRevealed)
                     .Select(c => c.Card)
                     .ToList()
-                    .PickAndRemoveRandom();
+                    .PickRandom();
     }
 }

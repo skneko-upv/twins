@@ -48,7 +48,7 @@ namespace Twins.Views
 
                 await Navigation.PushAsync(new BoardView(game.Board));
             } 
-            catch (Exception error) 
+            catch (ApplicationException error) 
             {
                 ErrorView.IsVisible = true;
                 TextError.Text = error.Message;
@@ -83,7 +83,8 @@ namespace Twins.Views
                     break;
 
                 case 2:
-                    throw new NotImplementedException();
+                    gameBuilder.OfKind(GameBuilder.GameKind.Category);
+                    break;
             }
         }
 

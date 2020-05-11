@@ -7,22 +7,34 @@ namespace Twins.Models
     {
         public ImageSource BackImage { get; }
 
-        public ISet<Category> Categories;
+        public ISet<Category> Categories = new HashSet<Category>();
 
-        public IList<Card> Cards { get; }
+        public IList<Card> Cards { get; } = new List<Card>();
 
         public string Name { get; }
 
-        public Deck(ImageSource backImage, Queue<ImageSource> imageCards, string name)
+        public Deck(string name, ImageSource backImage, IList<ImageSource> cardImages, IDictionary<int, ISet<Category>> categories = null)
         {
             BackImage = backImage;
-            Cards = new List<Card>();
             Name = name;
 
-            int i = 0;
-            foreach (ImageSource image in imageCards)
+            if (categories == null)
             {
-                Cards.Add(new Card(i, this, image));
+                categories = new Dictionary<int, ISet<Category>>();
+            }
+
+            int i = 0;
+            foreach(var image in cardImages)
+            {
+                var cardCategories = new HashSet<Category>(); 
+                if (categories.TryGetValue(i, out ISet<Category> declaredCategories)) {
+                    cardCategories.UnionWith(declaredCategories);
+                }
+
+                var card = new Card(i, this, image, cardCategories);
+                Cards.Add(card);
+                Categories.UnionWith(cardCategories);
+
                 i++;
             }
         }

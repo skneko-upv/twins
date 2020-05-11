@@ -22,6 +22,7 @@ namespace Twins.Models
             MatchFailures = matchFailures;
             LevelNumber = levelNumber;
             Score = score;
+            Time = time;
         }
     }
 }

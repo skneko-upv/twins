@@ -10,7 +10,8 @@ namespace Twins.Models.Builders
         public enum GameKind
         {
             Standard,
-            ReferenceCard
+            ReferenceCard,
+            Category
         }
 
         public int Height { get; private set; }
@@ -18,7 +19,7 @@ namespace Twins.Models.Builders
 
         GameKind kind = GameKind.Standard;
          
-        Deck deck = BasicDeck.Animales;
+        Deck deck = BuiltInDecks.Animals.Value;
 
         TimeSpan timeLimit = TimeSpan.FromMinutes(1);
         TimeSpan turnTimeLimit = TimeSpan.FromSeconds(5);
@@ -93,6 +94,17 @@ namespace Twins.Models.Builders
                 case GameKind.ReferenceCard:
                     {
                         return new ReferenceCardGame(
+                            Height,
+                            Width,
+                            deck,
+                            timeLimit,
+                            turnTimeLimit,
+                            cells,
+                            level);
+                    }
+                case GameKind.Category:
+                    {
+                        return new CategoryGame(
                             Height,
                             Width,
                             deck,

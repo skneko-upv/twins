@@ -21,6 +21,12 @@ namespace Twins.Models
             Image = image;
         }
 
+        public Card(int id, Deck deck, ImageSource image, ISet<Category> categories)
+            : this(id, deck, image)
+        {
+            Categories = categories;
+        }
+
         public bool Equals(Card other)
         {
             return Id == other.Id;
@@ -28,7 +34,7 @@ namespace Twins.Models
 
         public object Clone()
         {
-            return new Card(Id, Deck, Image);
+            return new Card(Id, Deck, Image, Categories);
         }
     }
 }

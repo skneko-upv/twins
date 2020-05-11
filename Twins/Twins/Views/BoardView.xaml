@@ -37,9 +37,7 @@
                               WidthRequest="145"
                               HorizontalOptions="Center"
                               VerticalOptions="Start"
-                              IsVisible="False"
-                              
-                              >
+                              IsVisible="False">
                                 <Grid BackgroundColor="{StaticResource backgroundColor}"
                                       HeightRequest="145"
                                       WidthRequest="145"
@@ -47,7 +45,15 @@
                                       VerticalOptions="Start"
                                       Margin="5">
                                     <twinsc:CardComponent x:Name="referenceCard" IsEnabled="False" IsBlocked="true" />
-                                </Grid>
+                                    <Frame OutlineColor="Black" CornerRadius="3">
+                                        <Label x:Name="categoryHint" IsVisible="false"
+                                                VerticalOptions="Center"
+                                                HorizontalOptions="Center"
+                                                BackgroundColor="White"
+                                                TranslationY="50"
+                                                FontAttributes="Bold" />
+                                    </Frame>
+                            </Grid>
                         </Grid>
 
                         <StackLayout Orientation="Vertical"

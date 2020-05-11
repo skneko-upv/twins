@@ -36,6 +36,9 @@ namespace Twins.Views
             };
             scoreLabel.Text = board.Game.Score.PositiveValue.ToString();
 
+            board.ReferenceCategoryChanged += OnReferenceCategoryChanged;
+            OnReferenceCategoryChanged(board.ReferenceCategory);
+
             turn2PointLabel.SetBinding(Label.TextColorProperty, "Color");
             turn2PointLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
 
@@ -47,6 +50,19 @@ namespace Twins.Views
             referenceCard.Clicked += () => { };
 
             FillBoard(board.Height, board.Width);
+        }
+
+        private void OnReferenceCategoryChanged(Category category)
+        {
+            if (category != null)
+            {
+                categoryHint.IsVisible = true;
+                categoryHint.Text = category.Name;
+            }
+            else
+            {
+                categoryHint.IsVisible = false;
+            }
         }
 
         protected override void OnAppearing()
