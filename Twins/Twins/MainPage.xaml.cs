@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using Twins.Models;
+using Twins.Utils;
 using Xamarin.Forms;
 
 namespace Twins
@@ -7,12 +9,26 @@ namespace Twins
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
+
+    
     public partial class MainPage : ContentPage
     {
+        public static AudioPlayer player { get; set; }
         public MainPage()
         {
+            player = new AudioPlayer();
             InitializeComponent();
 
+        }
+
+       
+        protected override void OnAppearing()
+        {
+            player = new AudioPlayer();
+            var defaultParameter = DefaultParameters.Instance;
+            player.LoadSong(defaultParameter.SelectedSong +".wav");
+            player.Player.Play();
+            player.ChangeVolume(defaultParameter.Volume);
         }
 
         private async void OnOption(object sender, EventArgs e)
@@ -27,7 +43,9 @@ namespace Twins
         {
             // resume
             // Mute music
-            CommingSoonView.ButtonNotImplemented();
+            var player = new AudioPlayer();
+            if ( player.GetVolume() == 0.0 ) { player.ChangeVolume(100.0); }
+            else { player.ChangeVolume(0.0); }
         }
 
         private void OnLogout(object sender, EventArgs e)

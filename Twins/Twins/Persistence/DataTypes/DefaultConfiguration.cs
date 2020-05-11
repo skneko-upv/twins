@@ -19,7 +19,6 @@ namespace Twins.Persistence.DataTypes
 
         public string SelectedDeck { get; set; }
 
-        [ForeignKey(typeof())]
-        public 
+         
     }
 }

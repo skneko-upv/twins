@@ -84,7 +84,17 @@
                             </StackLayout>
                         </StackLayout>
                     </StackLayout>
-                
+                    <Picker x:Name="SongPicker"
+                            Title="Selecciona canción"
+                            TitleColor="Black"
+                            Margin="30,0">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Solve The Puzzle</x:String>
+                                <x:String>Chiptronical</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
                     <!-- añadir aquí más opciones! -->
                 
                     <StackLayout HorizontalOptions="Center" VerticalOptions="End" Orientation="Horizontal" Margin="20" Spacing="10">

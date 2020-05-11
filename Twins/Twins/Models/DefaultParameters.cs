@@ -19,6 +19,10 @@ namespace Twins.Models
         
         public string SelectedDeck { get; set; }
 
+        public string SelectedSong { get; set; }
+
+        public double Volume { get; set; }
+
         private DefaultParameters()
         {
             var decks = new List<string>();
@@ -29,6 +33,8 @@ namespace Twins.Models
             Row = 4;
             ListDeck = decks;
             SelectedDeck = "Animales";
+            SelectedSong = "Solve The Puzzle";
+            Volume = 100.0;
         }
 
         public static DefaultParameters Instance

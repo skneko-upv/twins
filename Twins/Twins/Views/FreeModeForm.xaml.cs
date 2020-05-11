@@ -1,6 +1,7 @@
 ﻿using System;
 using Twins.Models;
 using Twins.Models.Builders;
+using Twins.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,16 +15,7 @@ namespace Twins.Views
         {            
 
             InitializeComponent();
-            InitDefaultParameter();
             categoryNotSelectedYet = true;
-
-        }
-
-        private void InitDefaultParameter()
-        {
-            var defaultParameters = DefaultParameters.Instance;
-            ColumnsEntry.Text = defaultParameters.Colum.ToString();
-            RowsEntry.Text = defaultParameters.Row.ToString();
         }
 
         private async void OnBackMainMenu(object sender, EventArgs e)
@@ -45,6 +37,9 @@ namespace Twins.Views
                     throw new Exception("Se necesita como mínimo 2 filas");
                 if (Int32.Parse(RowsEntry.Text) * Int32.Parse(ColumnsEntry.Text) % 2 != 0)
                     throw new Exception("Se necesita un número par de cartas para el tablero. Elija un número de columnas y filas correcto.");
+                if (SongPicker.SelectedItem==null)
+                    throw new Exception("Se necesita seleccionar una canción");
+
 
                 Game game;
                 var gameBuilder = new GameBuilder(Int32.Parse(ColumnsEntry.Text), Int32.Parse(RowsEntry.Text));
@@ -52,6 +47,7 @@ namespace Twins.Views
                 SetTypeOfGame(gameBuilder);
                 SetTimeOfGame(gameBuilder);
                 SetTurnTimeOfGame(gameBuilder);
+                SetSongGame();
 
                 game = gameBuilder.Build();
 
@@ -94,6 +90,12 @@ namespace Twins.Views
                 case 2:
                     throw new NotImplementedException();
             }
+        }
+
+        private void SetSongGame() 
+        {
+            var player = new AudioPlayer();
+            player.LoadSong(SongPicker.SelectedItem + ".wav");
         }
 
         private bool IsTurnTimeLimitCorrect()
