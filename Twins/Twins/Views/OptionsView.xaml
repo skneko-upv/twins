@@ -48,7 +48,7 @@
                 <StackLayout >
                     <!-- Aqui va el control de volumen de la música-->
                     <Slider x:Name="Volume" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="4" VerticalOptions="Center" 
-                             Minimum="0"  Value="100" Maximum="100"  Margin="5" ValueChanged="Volume_ValueChanged"/>
+                             Minimum="0"  Value="100" Maximum="100"  Margin="5" ValueChanged="Volume_ValueChanged" />
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center">
                     <Button Text="Aplicar" Clicked="OnApply"/>

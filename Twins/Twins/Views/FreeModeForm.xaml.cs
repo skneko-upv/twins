@@ -17,6 +17,16 @@ namespace Twins.Views
 
             InitializeComponent();
             categoryNotSelectedYet = true;
+            InitDefaultParameter();
+        }
+
+        private void InitDefaultParameter()
+        {
+            var defaultparameter = DefaultParameters.Instance;
+            ColumnsEntry.Text = defaultparameter.Colum.ToString();
+            RowsEntry.Text = defaultparameter.Row.ToString();
+            var index = SongPicker.Items.IndexOf(defaultparameter.SelectedSong);
+            SongPicker.SelectedIndex = index;
         }
 
         private async void OnBackMainMenu(object sender, EventArgs e)
