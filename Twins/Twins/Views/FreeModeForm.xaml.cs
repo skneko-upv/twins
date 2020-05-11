@@ -95,15 +95,15 @@ namespace Twins.Views
             SelectorDeck.UpdateDeck();
             if (defaultParameters.SelectedDeck == "Animales")
             {
-                gameBuilder.WithDeck(BasicDeck.Animales);
+                gameBuilder.WithDeck(BuiltInDecks.Animals.Value);
             }
             else if (defaultParameters.SelectedDeck == "Numeros")
             {
-                gameBuilder.WithDeck(BasicDeck.Numeros);
+                gameBuilder.WithDeck(BuiltInDecks.Numbers.Value);
             }
             else
             {
-                gameBuilder.WithDeck(BasicDeck.Deportes);
+                gameBuilder.WithDeck(BuiltInDecks.Numbers.Value);
             }
         }
         private void SetTypeOfGame(GameBuilder gameBuilder)
