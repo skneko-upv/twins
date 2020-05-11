@@ -56,13 +56,9 @@ namespace Twins.Views
             OnReferenceCardChanged(board.ReferenceCard);
         }
 
-        private void OnGameEnded(bool victory)
+        private void OnGameEnded(GameResult result)
         {
-            Game game = ((BoardViewModel)BindingContext).Board.Game;
-            EndGameModal.SetStadistics(
-                game.Score.PositiveValue,
-                game.GameClock.GetTimeSpan(),
-                victory, game.ResultOfGame);
+            EndGameModal.SetStadistics(result);
             EndGameModal.IsVisible = true;
         }
 

@@ -10,29 +10,26 @@ namespace Twins.Components
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LevelComponent : AbsoluteLayout
     {
-        private GameBuilder GameBuilder;
-        private Game Game;
-        private int Number;
-        private ResultOfGame ResultOfGame;
+        private readonly GameBuilder gameBuilder;
+        private readonly int number;
 
-        public LevelComponent(GameBuilder game, int number, int lvlPassed, ResultOfGame result)
+        public LevelComponent(GameBuilder game, int number, int lvlPassed)
         {
             InitializeComponent();
-            GameBuilder = game;
-            Number = number;
-            ResultOfGame = result;
+            gameBuilder = game;
+            this.number = number;
             NumberText.Text = number + "";
-            setStatusImage(1+lvlPassed);
+            SetStatusImage(1 + lvlPassed);
         }
 
-        public void setStatusImage(int lvlPassed)
+        public void SetStatusImage(int lvlPassed)
         {
-            if (lvlPassed < Number)
+            if (lvlPassed < number)
             {
                 StatusImage.Source = "Assets/Icons/levelBlocked.png";
 
             }
-            else if (lvlPassed > Number)
+            else if (lvlPassed > number)
             {
                 StatusImage.Source = "Assets/Icons/levelPassed.png";
                 ButtonLvl.IsVisible = true;
@@ -46,11 +43,9 @@ namespace Twins.Components
 
         private async void ClickedLevel(object sender, EventArgs e)
         {
-            Game = GameBuilder.Build();
-            Game.LevelNumber = Number;
-            Game.ResultOfGame = ResultOfGame;
-            await Navigation.PushAsync(new BoardView(Game.Board));
-
+            var game = gameBuilder
+                        .WithLevelNumber(number).Build();
+            await Navigation.PushAsync(new BoardView(game.Board));
         }
     }
 }

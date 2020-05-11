@@ -10,7 +10,8 @@ namespace Twins.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ResumeGameView : AbsoluteLayout
     {
-        public ResultOfGame ResultOfGame { get; private set; }
+        public GameResult GameResult { get; private set; }
+
         public int Score {
             set => PointsLabel.Text = value.ToString();
         }
@@ -29,12 +30,12 @@ namespace Twins.Views
 
         }
 
-        public void SetStadistics(int score, TimeSpan time, bool isVictory, ResultOfGame result)
+        public async void SetStadistics(GameResult result)
         {
-            ResultOfGame = result;
-            Score = score;
-            Time = time;
-            if (isVictory)
+            GameResult = result;
+            Score = result.Score;
+            Time = result.Time;
+            if (result.IsVictory)
             {
                 ResultLabel.Text = "Victoria";
                 ResultLabel.TextColor = Color.Green;
@@ -44,17 +45,18 @@ namespace Twins.Views
                 ResultLabel.Text = "Derrota";
                 ResultLabel.TextColor = Color.Red;
             }
+
+            if (GameResult.IsVictory)
+            {
+                var saved = await Database.Instance.GetPlayerInfo();
+                if (saved.LastLevelPassed < GameResult.LevelNumber)
+                    saved.LastLevelPassed = GameResult.LevelNumber;
+                await Database.Instance.SavePlayerInfo(saved);
+            }
         }
 
         public async void OnHome(object sender, EventArgs e)
         {
-            if (ResultOfGame.IsVictory)
-            {
-                var playerInfo = await Database.Instance.GetPlayerInfo();
-                if(((PlayerInfo)playerInfo).LastLevelPassed < ResultOfGame.LevelNumber)
-                    ((PlayerInfo)playerInfo).LastLevelPassed = ResultOfGame.LevelNumber;
-                await Database.Instance.SavePlayerInfo(playerInfo);
-            }
             await Navigation.PopToRootAsync();
         }
 

@@ -8,8 +8,7 @@
              BackgroundColor="{StaticResource backgroundColor}"
              BackgroundImageSource="Assets/Backgrounds/menuprincipal2.png"
              NavigationPage.HasBackButton="False"
-             NavigationPage.HasNavigationBar="False"
-             Appearing="AppearingForm">
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <Grid>
             <Grid VerticalOptions="Start">

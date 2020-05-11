@@ -27,11 +27,11 @@ namespace Twins.Models
         public Score Score { get; protected set; }
 
         public Board Board { get; protected set; }
-        public ResultOfGame ResultOfGame { get; set; }
-        public int LevelNumber { get;  set; }
+
+        public int LevelNumber { get; }
 
         public event Action TurnTimedOut;
-        public event Action<bool> GameEnded;
+        public event Action<GameResult> GameEnded;
 
         public Game(int height, int width, Deck deck, TimeSpan? timeLimit, TimeSpan? turnLimit, Board.Cell[,] cells = null, int levelNumber = 0)
         {
@@ -72,7 +72,6 @@ namespace Twins.Models
             Score = new Score();
             TurnTimedOut += () => { Score.DecrementTimedOut(); };
             LevelNumber = levelNumber;
-            ResultOfGame = new ResultOfGame(0);
         }
 
         public abstract IEnumerable<Board.Cell> TryMatch();
@@ -103,8 +102,8 @@ namespace Twins.Models
         {
             Pause();
             IsFinished = true;
-            ResultOfGame.SetVictory(victory).setMatchSyccesses(MatchSuccesses.Value).setLevelNumber(LevelNumber);
-            GameEnded(victory);
+
+            GameEnded(new GameResult(victory, MatchSuccesses.Value, MatchFailures, LevelNumber, Score.PositiveValue, GameClock.GetTimeSpan()));
         }
 
         public virtual void EndTurn()

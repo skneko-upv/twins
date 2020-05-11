@@ -26,6 +26,8 @@ namespace Twins.Models.Builders
         Board.Cell[,] cells = null;
         int groupSize = 2;
 
+        int level = 0;
+
         public GameBuilder(int height, int width)
         {
             Height = height;
@@ -78,6 +80,12 @@ namespace Twins.Models.Builders
             return this;
         }
 
+        public GameBuilder WithLevelNumber(int level)
+        {
+            this.level = level;
+            return this;
+        }
+
         public Game Build()
         {
             switch (kind)
@@ -90,7 +98,8 @@ namespace Twins.Models.Builders
                             deck,
                             timeLimit,
                             turnTimeLimit,
-                            cells);
+                            cells,
+                            level);
                     }
                 case GameKind.Standard:
                 default:
@@ -101,7 +110,8 @@ namespace Twins.Models.Builders
                             deck,
                             timeLimit,
                             turnTimeLimit,
-                            cells);
+                            cells,
+                            level);
                     }
             }
         }

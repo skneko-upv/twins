@@ -2,6 +2,7 @@
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Twins.Components;
 using Twins.Models;
 using Twins.Persistence;
@@ -13,14 +14,17 @@ namespace Twins.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LevelsView : ContentPage
     {
-        public ResultOfGame LastLevelResult;
         public LevelsView()
         {
             InitializeComponent();
-            FillGrid();
         }
 
-        private async void FillGrid()
+        protected override async void OnAppearing()
+        {
+            await FillGrid();
+        }
+
+        private async Task FillGrid()
         {
             for (int i = 0; i < 2; i++)
             {
@@ -31,39 +35,23 @@ namespace Twins.Views
                 Grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             }
             int level = 1;
-            var lvlPassed = await Database.Instance.GetPlayerInfo();
-            LastLevelResult = new ResultOfGame(lvlPassed.LastLevelPassed);
-            Grid.Children.Add(new LevelComponent(Levels.level1, level++, lvlPassed.LastLevelPassed, LastLevelResult), 0, 0);
-            Grid.Children.Add(new LevelComponent(Levels.level2, level++, lvlPassed.LastLevelPassed, LastLevelResult), 1, 0);
-            Grid.Children.Add(new LevelComponent(Levels.level3, level++, lvlPassed.LastLevelPassed, LastLevelResult), 2, 0);
-            Grid.Children.Add(new LevelComponent(Levels.level4, level++, lvlPassed.LastLevelPassed, LastLevelResult), 3, 0);
-            Grid.Children.Add(new LevelComponent(Levels.level5, level++, lvlPassed.LastLevelPassed, LastLevelResult), 4, 0);
-            Grid.Children.Add(new LevelComponent(Levels.level6, level++, lvlPassed.LastLevelPassed, LastLevelResult), 0, 1);
-            Grid.Children.Add(new LevelComponent(Levels.level7, level++, lvlPassed.LastLevelPassed, LastLevelResult), 1, 1);
-            Grid.Children.Add(new LevelComponent(Levels.level8, level++, lvlPassed.LastLevelPassed, LastLevelResult), 2, 1);
-            Grid.Children.Add(new LevelComponent(Levels.level9, level++, lvlPassed.LastLevelPassed, LastLevelResult), 3, 1);
-            Grid.Children.Add(new LevelComponent(Levels.level10, level++, lvlPassed.LastLevelPassed, LastLevelResult), 4, 1);
+
+            var saved = await Database.Instance.GetPlayerInfo();
+            Grid.Children.Add(new LevelComponent(Levels.Level1, level++, saved.LastLevelPassed), 0, 0);
+            Grid.Children.Add(new LevelComponent(Levels.Level2, level++, saved.LastLevelPassed), 1, 0);
+            Grid.Children.Add(new LevelComponent(Levels.Level3, level++, saved.LastLevelPassed), 2, 0);
+            Grid.Children.Add(new LevelComponent(Levels.Level4, level++, saved.LastLevelPassed), 3, 0);
+            Grid.Children.Add(new LevelComponent(Levels.Level5, level++, saved.LastLevelPassed), 4, 0);
+            Grid.Children.Add(new LevelComponent(Levels.Level6, level++, saved.LastLevelPassed), 0, 1);
+            Grid.Children.Add(new LevelComponent(Levels.Level7, level++, saved.LastLevelPassed), 1, 1);
+            Grid.Children.Add(new LevelComponent(Levels.Level8, level++, saved.LastLevelPassed), 2, 1);
+            Grid.Children.Add(new LevelComponent(Levels.Level9, level++, saved.LastLevelPassed), 3, 1);
+            Grid.Children.Add(new LevelComponent(Levels.Level10, level++, saved.LastLevelPassed), 4, 1);
         }
 
         private async void Back(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
-        }
-
-        private async void AppearingForm(object sender, EventArgs e)
-        {
-            if (LastLevelResult.IsVictory)
-            {
-                var info = await Database.Instance.GetPlayerInfo();
-                if(info.LastLevelPassed < LastLevelResult.LevelNumber) {
-                    info.LastLevelPassed = LastLevelResult.LevelNumber;
-                    for (int i = 0; i < 10; i++)
-                        ((LevelComponent)Grid.Children.ElementAt(i)).setStatusImage(info.LastLevelPassed+1);
-                    
-                    await Database.Instance.SavePlayerInfo(info);
-                }
-            }else
-                LastLevelResult.LevelNumber = 0;
         }
     }
 }
