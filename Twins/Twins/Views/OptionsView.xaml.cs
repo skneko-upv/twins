@@ -15,14 +15,10 @@ namespace Twins.Views
         public OptionsView()
         {
             InitializeComponent();
-            InitSelectionDeckList();
             InitSelectionSongList();
         }
 
-        private void InitSelectionDeckList()
-        {
-            SelectorDeck = new DeckSelector();
-        }
+       
 
         private void InitSelectionSongList()
         {
@@ -40,38 +36,63 @@ namespace Twins.Views
             await Navigation.PopAsync();
         }
 
-        private void OnApply(object sender, EventArgs e)
+        private void OnlyNumbers(object sender, TextChangedEventArgs e)
         {
-            var defaultparameters = Twins.Models.DefaultParameters.Instance;
-            if (DefaultRow.Text != null || DefaultColum.Text != null)
+            try
             {
-                if (DefaultRow.Text != null && DefaultColum.Text != null)
-                {
-                    if (DefaultRow.Text.All(Char.IsNumber) && DefaultColum.Text.All(Char.IsNumber))
-                    {
-                        
-                        defaultparameters.Row = int.Parse(DefaultRow.Text);
-                        defaultparameters.Colum = int.Parse(DefaultColum.Text);
-                        //defaultparameters.Desk = SelectDeck.SelectedItem.ToString();
-                        //await Navigation.PopAsync();
-                    }
-                    else
-                    {
-                        
-                    }
+                if (((Entry)sender).Text.Length != 0)
+                    Int32.Parse(((Entry)sender).Text);
+            }
+            catch (Exception)
+            {
+                ((Entry)sender).Text = ((Entry)sender).Text.Substring(0, ((Entry)sender).Text.Length - 1);
+            }
+        }
 
+        private bool CheckSizeboard(int widgt, int height) 
+        {
+            return (widgt * height) > 6 && (widgt * height) % 2 == 0;
+
+        }
+
+        private async void OnApply(object sender, EventArgs e)
+        {
+            try
+            {
+                var defaultparameters = Twins.Models.DefaultParameters.Instance;
+                if (DefaultRow.Text != null || DefaultColum.Text != null)
+                {
+                    if (DefaultRow.Text != null && DefaultColum.Text != null)
+                    {
+                        if (CheckSizeboard(int.Parse(DefaultColum.Text), int.Parse(DefaultRow.Text)))
+                        {
+
+                            defaultparameters.Row = int.Parse(DefaultRow.Text);
+                            defaultparameters.Colum = int.Parse(DefaultColum.Text);
+                            SelectorDeck.UpdateDeck();
+                            await Navigation.PopAsync();
+                        }
+                        else throw new Exception("El tamaño del tablero debe de ser Par y de un tamaño mayor que 6.");
+                    }
+                    else throw new Exception("Se deben de rellenar tanto las filas como las columnas.");
                 }
                 else
                 {
-                   
+                    SelectorDeck.UpdateDeck();
+                    await Navigation.PopAsync();
                 }
             }
-            else
+            catch (Exception error)
             {
-                //defaultparameters.Desk = SelectDeck.SelectedItem.ToString();
-                //await Navigation.PopAsync();
+                ErrorView.IsVisible = true;
+                TextError.Text = error.Message;
             }
 
+        }
+
+        private void ErrorViewClicked(object sender, EventArgs e)
+        {
+            ErrorView.IsVisible = false;
         }
 
         private void Volume_ValueChanged(object sender, ValueChangedEventArgs e)

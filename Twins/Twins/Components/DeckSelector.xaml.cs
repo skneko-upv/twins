@@ -21,22 +21,22 @@ namespace Twins.Components
         private void InitSelectionDeckList()
         {
             var defaultparameters = Twins.Models.DefaultParameters.Instance;
-            var decks = new List<string>();
-            decks.Add("Animales");
-            decks.Add("Numeros");
-            decks.Add("Paisajes");
 
-            SelectDeck.ItemsSource = decks;
+            SelectDeck.ItemsSource = defaultparameters.ListDeck;
             SelectDeck.SelectedIndex = 0;
         }
 
-        public void updateDeck() {
+        public void UpdateDeck() 
+        {
             var defaultparameters = Twins.Models.DefaultParameters.Instance;
-            defaultparameters.Desk = SelectDeck.SelectedItem.ToString();
+            defaultparameters.SelectedDeck = SelectDeck.SelectedItem.ToString();
+            
+        }
+
+        private void SelectDeck_SelectedIndexChanged(object sender, EventArgs e)
+        {
             //Here we have to update ImageCard , with the new image of de deck selected
             //ImageCard.Source = ""
         }
-
-
     }
 }

@@ -3,6 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Twins.Components.DeckSelector">
     <Picker Title="Selecciona una baraja" HorizontalOptions="Center"
-                        x:Name="SelectDeck"/>
+                        x:Name="SelectDeck" SelectedIndexChanged="SelectDeck_SelectedIndexChanged"/>
     <Image Source="Assets/Cards/card1.png" Scale="0.5" VerticalOptions="Center" x:Name="ImageCard"/>
 </StackLayout>

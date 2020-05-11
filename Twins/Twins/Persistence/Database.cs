@@ -17,6 +17,7 @@ namespace Twins.Persistence
         {
             _database = new SQLiteAsyncConnection(dbPath);
             _database.CreateTableAsync<PlayerInfo>().Wait();
+            _database.CreateTableAsync<DefaultConfiguration>().Wait();
 
 
         }

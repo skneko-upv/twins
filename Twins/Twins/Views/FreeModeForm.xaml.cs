@@ -14,7 +14,16 @@ namespace Twins.Views
         {            
 
             InitializeComponent();
+            InitDefaultParameter();
             categoryNotSelectedYet = true;
+
+        }
+
+        private void InitDefaultParameter()
+        {
+            var defaultParameters = DefaultParameters.Instance;
+            ColumnsEntry.Text = defaultParameters.Colum.ToString();
+            RowsEntry.Text = defaultParameters.Row.ToString();
         }
 
         private async void OnBackMainMenu(object sender, EventArgs e)

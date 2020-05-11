@@ -1,5 +1,7 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Twins.Models
@@ -8,17 +10,25 @@ namespace Twins.Models
     {
         private static DefaultParameters _instance = null;
 
+
         public int Colum { get; set; }
 
         public int Row { get; set; }
 
-        public string Desk { get; set; }
+        public List<string> ListDeck { get; set; }
+        
+        public string SelectedDeck { get; set; }
 
         private DefaultParameters()
         {
+            var decks = new List<string>();
+            decks.Add("Animales");
+            decks.Add("Numeros");
+            decks.Add("Paisajes");
             Colum = 6;
             Row = 4;
-            Desk = "Animales";
+            ListDeck = decks;
+            SelectedDeck = "Animales";
         }
 
         public static DefaultParameters Instance
