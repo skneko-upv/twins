@@ -41,7 +41,7 @@ namespace Twins.Components
             Flipped = true;
             await AnimationFlip(90, 150);
             button.ImageSource = Card.Image;
-            await AnimationFlip(180, 150);
+            await AnimationFlip(0, 150);
         }
 
         public async Task Unflip()
@@ -66,9 +66,9 @@ namespace Twins.Components
 
         private void OnClicked(object sender, EventArgs e)
         {
-            Clicked();
+            if(!Flipped)
+                Clicked();
         }
-
         private async Task AnimationFlip(int angle, uint seconds)
         {
             await button.RotateYTo(angle, seconds);

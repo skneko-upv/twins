@@ -29,9 +29,6 @@ namespace Twins.Views
             await Navigation.PopToRootAsync();
         }
 
-        public void OnOptions(object sender, EventArgs e)
-        {
-            CommingSoonView.ButtonNotImplemented();
-        }
+        
     }
 }

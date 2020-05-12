@@ -57,7 +57,7 @@
                 
                         <Button 
                             ClassId="ButtonPlay"
-                            Text="HISTORIA" 
+                            Text="NIVELES" 
                             HorizontalOptions="Center" 
                             VerticalOptions="End"
                             Clicked="OnHistoryGame"

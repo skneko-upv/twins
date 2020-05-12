@@ -20,10 +20,23 @@ namespace Twins.Models
             get => _referenceCard;
             set {
                 _referenceCard = value;
-                ReferenceCardChanged(value);
+                ReferenceCardChanged?.Invoke(value);
             }
         }
         private Card _referenceCard;
+
+        /// <summary>
+        /// The reference card category shown to the player to help them
+        /// achieve successful matches.
+        /// </summary>
+        public Category ReferenceCategory {
+            get => _referenceCategory;
+            set {
+                _referenceCategory = value;
+                ReferenceCategoryChanged?.Invoke(value);
+            }
+        }
+        private Category _referenceCategory;
 
         /// <summary>
         /// The cells temporarily flipped by the player in this time unit, e.g. the current turn.
@@ -37,6 +50,11 @@ namespace Twins.Models
         /// Occurs when the reference card to display has changed.
         /// </summary>
         public event Action<Card> ReferenceCardChanged;
+
+        /// <summary>
+        /// Occurs when the reference card category to display has changed.
+        /// </summary>
+        public event Action<Category> ReferenceCategoryChanged;
 
         /// <summary>
         /// Occurs when a cell is flipped by the player.
@@ -59,37 +77,40 @@ namespace Twins.Models
         /// </remarks>
         public event Action<Cell, bool> CellKeepRevealedStatusChanged;
 
-        public Cell[,] Cells { get; private set; }
+        public IList<Cell> Cells { get; private set; }
 
-        private readonly IBoardPopulationStrategy populationStrategy;
+        int[,] cellMap;
 
         /// <summary>
         /// Create a new board populated randomly.
         /// </summary>
         public Board(int height, int width, Game game, IBoardPopulationStrategy populationStrategy)
+            : this(height, width, game, populationStrategy.Populate(height, width))
+        { }
+
+        /// <summary>
+        /// Create a new board from the given cell matrix.
+        /// </summary>
+        public Board(int height, int width, Game game, Cell[,] cells)
         {
             Height = height;
             Width = width;
             Game = game;
             FlippedCells = new List<Cell>(height * width);
 
-            this.populationStrategy = populationStrategy;
-            Populate();
-        }
-
-        /// <summary>
-        /// Create a new board from the given cell matrix.
-        /// </summary>
-        public Board(int height, int width, Game game, Deck deck, Cell[,] cells)
-        {
-            Height = height;
-            Width = width;
-            Game = game;
-            Cells = cells;
+            cellMap = new int[height, width];
+            Cells = new List<Cell>(height * width);
+            int i = 0;
+            foreach (var cell in cells)
+            {
+                Cells.Add(cell);
+                cellMap[cell.Row, cell.Column] = i;
+                i++;
+            }
         }
 
         public Cell this[int row, int column]
-            => Cells[row, column];
+            => Cells[cellMap[row, column]];
 
         public void FlipCell(int row, int column)
         {
@@ -99,6 +120,8 @@ namespace Twins.Models
             {
                 throw new InvalidOperationException();
             }
+
+            flipped.FlipCount++;
 
             FlippedCells.Add(flipped);
             CellFlipped(flipped);
@@ -135,11 +158,6 @@ namespace Twins.Models
 
             cell.KeepRevealed = keepRevealed;
             CellKeepRevealedStatusChanged(cell, keepRevealed);
-        }
-
-        private void Populate()
-        {
-            Cells = populationStrategy.Populate(Height, Width);
         }
     }
 }

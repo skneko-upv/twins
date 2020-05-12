@@ -12,7 +12,7 @@
                  AbsoluteLayout.LayoutBounds=".5,.5,1.0,1.0"
                  AbsoluteLayout.LayoutFlags="All"/>
     <StackLayout BackgroundColor="{StaticResource backgroundColor}"
-                 HeightRequest="300"
+                 HeightRequest="225"
                  WidthRequest="275"
                  Padding="20"
                  Spacing="10"
@@ -22,19 +22,15 @@
                  AbsoluteLayout.LayoutFlags="All">
         <Label Text="Victoria" FontSize="Medium" FontAttributes="Bold" TextColor="Green"
                 HorizontalOptions="Center" x:Name="ResultLabel"/>
-        <Label Text="Modo libre" FontSize="Small" TextColor="Gray"
+        <Label x:Name="modeReminder" FontSize="Small" TextColor="Gray"
                 HorizontalOptions="Center"/>
         <StackLayout Spacing="15" Orientation="Horizontal" Margin="20,0">
             <StackLayout Spacing="15">
                 <Label Text="Puntos:"/>
-                <Label Text="Intentos:"/>
-                <Label Text="Aciertos:"/>
                 <Label Text="Tiempo:"/>
             </StackLayout>
             <StackLayout Spacing="15">
                 <Label Text="0" x:Name="PointsLabel"/>
-                <Label Text="0" x:Name="TriesLabel"/>
-                <Label Text="0" x:Name="SuccessLabel"/>
                 <StackLayout Orientation="Horizontal" Spacing="2">
                     <Label Text="" x:Name="TimeLabel" />
                 </StackLayout>
@@ -42,7 +38,7 @@
         </StackLayout>
         <Grid Margin="20" >
             <Button ImageSource="Assets/Icons/restart.png" VerticalOptions="Center" HorizontalOptions="Start" BackgroundColor="Transparent"
-                    Clicked="OnRetry"/>
+                    Clicked="OnRetry" IsVisible="False"/>
             <Button ImageSource="Assets/Icons/home.png" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent"
                     Clicked="OnHome"/>
             <Button ImageSource="Assets/Icons/next.png" VerticalOptions="Center" HorizontalOptions="End" BackgroundColor="Transparent"

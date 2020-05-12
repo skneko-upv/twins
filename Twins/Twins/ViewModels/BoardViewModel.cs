@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Twins.Components;
 using Twins.Models;
@@ -113,7 +114,7 @@ namespace Twins.ViewModels
                 {
                     OnCellsMatched(matched);
                     Board.ReferenceCard = null;
-                    await Task.Delay(1500);
+                    await Task.Delay(250);
                 }
                 else
                 {

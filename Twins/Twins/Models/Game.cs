@@ -1,30 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
-using Twins.Model;
+using System.Linq;
 using Twins.Models.Properties;
+using Twins.Models.Strategies;
+using static Twins.Utils.CollectionExtensions;
 
 namespace Twins.Models
 {
-    public abstract partial class Game
+    public abstract class Game
     {
-        public TimeProperty GlobalTime { get; }
-        public TimeProperty TurnTime { get; }
+        private const int GroupSize = 2;
+        
+        public Deck Deck { get; }
+
+        public int RemainingMatches { get; private set; }
 
         public bool IsFinished { get; protected set; } = false;
-        public TurnProperty Turn { get; protected set; } = new TurnProperty();
-        public TurnProperty MatchSuccesses { get; protected set; } = new TurnProperty(1, 0);
+        public Observable<int> Turn { get; protected set; } = new Observable<int>(1);
+
+        public Observable<int> MatchSuccesses { get; protected set; } = new Observable<int>(0);
         public int MatchFailures { get; protected set; } = 0;
-        public int MatchAttempts => MatchSuccesses.Match + MatchFailures;
+        public int MatchAttempts => MatchSuccesses.Value + MatchFailures;
 
         public Clock GameClock { get; protected set; }
         public Clock TurnClock { get; protected set; }
 
+        public Score Score { get; protected set; }
+
         public Board Board { get; protected set; }
 
-        public event Action TurnTimedOut;
-        public event Action<bool> GameEnded;
+        public int LevelNumber { get; }
 
-        public Game(TimeSpan? timeLimit, TimeSpan? turnLimit)
+        public event Action TurnTimedOut;
+        public event Action<GameResult> GameEnded;
+
+        public Game(int height, int width, Deck deck, TimeSpan? timeLimit, TimeSpan? turnLimit, Board.Cell[,] cells = null, int levelNumber = 0)
         {
             if (timeLimit != null)
             {
@@ -45,6 +55,36 @@ namespace Twins.Models
                 TurnClock = new Clock();
             }
             TurnClock.TimedOut += () => TurnTimedOut();
+
+            if (cells != null)
+            {
+                Board = new Board(height, width, this, cells);
+            }
+            else
+            {
+                var populationStrategy = new CyclicRandomPopulationStrategy(GroupSize, deck);
+                Board = new Board(height, width, this, populationStrategy);
+            }
+
+            Deck = deck;
+
+            RemainingMatches = height * width / GroupSize;
+
+            Score = new Score();
+            TurnTimedOut += () => { Score.DecrementTimedOut(); };
+            LevelNumber = levelNumber;
+        }
+
+        public abstract IEnumerable<Board.Cell> TryMatch();
+
+        public virtual bool ShouldTryMatch()
+        {
+            return Board.FlippedCells.Count > GroupSize - 1;
+        }
+
+        public virtual bool ShouldEndTurn()
+        {
+            return true;
         }
 
         public virtual void Resume()
@@ -63,18 +103,53 @@ namespace Twins.Models
         {
             Pause();
             IsFinished = true;
-            GameEnded(victory);
+
+            GameEnded(new GameResult(victory, MatchSuccesses.Value, MatchFailures, LevelNumber, Score.PositiveValue, GameClock.GetTimeSpan()));
         }
-
-        public abstract bool ShouldTryMatch();
-
-        public abstract IEnumerable<Board.Cell> TryMatch();
-
-        public abstract bool ShouldEndTurn();
 
         public virtual void EndTurn()
         {
             TurnClock.Reset();
+            Board.UnflipAllCells();
+            Turn.Value++;
         }
+
+        protected virtual IEnumerable<Board.Cell> HandleMatchResult(bool isMatch)
+        {
+            IEnumerable<Board.Cell> matched;
+            if (isMatch)
+            {
+                MatchSuccesses.Value++;
+
+                foreach (Board.Cell cell in Board.FlippedCells)
+                {
+                    Board.SetCellKeepRevealed(cell.Row, cell.Column, true);
+                }
+
+                Score.IncrementMatchSuccess();
+                RemainingMatches--;
+                matched = new List<Board.Cell>(Board.FlippedCells);
+
+                if (RemainingMatches <= 0)
+                {
+                    EndGame(true);
+                }
+            }
+            else
+            {
+                Score.DecrementMatchFail(Board.FlippedCells.Select(cell => cell.FlipCount).ToArray());
+                MatchFailures++;
+                matched = Enumerable.Empty<Board.Cell>();
+            }
+
+            return matched;
+        }
+
+        protected Card RandomHiddenCard()
+            => Board.Cells
+                    .Where(c => !c.KeepRevealed)
+                    .Select(c => c.Card)
+                    .ToList()
+                    .PickRandom();
     }
 }

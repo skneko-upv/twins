@@ -12,6 +12,8 @@
 
             public bool KeepRevealed { get; set; }
 
+            public int FlipCount { get; set; }
+
             public Cell(int row, int column, Card card, bool keepRevealed = false)
             {
                 Row = row;

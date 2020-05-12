@@ -1,5 +1,7 @@
 ﻿using System;
-
+using System.Threading.Tasks;
+using Twins.Models;
+using Twins.Persistence;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -8,15 +10,12 @@ namespace Twins.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ResumeGameView : AbsoluteLayout
     {
+        public GameResult GameResult { get; private set; }
+
         public int Score {
-            set => PointsLabel.Text = "" + value;
+            set => PointsLabel.Text = value.ToString();
         }
-        public int Tries {
-            set => TriesLabel.Text = "" + value;
-        }
-        public int Successes {
-            set => SuccessLabel.Text = "" + value;
-        }
+
         public TimeSpan Time {
             set => TimeLabel.Text = string.Format("{0:D2}:{1:D2}", value.Minutes, value.Seconds);
         }
@@ -31,13 +30,12 @@ namespace Twins.Views
 
         }
 
-        public void SetStadistics(int score, int tries, int successes, TimeSpan time, bool isVictory)
+        public async void SetStadistics(GameResult result)
         {
-            Score = score;
-            Tries = tries;
-            Successes = successes;
-            Time = time;
-            if (isVictory)
+            GameResult = result;
+            Score = result.Score;
+            Time = result.Time;
+            if (result.IsVictory)
             {
                 ResultLabel.Text = "Victoria";
                 ResultLabel.TextColor = Color.Green;
@@ -46,6 +44,23 @@ namespace Twins.Views
             {
                 ResultLabel.Text = "Derrota";
                 ResultLabel.TextColor = Color.Red;
+            }
+
+            if (result.LevelNumber > 0)
+            {
+                modeReminder.Text = $"Nivel {result.LevelNumber}"; 
+            }
+            else
+            {
+                modeReminder.Text = "Modo libre";
+            }
+
+            if (GameResult.IsVictory)
+            {
+                var saved = await Database.Instance.GetPlayerInfo();
+                if (saved.LastLevelPassed < GameResult.LevelNumber)
+                    saved.LastLevelPassed = GameResult.LevelNumber;
+                await Database.Instance.SavePlayerInfo(saved);
             }
         }
 
@@ -57,10 +72,10 @@ namespace Twins.Views
         public async void OnNext(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
-            Models.StandardGame game = new Models.StandardGame(6, 4, Components.BasicDeck.CreateBasicDeck(),
-                TimeSpan.FromMinutes(1),
-                TimeSpan.FromSeconds(5));
-            await Navigation.PushAsync(new Views.BoardView(game.Board));
+            //Models.StandardGame game = new Models.StandardGame(6, 4, Components.BasicDeck.Animales,
+                //TimeSpan.FromMinutes(1),
+                //TimeSpan.FromSeconds(5));
+            //await Navigation.PushAsync(new Views.BoardView(game.Board));
         }
     }
 }

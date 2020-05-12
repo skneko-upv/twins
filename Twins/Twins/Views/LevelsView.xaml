@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:twins="clr-namespace:Twins.Components"
+             mc:Ignorable="d"
+             x:Class="Twins.Views.LevelsView"             
+             BackgroundColor="{StaticResource backgroundColor}"
+             BackgroundImageSource="Assets/Backgrounds/menuprincipal2.png"
+             NavigationPage.HasBackButton="False"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid>
+            <Grid VerticalOptions="Start">
+                <ImageButton
+                            Source="Assets\Icons\next.png" 
+                            Rotation="180"
+                            Padding="15"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Start"
+                            Clicked ="Back"
+                            />
+                <Label Text="Niveles" FontSize="Header" FontAttributes="Bold"
+                       HorizontalOptions="Center" VerticalOptions="Start" Margin="30"/>
+            </Grid>
+            <Grid HorizontalOptions="Center" VerticalOptions="Center" x:Name="Grid" ColumnSpacing="30" RowSpacing="30"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

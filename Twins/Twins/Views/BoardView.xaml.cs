@@ -1,6 +1,7 @@
 ﻿using System;
 using Twins.Components;
 using Twins.Models;
+using Twins.Utils;
 using Twins.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,50 +16,79 @@ namespace Twins.Views
             InitializeComponent();
             BoardViewModel boardViewModel = new BoardViewModel(board);
             BindingContext = boardViewModel;
+            PauseMenu.BindingContext = boardViewModel;
 
-            TurnLabel.SetBinding(Label.TextProperty, "Turn");
-            TurnLabel.BindingContext = boardViewModel.Board.Game.Turn;
+            turnLabel.SetBinding(Label.TextProperty, "Value");
+            turnLabel.BindingContext = boardViewModel.Board.Game.Turn;
 
-            GlobalTimeLabel.SetBinding(Label.TextProperty, "Time");
-            GlobalTimeLabel.BindingContext = boardViewModel.Board.Game.GameClock.TimeLeft;
+            globalTimeLabel.SetBinding(Label.TextProperty, "Time");
+            globalTimeLabel.BindingContext = boardViewModel.Board.Game.GameClock.TimeLeft;
 
-            TurnTimeLabel.SetBinding(Label.TextProperty, "Time");
-            TurnTimeLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
+            turnTimeLabel.SetBinding(Label.TextProperty, "Time");
+            turnTimeLabel.SetBinding(Label.TextColorProperty, "Color");
+            turnTimeLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
 
-            SuccessLabel.SetBinding(Label.TextProperty, "Match");
-            SuccessLabel.BindingContext = boardViewModel.Board.Game.MatchSuccesses;
+            successLabel.SetBinding(Label.TextProperty, "Value");
+            successLabel.BindingContext = boardViewModel.Board.Game.MatchSuccesses;
 
-            FillBoard(board.Height, board.Width);
+            board.Game.Score.Changed += (_) =>
+            {
+                scoreLabel.Text = board.Game.Score.PositiveValue.ToString();
+            };
+            scoreLabel.Text = board.Game.Score.PositiveValue.ToString();
 
-            board.ReferenceCardChanged += OnReferenceCardChanged;
-            referenceCard.Clicked += () => { };
+            board.ReferenceCategoryChanged += OnReferenceCategoryChanged;
+            OnReferenceCategoryChanged(board.ReferenceCategory);
+
+            turn2PointLabel.SetBinding(Label.TextColorProperty, "Color");
+            turn2PointLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
+
+            turnTextLabel.SetBinding(Label.TextColorProperty, "Color");
+            turnTextLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
 
             board.Game.GameEnded += OnGameEnded;
 
-            PauseMenu.BindingContext = boardViewModel;
+            referenceCard.Clicked += () => { };
+
+            FillBoard(board.Height, board.Width);
         }
 
-        private void OnGameEnded(bool victory)
+        private void OnReferenceCategoryChanged(Category category)
         {
-            Game game = ((BoardViewModel)BindingContext).Board.Game;
-            EndGameModal.SetStadistics(
-                0,
-                game.MatchAttempts,
-                game.MatchSuccesses.Match,
-                game.GameClock.GetTimeSpan(),
-                victory);
+            if (category != null)
+            {
+                categoryHint.IsVisible = true;
+                categoryHint.Text = category.Name;
+            }
+            else
+            {
+                categoryHint.IsVisible = false;
+            }
+        }
+
+        protected override void OnAppearing()
+        {
+            var board = ((BoardViewModel)BindingContext).Board;
+            board.ReferenceCardChanged += OnReferenceCardChanged;
+            OnReferenceCardChanged(board.ReferenceCard);
+        }
+
+        private void OnGameEnded(GameResult result)
+        {
+            EndGameModal.SetStadistics(result);
             EndGameModal.IsVisible = true;
         }
 
         private void FillBoard(int height, int width)
         {
+
             for (int i = 0; i < height; i++)
             {
-                board.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+                board.RowDefinitions.Add(new RowDefinition { Height = new GridLength(120) });
             }
             for (int i = 0; i < width; i++)
             {
-                board.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                board.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(120) });
             }
 
             BoardViewModel viewModel = (BoardViewModel)BindingContext;
@@ -69,12 +99,18 @@ namespace Twins.Views
                 card.HorizontalOptions = LayoutOptions.Center;
                 board.Children.Add(card, cell.Row, cell.Column);
             }
+            boardArea.WidthRequest = 122 * height;
+            boardArea.HeightRequest = 122 *  width;
+            board.WidthRequest = 122 * height;
+            board.HeightRequest = 122 *  width;
+
         }
 
         private async void OnReferenceCardChanged(Card card)
         {
             if (card != null)
             {
+                referenceCardFrame.IsVisible = true;
                 referenceCard.Card = card;
                 if (!referenceCard.Flipped)
                 {
@@ -98,7 +134,22 @@ namespace Twins.Views
 
         private void OnMute(object sender, EventArgs e)
         {
-            CommingSoonView.ButtonNotImplemented();
+            var defaultparameters = DefaultParameters.Instance;
+            if (MainPage.player.GetVolume() == 0.0)
+            {
+                defaultparameters.Volume = 100.0;
+                MainPage.player.ChangeVolume(defaultparameters.Volume);
+            }
+            else
+            {
+                defaultparameters.Volume = 0.0;
+                MainPage.player.ChangeVolume(defaultparameters.Volume);
+            }
+        }
+
+        public ResumeGameView GetResumeGameView() 
+        {
+            return EndGameModal;
         }
     }
 }
