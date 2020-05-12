@@ -24,6 +24,7 @@ namespace Twins.Utils
         {
             Player.Load("Sounds\\" + songName);
             Player.Volume = Volume;
+            Player.Loop = true;
             Player.Play();
         }
     }
