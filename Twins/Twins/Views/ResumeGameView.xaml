@@ -22,7 +22,7 @@
                  AbsoluteLayout.LayoutFlags="All">
         <Label Text="Victoria" FontSize="Medium" FontAttributes="Bold" TextColor="Green"
                 HorizontalOptions="Center" x:Name="ResultLabel"/>
-        <Label Text="Modo libre" FontSize="Small" TextColor="Gray"
+        <Label x:Name="modeReminder" FontSize="Small" TextColor="Gray"
                 HorizontalOptions="Center"/>
         <StackLayout Spacing="15" Orientation="Horizontal" Margin="20,0">
             <StackLayout Spacing="15">
