@@ -17,23 +17,24 @@ namespace Twins.Views
         public LevelsView()
         {
             InitializeComponent();
-        }
 
-        protected override async void OnAppearing()
-        {
-            await FillGrid();
-        }
-
-        private async Task FillGrid()
-        {
             for (int i = 0; i < 2; i++)
             {
-                Grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1,GridUnitType.Star)});
+                Grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             }
             for (int i = 0; i < 5; i++)
             {
                 Grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             }
+        }
+
+        protected override void OnAppearing()
+        {
+            FillGrid();
+        }
+
+        private async void FillGrid()
+        {
             int level = 1;
 
             var saved = await Database.Instance.GetPlayerInfo();
