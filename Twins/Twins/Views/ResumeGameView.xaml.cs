@@ -46,6 +46,15 @@ namespace Twins.Views
                 ResultLabel.TextColor = Color.Red;
             }
 
+            if (result.LevelNumber > 0)
+            {
+                modeReminder.Text = $"Nivel {result.LevelNumber}"; 
+            }
+            else
+            {
+                modeReminder.Text = "Modo libre";
+            }
+
             if (GameResult.IsVictory)
             {
                 var saved = await Database.Instance.GetPlayerInfo();
