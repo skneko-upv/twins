@@ -11,11 +11,11 @@ namespace Twins.Persistence.DataTypes
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
 
-        public int Colum { get; set; }
+        public int Column { get; set; }
 
         public int Row { get; set; }
 
-        public List<string> ListDeck { get; set; }
+        public List<string> Decks { get; set; }
 
         public string SelectedDeck { get; set; }
 
