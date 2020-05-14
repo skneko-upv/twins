@@ -20,8 +20,10 @@ namespace Twins.Models
 
         public override IEnumerable<Board.Cell> TryMatch()
         {
+            var reference = Board.FlippedCells.First().Card;
             bool isMatch = Board.FlippedCells.All(
-                c => c.Card.Categories.Contains(Board.ReferenceCategory));
+                c => c.Card.Equals(reference)
+                    && c.Card.Categories.Contains(Board.ReferenceCategory));
             return HandleMatchResult(isMatch);
         }
 
