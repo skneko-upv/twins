@@ -31,11 +31,8 @@ namespace Twins.Views
             successLabel.SetBinding(Label.TextProperty, "Value");
             successLabel.BindingContext = boardViewModel.Board.Game.MatchSuccesses;
 
-            board.Game.Score.Changed += (_) =>
-            {
-                scoreLabel.Text = board.Game.Score.PositiveValue.ToString();
-            };
-            scoreLabel.Text = board.Game.Score.PositiveValue.ToString();
+            board.Game.Score.Changed += OnScoreChanged;
+            OnScoreChanged(board.Game.Score.Value);
 
             board.ReferenceCategoryChanged += OnReferenceCategoryChanged;
             OnReferenceCategoryChanged(board.ReferenceCategory);
@@ -51,6 +48,19 @@ namespace Twins.Views
             referenceCard.Clicked += () => { };
 
             FillBoard(board.Height, board.Width);
+        }
+
+        private void OnScoreChanged(int score)
+        {
+            if (score < 0)
+            {
+                scoreLabel.TextColor = Color.Red;
+            }
+            else
+            {
+                scoreLabel.TextColor = Color.Black;
+            }
+            scoreLabel.Text = score.ToString();
         }
 
         private void OnReferenceCategoryChanged(Category category)

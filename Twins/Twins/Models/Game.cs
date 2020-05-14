@@ -104,7 +104,7 @@ namespace Twins.Models
             Pause();
             IsFinished = true;
 
-            GameEnded(new GameResult(victory, MatchSuccesses.Value, MatchFailures, LevelNumber, Score.PositiveValue, GameClock.GetTimeSpan()));
+            GameEnded(new GameResult(victory, MatchSuccesses.Value, MatchFailures, LevelNumber, Score.Value, GameClock.GetTimeSpan()));
         }
 
         public virtual void EndTurn()

@@ -14,11 +14,6 @@ namespace Twins.Models
 
         public event Action<int> Changed;
 
-        public int PositiveValue 
-        {
-            get => Math.Max(Value, 0);
-        }
-
         public int Value {
             get => value;
             set {
