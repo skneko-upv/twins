@@ -25,7 +25,7 @@ namespace Twins.Models.Properties
                 if (Int32.Parse(value.Substring(6)) <= 2)
                     Color = Color.Red;
                 else
-                    Color = Color.Black;
+                    Color = Color.White;
                 OnPropertyChanged(nameof(Time));
             }
         }

@@ -28,9 +28,6 @@ namespace Twins.Views
             turnTimeLabel.SetBinding(Label.TextColorProperty, "Color");
             turnTimeLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
 
-            successLabel.SetBinding(Label.TextProperty, "Value");
-            successLabel.BindingContext = boardViewModel.Board.Game.MatchSuccesses;
-
             board.Game.Score.Changed += OnScoreChanged;
             OnScoreChanged(board.Game.Score.Value);
 
@@ -58,7 +55,7 @@ namespace Twins.Views
             }
             else
             {
-                scoreLabel.TextColor = Color.Black;
+                scoreLabel.TextColor = Color.White;
             }
             scoreLabel.Text = score.ToString();
         }
