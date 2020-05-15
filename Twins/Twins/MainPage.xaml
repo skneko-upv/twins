@@ -66,10 +66,26 @@
                        />
                         <Button 
                             ClassId="ButtonPlay"
-                            Text="JUEGO LIBRE" 
+                            Text="PARTIDA ESTÁNDAR" 
                             HorizontalOptions="Center" 
                             VerticalOptions="End"
-                            Clicked="OnFreeGame"
+                            Clicked="OnStandarGame"
+                            Style="{StaticResource buttonStyle}"
+                        />
+                        <Button 
+                            ClassId="ButtonPlay"
+                            Text="PARTIDA POR CARTA" 
+                            HorizontalOptions="Center" 
+                            VerticalOptions="End"
+                            Clicked="OnCardGame"
+                            Style="{StaticResource buttonStyle}"
+                        />
+                        <Button 
+                            ClassId="ButtonPlay"
+                            Text="PARTIDA POR CATEGORÍA" 
+                            HorizontalOptions="Center" 
+                            VerticalOptions="End"
+                            Clicked="OnCategoryGame"
                             Style="{StaticResource buttonStyle}"
                         />
                         <Button 

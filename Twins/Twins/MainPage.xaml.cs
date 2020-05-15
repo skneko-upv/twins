@@ -1,7 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
+using Twins.Components;
+using Twins.Models;
+using Twins.Models.Builders;
 using Twins.Models.Singletons;
 using Twins.Utils;
+using Twins.Views;
 using Xamarin.Forms;
 
 namespace Twins
@@ -67,11 +71,81 @@ namespace Twins
             await Navigation.PushAsync(new Views.LevelsView());
         }
 
-        private async void OnFreeGame(object sender, EventArgs e)
+        private async void OnStandarGame(object sender, EventArgs e)
         {
             // resume
             // Open Free Game menu
-            await Navigation.PushAsync(new Views.FreeModeForm());
+            var defaultParameters = PlayerPreferences.Instance;
+            Game game;
+            var gameBuilder = new GameBuilder(defaultParameters.Column, defaultParameters.Row);
+            SetTimeOfGame(gameBuilder);
+            SetTurnTimeOfGame(gameBuilder);
+            SetDeck(gameBuilder);
+            gameBuilder.OfKind(GameBuilder.GameKind.Standard);
+            game = gameBuilder.Build();
+
+            await Navigation.PushAsync(new BoardView(game.Board));
+
+        }
+
+        private void SetDeck(GameBuilder gameBuilder)
+        {
+            var defaultParameters = PlayerPreferences.Instance;
+            if (defaultParameters.SelectedDeck == "Animales")
+            {
+                gameBuilder.WithDeck(BuiltInDecks.Animals.Value);
+            }
+            else if (defaultParameters.SelectedDeck == "Numeros")
+            {
+                gameBuilder.WithDeck(BuiltInDecks.Numbers.Value);
+            }
+            else
+            {
+                gameBuilder.WithDeck(BuiltInDecks.Sports.Value);
+            }
+        }
+
+        private void SetTurnTimeOfGame(GameBuilder gameBuilder)
+        {
+            var defaultParameters = PlayerPreferences.Instance;
+            gameBuilder.WithTurnTimeLimit(defaultParameters.TurnTime);
+        }
+
+        private void SetTimeOfGame(GameBuilder gameBuilder)
+        {
+            var defaultParameters = PlayerPreferences.Instance;
+            gameBuilder.WithTimeLimit(defaultParameters.LimitTime);
+        }
+
+        private async void OnCardGame(object sender, EventArgs e)
+        {
+            // resume
+            // Open Free Game menu
+            var defaultParameters = PlayerPreferences.Instance;
+            Game game;
+            var gameBuilder = new GameBuilder(defaultParameters.Column, defaultParameters.Row);
+            SetTimeOfGame(gameBuilder);
+            SetTurnTimeOfGame(gameBuilder);
+            SetDeck(gameBuilder);
+            gameBuilder.OfKind(GameBuilder.GameKind.ReferenceCard);
+            game = gameBuilder.Build();
+
+            await Navigation.PushAsync(new BoardView(game.Board));
+        }
+        private async void OnCategoryGame(object sender, EventArgs e)
+        {
+            // resume
+            // Open Free Game menu
+            var defaultParameters = PlayerPreferences.Instance;
+            Game game;
+            var gameBuilder = new GameBuilder(defaultParameters.Column, defaultParameters.Row);
+            SetTimeOfGame(gameBuilder);
+            SetTurnTimeOfGame(gameBuilder);
+            SetDeck(gameBuilder);
+            gameBuilder.OfKind(GameBuilder.GameKind.Category);
+            game = gameBuilder.Build();
+
+            await Navigation.PushAsync(new BoardView(game.Board));
         }
 
         private void OnMultiplayerGame(object sender, EventArgs e)

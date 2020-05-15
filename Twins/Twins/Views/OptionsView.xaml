@@ -23,7 +23,7 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <AbsoluteLayout>
-            <StackLayout AbsoluteLayout.LayoutBounds=".5,.5,0.5,0.5" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="Center" VerticalOptions="Center" Padding="0,-20,0,0" >
+            <StackLayout AbsoluteLayout.LayoutBounds=".5,.5,1,1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="Center" VerticalOptions="Center" Padding="0,-20,0,0" >
             <StackLayout Orientation="Vertical" VerticalOptions="Center" BackgroundColor="WhiteSmoke" HorizontalOptions="Center" Padding="100,10,100,10">
                 <StackLayout VerticalOptions="Start" HorizontalOptions="Center">
                     <Label Text="OPCIONES" FontSize="Header"/>
@@ -34,6 +34,27 @@
                     <Label Text="Columna"  HorizontalOptions="Center" Padding="0,5,0,0"/>
                     <Entry Keyboard="Numeric" x:Name="DefaultColum" HorizontalOptions="Center" TextChanged="OnlyNumbers" FlowDirection="RightToLeft"/>
                 </StackLayout>
+                <StackLayout Orientation="Horizontal"  Margin="0,5,0,0">
+                    <Label Text="Límite de tiempo: " VerticalOptions="Center" FontAttributes="Bold" />
+                    <CheckBox IsChecked="True" x:Name="HasTimeLimit"/>
+                    <Entry Keyboard="Numeric" MaxLength="2" FlowDirection="RightToLeft" x:Name="MinutesEntry" TextChanged="OnlyNumbersTime"
+                                    BindingContext="{x:Reference Name=HasTimeLimit}" IsEnabled="{Binding Path=IsChecked}"  Text="2"/>
+                    <Label Text="Minutos, " VerticalOptions="Center"/>
+                    <Entry Keyboard="Numeric" MaxLength="2" FlowDirection="RightToLeft" x:Name="SecondsEntry" TextChanged="OnlyNumbersTime"
+                                    BindingContext="{x:Reference Name=HasTimeLimit}" IsEnabled="{Binding Path=IsChecked}" Text="30"/>
+                    <Label Text="Segundos" VerticalOptions="Center"/>
+                    </StackLayout>
+                <StackLayout Orientation="Horizontal"  Margin="0,5,0,0">
+                    <Label Text="Tiempo por turno: " VerticalOptions="Center" FontAttributes="Bold" />
+                    <CheckBox IsChecked="True" x:Name="HasTimeTLimit"/>
+                    <Entry Keyboard="Numeric" MaxLength="2" FlowDirection="RightToLeft" x:Name="TMinutesEntry" TextChanged="OnlyNumbersTime"
+                                    BindingContext="{x:Reference Name=HasTimeTLimit}" IsEnabled="{Binding Path=IsChecked}" Text="0"/>
+                    <Label Text="Minutos, " VerticalOptions="Center"/>
+                    <Entry Keyboard="Numeric" MaxLength="2" FlowDirection="RightToLeft" x:Name="TSecondsEntry" TextChanged="OnlyNumbersTime"
+                                    BindingContext="{x:Reference Name=HasTimeTLimit}" IsEnabled="{Binding Path=IsChecked}" Text="10"/>
+                    <Label Text="Segundos" VerticalOptions="Center"/>
+
+                    </StackLayout>
                 <StackLayout Orientation="Vertical" HorizontalOptions="Center" >
                     <twinsc:DeckSelector x:Name="SelectorDeck"/>
                 </StackLayout>
