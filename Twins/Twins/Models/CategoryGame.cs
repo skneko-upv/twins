@@ -33,13 +33,27 @@ namespace Twins.Models
 
             if (!IsFinished && Board.ReferenceCard == null)
             {
+                CycleReferenceCategory();
+            }
+        }
+
+        void CycleReferenceCategory()
+        {
+            var sameCategoryCards = Board.Cells.Where(c => !c.KeepRevealed
+                                    && c.Card.Categories.Contains(Board.ReferenceCategory));
+            if (sameCategoryCards.Any())
+            {
+                Board.ReferenceCard = RandomHiddenCard(sameCategoryCards);
+            }
+            else
+            {
                 SetRandomReferenceCategory();
             }
         }
 
         void SetRandomReferenceCategory()
         {
-            var card = RandomHiddenCard();
+            var card = RandomHiddenCard(Board.Cells);
             Board.ReferenceCard = card;
             Board.ReferenceCategory = card.Categories
                                           .ToList()

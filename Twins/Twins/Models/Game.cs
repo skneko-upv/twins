@@ -145,9 +145,8 @@ namespace Twins.Models
             return matched;
         }
 
-        protected Card RandomHiddenCard()
-            => Board.Cells
-                    .Where(c => !c.KeepRevealed)
+        protected static Card RandomHiddenCard(IEnumerable<Board.Cell> cells)
+            => cells.Where(c => !c.KeepRevealed)
                     .Select(c => c.Card)
                     .ToList()
                     .PickRandom();
