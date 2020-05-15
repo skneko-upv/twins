@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Twins.Models
+namespace Twins.Models.Game
 {
     public class StandardGame : Game
     {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Twins.Models.Game;
 using Twins.Models.Strategies;
 
 namespace Twins.Models

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Twins.Models.Properties;
 
-namespace Twins.Models
+namespace Twins.Models.Game
 {
     public interface IGame
     {

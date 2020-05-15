@@ -5,7 +5,7 @@ using Twins.Models.Properties;
 using Twins.Models.Strategies;
 using static Twins.Utils.CollectionExtensions;
 
-namespace Twins.Models
+namespace Twins.Models.Game
 {
     public abstract class Game : IGame
     {

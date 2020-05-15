@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using static Twins.Utils.CollectionExtensions;
 
-namespace Twins.Models
+namespace Twins.Models.Game
 {
     public class CategoryGame : Game
     {
