@@ -62,7 +62,27 @@ namespace Twins.Components
 
         private static Deck CreateSportsDeck()
         {
-            return new Deck("Deportes", ImageSource.FromFile("Assets/Decks/Deck3/backimage.png"), LoadImages("Assets/Decks/Deck3/"));
+            var indoors = new Category(0, "De salón");
+            var outdoors = new Category(1, "De exterior");
+            var table = new Category(2, "De mesa");
+
+            var sportsCategories = new Dictionary<int, ISet<Category>>
+            {
+                [0] = new HashSet<Category> { indoors, table },
+                [1] = new HashSet<Category> { outdoors },
+                [2] = new HashSet<Category> { indoors, outdoors },
+                [3] = new HashSet<Category> { indoors, table },
+                [4] = new HashSet<Category> { outdoors },
+                [5] = new HashSet<Category> { outdoors, indoors },
+                [6] = new HashSet<Category> { indoors },
+                [7] = new HashSet<Category> { outdoors },
+                [8] = new HashSet<Category> { outdoors, indoors },
+                [9] = new HashSet<Category> { indoors },
+                [10] = new HashSet<Category> { outdoors, indoors },
+                [11] = new HashSet<Category> { outdoors }
+            };
+
+            return new Deck("Deportes", ImageSource.FromFile("Assets/Decks/Deck3/backimage.png"), LoadImages("Assets/Decks/Deck3/"), sportsCategories);
         }
 
         private static IList<ImageSource> LoadImages(string path)
