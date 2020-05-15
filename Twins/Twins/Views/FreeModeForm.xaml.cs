@@ -53,7 +53,7 @@ namespace Twins.Views
                     throw new Exception("Se necesita seleccionar una canción");
 
 
-                Game game;
+                IGame game;
                 var gameBuilder = new GameBuilder(Int32.Parse(ColumnsEntry.Text), Int32.Parse(RowsEntry.Text));
                 
                 SetTypeOfGame(gameBuilder);

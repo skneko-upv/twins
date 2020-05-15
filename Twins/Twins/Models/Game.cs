@@ -7,20 +7,19 @@ using static Twins.Utils.CollectionExtensions;
 
 namespace Twins.Models
 {
-    public abstract class Game
+    public abstract class Game : IGame
     {
         private const int GroupSize = 2;
         
         public Deck Deck { get; }
 
-        public int RemainingMatches { get; private set; }
+        public Observable<int> RemainingMatches { get; private set; }
 
         public bool IsFinished { get; protected set; } = false;
         public Observable<int> Turn { get; protected set; } = new Observable<int>(1);
 
         public Observable<int> MatchSuccesses { get; protected set; } = new Observable<int>(0);
-        public int MatchFailures { get; protected set; } = 0;
-        public int MatchAttempts => MatchSuccesses.Value + MatchFailures;
+        public Observable<int> MatchFailures { get; protected set; } = new Observable<int>(0);
 
         public Clock GameClock { get; protected set; }
         public Clock TurnClock { get; protected set; }
@@ -68,7 +67,7 @@ namespace Twins.Models
 
             Deck = deck;
 
-            RemainingMatches = height * width / GroupSize;
+            RemainingMatches = new Observable<int>(height * width / GroupSize);
 
             Score = new Score();
             TurnTimedOut += () => { Score.DecrementTimedOut(); };
@@ -99,19 +98,19 @@ namespace Twins.Models
             TurnClock.Stop();
         }
 
-        public virtual void EndGame(bool victory)
-        {
-            Pause();
-            IsFinished = true;
-
-            GameEnded(new GameResult(victory, MatchSuccesses.Value, MatchFailures, LevelNumber, Score.Value, GameClock.GetTimeSpan()));
-        }
-
         public virtual void EndTurn()
         {
             TurnClock.Reset();
             Board.UnflipAllCells();
             Turn.Value++;
+        }
+
+        protected virtual void EndGame(bool victory)
+        {
+            Pause();
+            IsFinished = true;
+
+            GameEnded(new GameResult(victory, MatchSuccesses.Value, MatchFailures.Value, LevelNumber, Score.Value, GameClock.GetTimeSpan()));
         }
 
         protected virtual IEnumerable<Board.Cell> HandleMatchResult(bool isMatch)
@@ -127,10 +126,10 @@ namespace Twins.Models
                 }
 
                 Score.IncrementMatchSuccess();
-                RemainingMatches--;
+                RemainingMatches.Value--;
                 matched = new List<Board.Cell>(Board.FlippedCells);
 
-                if (RemainingMatches <= 0)
+                if (RemainingMatches.Value <= 0)
                 {
                     EndGame(true);
                 }
@@ -138,7 +137,7 @@ namespace Twins.Models
             else
             {
                 Score.DecrementMatchFail(Board.FlippedCells.Select(cell => cell.FlipCount).ToArray());
-                MatchFailures++;
+                MatchFailures.Value++;
                 matched = Enumerable.Empty<Board.Cell>();
             }
 

@@ -87,7 +87,7 @@ namespace Twins.Models.Builders
             return this;
         }
 
-        public Game Build()
+        public IGame Build()
         {
             switch (kind)
             {

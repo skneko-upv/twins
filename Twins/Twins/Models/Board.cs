@@ -10,7 +10,7 @@ namespace Twins.Models
 
         public int Width { get; }
 
-        public Game Game { get; }
+        public IGame Game { get; }
 
         /// <summary>
         /// The reference card shown to the player to help them achieve
@@ -84,14 +84,14 @@ namespace Twins.Models
         /// <summary>
         /// Create a new board populated randomly.
         /// </summary>
-        public Board(int height, int width, Game game, IBoardPopulationStrategy populationStrategy)
+        public Board(int height, int width, IGame game, IBoardPopulationStrategy populationStrategy)
             : this(height, width, game, populationStrategy.Populate(height, width))
         { }
 
         /// <summary>
         /// Create a new board from the given cell matrix.
         /// </summary>
-        public Board(int height, int width, Game game, Cell[,] cells)
+        public Board(int height, int width, IGame game, Cell[,] cells)
         {
             Height = height;
             Width = width;
