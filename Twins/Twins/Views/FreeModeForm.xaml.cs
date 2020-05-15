@@ -71,7 +71,7 @@ namespace Twins.Views
             catch (Exception error) 
             {
                 ErrorView.IsVisible = true;
-                TextError.Text = error.Message;
+                ErrorView.SetTextError(error.Message);
             }
 }
 
@@ -155,11 +155,6 @@ namespace Twins.Views
         private void CategoryPickerChanged(object sender, EventArgs e)
         {
             categoryNotSelectedYet = false;
-        }
-
-        private void ErrorViewClicked(object sender, EventArgs e)
-        {
-            ErrorView.IsVisible = false;
         }
 
         private void OnlyNumbersTime(object sender, TextChangedEventArgs e)
