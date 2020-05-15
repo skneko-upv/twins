@@ -55,6 +55,11 @@ namespace Twins.Views
                 modeReminder.Text = "Modo libre";
             }
 
+            if (result.Score < 0)
+            {
+                PointsLabel.TextColor = Color.Red;
+            }
+
             if (GameResult.IsVictory)
             {
                 var saved = await Database.Instance.GetPlayerInfo();
