@@ -11,6 +11,7 @@ namespace Twins.Models
         public int MatchFailDeltaBase { get; set; } = 1;
         public int MatchFailDeltaPerCell { get; set; } = 1;
         public int TimedOutDelta { get; set; } = 2;
+        public int MatchFailDeltaMax { get; set; } = 10;
 
         public event Action<int> Changed;
 
@@ -36,7 +37,7 @@ namespace Twins.Models
         public void DecrementMatchFail(params int[] flipCounts)
         {
             var delta = MatchFailDeltaBase + flipCounts.Select(c => Math.Max(c - 1, 0) * MatchFailDeltaPerCell).Sum();
-            Value -= delta;
+            Value -= Math.Min(delta, 10);
         }
 
         public void DecrementTimedOut()
