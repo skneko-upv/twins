@@ -104,7 +104,7 @@ namespace Twins.Views
             }
             else
             {
-                gameBuilder.WithDeck(BuiltInDecks.Numbers.Value);
+                gameBuilder.WithDeck(BuiltInDecks.Sports.Value);
             }
         }
         private void SetTypeOfGame(GameBuilder gameBuilder)
