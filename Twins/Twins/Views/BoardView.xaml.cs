@@ -1,7 +1,7 @@
 ﻿using System;
 using Twins.Components;
 using Twins.Models;
-using Twins.Utils;
+using Twins.Models.Singletons;
 using Twins.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -144,7 +144,7 @@ namespace Twins.Views
 
         private void OnMute(object sender, EventArgs e)
         {
-            var defaultparameters = DefaultParameters.Instance;
+            var defaultparameters = PlayerPreferences.Instance;
             if (MainPage.player.GetVolume() == 0.0)
             {
                 defaultparameters.Volume = 100.0;

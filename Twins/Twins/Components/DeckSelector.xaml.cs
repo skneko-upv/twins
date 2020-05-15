@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-
+using Twins.Models.Singletons;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -21,7 +16,7 @@ namespace Twins.Components
 
         private void InitSelectionDeckList()
         {
-            var defaultparameters = Twins.Models.DefaultParameters.Instance;
+            var defaultparameters = PlayerPreferences.Instance;
 
             SelectDeck.ItemsSource = defaultparameters.Decks;
             var index = defaultparameters.Decks.IndexOf(defaultparameters.SelectedDeck);
@@ -43,7 +38,7 @@ namespace Twins.Components
 
         public void UpdateDeck() 
         {
-            var defaultparameters = Twins.Models.DefaultParameters.Instance;
+            var defaultparameters = PlayerPreferences.Instance;
             defaultparameters.SelectedDeck = SelectDeck.SelectedItem.ToString();
             
         }

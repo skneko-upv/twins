@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Twins.Components;
-using Twins.Models;
-using Twins.Utils;
+using Twins.Models.Singletons;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -23,14 +18,14 @@ namespace Twins.Views
 
         private void InitVolume() 
         {
-            var defaultParameters = DefaultParameters.Instance;
+            var defaultParameters = PlayerPreferences.Instance;
             Volume.Value = defaultParameters.Volume;
         }
 
         private void InitSelectionSongList()
         {
             var songs = new List<string>();
-            var defaultParameters = DefaultParameters.Instance;
+            var defaultParameters = PlayerPreferences.Instance;
             songs.Add("Solve The Puzzle");
             songs.Add("Chiptronical");
 
@@ -40,7 +35,7 @@ namespace Twins.Views
         }
 
         private void UpdateVolume() {
-            var defaultParameters = DefaultParameters.Instance;
+            var defaultParameters = PlayerPreferences.Instance;
             defaultParameters.Volume = Volume.Value;
         }
 
@@ -50,7 +45,7 @@ namespace Twins.Views
         }
         private void UpdateSong() 
         {
-            var defaultparameters = DefaultParameters.Instance;
+            var defaultparameters = PlayerPreferences.Instance;
             defaultparameters.SelectedSong = SelectSong.SelectedItem.ToString();
         } 
         private void OnlyNumbers(object sender, TextChangedEventArgs e)
@@ -76,7 +71,7 @@ namespace Twins.Views
         {
             try
             {
-                var defaultParameters = DefaultParameters.Instance;
+                var defaultParameters = PlayerPreferences.Instance;
                 if (DefaultRow.Text != null || DefaultColum.Text != null)
                 {
                     if (DefaultRow.Text != null && DefaultColum.Text != null)

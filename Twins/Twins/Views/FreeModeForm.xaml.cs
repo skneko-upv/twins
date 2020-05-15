@@ -2,6 +2,7 @@
 using Twins.Components;
 using Twins.Models;
 using Twins.Models.Builders;
+using Twins.Models.Singletons;
 using Twins.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -22,7 +23,7 @@ namespace Twins.Views
 
         private void InitDefaultParameter()
         {
-            var defaultparameter = DefaultParameters.Instance;
+            var defaultparameter = PlayerPreferences.Instance;
             ColumnsEntry.Text = defaultparameter.Column.ToString();
             RowsEntry.Text = defaultparameter.Row.ToString();
             var index = SongPicker.Items.IndexOf(defaultparameter.SelectedSong);
@@ -91,7 +92,7 @@ namespace Twins.Views
 
         private void SetDeck(GameBuilder gameBuilder)
         {
-            var defaultParameters = DefaultParameters.Instance;
+            var defaultParameters = PlayerPreferences.Instance;
             SelectorDeck.UpdateDeck();
             if (defaultParameters.SelectedDeck == "Animales")
             {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
-using Twins.Models;
+using Twins.Models.Singletons;
 using Twins.Utils;
 using Xamarin.Forms;
 
@@ -24,7 +24,7 @@ namespace Twins
         protected override void OnAppearing()
         {
             player = new AudioPlayer();
-            var defaultParameter = DefaultParameters.Instance;
+            var defaultParameter = PlayerPreferences.Instance;
             player.LoadSong(defaultParameter.SelectedSong +".wav");
             player.Player.Play();
             player.ChangeVolume(defaultParameter.Volume);
@@ -42,7 +42,7 @@ namespace Twins
         {
             // resume
             // Mute music
-            var defaultparameters = DefaultParameters.Instance;
+            var defaultparameters = PlayerPreferences.Instance;
             if ( player.GetVolume() == 0.0 ) {
                 defaultparameters.Volume = 100.0;
                 player.ChangeVolume(defaultparameters.Volume); 
