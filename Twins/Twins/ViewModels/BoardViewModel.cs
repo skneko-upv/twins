@@ -107,7 +107,6 @@ namespace Twins.ViewModels
             if (Board.Game.ShouldTryMatch())
             {
                 InteractionAllowed = false;
-                Board.Game.Pause();
 
                 IEnumerable<Board.Cell> matched = Board.Game.TryMatch();
                 if (matched.Any())
@@ -129,7 +128,6 @@ namespace Twins.ViewModels
                 if (!Board.Game.IsFinished)
                 {
                     InteractionAllowed = true;
-                    Board.Game.Resume();
                 }
             }
         }
