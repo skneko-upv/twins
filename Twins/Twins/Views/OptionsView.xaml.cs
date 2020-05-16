@@ -16,6 +16,16 @@ namespace Twins.Views
             InitializeComponent();
             InitSelectionSongList();
             InitVolume();
+            InitTime();
+        }
+
+        private void InitTime()
+        {
+            var defaultParameters = PlayerPreferences.Instance;
+            MinutesEntry.Text = defaultParameters.LimitTime.Minutes.ToString();
+            SecondsEntry.Text = defaultParameters.LimitTime.Seconds.ToString();
+            TMinutesEntry.Text = defaultParameters.TurnTime.Minutes.ToString();
+            TSecondsEntry.Text = defaultParameters.TurnTime.Seconds.ToString();
         }
 
         private void InitVolume() 
