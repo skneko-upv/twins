@@ -91,43 +91,114 @@ namespace Twins.Views
             try
             {
                 var defaultParameters = PlayerPreferences.Instance;
-                if (HasTimeLimit.IsChecked && IsTimeLimitCorrect())
-                {
-                    defaultParameters.LimitTime = TimeSpan.Parse("0:" + MinutesEntry.Text + ":" + SecondsEntry.Text);
-                }
-
-                if (HasTimeTLimit.IsChecked && IsTurnTimeLimitCorrect()) 
-                {
-                    defaultParameters.TurnTime = TimeSpan.Parse("0:" + TMinutesEntry.Text + ":" + TSecondsEntry.Text);
-                }
+                
                 if (DefaultRow.Text != null || DefaultColum.Text != null)
                 {
                     if (DefaultRow.Text != null && DefaultColum.Text != null)
                     {
                         if (CheckSizeboard(int.Parse(DefaultColum.Text), int.Parse(DefaultRow.Text)))
                         {
-                                defaultParameters.Row = int.Parse(DefaultRow.Text);
-                                defaultParameters.Column = int.Parse(DefaultColum.Text);
-                                SelectorDeck.UpdateDeck();
-                                UpdateSong();
-                                UpdateVolume();
-                                await Navigation.PopAsync();
+                            if (HasTimeLimit.IsChecked && IsTimeLimitCorrect())
+                            {
+                                if (HasTimeTLimit.IsChecked && IsTurnTimeLimitCorrect())
+                                {
+                                    defaultParameters.LimitTime = TimeSpan.Parse("0:" + MinutesEntry.Text + ":" + SecondsEntry.Text);
+                                    defaultParameters.TurnTime = TimeSpan.Parse("0:" + TMinutesEntry.Text + ":" + TSecondsEntry.Text);
+                                    defaultParameters.Row = int.Parse(DefaultRow.Text);
+                                    defaultParameters.Column = int.Parse(DefaultColum.Text);
+                                    SelectorDeck.UpdateDeck();
+                                    UpdateSong();
+                                    UpdateVolume();
+                                    await Navigation.PopAsync();
+                                }
+                                else
+                                {
+                                    defaultParameters.LimitTime = TimeSpan.Parse("0:" + MinutesEntry.Text + ":" + SecondsEntry.Text);
+                                    defaultParameters.Row = int.Parse(DefaultRow.Text);
+                                    defaultParameters.Column = int.Parse(DefaultColum.Text);
+                                    SelectorDeck.UpdateDeck();
+                                    UpdateSong();
+                                    UpdateVolume();
+                                    await Navigation.PopAsync();
+                                }
+
+                            }
+                            else
+                            {
+                                if (HasTimeTLimit.IsChecked && IsTurnTimeLimitCorrect())
+                                {
+                                    defaultParameters.TurnTime = TimeSpan.Parse("0:" + TMinutesEntry.Text + ":" + TSecondsEntry.Text);
+                                    defaultParameters.Row = int.Parse(DefaultRow.Text);
+                                    defaultParameters.Column = int.Parse(DefaultColum.Text);
+                                    SelectorDeck.UpdateDeck();
+                                    UpdateSong();
+                                    UpdateVolume();
+                                    await Navigation.PopAsync();
+                                }
+                                else
+                                {
+                                    defaultParameters.Row = int.Parse(DefaultRow.Text);
+                                    defaultParameters.Column = int.Parse(DefaultColum.Text);
+                                    SelectorDeck.UpdateDeck();
+                                    UpdateSong();
+                                    UpdateVolume();
+                                    await Navigation.PopAsync();
+                                }
+                            
+                            } 
                         } else throw new Exception("El tamaño del tablero debe de ser Par y de un tamaño mayor que 6.");
                     }
                     else throw new Exception("Se deben de rellenar tanto las filas como las columnas.");
                 }
                 else
                 {
-                    SelectorDeck.UpdateDeck();
-                    UpdateSong();
-                    UpdateVolume();
-                    await Navigation.PopAsync();
+                    if (HasTimeLimit.IsChecked && IsTimeLimitCorrect())
+                    {
+                        if (HasTimeTLimit.IsChecked && IsTurnTimeLimitCorrect())
+                        {
+                            defaultParameters.LimitTime = TimeSpan.Parse("0:" + MinutesEntry.Text + ":" + SecondsEntry.Text);
+                            defaultParameters.TurnTime = TimeSpan.Parse("0:" + TMinutesEntry.Text + ":" + TSecondsEntry.Text);
+                            SelectorDeck.UpdateDeck();
+                            UpdateSong();
+                            UpdateVolume();
+                            await Navigation.PopAsync();
+                        }
+                        else
+                        {
+                            defaultParameters.LimitTime = TimeSpan.Parse("0:" + MinutesEntry.Text + ":" + SecondsEntry.Text);
+                            SelectorDeck.UpdateDeck();
+                            UpdateSong();
+                            UpdateVolume();
+                            await Navigation.PopAsync();
+                        }
+
+                    }
+                    else
+                    {
+                        if (HasTimeTLimit.IsChecked && IsTurnTimeLimitCorrect())
+                        {
+                            defaultParameters.TurnTime = TimeSpan.Parse("0:" + TMinutesEntry.Text + ":" + TSecondsEntry.Text);
+                            SelectorDeck.UpdateDeck();
+                            UpdateSong();
+                            UpdateVolume();
+                            await Navigation.PopAsync();
+                        }
+                        else
+                        {
+                           
+                            SelectorDeck.UpdateDeck();
+                            UpdateSong();
+                            UpdateVolume();
+                            await Navigation.PopAsync();
+                        }
+
+                    }
                 }
             }
             catch (Exception error)
             {
                 ErrorView.IsVisible = true;
-                TextError.Text = error.Message;
+                ErrorView.SetTextError(error.Message);
             }
 
         }

@@ -18,20 +18,29 @@ namespace Twins
     public partial class MainPage : ContentPage
     {
         public static AudioPlayer player { get; set; }
+        PlayerPreferences gameConfiguration = PlayerPreferences.Instance;
+        Game game;
+        GameBuilder gameBuilder; 
         public MainPage()
         {
             InitializeComponent();
 
         }
 
-       
+        private void InitGameConfiguration()
+        {
+            gameBuilder = new GameBuilder(gameConfiguration.Column, gameConfiguration.Row);
+            SetTimeOfGame(gameBuilder);
+            SetTurnTimeOfGame(gameBuilder);
+            SetDeck(gameBuilder);
+        }
+
         protected override void OnAppearing()
         {
             player = new AudioPlayer();
-            var defaultParameter = PlayerPreferences.Instance;
-            player.LoadSong(defaultParameter.SelectedSong +".wav");
+            player.LoadSong(gameConfiguration.SelectedSong +".wav");
             player.Player.Play();
-            player.ChangeVolume(defaultParameter.Volume);
+            player.ChangeVolume(gameConfiguration.Volume);
         }
 
         private async void OnOption(object sender, EventArgs e)
@@ -46,14 +55,11 @@ namespace Twins
         {
             // resume
             // Mute music
-            var defaultparameters = PlayerPreferences.Instance;
             if ( player.GetVolume() == 0.0 ) {
-                defaultparameters.Volume = 100.0;
-                player.ChangeVolume(defaultparameters.Volume); 
+                player.ChangeVolume(gameConfiguration.Volume); 
             }
             else {
-                defaultparameters.Volume = 0.0;
-                player.ChangeVolume(defaultparameters.Volume); 
+                player.ChangeVolume(0.0); 
             }
         }
 
@@ -75,27 +81,26 @@ namespace Twins
         {
             // resume
             // Open Free Game menu
-            var defaultParameters = PlayerPreferences.Instance;
-            Game game;
-            var gameBuilder = new GameBuilder(defaultParameters.Column, defaultParameters.Row);
-            SetTimeOfGame(gameBuilder);
-            SetTurnTimeOfGame(gameBuilder);
-            SetDeck(gameBuilder);
+            try{
+            InitGameConfiguration();
             gameBuilder.OfKind(GameBuilder.GameKind.Standard);
             game = gameBuilder.Build();
-
             await Navigation.PushAsync(new BoardView(game.Board));
-
+            }
+            catch (Exception error)
+            {
+                ErrorView.IsVisible = true;
+                ErrorView.SetTextError(error.Message);
+            }
         }
 
         private void SetDeck(GameBuilder gameBuilder)
         {
-            var defaultParameters = PlayerPreferences.Instance;
-            if (defaultParameters.SelectedDeck == "Animales")
+            if (gameConfiguration.SelectedDeck == "Animales")
             {
                 gameBuilder.WithDeck(BuiltInDecks.Animals.Value);
             }
-            else if (defaultParameters.SelectedDeck == "Numeros")
+            else if (gameConfiguration.SelectedDeck == "Numeros")
             {
                 gameBuilder.WithDeck(BuiltInDecks.Numbers.Value);
             }
@@ -107,45 +112,50 @@ namespace Twins
 
         private void SetTurnTimeOfGame(GameBuilder gameBuilder)
         {
-            var defaultParameters = PlayerPreferences.Instance;
-            gameBuilder.WithTurnTimeLimit(defaultParameters.TurnTime);
+            gameBuilder.WithTurnTimeLimit(gameConfiguration.TurnTime);
         }
 
         private void SetTimeOfGame(GameBuilder gameBuilder)
         {
-            var defaultParameters = PlayerPreferences.Instance;
-            gameBuilder.WithTimeLimit(defaultParameters.LimitTime);
+            gameBuilder.WithTimeLimit(gameConfiguration.LimitTime);
         }
 
         private async void OnCardGame(object sender, EventArgs e)
         {
             // resume
-            // Open Free Game menu
-            var defaultParameters = PlayerPreferences.Instance;
-            Game game;
-            var gameBuilder = new GameBuilder(defaultParameters.Column, defaultParameters.Row);
-            SetTimeOfGame(gameBuilder);
-            SetTurnTimeOfGame(gameBuilder);
-            SetDeck(gameBuilder);
+            // Open Free Game men
+            try 
+            {
+            InitGameConfiguration();
             gameBuilder.OfKind(GameBuilder.GameKind.ReferenceCard);
             game = gameBuilder.Build();
-
             await Navigation.PushAsync(new BoardView(game.Board));
+            }
+            catch (Exception error)
+            {
+                ErrorView.IsVisible = true;
+                ErrorView.SetTextError(error.Message);
+            }
+
+    
         }
         private async void OnCategoryGame(object sender, EventArgs e)
         {
             // resume
             // Open Free Game menu
-            var defaultParameters = PlayerPreferences.Instance;
-            Game game;
-            var gameBuilder = new GameBuilder(defaultParameters.Column, defaultParameters.Row);
-            SetTimeOfGame(gameBuilder);
-            SetTurnTimeOfGame(gameBuilder);
-            SetDeck(gameBuilder);
+            try
+            { 
+            InitGameConfiguration();
             gameBuilder.OfKind(GameBuilder.GameKind.Category);
             game = gameBuilder.Build();
-
             await Navigation.PushAsync(new BoardView(game.Board));
+            }
+            catch (Exception error)
+            {
+                ErrorView.IsVisible = true;
+                ErrorView.SetTextError(error.Message);
+            }
+            
         }
 
         private void OnMultiplayerGame(object sender, EventArgs e)
