@@ -104,6 +104,7 @@
                              AbsoluteLayout.LayoutFlags="All"/>
             <twinsc:NotImplementedMessage x:Name="CommingSoonView"/>
             <twins:ResumeGameView x:Name="EndGameModal" IsVisible="False"/>
+            <twinsc:BubblePoint x:Name="Bubble"/>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

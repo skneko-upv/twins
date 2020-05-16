@@ -110,6 +110,8 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Backgrounds\bubbleGBackground.png" />
+    <Content Include="Assets\Backgrounds\bubbleRBackground.png" />
     <Content Include="Assets\Backgrounds\errorDialogBackground.png" />
     <Content Include="Assets\Backgrounds\levelBackground.png" />
     <Content Include="Assets\Backgrounds\menuprincipal.png" />
