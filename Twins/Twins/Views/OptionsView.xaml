@@ -38,10 +38,10 @@
                     <Label Text="Límite de tiempo: " VerticalOptions="Center" FontAttributes="Bold" />
                     <CheckBox IsChecked="True" x:Name="HasTimeLimit"/>
                     <Entry Keyboard="Numeric" MaxLength="2" FlowDirection="RightToLeft" x:Name="MinutesEntry" TextChanged="OnlyNumbersTime"
-                                    BindingContext="{x:Reference Name=HasTimeLimit}" IsEnabled="{Binding Path=IsChecked}"  Text="2"/>
+                                    BindingContext="{x:Reference Name=HasTimeLimit}" IsEnabled="{Binding Path=IsChecked}"  Text="1"/>
                     <Label Text="Minutos, " VerticalOptions="Center"/>
                     <Entry Keyboard="Numeric" MaxLength="2" FlowDirection="RightToLeft" x:Name="SecondsEntry" TextChanged="OnlyNumbersTime"
-                                    BindingContext="{x:Reference Name=HasTimeLimit}" IsEnabled="{Binding Path=IsChecked}" Text="30"/>
+                                    BindingContext="{x:Reference Name=HasTimeLimit}" IsEnabled="{Binding Path=IsChecked}" Text="00"/>
                     <Label Text="Segundos" VerticalOptions="Center"/>
                     </StackLayout>
                 <StackLayout Orientation="Horizontal"  Margin="0,5,0,0">
@@ -51,7 +51,7 @@
                                     BindingContext="{x:Reference Name=HasTimeTLimit}" IsEnabled="{Binding Path=IsChecked}" Text="0"/>
                     <Label Text="Minutos, " VerticalOptions="Center"/>
                     <Entry Keyboard="Numeric" MaxLength="2" FlowDirection="RightToLeft" x:Name="TSecondsEntry" TextChanged="OnlyNumbersTime"
-                                    BindingContext="{x:Reference Name=HasTimeTLimit}" IsEnabled="{Binding Path=IsChecked}" Text="10"/>
+                                    BindingContext="{x:Reference Name=HasTimeTLimit}" IsEnabled="{Binding Path=IsChecked}" Text="5"/>
                     <Label Text="Segundos" VerticalOptions="Center"/>
 
                     </StackLayout>
