@@ -12,7 +12,7 @@
              NavigationPage.HasBackButton="False"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <AbsoluteLayout>
+        <AbsoluteLayout x:Name="root">
             <StackLayout AbsoluteLayout.LayoutBounds="0.5,0.5,1,1" AbsoluteLayout.LayoutFlags="All">
                 <Grid HeightRequest="235" HorizontalOptions="FillAndExpand">
                     <BoxView BackgroundColor="Black" HorizontalOptions="FillAndExpand" VerticalOptions="Start"
@@ -93,6 +93,7 @@
                     <Grid x:Name="board"
                       ColumnSpacing="2"
                       RowSpacing="2"
+                      
                       BackgroundColor="{StaticResource backgroundColor}"                      
                       VerticalOptions="Center"
                       HorizontalOptions="Center"/>
@@ -104,7 +105,6 @@
                              AbsoluteLayout.LayoutFlags="All"/>
             <twinsc:NotImplementedMessage x:Name="CommingSoonView"/>
             <twins:ResumeGameView x:Name="EndGameModal" IsVisible="False"/>
-            <twinsc:BubblePoint x:Name="Bubble"/>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

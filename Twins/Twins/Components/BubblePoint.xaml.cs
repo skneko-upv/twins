@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-
+using Twins.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,6 +13,13 @@ namespace Twins.Components
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BubblePoint : Grid
     {
+        public double PosX;
+        public double PosY;
+        public double PointOfReferenceX;
+        public double PointOfReferenceY;
+        public double CardWidth;
+        public double CardHeight;
+
         public BubblePoint()
         {
             InitializeComponent();
@@ -40,13 +47,24 @@ namespace Twins.Components
 
         public async void SetPosition(int x, int y)
         {
-            await this.TranslateTo(x, y, 0);
+            PosX = x;
+            PosY = y;
+            await this.TranslateTo(PointOfReferenceX + CardWidth / 2 + (x - 1) * CardWidth,
+                PointOfReferenceY + CardHeight / 2 + (y - 1) * CardHeight, 0);
+        }
+
+        public void setReferences(double pointX, double pointY, double w, double h) 
+        {
+            PointOfReferenceX = pointX;
+            PointOfReferenceY = pointY;
+            CardHeight = h;
+            CardWidth = w;
         }
 
         public async void GoUp() 
         {
             this.IsVisible = true;
-            await this.TranslateTo(this.X, this.Y + 5, 1500);
+            await this.TranslateTo(PosX, PosY - 15, 700);
             await this.FadeTo(0);
             this.IsVisible = false;
         }

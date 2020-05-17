@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Twins.Components;
 using Twins.Models;
 using Twins.Models.Singletons;
@@ -45,6 +46,11 @@ namespace Twins.Views
             referenceCard.Clicked += () => { };
 
             FillBoard(board.Height, board.Width);
+            root.Children.Add(boardViewModel.BubblePoint);
+            boardViewModel.BubblePoint.setReferences(this.X, this.Y,
+                this.board.ColumnDefinitions.First().Width.Value, this.board.RowDefinitions.First().Height.Value);
+            boardViewModel.BubblePoint.IsVisible = true;
+            boardViewModel.BubblePoint.SetRedBubble();
         }
 
         private void OnScoreChanged(int score)
@@ -158,5 +164,6 @@ namespace Twins.Views
         {
             return EndGameModal;
         }
+
     }
 }

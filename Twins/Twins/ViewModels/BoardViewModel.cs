@@ -32,6 +32,8 @@ namespace Twins.ViewModels
 
         public bool InteractionAllowed { get; private set; }
 
+        public BubblePoint BubblePoint { get; }
+
 
         public BoardViewModel(Board board)
         {
@@ -52,6 +54,7 @@ namespace Twins.ViewModels
 
             Board.Game.Resume();
             InteractionAllowed = true;
+            BubblePoint = new BubblePoint();
         }
 
         private void OnTurnTimedOut()
@@ -90,7 +93,6 @@ namespace Twins.ViewModels
                 await CardComponents[cell].Unflip();
             }
         }
-
         private async void OnCellClicked(Board.Cell cell)
         {
             if (!InteractionAllowed)
@@ -119,6 +121,7 @@ namespace Twins.ViewModels
                 }
                 else
                 {
+                    ShowRedPoints(-5, cell.Row, cell.Column);
                     await Task.Delay(1000);
                 }
 
@@ -133,6 +136,12 @@ namespace Twins.ViewModels
                     Board.Game.Resume();
                 }
             }
+        }
+        public void ShowRedPoints(int points, int x, int y) 
+        {
+
+            BubblePoint.SetRedBubble().SetPoints(points).SetPosition(x, y);
+            BubblePoint.GoUp();
         }
     }
 }
