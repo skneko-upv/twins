@@ -46,11 +46,6 @@ namespace Twins.Views
             referenceCard.Clicked += () => { };
 
             FillBoard(board.Height, board.Width);
-            root.Children.Add(boardViewModel.BubblePoint);
-            boardViewModel.BubblePoint.setReferences(this.X, this.Y,
-                this.board.ColumnDefinitions.First().Width.Value, this.board.RowDefinitions.First().Height.Value);
-            boardViewModel.BubblePoint.IsVisible = true;
-            boardViewModel.BubblePoint.SetRedBubble();
         }
 
         private void OnScoreChanged(int score)
@@ -116,7 +111,6 @@ namespace Twins.Views
             boardArea.HeightRequest = 122 *  width;
             board.WidthRequest = 122 * height;
             board.HeightRequest = 122 *  width;
-
         }
 
         private async void OnReferenceCardChanged(Card card)

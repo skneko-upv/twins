@@ -12,7 +12,7 @@
              NavigationPage.HasBackButton="False"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <AbsoluteLayout x:Name="root">
+        <AbsoluteLayout x:Name="root" >
             <StackLayout AbsoluteLayout.LayoutBounds="0.5,0.5,1,1" AbsoluteLayout.LayoutFlags="All">
                 <Grid HeightRequest="235" HorizontalOptions="FillAndExpand">
                     <BoxView BackgroundColor="Black" HorizontalOptions="FillAndExpand" VerticalOptions="Start"

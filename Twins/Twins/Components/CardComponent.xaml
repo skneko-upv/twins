@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<StackLayout xmlns="http://xamarin.com/schemas/2014/forms" 
+<Grid xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              HeightRequest="120"
              WidthRequest="120"
              VerticalOptions="Center"
              HorizontalOptions="Center"
-             x:Class="Twins.Components.CardComponent">
+             x:Class="Twins.Components.CardComponent"
+             x:Name="root">
     <Button x:Name="button"
             BackgroundColor="Transparent"
             
@@ -17,4 +18,4 @@
             HeightRequest="120"
             WidthRequest="120"
             Clicked="OnClicked" />
-</StackLayout>
+</Grid>

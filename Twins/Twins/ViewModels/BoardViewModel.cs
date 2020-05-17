@@ -32,8 +32,7 @@ namespace Twins.ViewModels
 
         public bool InteractionAllowed { get; private set; }
 
-        public BubblePoint BubblePoint { get; }
-
+        private int lastScoreChange;
 
         public BoardViewModel(Board board)
         {
@@ -54,7 +53,7 @@ namespace Twins.ViewModels
 
             Board.Game.Resume();
             InteractionAllowed = true;
-            BubblePoint = new BubblePoint();
+            lastScoreChange = Board.Game.Score.Value;
         }
 
         private void OnTurnTimedOut()
@@ -112,19 +111,23 @@ namespace Twins.ViewModels
                 Board.Game.Pause();
 
                 IEnumerable<Board.Cell> matched = Board.Game.TryMatch();
+
+                var score = Board.Game.Score.Value;
                 if (matched.Any())
                 {
                     OnCellsMatched(matched);
                     
                     Board.ReferenceCard = null;
+                    await CardComponents[cell].ShowGreenPoints(score - lastScoreChange);
                     await Task.Delay(250);
                 }
                 else
                 {
-                    ShowRedPoints(-5, cell.Row, cell.Column);
+                    await CardComponents[cell].ShowRedPoints(score - lastScoreChange);
                     await Task.Delay(1000);
-                }
 
+                }
+                lastScoreChange = score;
                 if (Board.Game.ShouldEndTurn())
                 {
                     Board.Game.EndTurn();
@@ -137,11 +140,6 @@ namespace Twins.ViewModels
                 }
             }
         }
-        public void ShowRedPoints(int points, int x, int y) 
-        {
 
-            BubblePoint.SetRedBubble().SetPoints(points).SetPosition(x, y);
-            BubblePoint.GoUp();
-        }
     }
 }

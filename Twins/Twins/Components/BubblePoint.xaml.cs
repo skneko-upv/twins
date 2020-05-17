@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using Twins.Models;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -45,12 +40,11 @@ namespace Twins.Components
             return this;
         }
 
-        public async void SetPosition(int x, int y)
+        public async void SetPosition(double x, double y)
         {
             PosX = x;
             PosY = y;
-            await this.TranslateTo(PointOfReferenceX + CardWidth / 2 + (x - 1) * CardWidth,
-                PointOfReferenceY + CardHeight / 2 + (y - 1) * CardHeight, 0);
+            await this.TranslateTo(x, y, 0);
         }
 
         public void setReferences(double pointX, double pointY, double w, double h) 
@@ -61,8 +55,9 @@ namespace Twins.Components
             CardWidth = w;
         }
 
-        public async void GoUp() 
+        public async Task GoUp() 
         {
+            this.Opacity = 1;
             this.IsVisible = true;
             await this.TranslateTo(PosX, PosY - 15, 700);
             await this.FadeTo(0);
