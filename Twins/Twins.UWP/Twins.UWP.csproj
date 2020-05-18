@@ -114,8 +114,10 @@
     <Content Include="Assets\Backgrounds\bubbleRBackground.png" />
     <Content Include="Assets\Backgrounds\errorDialogBackground.png" />
     <Content Include="Assets\Backgrounds\levelBackground.png" />
+    <Content Include="Assets\Backgrounds\lostBackground.png" />
     <Content Include="Assets\Backgrounds\menuprincipal.png" />
     <Content Include="Assets\Backgrounds\menuprincipal2.png" />
+    <Content Include="Assets\Backgrounds\winBackground.png" />
     <Content Include="Assets\Decks\Deck2\backimage.png" />
     <Content Include="Assets\Decks\Deck2\card1.png" />
     <Content Include="Assets\Decks\Deck2\card10.png" />

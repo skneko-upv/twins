@@ -119,12 +119,12 @@ namespace Twins.ViewModels
                     
                     Board.ReferenceCard = null;
                     await CardComponents[cell].ShowGreenPoints(score - lastScoreChange);
-                    await Task.Delay(250);
+                    await Task.Delay(150);
                 }
                 else
                 {
                     await CardComponents[cell].ShowRedPoints(score - lastScoreChange);
-                    await Task.Delay(1000);
+                    await Task.Delay(150);
 
                 }
                 lastScoreChange = score;
