@@ -7,7 +7,7 @@ using Xamarin.Forms.Xaml;
 namespace Twins.Components
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CardComponent : StackLayout
+    public partial class CardComponent : Grid
     {
         public Card Card { get; set; }
         public bool Flipped { get; private set; }
@@ -16,9 +16,12 @@ namespace Twins.Components
 
         public bool IsBlocked { get; set; }
 
+        public BubblePoint BubblePoint { get;  }
+
         public CardComponent()
         {
             InitializeComponent();
+
         }
 
         public CardComponent(Card card, bool isBlocked = false)
@@ -29,6 +32,11 @@ namespace Twins.Components
             Flipped = false;
             button.ImageSource = card.Deck.BackImage;
             IsBlocked = isBlocked;
+
+
+            BubblePoint = new BubblePoint();
+            root.Children.Add(BubblePoint);
+            BubblePoint.SetPosition(0, -30);
         }
 
         public async Task Flip()
@@ -72,6 +80,18 @@ namespace Twins.Components
         private async Task AnimationFlip(int angle, uint seconds)
         {
             await button.RotateYTo(angle, seconds);
+        }
+        public async Task ShowRedPoints(int points)
+        {
+
+            await BubblePoint.SetRedBubble().SetPoints(points).GoUp();
+            BubblePoint.SetPosition(0, -30);
+        }
+        public async Task ShowGreenPoints(int points)
+        {
+
+            await BubblePoint.SetGreenBubble().SetPoints(points).GoUp();
+            BubblePoint.SetPosition(0, -30);
         }
     }
 }

@@ -110,10 +110,14 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Backgrounds\bubbleGBackground.png" />
+    <Content Include="Assets\Backgrounds\bubbleRBackground.png" />
     <Content Include="Assets\Backgrounds\errorDialogBackground.png" />
     <Content Include="Assets\Backgrounds\levelBackground.png" />
+    <Content Include="Assets\Backgrounds\lostBackground.png" />
     <Content Include="Assets\Backgrounds\menuprincipal.png" />
     <Content Include="Assets\Backgrounds\menuprincipal2.png" />
+    <Content Include="Assets\Backgrounds\winBackground.png" />
     <Content Include="Assets\Decks\Deck2\backimage.png" />
     <Content Include="Assets\Decks\Deck2\card1.png" />
     <Content Include="Assets\Decks\Deck2\card10.png" />
@@ -141,15 +145,19 @@
     <Content Include="Assets\Decks\Deck3\card8.png" />
     <Content Include="Assets\Decks\Deck3\card9.png" />
     <Content Include="Assets\Icons\cronometro.png" />
+    <Content Include="Assets\Icons\cronometroColor.png" />
     <Content Include="Assets\Icons\error.png" />
     <Content Include="Assets\Icons\home.png" />
     <Content Include="Assets\Icons\levelBlocked.png" />
     <Content Include="Assets\Icons\levelPassed.png" />
     <Content Include="Assets\Icons\logout.png" />
     <Content Include="Assets\Icons\mute.png" />
+    <Content Include="Assets\Icons\muteW.png" />
     <Content Include="Assets\Icons\next.png" />
     <Content Include="Assets\Icons\Options.png" />
+    <Content Include="Assets\Icons\pauseW.png" />
     <Content Include="Assets\Icons\restart.png" />
+    <Content Include="Assets\Icons\score.png" />
     <Content Include="Assets\Icons\title.png" />
     <Content Include="Assets\Icons\title2.png" />
     <Content Include="Assets\Icons\title4.png" />
@@ -174,6 +182,7 @@
     <Content Include="Assets\Icons\Options.png" />
     <Content Include="Assets\Icons\pause.png" />
     <Content Include="Assets\Icons\volume.png" />
+    <Content Include="Assets\Icons\volumeW.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
