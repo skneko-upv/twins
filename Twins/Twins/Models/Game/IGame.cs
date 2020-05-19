@@ -23,6 +23,8 @@ namespace Twins.Models.Game
 
         int LevelNumber { get; }
 
+        bool IsMultiplayer { get; }
+
         event Action TurnTimedOut;
         event Action<GameResult> GameEnded;
 
