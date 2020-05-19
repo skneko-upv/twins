@@ -44,7 +44,12 @@ namespace Twins.Models
             {
                 GameClock = new Clock();
             }
-            GameClock.TimedOut += () => EndGame(false);
+            GameClock.TimedOut += () => {
+                if (!IsFinished)
+                {
+                    EndGame(false);
+                }
+            };
 
             if (turnLimit != null)
             {
@@ -89,8 +94,11 @@ namespace Twins.Models
 
         public virtual void Resume()
         {
-            GameClock.Start();
-            TurnClock.Start();
+            if (!IsFinished) 
+            {
+                GameClock.Start();
+                TurnClock.Start();
+            }
         }
 
         public virtual void Pause()
