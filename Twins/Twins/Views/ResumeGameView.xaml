@@ -24,9 +24,9 @@
         
         <StackLayout Spacing="15" Orientation="Horizontal">
             <StackLayout Spacing="15">
-                <Label Text="Nivel:" FontSize="20"/>
-                <Label Text="Puntos:" FontSize="20"/>
-                <Label Text="Tiempo:" FontSize="20"/>
+                <Label Text="Nivel:" FontSize="20" FontAttributes="Bold"/>
+                <Label Text="Puntos:" FontSize="20" FontAttributes="Bold"/>
+                <Label Text="Tiempo:" FontSize="20" FontAttributes="Bold"/>
             </StackLayout>
             <StackLayout Spacing="15">
                 <Label x:Name="modeReminder" FontSize="20"/>
