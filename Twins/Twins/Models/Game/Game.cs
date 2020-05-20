@@ -132,7 +132,7 @@ namespace Twins.Models.Game
             if (isMatch)
             {
                 MatchSuccesses.Value++;
-                AttemptedMatch(true);
+                AttemptedMatch?.Invoke(true);
 
                 foreach (Board.Cell cell in Board.FlippedCells)
                 {
@@ -152,7 +152,7 @@ namespace Twins.Models.Game
             {
                 Score.DecrementMatchFail(Board.FlippedCells.Select(cell => cell.FlipCount).ToArray());
 
-                AttemptedMatch(false);
+                AttemptedMatch?.Invoke(false);
                 MatchFailures.Value++;
 
                 matched = Enumerable.Empty<Board.Cell>();

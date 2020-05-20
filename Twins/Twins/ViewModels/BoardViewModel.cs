@@ -130,6 +130,7 @@ namespace Twins.ViewModels
                 if (Board.Game.ShouldEndTurn())
                 {
                     Board.Game.EndTurn();
+                    Board.Game.Resume();
                 }
 
                 if (!Board.Game.IsFinished)

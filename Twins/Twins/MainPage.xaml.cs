@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using Twins.Components;
-using Twins.Models;
 using Twins.Models.Builders;
+using Twins.Models.Game;
 using Twins.Models.Singletons;
 using Twins.Utils;
 using Twins.Views;
@@ -19,7 +19,7 @@ namespace Twins
     {
         public static AudioPlayer player { get; set; }
         PlayerPreferences gameConfiguration = PlayerPreferences.Instance;
-        Game game;
+        IGame game;
         GameBuilder gameBuilder; 
         public MainPage()
         {
@@ -74,7 +74,7 @@ namespace Twins
         {
             // resume
             // Open History menu
-            await Navigation.PushAsync(new Views.LevelsView());
+            await Navigation.PushAsync(new LevelsView());
         }
 
         private async void OnStandarGame(object sender, EventArgs e)

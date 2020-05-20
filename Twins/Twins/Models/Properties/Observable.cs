@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Xamarin.Forms.Internals;
 
 namespace Twins.Models.Properties
 {
@@ -19,7 +20,7 @@ namespace Twins.Models.Properties
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private List<IObserver<T>> observers;
+        private readonly IList<IObserver<T>> observers = new List<IObserver<T>>();
 
         public Observable(T value)
         {
