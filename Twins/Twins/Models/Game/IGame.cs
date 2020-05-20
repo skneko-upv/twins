@@ -27,6 +27,7 @@ namespace Twins.Models.Game
 
         event Action TurnTimedOut;
         event Action<GameResult> GameEnded;
+        event Action<bool> AttemptedMatch;
 
         void Resume();
         void Pause();

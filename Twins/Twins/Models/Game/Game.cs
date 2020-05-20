@@ -36,6 +36,7 @@ namespace Twins.Models.Game
 
         public event Action TurnTimedOut;
         public event Action<GameResult> GameEnded;
+        public event Action<bool> AttemptedMatch;
 
         public Game(int height, int width, Deck deck, TimeSpan? timeLimit, TimeSpan? turnLimit, Board.Cell[,] cells = null, int levelNumber = 0)
         {
@@ -123,6 +124,7 @@ namespace Twins.Models.Game
             if (isMatch)
             {
                 MatchSuccesses.Value++;
+                AttemptedMatch(true);
 
                 foreach (Board.Cell cell in Board.FlippedCells)
                 {
@@ -141,7 +143,10 @@ namespace Twins.Models.Game
             else
             {
                 Score.DecrementMatchFail(Board.FlippedCells.Select(cell => cell.FlipCount).ToArray());
+
+                AttemptedMatch(false);
                 MatchFailures.Value++;
+
                 matched = Enumerable.Empty<Board.Cell>();
             }
 

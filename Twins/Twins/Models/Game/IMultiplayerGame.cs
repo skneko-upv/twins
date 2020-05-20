@@ -6,6 +6,8 @@ namespace Twins.Models.Game
 {
     interface IMultiplayerGame : IGame
     {
-        int PlayerCount { get; }
+        ICollection<Player> Players { get; }
+
+        event Action<Player> PlayerChanged;
     }
 }
