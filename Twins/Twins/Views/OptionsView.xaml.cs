@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using Twins.Components;
 using Twins.Models.Singletons;
 using Twins.Persistence;
 using Xamarin.Forms;
@@ -16,15 +18,13 @@ namespace Twins.Views
         {
             InitializeComponent();
             InitPlayerPreferences();
-            InitSelectionSongList();
-            InitVolume();
-            InitTime();
+            
         }
 
         private async void InitPlayerPreferences()
         {
-            var defaultParameters = PlayerPreferences.Instance;
             var database = Database.Instance;
+            var defaultPreferences = PlayerPreferences.Instance;
             var playerPreferences = await database.GetPlayerPreferences();
             var decksdatabase = await database.GetDecksAsync();
             var decks = new List<string>();
@@ -33,14 +33,18 @@ namespace Twins.Views
                 decks.Add(d.Name);
             };
 
-            defaultParameters.Column = playerPreferences.Column;
-            defaultParameters.Row = playerPreferences.Row;
-            defaultParameters.Decks = decks;
-            defaultParameters.SelectedDeck = playerPreferences.SelectedDeck;
-            defaultParameters.SelectedSong = playerPreferences.SelectedSong;
-            defaultParameters.Volume = playerPreferences.Volume;
-            defaultParameters.LimitTime = playerPreferences.LimitTime;
-            defaultParameters.TurnTime = playerPreferences.TurnTime;
+            defaultPreferences.Column = playerPreferences.Column;
+            defaultPreferences.Row = playerPreferences.Row;
+            defaultPreferences.Decks = decks;
+            defaultPreferences.SelectedDeck = playerPreferences.SelectedDeck;
+            defaultPreferences.SelectedSong = playerPreferences.SelectedSong;
+            defaultPreferences.Volume = playerPreferences.Volume;
+            defaultPreferences.LimitTime = playerPreferences.LimitTime;
+            defaultPreferences.TurnTime = playerPreferences.TurnTime;
+            InitSelectionSongList();
+            InitVolume();
+            InitTime();
+            SelectorDeck.InitSelectionDeckList();
         }
 
         private void InitTime()
@@ -143,7 +147,7 @@ namespace Twins.Views
                                     SelectorDeck.UpdateDeck();
                                     UpdateSong();
                                     UpdateVolume();
-                                    UpdateDatabase();
+                                    await UpdateDatabase();
                                     await Navigation.PopAsync();
                                 }
                                 else
@@ -154,7 +158,7 @@ namespace Twins.Views
                                     SelectorDeck.UpdateDeck();
                                     UpdateSong();
                                     UpdateVolume();
-                                    UpdateDatabase();
+                                    await UpdateDatabase();
                                     await Navigation.PopAsync();
                                 }
 
@@ -169,7 +173,7 @@ namespace Twins.Views
                                     SelectorDeck.UpdateDeck();
                                     UpdateSong();
                                     UpdateVolume();
-                                    UpdateDatabase();
+                                    await UpdateDatabase();
                                     await Navigation.PopAsync();
                                 }
                                 else
@@ -179,7 +183,7 @@ namespace Twins.Views
                                     SelectorDeck.UpdateDeck();
                                     UpdateSong();
                                     UpdateVolume();
-                                    UpdateDatabase();
+                                    await UpdateDatabase();
                                     await Navigation.PopAsync();
                                 }
                             
@@ -199,7 +203,7 @@ namespace Twins.Views
                             SelectorDeck.UpdateDeck();
                             UpdateSong();
                             UpdateVolume();
-                            UpdateDatabase();
+                            await UpdateDatabase();
                             await Navigation.PopAsync();
                         }
                         else
@@ -208,7 +212,7 @@ namespace Twins.Views
                             SelectorDeck.UpdateDeck();
                             UpdateSong();
                             UpdateVolume();
-                            UpdateDatabase();
+                            await UpdateDatabase();
                             await Navigation.PopAsync();
                         }
 
@@ -243,7 +247,7 @@ namespace Twins.Views
 
         }
 
-        private async void UpdateDatabase()
+        private async Task UpdateDatabase()
         {
             var database = Database.Instance;
             var playerPreferencesDB = await database.GetPlayerPreferences();
@@ -267,7 +271,7 @@ namespace Twins.Views
         private void Volume_ValueChanged(object sender, ValueChangedEventArgs e)
         {
             //here is the control logic volume
-            MainPage.player.ChangeVolume(Volume.Value);
+            OnAppearingAsync.player.ChangeVolume(Volume.Value);
         }
 
         private void OnlyNumbersTime(object sender, TextChangedEventArgs e)

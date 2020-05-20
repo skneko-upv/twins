@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:twinsc="clr-namespace:Twins.Components" xmlns:common="clr-namespace:Twins.Views"
              mc:Ignorable="d"
-             x:Class="Twins.MainPage"
+             x:Class="Twins.OnAppearingAsync"
              BackgroundImageSource="Assets/Backgrounds/menuprincipal2.png"
              NavigationPage.HasBackButton="False"
              NavigationPage.HasNavigationBar="False">

@@ -11,10 +11,10 @@ namespace Twins.Components
         public DeckSelector()
         {
             InitializeComponent();
-            InitSelectionDeckList();
+            
         }
 
-        private void InitSelectionDeckList()
+        public void InitSelectionDeckList()
         {
             var defaultparameters = PlayerPreferences.Instance;
 

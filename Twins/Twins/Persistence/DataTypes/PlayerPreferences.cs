@@ -47,7 +47,7 @@ namespace Twins.Persistence.DataTypes
            // Decks = decks;
             SelectedDeck = "Animales";
             SelectedSong = "Solve The Puzzle";
-            Volume = 1.0;
+            Volume = 100.0;
             LimitTime = TimeSpan.Parse("0:01:00");
             TurnTime = TimeSpan.Parse("0:00:05");
         }

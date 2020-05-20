@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq.Expressions;
 using Twins.Components;
 using Twins.Models;
 using Twins.Models.Builders;
 using Twins.Models.Singletons;
+using Twins.Persistence;
 using Twins.Utils;
 using Twins.Views;
 using Xamarin.Forms;
@@ -15,15 +18,38 @@ namespace Twins
     [DesignTimeVisible(false)]
 
     
-    public partial class MainPage : ContentPage
+    public partial class OnAppearingAsync : ContentPage
     {
         public static AudioPlayer player { get; set; }
         PlayerPreferences gameConfiguration = PlayerPreferences.Instance;
         Game game;
         GameBuilder gameBuilder; 
-        public MainPage()
+        public OnAppearingAsync()
         {
             InitializeComponent();
+            //InitPlayerPreferences();
+
+        }
+
+        private async void InitPlayerMusic()
+        {
+            try
+            {
+                var database = Database.Instance;
+                var playerPreferences = await database.GetPlayerPreferences();
+                gameConfiguration.SelectedSong = playerPreferences.SelectedSong;
+                gameConfiguration.Volume = playerPreferences.Volume;
+                player = new AudioPlayer();
+                player.LoadSong(gameConfiguration.SelectedSong + ".wav");
+                player.Player.Play();
+                player.ChangeVolume(gameConfiguration.Volume);
+            }
+            catch (Exception error) {
+                player = new AudioPlayer();
+                player.LoadSong(gameConfiguration.SelectedSong + ".wav");
+                player.Player.Play();
+                player.ChangeVolume(gameConfiguration.Volume);
+            }
 
         }
 
@@ -35,12 +61,10 @@ namespace Twins
             SetDeck(gameBuilder);
         }
 
-        protected override void OnAppearing()
+        protected override void  OnAppearing()
         {
-            player = new AudioPlayer();
-            player.LoadSong(gameConfiguration.SelectedSong +".wav");
-            player.Player.Play();
-            player.ChangeVolume(gameConfiguration.Volume);
+                InitPlayerMusic();
+
         }
 
         private async void OnOption(object sender, EventArgs e)

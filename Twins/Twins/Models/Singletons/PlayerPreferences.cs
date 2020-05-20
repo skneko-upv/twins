@@ -39,6 +39,7 @@ namespace Twins.Models.Singletons
 
         private PlayerPreferences()
         {
+   
             var decks = new List<string>
             {
                 "Animales",
