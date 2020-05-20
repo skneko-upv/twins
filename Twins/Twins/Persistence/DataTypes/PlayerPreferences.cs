@@ -36,15 +36,9 @@ namespace Twins.Persistence.DataTypes
 
         public PlayerPreferences() {
             ID = 1;
-           /* var decks = new List<string>
-            {
-                "Animales",
-                "Numeros",
-                "Deportes"
-            };*/
+           
             Column = 6;
             Row = 4;
-           // Decks = decks;
             SelectedDeck = "Animales";
             SelectedSong = "Solve The Puzzle";
             Volume = 100.0;

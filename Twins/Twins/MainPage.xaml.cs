@@ -64,7 +64,6 @@ namespace Twins
         protected override void  OnAppearing()
         {
                 InitPlayerMusic();
-
         }
 
         private async void OnOption(object sender, EventArgs e)
