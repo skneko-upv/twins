@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Twins.Models.Singletons
 {
@@ -27,6 +28,10 @@ namespace Twins.Models.Singletons
 
         public double Volume { get; set; }
 
+        public TimeSpan LimitTime { get; set; }
+
+        public TimeSpan TurnTime { get; set; }
+
         private PlayerPreferences()
         {
             var decks = new List<string>
@@ -41,6 +46,8 @@ namespace Twins.Models.Singletons
             SelectedDeck = "Animales";
             SelectedSong = "Solve The Puzzle";
             Volume = 100.0;
+            LimitTime = TimeSpan.Parse("0:01:00");
+            TurnTime = TimeSpan.Parse("0:00:05");
         }
     }
 }

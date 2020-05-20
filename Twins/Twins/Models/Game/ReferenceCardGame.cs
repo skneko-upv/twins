@@ -9,7 +9,7 @@ namespace Twins.Models.Game
         public ReferenceCardGame(int height, int width, Deck deck, TimeSpan timeLimit, TimeSpan turnLimit, Board.Cell[,] cells = null, int level = 0)
             : base(height, width, deck, timeLimit, turnLimit, cells, level)
         {
-            Board.ReferenceCard = RandomHiddenCard();
+            Board.ReferenceCard = RandomHiddenCard(Board.Cells);
         }
 
         public override IEnumerable<Board.Cell> TryMatch()
@@ -24,7 +24,7 @@ namespace Twins.Models.Game
 
             if (!IsFinished && Board.ReferenceCard == null)
             {
-                Board.ReferenceCard = RandomHiddenCard();
+                Board.ReferenceCard = RandomHiddenCard(Board.Cells);
             }
         }
     }

@@ -1,7 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
+using Twins.Components;
+using Twins.Models;
+using Twins.Models.Builders;
 using Twins.Models.Singletons;
 using Twins.Utils;
+using Twins.Views;
 using Xamarin.Forms;
 
 namespace Twins
@@ -14,20 +18,29 @@ namespace Twins
     public partial class MainPage : ContentPage
     {
         public static AudioPlayer player { get; set; }
+        PlayerPreferences gameConfiguration = PlayerPreferences.Instance;
+        Game game;
+        GameBuilder gameBuilder; 
         public MainPage()
         {
             InitializeComponent();
 
         }
 
-       
+        private void InitGameConfiguration()
+        {
+            gameBuilder = new GameBuilder(gameConfiguration.Column, gameConfiguration.Row);
+            SetTimeOfGame(gameBuilder);
+            SetTurnTimeOfGame(gameBuilder);
+            SetDeck(gameBuilder);
+        }
+
         protected override void OnAppearing()
         {
             player = new AudioPlayer();
-            var defaultParameter = PlayerPreferences.Instance;
-            player.LoadSong(defaultParameter.SelectedSong +".wav");
+            player.LoadSong(gameConfiguration.SelectedSong +".wav");
             player.Player.Play();
-            player.ChangeVolume(defaultParameter.Volume);
+            player.ChangeVolume(gameConfiguration.Volume);
         }
 
         private async void OnOption(object sender, EventArgs e)
@@ -42,14 +55,11 @@ namespace Twins
         {
             // resume
             // Mute music
-            var defaultparameters = PlayerPreferences.Instance;
             if ( player.GetVolume() == 0.0 ) {
-                defaultparameters.Volume = 100.0;
-                player.ChangeVolume(defaultparameters.Volume); 
+                player.ChangeVolume(gameConfiguration.Volume); 
             }
             else {
-                defaultparameters.Volume = 0.0;
-                player.ChangeVolume(defaultparameters.Volume); 
+                player.ChangeVolume(0.0); 
             }
         }
 
@@ -67,11 +77,85 @@ namespace Twins
             await Navigation.PushAsync(new Views.LevelsView());
         }
 
-        private async void OnFreeGame(object sender, EventArgs e)
+        private async void OnStandarGame(object sender, EventArgs e)
         {
             // resume
             // Open Free Game menu
-            await Navigation.PushAsync(new Views.FreeModeForm());
+            try{
+            InitGameConfiguration();
+            gameBuilder.OfKind(GameBuilder.GameKind.Standard);
+            game = gameBuilder.Build();
+            await Navigation.PushAsync(new BoardView(game.Board));
+            }
+            catch (Exception error)
+            {
+                ErrorView.IsVisible = true;
+                ErrorView.SetTextError(error.Message);
+            }
+        }
+
+        private void SetDeck(GameBuilder gameBuilder)
+        {
+            if (gameConfiguration.SelectedDeck == "Animales")
+            {
+                gameBuilder.WithDeck(BuiltInDecks.Animals.Value);
+            }
+            else if (gameConfiguration.SelectedDeck == "Numeros")
+            {
+                gameBuilder.WithDeck(BuiltInDecks.Numbers.Value);
+            }
+            else
+            {
+                gameBuilder.WithDeck(BuiltInDecks.Sports.Value);
+            }
+        }
+
+        private void SetTurnTimeOfGame(GameBuilder gameBuilder)
+        {
+            gameBuilder.WithTurnTimeLimit(gameConfiguration.TurnTime);
+        }
+
+        private void SetTimeOfGame(GameBuilder gameBuilder)
+        {
+            gameBuilder.WithTimeLimit(gameConfiguration.LimitTime);
+        }
+
+        private async void OnCardGame(object sender, EventArgs e)
+        {
+            // resume
+            // Open Free Game men
+            try 
+            {
+            InitGameConfiguration();
+            gameBuilder.OfKind(GameBuilder.GameKind.ReferenceCard);
+            game = gameBuilder.Build();
+            await Navigation.PushAsync(new BoardView(game.Board));
+            }
+            catch (Exception error)
+            {
+                ErrorView.IsVisible = true;
+                ErrorView.SetTextError(error.Message);
+            }
+
+    
+        }
+        private async void OnCategoryGame(object sender, EventArgs e)
+        {
+            // resume
+            // Open Free Game menu
+            try
+            { 
+            InitGameConfiguration();
+            gameBuilder.OfKind(GameBuilder.GameKind.Category);
+            game = gameBuilder.Build();
+            await Navigation.PushAsync(new BoardView(game.Board));
+            }
+            catch (Exception error)
+            {
+                ErrorView.IsVisible = true;
+                ErrorView.SetTextError(error.Message);
+            }
+            
         }
 
         private void OnMultiplayerGame(object sender, EventArgs e)

@@ -37,22 +37,25 @@ namespace Twins.Views
             Time = result.Time;
             if (result.IsVictory)
             {
-                ResultLabel.Text = "Victoria";
-                ResultLabel.TextColor = Color.Green;
+                background.Source = "Assets/Backgrounds/winBackground.png";
             }
             else
             {
-                ResultLabel.Text = "Derrota";
-                ResultLabel.TextColor = Color.Red;
+                    background.Source = "Assets/Backgrounds/lostBackground.png";
             }
 
             if (result.LevelNumber > 0)
             {
-                modeReminder.Text = $"Nivel {result.LevelNumber}"; 
+                modeReminder.Text += $"{result.LevelNumber}"; 
             }
             else
             {
                 modeReminder.Text = "Modo libre";
+            }
+
+            if (result.Score < 0)
+            {
+                PointsLabel.TextColor = Color.Red;
             }
 
             if (GameResult.IsVictory)

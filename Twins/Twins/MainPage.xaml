@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:twinsc="clr-namespace:Twins.Components"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:twinsc="clr-namespace:Twins.Components" xmlns:common="clr-namespace:Twins.Views"
              mc:Ignorable="d"
              x:Class="Twins.MainPage"
              BackgroundImageSource="Assets/Backgrounds/menuprincipal2.png"
@@ -66,10 +66,26 @@
                        />
                         <Button 
                             ClassId="ButtonPlay"
-                            Text="JUEGO LIBRE" 
+                            Text="PARTIDA ESTÁNDAR" 
                             HorizontalOptions="Center" 
                             VerticalOptions="End"
-                            Clicked="OnFreeGame"
+                            Clicked="OnStandarGame"
+                            Style="{StaticResource buttonStyle}"
+                        />
+                        <Button 
+                            ClassId="ButtonPlay"
+                            Text="PARTIDA POR CARTA" 
+                            HorizontalOptions="Center" 
+                            VerticalOptions="End"
+                            Clicked="OnCardGame"
+                            Style="{StaticResource buttonStyle}"
+                        />
+                        <Button 
+                            ClassId="ButtonPlay"
+                            Text="PARTIDA POR CATEGORÍA" 
+                            HorizontalOptions="Center" 
+                            VerticalOptions="End"
+                            Clicked="OnCategoryGame"
                             Style="{StaticResource buttonStyle}"
                         />
                         <Button 
@@ -102,6 +118,9 @@
             </StackLayout>
         </StackLayout>
         <twinsc:NotImplementedMessage x:Name="CommingSoonView"/>
+        <common:ErrorView x:Name="ErrorView" AbsoluteLayout.LayoutBounds=".5,.5" 
+            AbsoluteLayout.LayoutFlags="PositionProportional" IsVisible="False">
+        </common:ErrorView>
     </AbsoluteLayout>
 
 </ContentPage>

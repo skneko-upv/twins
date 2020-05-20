@@ -11,29 +11,30 @@
                  WidthRequest="2000" HeightRequest="2000" 
                  AbsoluteLayout.LayoutBounds=".5,.5,1.0,1.0"
                  AbsoluteLayout.LayoutFlags="All"/>
-    <StackLayout BackgroundColor="{StaticResource backgroundColor}"
+    <Image x:Name="background" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,0.4,0.4"/>
+    <StackLayout 
                  HeightRequest="225"
                  WidthRequest="275"
-                 Padding="20"
+                 Margin="20,100,0,0"
                  Spacing="10"
                  VerticalOptions="Center"
                  HorizontalOptions="Center"
                  AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
                  AbsoluteLayout.LayoutFlags="All">
-        <Label Text="Victoria" FontSize="Medium" FontAttributes="Bold" TextColor="Green"
-                HorizontalOptions="Center" x:Name="ResultLabel"/>
-        <Label x:Name="modeReminder" FontSize="Small" TextColor="Gray"
-                HorizontalOptions="Center"/>
-        <StackLayout Spacing="15" Orientation="Horizontal" Margin="20,0">
+        
+        <StackLayout Spacing="15" Orientation="Horizontal">
             <StackLayout Spacing="15">
-                <Label Text="Puntos:"/>
-                <Label Text="Tiempo:"/>
+                <Label Text="Nivel:" FontSize="20" FontAttributes="Bold"/>
+                <Label Text="Puntos:" FontSize="20" FontAttributes="Bold"/>
+                <Label Text="Tiempo:" FontSize="20" FontAttributes="Bold"/>
             </StackLayout>
             <StackLayout Spacing="15">
-                <Label Text="0" x:Name="PointsLabel"/>
+                <Label x:Name="modeReminder" FontSize="20"/>
+                <Label Text="0" x:Name="PointsLabel" FontSize="20"/>
                 <StackLayout Orientation="Horizontal" Spacing="2">
-                    <Label Text="" x:Name="TimeLabel" />
+                    <Label Text="" x:Name="TimeLabel" FontSize="20" />
                 </StackLayout>
+                
             </StackLayout>
         </StackLayout>
         <Grid Margin="20" >

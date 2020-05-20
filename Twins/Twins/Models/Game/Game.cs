@@ -48,7 +48,12 @@ namespace Twins.Models.Game
             {
                 GameClock = new Clock();
             }
-            GameClock.TimedOut += () => EndGame(false);
+            GameClock.TimedOut += () => {
+                if (!IsFinished)
+                {
+                    EndGame(false);
+                }
+            };
 
             if (turnLimit != null)
             {
@@ -93,8 +98,11 @@ namespace Twins.Models.Game
 
         public virtual void Resume()
         {
-            GameClock.Start();
-            TurnClock.Start();
+            if (!IsFinished) 
+            {
+                GameClock.Start();
+                TurnClock.Start();
+            }
         }
 
         public virtual void Pause()
@@ -153,9 +161,8 @@ namespace Twins.Models.Game
             return matched;
         }
 
-        protected Card RandomHiddenCard()
-            => Board.Cells
-                    .Where(c => !c.KeepRevealed)
+        protected static Card RandomHiddenCard(IEnumerable<Board.Cell> cells)
+            => cells.Where(c => !c.KeepRevealed)
                     .Select(c => c.Card)
                     .ToList()
                     .PickRandom();
