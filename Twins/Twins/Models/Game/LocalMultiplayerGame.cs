@@ -54,6 +54,10 @@ namespace Twins.Models.Game
             get => true;
         }
 
+        public Player CurrentPlayer {
+            get => players[currentPlayer];
+        }
+
         public event Action TurnTimedOut;
         public event Action<GameResult> GameEnded;
         public event Action<Player> PlayerChanged;

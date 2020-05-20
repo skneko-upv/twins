@@ -8,6 +8,8 @@ namespace Twins.Models.Game
     {
         ICollection<Player> Players { get; }
 
+        Player CurrentPlayer { get; }
+
         event Action<Player> PlayerChanged;
     }
 }
