@@ -1,5 +1,8 @@
-﻿using System;
+﻿using SQLiteNetExtensions.Attributes;
+using System;
 using System.Collections.Generic;
+using Twins.Persistence;
+using Twins.Persistence.DataTypes;
 
 namespace Twins.Models.Singletons
 {
@@ -31,6 +34,8 @@ namespace Twins.Models.Singletons
         public TimeSpan LimitTime { get; set; }
 
         public TimeSpan TurnTime { get; set; }
+
+        
 
         private PlayerPreferences()
         {
