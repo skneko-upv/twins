@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Twins.Models.Properties;
 
 namespace Twins.Models.Game
 {
-    public class LocalMultiplayerGame : IMultiplayerGame
+    public class LocalCompetitiveGame : IMultiplayerGame
     {
         public Deck Deck {
             get => inner.Deck;
@@ -35,9 +34,9 @@ namespace Twins.Models.Game
             get => inner.TurnClock;
         }
 
-        public Score Score {
-            get => players[currentPlayer].Score;
-        }
+        // In this competitive game mode only player-wise scores are considered.
+        // This field for a general score is always zero.
+        public Score Score { get; } = new Score(0);
         public Board Board {
             get => inner.Board;
         }
@@ -46,7 +45,7 @@ namespace Twins.Models.Game
             get => inner.LevelNumber;
         }
 
-        public ICollection<Player> Players {
+        public IList<Player> Players {
             get => players;
         }
 
@@ -58,8 +57,16 @@ namespace Twins.Models.Game
             get => players[currentPlayer];
         }
 
-        public event Action TurnTimedOut;
-        public event Action<GameResult> GameEnded;
+        public event Action TurnTimedOut {
+            add { inner.TurnTimedOut += value; }
+            remove { inner.TurnTimedOut -= value; }
+        }
+
+        public event Action<GameResult> GameEnded {
+            add { inner.GameEnded += value; }
+            remove { inner.GameEnded -= value; }
+        }
+
         public event Action<Player> PlayerChanged;
         public event Action<bool> AttemptedMatch;
 
@@ -67,32 +74,28 @@ namespace Twins.Models.Game
         readonly Player[] players;
         int currentPlayer;
 
-        public LocalMultiplayerGame(IGame inner, params Player[] players)
+        public LocalCompetitiveGame(IGame inner, params Player[] players)
         {
             this.inner = inner;
             this.players = players;
 
-            inner.TurnTimedOut += TurnTimedOut;
-            inner.GameEnded += GameEnded;
-            inner.Score.Changed += delta =>
-            {
-                players[currentPlayer].Score.Value += delta;
-            };
             inner.AttemptedMatch += success =>
             {
                 if (success)
                 {
                     players[currentPlayer].MatchSucceses.Value++;
-                    AttemptedMatch(true);
+                    AttemptedMatch?.Invoke(true);
                 }
                 else
                 {
                     players[currentPlayer].MatchFailures.Value++;
-                    AttemptedMatch(false);
+                    AttemptedMatch?.Invoke(false);
                 }
             };
 
             currentPlayer = 0;
+
+            inner.Board.Game = this;
         }
 
         public void Resume() => inner.Resume();

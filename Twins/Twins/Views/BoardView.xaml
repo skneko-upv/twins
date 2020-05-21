@@ -41,10 +41,12 @@
 
                             <Image Source="Assets/Icons/score.png" HorizontalOptions="Center"
                                        VerticalOptions="Center" HeightRequest="50" Margin="10,0"/>
-                            <Label x:Name="scoreLabel" FontSize="40" TextColor="White" Margin="0,0,60,0" />
+                            <Label x:Name="scoreLabel1" FontSize="40" TextColor="White" />
+                            <Label x:Name="scoreLabelVs" Text="vs" FontSize="25" TextColor="White" IsVisible="false" VerticalOptions="Center" />
+                            <Label x:Name="scoreLabel2" FontSize="40" TextColor="White" IsVisible="false" />
 
                             <Label FontAttributes="Bold"
-                                       x:Name="turnTextLabel" TextColor="White" FontSize="40">
+                                       x:Name="turnTextLabel" TextColor="White" FontSize="40" Margin="60,0,0,0">
                                 Turno
                             </Label>
                             <Label Text="" x:Name="turnLabel"
@@ -52,7 +54,17 @@
                             <Label Text=":"  Margin="0,0,5,0" 
                                        x:Name="turn2PointLabel" TextColor="White" FontSize="40"/>
                             <Label x:Name="turnTimeLabel" TextColor="White" FontSize="40"/>
-
+                        </StackLayout>
+                        <StackLayout x:Name="multiplayerFrame" IsVisible="false" 
+                                     Orientation="Horizontal"
+                                     HorizontalOptions="End" Padding="0,0,8,0"
+                                     VerticalOptions="Center">
+                            <Label TextColor="White" FontSize="30"
+                                   Text="Turno del jugador"
+                                   HorizontalTextAlignment="End"/>
+                            <Label x:Name="playerLabel" TextColor="Orange" FontSize="30"
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="End"/>
                         </StackLayout>
                     </Grid>
                     <Grid HorizontalOptions="Center"

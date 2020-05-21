@@ -13,13 +13,14 @@ namespace Twins.Models
         public int TimedOutDelta { get; set; } = 2;
         public int MatchFailDeltaMax { get; set; } = 10;
 
-        public event Action<int> Changed;
+        public event Action<int, int> Changed;
 
         public int Value {
             get => value;
             set {
+                var previous = this.value;
                 this.value = value;
-                Changed?.Invoke(value);
+                Changed?.Invoke(previous, value);
             }
         }
         public int value;

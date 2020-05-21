@@ -112,7 +112,7 @@ namespace Twins.Models.Builders
         {
             if (players != null && players.Count > 1)
             {
-                return new LocalMultiplayerGame(BuildByKind(), players.ToArray());
+                return new LocalCompetitiveGame(BuildByKind(), players.ToArray());
             }
             else
             {

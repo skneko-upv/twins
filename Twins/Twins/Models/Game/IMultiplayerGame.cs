@@ -6,7 +6,7 @@ namespace Twins.Models.Game
 {
     interface IMultiplayerGame : IGame
     {
-        ICollection<Player> Players { get; }
+        IList<Player> Players { get; }
 
         Player CurrentPlayer { get; }
 

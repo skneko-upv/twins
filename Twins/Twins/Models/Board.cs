@@ -11,7 +11,7 @@ namespace Twins.Models
 
         public int Width { get; }
 
-        public IGame Game { get; }
+        public IGame Game { get; set; }
 
         /// <summary>
         /// The reference card shown to the player to help them achieve
