@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:twinsc="clr-namespace:Twins.Components" xmlns:common="clr-namespace:Twins.Views"
              mc:Ignorable="d"
-             x:Class="Twins.OnAppearingAsync"
+             x:Class="Twins.MainPage"
              BackgroundImageSource="Assets/Backgrounds/menuprincipal2.png"
              NavigationPage.HasBackButton="False"
              NavigationPage.HasNavigationBar="False">
@@ -69,7 +69,7 @@
                             Text="PARTIDA ESTÁNDAR" 
                             HorizontalOptions="Center" 
                             VerticalOptions="End"
-                            Clicked="OnStandarGame"
+                            Clicked="OnStandardGame"
                             Style="{StaticResource buttonStyle}"
                         />
                         <Button 

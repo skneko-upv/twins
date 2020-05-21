@@ -65,11 +65,13 @@ namespace Twins.Views
         private async void OnCancel(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
+            MainPage.EffectsPlayer.Play();
         }
         private void UpdateSong() 
         {
             var defaultparameters = PlayerPreferences.Instance;
             defaultparameters.SelectedSong = SelectSong.SelectedItem.ToString();
+            MainPage.Player.LoadSong(SelectSong.SelectedItem.ToString() + ".wav");
         } 
         private void OnlyNumbers(object sender, TextChangedEventArgs e)
         {
@@ -227,7 +229,7 @@ namespace Twins.Views
                 ErrorView.IsVisible = true;
                 ErrorView.SetTextError(error.Message);
             }
-
+            MainPage.EffectsPlayer.Play();
         }
 
         private async Task UpdateDatabase()
@@ -249,12 +251,14 @@ namespace Twins.Views
         private void ErrorViewClicked(object sender, EventArgs e)
         {
             ErrorView.IsVisible = false;
+            MainPage.EffectsPlayer.Play();
         }
 
         private void Volume_ValueChanged(object sender, ValueChangedEventArgs e)
         {
             //here is the control logic volume
-            OnAppearingAsync.player.ChangeVolume(Volume.Value);
+            MainPage.Player.ChangeVolume(Volume.Value);
+            MainPage.EffectsPlayer.ChangeVolume(Volume.Value);
         }
 
         private void OnlyNumbersTime(object sender, TextChangedEventArgs e)

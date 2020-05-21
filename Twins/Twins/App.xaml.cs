@@ -10,7 +10,7 @@ namespace Twins
             InitializeComponent();
 
             var _ = Database.Instance;
-            MainPage = new NavigationPage(new OnAppearingAsync());
+            MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()

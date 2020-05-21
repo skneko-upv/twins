@@ -43,6 +43,7 @@ namespace Twins.Components
 
         private async void ClickedLevel(object sender, EventArgs e)
         {
+            MainPage.EffectsPlayer.Play();
             var game = gameBuilder
                         .WithLevelNumber(number).Build();
             await Navigation.PushAsync(new BoardView(game.Board));

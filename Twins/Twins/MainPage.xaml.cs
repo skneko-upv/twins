@@ -16,18 +16,18 @@ namespace Twins
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
-
     
-    public partial class OnAppearingAsync : ContentPage
+    public partial class MainPage : ContentPage
     {
-        public static AudioPlayer player { get; set; }
-        PlayerPreferences gameConfiguration = PlayerPreferences.Instance;
+        public static AudioPlayer Player { get; set; }
+        public static AudioPlayer EffectsPlayer { get; set; }
+
+        readonly PlayerPreferences gameConfiguration = PlayerPreferences.Instance;
         Game game;
         GameBuilder gameBuilder; 
-        public OnAppearingAsync()
+        public MainPage()
         {
             InitializeComponent();
-            //InitPlayerPreferences();
 
         }
 
@@ -36,33 +36,37 @@ namespace Twins
             try
             {
                 var database = Database.Instance;
-                var playerPreferences = await database.GetPlayerPreferences();
-                gameConfiguration.SelectedSong = playerPreferences.SelectedSong;
-                gameConfiguration.Volume = playerPreferences.Volume;
-                var decksdatabase = await database.GetDecksAsync();
+                var saved = await database.GetPlayerPreferences();
+                gameConfiguration.SelectedSong = saved.SelectedSong;
+                gameConfiguration.Volume = saved.Volume;
+
+                var savedDecks = await database.GetDecksAsync();
                 var decks = new List<string>();
-                foreach (Persistence.DataTypes.Deck d in decksdatabase)
+                foreach (var d in savedDecks)
                 {
                     decks.Add(d.Name);
                 };
 
-                gameConfiguration.Column = playerPreferences.Column;
-                gameConfiguration.Row = playerPreferences.Row;
+                gameConfiguration.Column = saved.Column;
+                gameConfiguration.Row = saved.Row;
                 gameConfiguration.Decks = decks;
-                gameConfiguration.SelectedDeck = playerPreferences.SelectedDeck;
-                gameConfiguration.LimitTime = playerPreferences.LimitTime;
-                gameConfiguration.TurnTime = playerPreferences.TurnTime;
-
-                player = new AudioPlayer();
-                player.LoadSong(gameConfiguration.SelectedSong + ".wav");
-                player.Player.Play();
-                player.ChangeVolume(gameConfiguration.Volume);
+                gameConfiguration.SelectedDeck = saved.SelectedDeck;
+                gameConfiguration.LimitTime = saved.LimitTime;
+                gameConfiguration.TurnTime = saved.TurnTime;
             }
-            catch (Exception error) {
-                player = new AudioPlayer();
-                player.LoadSong(gameConfiguration.SelectedSong + ".wav");
-                player.Player.Play();
-                player.ChangeVolume(gameConfiguration.Volume);
+            catch (Exception) { }
+
+            if (Player == null)
+            {
+                Player = new AudioPlayer();
+                EffectsPlayer = new AudioPlayer();
+            }
+
+            if (Player.CurrentSong == "")
+            {
+                Player.LoadSong(gameConfiguration.SelectedSong + ".wav");
+                Player.ChangeVolume(gameConfiguration.Volume);
+                EffectsPlayer.LoadEffect(gameConfiguration.ButtonEffect + ".wav");
             }
 
         }
@@ -77,7 +81,7 @@ namespace Twins
 
         protected override void  OnAppearing()
         {
-                InitPlayerPreferences();
+            InitPlayerPreferences();
         }
 
         private async void OnOption(object sender, EventArgs e)
@@ -86,17 +90,18 @@ namespace Twins
             // resume
             // Open Option menu
             await Navigation.PushAsync(new Views.OptionsView());
+            MainPage.EffectsPlayer.Play();
         }
 
         private void OnMute(object sender, EventArgs e)
         {
             // resume
             // Mute music
-            if ( player.GetVolume() == 0.0 ) {
-                player.ChangeVolume(gameConfiguration.Volume); 
+            if ( Player.GetVolume() == 0.0 ) {
+                Player.ChangeVolume(gameConfiguration.Volume); 
             }
             else {
-                player.ChangeVolume(0.0); 
+                Player.ChangeVolume(0.0); 
             }
         }
 
@@ -112,17 +117,18 @@ namespace Twins
             // resume
             // Open History menu
             await Navigation.PushAsync(new Views.LevelsView());
+            EffectsPlayer.Play();
         }
 
-        private async void OnStandarGame(object sender, EventArgs e)
+        private async void OnStandardGame(object sender, EventArgs e)
         {
             // resume
             // Open Free Game menu
             try{
-            InitGameConfiguration();
-            gameBuilder.OfKind(GameBuilder.GameKind.Standard);
-            game = gameBuilder.Build();
-            await Navigation.PushAsync(new BoardView(game.Board));
+                InitGameConfiguration();
+                gameBuilder.OfKind(GameBuilder.GameKind.Standard);
+                game = gameBuilder.Build();
+                await Navigation.PushAsync(new BoardView(game.Board));
             }
             catch (Exception error)
             {
@@ -182,10 +188,11 @@ namespace Twins
             // Open Free Game menu
             try
             { 
-            InitGameConfiguration();
-            gameBuilder.OfKind(GameBuilder.GameKind.Category);
-            game = gameBuilder.Build();
-            await Navigation.PushAsync(new BoardView(game.Board));
+                InitGameConfiguration();
+                gameBuilder.OfKind(GameBuilder.GameKind.Category);
+                game = gameBuilder.Build();
+                await Navigation.PushAsync(new BoardView(game.Board));
+                MainPage.EffectsPlayer.Play();
             }
             catch (Exception error)
             {
@@ -200,6 +207,7 @@ namespace Twins
             // resume
             // Open Multiplayer menu
             CommingSoonView.ButtonNotImplemented();
+            MainPage.EffectsPlayer.Play();
         }
 
         private void OnChallengeGame(object sender, EventArgs e)
@@ -207,6 +215,7 @@ namespace Twins
             // resume
             // Open Challenge menu
             CommingSoonView.ButtonNotImplemented();
+            MainPage.EffectsPlayer.Play();
         }
 
         private void OnDesck(object sender, EventArgs e)
@@ -214,6 +223,7 @@ namespace Twins
             // resume
             // Open Desck menu
             CommingSoonView.ButtonNotImplemented();
+            MainPage.EffectsPlayer.Play();
         }
 
     }

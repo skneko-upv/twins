@@ -16,6 +16,7 @@ namespace Twins.Components
         public void OnAcceptButton(object sender, EventArgs e)
         {
             CommingSoonView.IsVisible = false;
+            MainPage.EffectsPlayer.Play();
         }
 
         public void ButtonNotImplemented()

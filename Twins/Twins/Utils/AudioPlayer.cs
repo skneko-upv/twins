@@ -7,10 +7,12 @@ namespace Twins.Utils
     public class AudioPlayer
     {
         public Plugin.SimpleAudioPlayer.ISimpleAudioPlayer Player { get; }
+        public string CurrentSong { get; private set; } = "";
 
-        private static double Volume = 100.0;
+        private static double Volume = 1.0;
 
-        public AudioPlayer() { Player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current; }
+        //Arreglar bug que se stackean las canciones
+        public AudioPlayer() { Player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.CreateSimpleAudioPlayer(); }
 
         public void ChangeVolume(double newVolume) 
         {
@@ -22,11 +24,25 @@ namespace Twins.Utils
 
         public void LoadSong(String songName)
         {
-            Player.Load("Sounds\\" + songName);
-            Player.Volume = Volume;
-            Player.Loop = true;
-            Player.Play();
+            if (songName != CurrentSong)
+            {
+                Player.Load("Sounds\\" + songName);
+                Player.Volume = Volume;
+                Player.Loop = true;
+                CurrentSong = songName;
+       
+                Player.Play();
+            }
         }
+
+        public void LoadEffect(String effectName)
+        {
+            Player.Load("Sounds\\" + effectName);
+        }
+
+        public void Play() { Player.Play(); }
+
+        public void Pause() { Player.Pause(); }
     }
 }
 
