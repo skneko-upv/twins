@@ -31,7 +31,7 @@ namespace Twins
 
         }
 
-        private async void InitPlayerMusic()
+        private async void InitPlayerPreferences()
         {
             try
             {
@@ -39,6 +39,20 @@ namespace Twins
                 var playerPreferences = await database.GetPlayerPreferences();
                 gameConfiguration.SelectedSong = playerPreferences.SelectedSong;
                 gameConfiguration.Volume = playerPreferences.Volume;
+                var decksdatabase = await database.GetDecksAsync();
+                var decks = new List<string>();
+                foreach (Persistence.DataTypes.Deck d in decksdatabase)
+                {
+                    decks.Add(d.Name);
+                };
+
+                gameConfiguration.Column = playerPreferences.Column;
+                gameConfiguration.Row = playerPreferences.Row;
+                gameConfiguration.Decks = decks;
+                gameConfiguration.SelectedDeck = playerPreferences.SelectedDeck;
+                gameConfiguration.LimitTime = playerPreferences.LimitTime;
+                gameConfiguration.TurnTime = playerPreferences.TurnTime;
+
                 player = new AudioPlayer();
                 player.LoadSong(gameConfiguration.SelectedSong + ".wav");
                 player.Player.Play();
@@ -63,7 +77,7 @@ namespace Twins
 
         protected override void  OnAppearing()
         {
-                InitPlayerMusic();
+                InitPlayerPreferences();
         }
 
         private async void OnOption(object sender, EventArgs e)

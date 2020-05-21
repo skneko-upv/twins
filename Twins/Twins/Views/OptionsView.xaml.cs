@@ -21,26 +21,9 @@ namespace Twins.Views
             
         }
 
-        private async void InitPlayerPreferences()
+        private  void InitPlayerPreferences()
         {
-            var database = Database.Instance;
-            var defaultPreferences = PlayerPreferences.Instance;
-            var playerPreferences = await database.GetPlayerPreferences();
-            var decksdatabase = await database.GetDecksAsync();
-            var decks = new List<string>();
-            foreach (Persistence.DataTypes.Deck d in decksdatabase)
-            {
-                decks.Add(d.Name);
-            };
-
-            defaultPreferences.Column = playerPreferences.Column;
-            defaultPreferences.Row = playerPreferences.Row;
-            defaultPreferences.Decks = decks;
-            defaultPreferences.SelectedDeck = playerPreferences.SelectedDeck;
-            defaultPreferences.SelectedSong = playerPreferences.SelectedSong;
-            defaultPreferences.Volume = playerPreferences.Volume;
-            defaultPreferences.LimitTime = playerPreferences.LimitTime;
-            defaultPreferences.TurnTime = playerPreferences.TurnTime;
+          
             InitSelectionSongList();
             InitVolume();
             InitTime();
