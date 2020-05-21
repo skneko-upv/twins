@@ -20,8 +20,10 @@ namespace Twins.Models
 
         public override IEnumerable<Board.Cell> TryMatch()
         {
+            var reference = Board.FlippedCells.First().Card;
             bool isMatch = Board.FlippedCells.All(
-                c => c.Card.Categories.Contains(Board.ReferenceCategory));
+                c => c.Card.Equals(reference)
+                    && c.Card.Categories.Contains(Board.ReferenceCategory));
             return HandleMatchResult(isMatch);
         }
 
@@ -31,13 +33,27 @@ namespace Twins.Models
 
             if (!IsFinished && Board.ReferenceCard == null)
             {
+                CycleReferenceCategory();
+            }
+        }
+
+        void CycleReferenceCategory()
+        {
+            var sameCategoryCards = Board.Cells.Where(c => !c.KeepRevealed
+                                    && c.Card.Categories.Contains(Board.ReferenceCategory));
+            if (sameCategoryCards.Any())
+            {
+                Board.ReferenceCard = RandomHiddenCard(sameCategoryCards);
+            }
+            else
+            {
                 SetRandomReferenceCategory();
             }
         }
 
         void SetRandomReferenceCategory()
         {
-            var card = RandomHiddenCard();
+            var card = RandomHiddenCard(Board.Cells);
             Board.ReferenceCard = card;
             Board.ReferenceCategory = card.Categories
                                           .ToList()

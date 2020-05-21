@@ -5,6 +5,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Twins.Components;
 using Twins.Models;
+using Twins.Models.Singletons;
+using Twins.Utils;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace Twins.ViewModels
 {
@@ -32,6 +35,11 @@ namespace Twins.ViewModels
 
         public bool InteractionAllowed { get; private set; }
 
+        public AudioPlayer FlipEffect { get; private set; }
+
+        public AudioPlayer UnflipEffect { get; private set; }
+
+        private int lastScoreChange;
 
         public BoardViewModel(Board board)
         {
@@ -50,8 +58,19 @@ namespace Twins.ViewModels
             Board.CellKeepRevealedStatusChanged += OnCellKeepRevealedStatusChanged;
             Board.Game.TurnTimedOut += OnTurnTimedOut;
 
+            var preferences = PlayerPreferences.Instance;
+
+            FlipEffect = new AudioPlayer();
+            FlipEffect.LoadEffect(preferences.TurnCardEffect + ".wav");
+            FlipEffect.Player.Volume = 1;
+
+            UnflipEffect = new AudioPlayer();
+            UnflipEffect.LoadEffect(preferences.UnturnCardEffect + ".wav");
+            UnflipEffect.Player.Volume = 1;
+
             Board.Game.Resume();
             InteractionAllowed = true;
+            lastScoreChange = Board.Game.Score.Value;
         }
 
         private void OnTurnTimedOut()
@@ -71,11 +90,13 @@ namespace Twins.ViewModels
 
         private async void OnCellFlipped(Board.Cell cell)
         {
+            FlipEffect.Play();
             await CardComponents[cell].Flip();
         }
 
         private async void OnCellUnflipped(Board.Cell cell)
         {
+            UnflipEffect.Play();
             await CardComponents[cell].Unflip();
         }
 
@@ -90,7 +111,6 @@ namespace Twins.ViewModels
                 await CardComponents[cell].Unflip();
             }
         }
-
         private async void OnCellClicked(Board.Cell cell)
         {
             if (!InteractionAllowed)
@@ -107,20 +127,25 @@ namespace Twins.ViewModels
             if (Board.Game.ShouldTryMatch())
             {
                 InteractionAllowed = false;
-                Board.Game.Pause();
 
                 IEnumerable<Board.Cell> matched = Board.Game.TryMatch();
+
+                var score = Board.Game.Score.Value;
                 if (matched.Any())
                 {
                     OnCellsMatched(matched);
+                    
                     Board.ReferenceCard = null;
-                    await Task.Delay(250);
+                    await CardComponents[cell].ShowGreenPoints(score - lastScoreChange);
+                    await Task.Delay(150);
                 }
                 else
                 {
-                    await Task.Delay(1000);
-                }
+                    await CardComponents[cell].ShowRedPoints(score - lastScoreChange);
+                    await Task.Delay(150);
 
+                }
+                lastScoreChange = score;
                 if (Board.Game.ShouldEndTurn())
                 {
                     Board.Game.EndTurn();
@@ -129,9 +154,9 @@ namespace Twins.ViewModels
                 if (!Board.Game.IsFinished)
                 {
                     InteractionAllowed = true;
-                    Board.Game.Resume();
                 }
             }
         }
+
     }
 }

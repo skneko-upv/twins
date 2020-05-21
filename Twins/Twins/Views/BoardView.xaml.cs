@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Linq;
 using Twins.Components;
 using Twins.Models;
-using Twins.Utils;
+using Twins.Models.Singletons;
 using Twins.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -28,14 +29,8 @@ namespace Twins.Views
             turnTimeLabel.SetBinding(Label.TextColorProperty, "Color");
             turnTimeLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
 
-            successLabel.SetBinding(Label.TextProperty, "Value");
-            successLabel.BindingContext = boardViewModel.Board.Game.MatchSuccesses;
-
-            board.Game.Score.Changed += (_) =>
-            {
-                scoreLabel.Text = board.Game.Score.PositiveValue.ToString();
-            };
-            scoreLabel.Text = board.Game.Score.PositiveValue.ToString();
+            board.Game.Score.Changed += OnScoreChanged;
+            OnScoreChanged(board.Game.Score.Value);
 
             board.ReferenceCategoryChanged += OnReferenceCategoryChanged;
             OnReferenceCategoryChanged(board.ReferenceCategory);
@@ -51,6 +46,19 @@ namespace Twins.Views
             referenceCard.Clicked += () => { };
 
             FillBoard(board.Height, board.Width);
+        }
+
+        private void OnScoreChanged(int score)
+        {
+            if (score < 0)
+            {
+                scoreLabel.TextColor = Color.Red;
+            }
+            else
+            {
+                scoreLabel.TextColor = Color.White;
+            }
+            scoreLabel.Text = score.ToString();
         }
 
         private void OnReferenceCategoryChanged(Category category)
@@ -103,7 +111,6 @@ namespace Twins.Views
             boardArea.HeightRequest = 122 *  width;
             board.WidthRequest = 122 * height;
             board.HeightRequest = 122 *  width;
-
         }
 
         private async void OnReferenceCardChanged(Card card)
@@ -134,16 +141,16 @@ namespace Twins.Views
 
         private void OnMute(object sender, EventArgs e)
         {
-            var defaultparameters = DefaultParameters.Instance;
-            if (MainPage.player.GetVolume() == 0.0)
+            var preferences = PlayerPreferences.Instance;
+            if (Twins.MainPage.Player.GetVolume() == 0.0)
             {
-                defaultparameters.Volume = 100.0;
-                MainPage.player.ChangeVolume(defaultparameters.Volume);
+                preferences.Volume = 100.0;
+                Twins.MainPage.Player.ChangeVolume(preferences.Volume);
             }
             else
             {
-                defaultparameters.Volume = 0.0;
-                MainPage.player.ChangeVolume(defaultparameters.Volume);
+                preferences.Volume = 0.0;
+                MainPage.Player.ChangeVolume(preferences.Volume);
             }
         }
 
@@ -151,5 +158,6 @@ namespace Twins.Views
         {
             return EndGameModal;
         }
+
     }
 }
