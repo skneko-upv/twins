@@ -135,15 +135,14 @@ namespace Twins.Views
         private void OnMute(object sender, EventArgs e)
         {
             var defaultparameters = DefaultParameters.Instance;
-            if (MainPage.player.GetVolume() == 0.0)
+            var Player = MainPage.Player;
+            if (Player.GetVolume() == 0.0)
             {
-                defaultparameters.Volume = 100.0;
-                MainPage.player.ChangeVolume(defaultparameters.Volume);
+                Player.ChangeVolume(defaultparameters.Volume);
             }
             else
             {
-                defaultparameters.Volume = 0.0;
-                MainPage.player.ChangeVolume(defaultparameters.Volume);
+                Player.ChangeVolume(0.0);
             }
         }
 

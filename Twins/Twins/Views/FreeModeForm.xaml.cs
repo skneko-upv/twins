@@ -33,6 +33,7 @@ namespace Twins.Views
         {
             //resume
             //Go Back to Main Menu
+            MainPage.Effects.Play();
             await Navigation.PopAsync();
         }
 
@@ -64,6 +65,8 @@ namespace Twins.Views
                
 
                 game = gameBuilder.Build();
+
+                MainPage.Effects.Play();
 
                 await Navigation.PushAsync(new BoardView(game.Board));
             } 
@@ -126,7 +129,7 @@ namespace Twins.Views
 
         private void SetSongGame() 
         {
-            var player = new AudioPlayer();
+            var player = MainPage.Player;
             player.LoadSong(SongPicker.SelectedItem + ".wav");
         }
 
@@ -158,6 +161,7 @@ namespace Twins.Views
 
         private void ErrorViewClicked(object sender, EventArgs e)
         {
+            MainPage.Effects.Play();
             ErrorView.IsVisible = false;
         }
 

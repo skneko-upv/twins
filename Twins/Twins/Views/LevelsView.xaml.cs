@@ -52,6 +52,7 @@ namespace Twins.Views
 
         private async void Back(object sender, EventArgs e)
         {
+            MainPage.Effects.Play();
             await Navigation.PopAsync();
         }
     }

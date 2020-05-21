@@ -5,6 +5,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Twins.Components;
 using Twins.Models;
+using Twins.Utils;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace Twins.ViewModels
 {
@@ -32,6 +34,9 @@ namespace Twins.ViewModels
 
         public bool InteractionAllowed { get; private set; }
 
+        public AudioPlayer FlipEffect { get; private set; }
+
+        public AudioPlayer UnflipEffect { get; private set; }
 
         public BoardViewModel(Board board)
         {
@@ -49,6 +54,16 @@ namespace Twins.ViewModels
             Board.CellUnflipped += OnCellUnflipped;
             Board.CellKeepRevealedStatusChanged += OnCellKeepRevealedStatusChanged;
             Board.Game.TurnTimedOut += OnTurnTimedOut;
+
+            var defaultparameters = DefaultParameters.Instance;
+
+            FlipEffect = new AudioPlayer();
+            FlipEffect.LoadEffect(defaultparameters.TurnCardEffect + ".wav");
+            FlipEffect.Player.Volume = 1;
+
+            UnflipEffect = new AudioPlayer();
+            UnflipEffect.LoadEffect(defaultparameters.UnturnCardEffect + ".wav");
+            UnflipEffect.Player.Volume = 1;
 
             Board.Game.Resume();
             InteractionAllowed = true;
@@ -71,11 +86,13 @@ namespace Twins.ViewModels
 
         private async void OnCellFlipped(Board.Cell cell)
         {
+            FlipEffect.Play();
             await CardComponents[cell].Flip();
         }
 
         private async void OnCellUnflipped(Board.Cell cell)
         {
+            UnflipEffect.Play();
             await CardComponents[cell].Unflip();
         }
 

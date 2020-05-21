@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Twins.Models;
 using Twins.Persistence;
+using Twins.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,6 +12,8 @@ namespace Twins.Views
     public partial class ResumeGameView : AbsoluteLayout
     {
         public GameResult GameResult { get; private set; }
+
+        private bool AlreadyPlayed { get; set; }
 
         public int Score {
             set => PointsLabel.Text = value.ToString();
@@ -23,6 +26,7 @@ namespace Twins.Views
         public ResumeGameView()
         {
             InitializeComponent();
+            AlreadyPlayed = false;
         }
 
         public void OnRetry(object sender, EventArgs e)
@@ -32,6 +36,9 @@ namespace Twins.Views
 
         public async void SetStadistics(GameResult result)
         {
+            var effects = new AudioPlayer();
+            var defaultparameters = DefaultParameters.Instance;         
+
             GameResult = result;
             Score = result.Score;
             Time = result.Time;
@@ -39,11 +46,17 @@ namespace Twins.Views
             {
                 ResultLabel.Text = "Victoria";
                 ResultLabel.TextColor = Color.Green;
+                effects.LoadEffect(defaultparameters.WinEffect + ".wav");
             }
             else
             {
                 ResultLabel.Text = "Derrota";
                 ResultLabel.TextColor = Color.Red;
+                effects.LoadEffect(defaultparameters.LoseEffect + ".wav");
+            }
+            if (!AlreadyPlayed) { 
+                effects.Play();
+                AlreadyPlayed = true;
             }
 
             if (result.LevelNumber > 0)

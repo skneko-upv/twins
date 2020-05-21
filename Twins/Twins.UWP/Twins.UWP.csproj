@@ -179,7 +179,13 @@
     <Content Include="Assets\SmallTile.scale-200.png" />
     <Content Include="Assets\SmallTile.scale-400.png" />
     <Content Include="Assets\Sounds\Chiptronical.wav" />
+    <Content Include="Assets\Sounds\clockticksound.wav" />
+    <Content Include="Assets\Sounds\Lose Sound.wav" />
+    <Content Include="Assets\Sounds\menuButtonSound.wav" />
     <Content Include="Assets\Sounds\Solve The Puzzle.wav" />
+    <Content Include="Assets\Sounds\Ta Da.wav" />
+    <Content Include="Assets\Sounds\Voltear Carta Invertido.wav" />
+    <Content Include="Assets\Sounds\Voltear Carta.wav" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-400.png" />

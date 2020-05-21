@@ -21,6 +21,18 @@ namespace Twins.Models
 
         public string SelectedSong { get; set; }
 
+        public string ButtonEffect { get; set; }
+
+        public string TurnCardEffect { get; set; }
+
+        public string UnturnCardEffect { get; set; }
+
+        public string WinEffect { get; set; }
+
+        public string LoseEffect { get; set; }
+
+        public string ClockTimerEffect { get; set; }
+
         public double Volume { get; set; }
 
         private DefaultParameters()
@@ -34,6 +46,12 @@ namespace Twins.Models
             Decks = decks;
             SelectedDeck = "Animales";
             SelectedSong = "Solve The Puzzle";
+            ButtonEffect = "menuButtonSound";
+            TurnCardEffect = "Voltear Carta";
+            UnturnCardEffect = "Voltear Carta Invertido";
+            WinEffect = "Ta Da";
+            LoseEffect = "Lose Sound";
+            ClockTimerEffect = "clockticksound";
             Volume = 100.0;
         }
 

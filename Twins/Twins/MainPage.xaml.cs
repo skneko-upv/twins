@@ -13,21 +13,30 @@ namespace Twins
     
     public partial class MainPage : ContentPage
     {
-        public static AudioPlayer player { get; set; }
+        public static AudioPlayer Player { get; set; }
+        public static AudioPlayer Effects { get; set; }
         public MainPage()
         {
             InitializeComponent();
-
         }
 
        
         protected override void OnAppearing()
         {
-            player = new AudioPlayer();
+            if (Player == null) 
+            { 
+                Player = new AudioPlayer();
+                Effects = new AudioPlayer();
+            }
+            
             var defaultParameter = DefaultParameters.Instance;
-            player.LoadSong(defaultParameter.SelectedSong +".wav");
-            player.Player.Play();
-            player.ChangeVolume(defaultParameter.Volume);
+
+            if (Player.CurrentSong == "")
+            {
+                Player.LoadSong(defaultParameter.SelectedSong + ".wav");
+                Player.ChangeVolume(defaultParameter.Volume);
+                Effects.LoadEffect(defaultParameter.ButtonEffect + ".wav");
+            }
         }
 
         private async void OnOption(object sender, EventArgs e)
@@ -36,6 +45,7 @@ namespace Twins
             // resume
             // Open Option menu
             await Navigation.PushAsync(new Views.OptionsView());
+            MainPage.Effects.Play();
         }
 
         private void OnMute(object sender, EventArgs e)
@@ -43,13 +53,11 @@ namespace Twins
             // resume
             // Mute music
             var defaultparameters = DefaultParameters.Instance;
-            if ( player.GetVolume() == 0.0 ) {
-                defaultparameters.Volume = 100.0;
-                player.ChangeVolume(defaultparameters.Volume); 
+            if ( Player.GetVolume() == 0.0 ) {
+                Player.ChangeVolume(defaultparameters.Volume);
             }
             else {
-                defaultparameters.Volume = 0.0;
-                player.ChangeVolume(defaultparameters.Volume); 
+                Player.ChangeVolume(0.0);
             }
         }
 
@@ -65,6 +73,7 @@ namespace Twins
             // resume
             // Open History menu
             await Navigation.PushAsync(new Views.LevelsView());
+            MainPage.Effects.Play();
         }
 
         private async void OnFreeGame(object sender, EventArgs e)
@@ -72,6 +81,7 @@ namespace Twins
             // resume
             // Open Free Game menu
             await Navigation.PushAsync(new Views.FreeModeForm());
+            MainPage.Effects.Play();
         }
 
         private void OnMultiplayerGame(object sender, EventArgs e)
@@ -79,6 +89,7 @@ namespace Twins
             // resume
             // Open Multiplayer menu
             CommingSoonView.ButtonNotImplemented();
+            MainPage.Effects.Play();
         }
 
         private void OnChallengeGame(object sender, EventArgs e)
@@ -86,6 +97,7 @@ namespace Twins
             // resume
             // Open Challenge menu
             CommingSoonView.ButtonNotImplemented();
+            MainPage.Effects.Play();
         }
 
         private void OnDesck(object sender, EventArgs e)
@@ -93,6 +105,7 @@ namespace Twins
             // resume
             // Open Desck menu
             CommingSoonView.ButtonNotImplemented();
+            MainPage.Effects.Play();
         }
 
     }

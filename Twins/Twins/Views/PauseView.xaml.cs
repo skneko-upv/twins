@@ -18,14 +18,19 @@ namespace Twins.Views
 
         public void OnResume(object sender, EventArgs e)
         {
+            MainPage.Effects.Play();
             ((BoardViewModel)BindingContext).Board.Game.Resume();
             window.IsVisible = false;
         }
 
-        public void OnPause() { window.IsVisible = true; }
+        public void OnPause() {
+            MainPage.Effects.Play();
+            window.IsVisible = true;
+        }
 
         public async void OnAbandon(object sender, EventArgs e)
         {
+            MainPage.Effects.Play();
             await Navigation.PopToRootAsync();
         }
 
