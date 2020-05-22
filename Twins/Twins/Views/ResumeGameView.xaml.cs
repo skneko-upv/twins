@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Twins.Models;
+using Twins.Models.Singletons;
 using Twins.Persistence;
+using Twins.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,6 +13,8 @@ namespace Twins.Views
     public partial class ResumeGameView : AbsoluteLayout
     {
         public GameResult GameResult { get; private set; }
+
+        private bool AlreadyPlayed { get; set; }
 
         public int Score {
             set => PointsLabel.Text = value.ToString();
@@ -23,6 +27,7 @@ namespace Twins.Views
         public ResumeGameView()
         {
             InitializeComponent();
+            AlreadyPlayed = false;
         }
 
         public void OnRetry(object sender, EventArgs e)
@@ -32,16 +37,27 @@ namespace Twins.Views
 
         public async void SetStadistics(GameResult result)
         {
+            var effects = new AudioPlayer();
+            var preferences = PlayerPreferences.Instance;         
+
             GameResult = result;
             Score = result.Score;
             Time = result.Time;
             if (result.IsVictory)
             {
                 background.Source = "Assets/Backgrounds/winBackground.png";
+                effects.LoadEffect(preferences.WinEffect + ".wav");
             }
             else
             {
-                    background.Source = "Assets/Backgrounds/lostBackground.png";
+                background.Source = "Assets/Backgrounds/lostBackground.png";
+                effects.LoadEffect(preferences.LoseEffect + ".wav");
+            }
+
+            if (!AlreadyPlayed)
+            {
+                effects.Play();
+                AlreadyPlayed = true;
             }
 
             if (result.LevelNumber > 0)
@@ -75,10 +91,6 @@ namespace Twins.Views
         public async void OnNext(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
-            //Models.StandardGame game = new Models.StandardGame(6, 4, Components.BasicDeck.Animales,
-                //TimeSpan.FromMinutes(1),
-                //TimeSpan.FromSeconds(5));
-            //await Navigation.PushAsync(new Views.BoardView(game.Board));
         }
     }
 }

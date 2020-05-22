@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Twins.Models.Properties;
+using Twins.Models.Singletons;
 using Twins.Models.Strategies;
+using Twins.Utils;
+using Xamarin.Forms;
 using static Twins.Utils.CollectionExtensions;
 
 namespace Twins.Models.Game
@@ -10,7 +14,7 @@ namespace Twins.Models.Game
     public abstract class Game : IGame
     {
         private const int GroupSize = 2;
-        
+
         public Deck Deck { get; }
 
         public Observable<int> RemainingMatches { get; private set; }
@@ -27,6 +31,10 @@ namespace Twins.Models.Game
         public Score Score { get; protected set; }
 
         public Board Board { get; protected set; }
+
+        private AudioPlayer ClockEffect { get; set; }
+
+        private Thread clockThreadEffect { get; set; }
 
         public int LevelNumber { get; }
 
@@ -82,6 +90,18 @@ namespace Twins.Models.Game
             Score = new Score();
             TurnTimedOut += () => { Score.DecrementTimedOut(); };
             LevelNumber = levelNumber;
+
+            Device.StartTimer(TimeSpan.FromMilliseconds(500.0), () =>
+            {
+                if(Int32.Parse(GameClock.TimeLeft.Time.Substring(3)) < 10 && ClockEffect == null) {
+                    var preferences = PlayerPreferences.Instance;
+                    ClockEffect = new AudioPlayer();
+                    ClockEffect.LoadEffect(preferences.ClockTimerEffect + ".wav");
+                    ClockEffect.Player.Loop = true;
+                    ClockEffect.Play();
+                }
+                return true;
+            });
         }
 
         public abstract IEnumerable<Board.Cell> TryMatch();
@@ -102,6 +122,7 @@ namespace Twins.Models.Game
             {
                 GameClock.Start();
                 TurnClock.Start();
+                if (ClockEffect != null) { ClockEffect.Play(); }
             }
         }
 
@@ -109,6 +130,7 @@ namespace Twins.Models.Game
         {
             GameClock.Stop();
             TurnClock.Stop();
+            if (ClockEffect != null) { ClockEffect.Pause(); }
         }
 
         public virtual void EndTurn()
@@ -122,6 +144,7 @@ namespace Twins.Models.Game
         {
             Pause();
             IsFinished = true;
+            if (ClockEffect != null) { ClockEffect.Pause(); }
 
             GameEnded(new GameResult(victory, MatchSuccesses.Value, MatchFailures.Value, LevelNumber, Score.Value, GameClock.GetTimeSpan()));
         }

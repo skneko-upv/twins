@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using Twins.Components;
 using Twins.Models.Singletons;
+using Twins.Persistence;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,9 +17,17 @@ namespace Twins.Views
         public OptionsView()
         {
             InitializeComponent();
+            InitPlayerPreferences();
+            
+        }
+
+        private  void InitPlayerPreferences()
+        {
+          
             InitSelectionSongList();
             InitVolume();
             InitTime();
+            SelectorDeck.InitSelectionDeckList();
         }
 
         private void InitTime()
@@ -54,11 +65,13 @@ namespace Twins.Views
         private async void OnCancel(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
+            MainPage.EffectsPlayer.Play();
         }
         private void UpdateSong() 
         {
             var defaultparameters = PlayerPreferences.Instance;
             defaultparameters.SelectedSong = SelectSong.SelectedItem.ToString();
+            MainPage.Player.LoadSong(SelectSong.SelectedItem.ToString() + ".wav");
         } 
         private void OnlyNumbers(object sender, TextChangedEventArgs e)
         {
@@ -119,6 +132,7 @@ namespace Twins.Views
                                     SelectorDeck.UpdateDeck();
                                     UpdateSong();
                                     UpdateVolume();
+                                    await UpdateDatabase();
                                     await Navigation.PopAsync();
                                 }
                                 else
@@ -129,6 +143,7 @@ namespace Twins.Views
                                     SelectorDeck.UpdateDeck();
                                     UpdateSong();
                                     UpdateVolume();
+                                    await UpdateDatabase();
                                     await Navigation.PopAsync();
                                 }
 
@@ -143,6 +158,7 @@ namespace Twins.Views
                                     SelectorDeck.UpdateDeck();
                                     UpdateSong();
                                     UpdateVolume();
+                                    await UpdateDatabase();
                                     await Navigation.PopAsync();
                                 }
                                 else
@@ -152,6 +168,7 @@ namespace Twins.Views
                                     SelectorDeck.UpdateDeck();
                                     UpdateSong();
                                     UpdateVolume();
+                                    await UpdateDatabase();
                                     await Navigation.PopAsync();
                                 }
                             
@@ -171,6 +188,7 @@ namespace Twins.Views
                             SelectorDeck.UpdateDeck();
                             UpdateSong();
                             UpdateVolume();
+                            await UpdateDatabase();
                             await Navigation.PopAsync();
                         }
                         else
@@ -179,6 +197,7 @@ namespace Twins.Views
                             SelectorDeck.UpdateDeck();
                             UpdateSong();
                             UpdateVolume();
+                            await UpdateDatabase();
                             await Navigation.PopAsync();
                         }
 
@@ -210,18 +229,36 @@ namespace Twins.Views
                 ErrorView.IsVisible = true;
                 ErrorView.SetTextError(error.Message);
             }
+            MainPage.EffectsPlayer.Play();
+        }
 
+        private async Task UpdateDatabase()
+        {
+            var database = Database.Instance;
+            var playerPreferencesDB = await database.GetPlayerPreferences();
+            var playerPreferences = PlayerPreferences.Instance;
+            playerPreferencesDB.Column=playerPreferences.Column;
+            playerPreferencesDB.Row = playerPreferences.Row;
+            playerPreferencesDB.SelectedDeck = playerPreferences.SelectedDeck;
+            playerPreferencesDB.SelectedSong = playerPreferences.SelectedSong;
+            playerPreferencesDB.Volume = playerPreferences.Volume;
+            playerPreferencesDB.LimitTime = playerPreferences.LimitTime;
+            playerPreferencesDB.TurnTime = playerPreferences.TurnTime;
+
+            Database.Instance.SavePlayerPreferences(playerPreferencesDB);
         }
 
         private void ErrorViewClicked(object sender, EventArgs e)
         {
             ErrorView.IsVisible = false;
+            MainPage.EffectsPlayer.Play();
         }
 
         private void Volume_ValueChanged(object sender, ValueChangedEventArgs e)
         {
             //here is the control logic volume
-            MainPage.player.ChangeVolume(Volume.Value);
+            MainPage.Player.ChangeVolume(Volume.Value);
+            MainPage.EffectsPlayer.ChangeVolume(Volume.Value);
         }
 
         private void OnlyNumbersTime(object sender, TextChangedEventArgs e)

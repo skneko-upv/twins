@@ -175,16 +175,16 @@ namespace Twins.Views
 
         private void OnMute(object sender, EventArgs e)
         {
-            var defaultparameters = PlayerPreferences.Instance;
-            if (MainPage.player.GetVolume() == 0.0)
+            var preferences = PlayerPreferences.Instance;
+            if (Twins.MainPage.Player.GetVolume() == 0.0)
             {
-                defaultparameters.Volume = 100.0;
-                MainPage.player.ChangeVolume(defaultparameters.Volume);
+                preferences.Volume = 100.0;
+                Twins.MainPage.Player.ChangeVolume(preferences.Volume);
             }
             else
             {
-                defaultparameters.Volume = 0.0;
-                MainPage.player.ChangeVolume(defaultparameters.Volume);
+                preferences.Volume = 0.0;
+                MainPage.Player.ChangeVolume(preferences.Volume);
             }
         }
 
