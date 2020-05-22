@@ -4,6 +4,7 @@ using Twins.Components;
 using Twins.Models;
 using Twins.Models.Game;
 using Twins.Models.Singletons;
+using Twins.Utils;
 using Twins.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,6 +14,8 @@ namespace Twins.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BoardView : ContentPage
     {
+        AudioPlayer tickPlayer = new AudioPlayer();
+
         public BoardView(Board board)
         {
             InitializeComponent();
@@ -51,6 +54,8 @@ namespace Twins.Views
 
                 scoreLabelVs.IsVisible = true;
                 scoreLabel2.IsVisible = true;
+
+                tickPlayer.LoadEffect("PlayerChange.wav");
             }
             else
             {
@@ -69,6 +74,8 @@ namespace Twins.Views
         {
             multiplayerFrame.IsVisible = true;
             playerLabel.Text = currentPlayer.Name;
+
+            tickPlayer.Play();
         }
 
         private void OnScoreChanged(int counterId, int score)

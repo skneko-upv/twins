@@ -34,8 +34,6 @@ namespace Twins.Models.Game
 
         private AudioPlayer ClockEffect { get; set; }
 
-        private Thread clockThreadEffect { get; set; }
-
         public int LevelNumber { get; }
 
         public bool IsMultiplayer {

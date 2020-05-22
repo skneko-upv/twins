@@ -193,6 +193,7 @@
     <Content Include="Assets\Sounds\clockticksound.wav" />
     <Content Include="Assets\Sounds\Lose Sound.wav" />
     <Content Include="Assets\Sounds\menuButtonSound.wav" />
+    <Content Include="Assets\Sounds\PlayerChange.wav" />
     <Content Include="Assets\Sounds\Solve The Puzzle.wav" />
     <Content Include="Assets\Sounds\Ta Da.wav" />
     <Content Include="Assets\Sounds\Voltear Carta Invertido.wav" />

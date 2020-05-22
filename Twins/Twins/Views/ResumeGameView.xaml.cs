@@ -88,7 +88,7 @@ namespace Twins.Views
             Score = winner.Score.Value;
             Time = result.Time;
 
-            var player = MainPage.EffectsPlayer;
+            var player = new AudioPlayer();
             background.Source = "Assets/Backgrounds/winBackground.png";
             player.LoadEffect(PlayerPreferences.Instance.WinEffect + ".wav");
             player.Play();
