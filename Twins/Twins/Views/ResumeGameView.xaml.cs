@@ -83,6 +83,28 @@ namespace Twins.Views
             }
         }
 
+        public void SetMultiplayerStatistics(GameResult result, Player winner)
+        {
+            Score = winner.Score.Value;
+            Time = result.Time;
+
+            var player = MainPage.EffectsPlayer;
+            background.Source = "Assets/Backgrounds/winBackground.png";
+            player.LoadEffect(PlayerPreferences.Instance.WinEffect + ".wav");
+            player.Play();
+
+            modeReminder.Text = "Multijugador";
+
+            multiplayerResultLabel.IsVisible = true;
+            winningPlayerLabel.IsVisible = true;
+            winningPlayerLabel.Text = winner.Name;
+
+            if (winner.Score.Value < 0)
+            {
+                PointsLabel.TextColor = Color.Red;
+            }
+        }
+
         public async void OnHome(object sender, EventArgs e)
         {
             await Navigation.PopToRootAsync();

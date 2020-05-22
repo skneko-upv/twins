@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Twins.Models.Properties;
 
 namespace Twins.Models.Game
@@ -92,6 +93,11 @@ namespace Twins.Models.Game
                     AttemptedMatch?.Invoke(false);
                 }
             };
+            inner.Score.Changed += (old, @new) =>
+            {
+                var delta = @new - old;
+                players[currentPlayer].Score.Value += delta;
+            };
 
             currentPlayer = 0;
 
@@ -110,6 +116,19 @@ namespace Twins.Models.Game
         {
             inner.EndTurn();
             NextPlayer();
+        }
+
+        public Player DetermineWinner()
+        {
+            if (IsFinished)
+            {
+                return players.Aggregate((p1, p2) =>
+                    p1.Score.CompareTo(p2.Score) > 0 ? p1 : p2);    // select player with the higher score
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
         }
 
         void NextPlayer()

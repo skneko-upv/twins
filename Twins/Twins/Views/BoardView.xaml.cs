@@ -117,8 +117,18 @@ namespace Twins.Views
 
         private void OnGameEnded(GameResult result)
         {
-            EndGameModal.SetStadistics(result);
-            EndGameModal.IsVisible = true;
+            var game = ((BoardViewModel)BindingContext).Board.Game;
+            if (game.IsMultiplayer)
+            {
+                EndGameModal.SetMultiplayerStatistics(result,
+                    ((IMultiplayerGame)game).DetermineWinner());
+                EndGameModal.IsVisible = true;
+            }
+            else
+            {
+                EndGameModal.SetStadistics(result);
+                EndGameModal.IsVisible = true;
+            }
         }
 
         private void FillBoard(int height, int width)
