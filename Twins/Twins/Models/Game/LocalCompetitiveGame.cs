@@ -36,7 +36,7 @@ namespace Twins.Models.Game
         }
 
         // In this competitive game mode only player-wise scores are considered.
-        // This field for a general score is always zero.
+        // This hidden field will aggregate deltas from all players.
         public Score Score { get; } = new Score(0);
         public Board Board {
             get => inner.Board;
@@ -97,6 +97,7 @@ namespace Twins.Models.Game
             {
                 var delta = @new - old;
                 players[currentPlayer].Score.Value += delta;
+                Score.Value += delta;
             };
 
             currentPlayer = 0;
