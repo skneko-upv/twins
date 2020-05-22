@@ -144,6 +144,7 @@
     <Content Include="Assets\Decks\Deck3\card7.png" />
     <Content Include="Assets\Decks\Deck3\card8.png" />
     <Content Include="Assets\Decks\Deck3\card9.png" />
+    <Content Include="Assets\Icons\Add.png" />
     <Content Include="Assets\Icons\cronometro.png" />
     <Content Include="Assets\Icons\cronometroColor.png" />
     <Content Include="Assets\Icons\error.png" />
@@ -157,6 +158,7 @@
     <Content Include="Assets\Icons\Options.png" />
     <Content Include="Assets\Icons\pauseW.png" />
     <Content Include="Assets\Icons\restart.png" />
+    <Content Include="Assets\Icons\save.png" />
     <Content Include="Assets\Icons\score.png" />
     <Content Include="Assets\Icons\title.png" />
     <Content Include="Assets\Icons\title2.png" />

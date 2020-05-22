@@ -7,24 +7,15 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Twins.Views
+namespace Twins.Components
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class EditDeckView : ContentPage
+
+    public partial class CardList : StackLayout
     {
-        public EditDeckView()
+        public CardList()
         {
             InitializeComponent();
-        }
-
-        
-        private void OnSave(object sender, EventArgs e)
-        {
-
-        }
-        private void OnCancel(object sender, EventArgs e)
-        {
-
         }
     }
 }
