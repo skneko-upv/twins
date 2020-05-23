@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Twins.Components;
 using Twins.Models;
@@ -68,9 +67,13 @@ namespace Twins.ViewModels
             UnflipEffect.LoadEffect(preferences.UnturnCardEffect + ".wav");
             UnflipEffect.Player.Volume = 1;
 
+            Board.Game.Score.Changed += (old, @new) =>
+            {
+                lastScoreChange = @new - old;
+            };
+
             Board.Game.Resume();
             InteractionAllowed = true;
-            lastScoreChange = Board.Game.Score.Value;
         }
 
         private void OnTurnTimedOut()
@@ -130,25 +133,24 @@ namespace Twins.ViewModels
 
                 IEnumerable<Board.Cell> matched = Board.Game.TryMatch();
 
-                var score = Board.Game.Score.Value;
                 if (matched.Any())
                 {
                     OnCellsMatched(matched);
                     
                     Board.ReferenceCard = null;
-                    await CardComponents[cell].ShowGreenPoints(score - lastScoreChange);
+                    await CardComponents[cell].ShowGreenPoints(lastScoreChange);
                     await Task.Delay(150);
                 }
                 else
                 {
-                    await CardComponents[cell].ShowRedPoints(score - lastScoreChange);
+                    await CardComponents[cell].ShowRedPoints(lastScoreChange);
                     await Task.Delay(150);
 
                 }
-                lastScoreChange = score;
                 if (Board.Game.ShouldEndTurn())
                 {
                     Board.Game.EndTurn();
+                    Board.Game.Resume();
                 }
 
                 if (!Board.Game.IsFinished)

@@ -22,7 +22,7 @@ namespace Twins.Utils
 
         public double GetVolume() { return Player.Volume; }
 
-        public void LoadSong(String songName)
+        public void LoadSong(string songName)
         {
             if (songName != CurrentSong)
             {
@@ -35,7 +35,7 @@ namespace Twins.Utils
             }
         }
 
-        public void LoadEffect(String effectName)
+        public void LoadEffect(string effectName)
         {
             Player.Load("Sounds\\" + effectName);
         }

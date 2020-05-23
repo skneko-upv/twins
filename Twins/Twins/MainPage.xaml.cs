@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using Twins.Components;
 using Twins.Models;
 using Twins.Models.Builders;
+using Twins.Models.Game;
 using Twins.Models.Singletons;
 using Twins.Persistence;
 using Twins.Utils;
@@ -23,7 +24,7 @@ namespace Twins
         public static AudioPlayer EffectsPlayer { get; set; }
 
         readonly PlayerPreferences gameConfiguration = PlayerPreferences.Instance;
-        Game game;
+        IGame game;
         GameBuilder gameBuilder; 
         public MainPage()
         {
@@ -116,7 +117,7 @@ namespace Twins
         {
             // resume
             // Open History menu
-            await Navigation.PushAsync(new Views.LevelsView());
+            await Navigation.PushAsync(new LevelsView());
             EffectsPlayer.Play();
         }
 
@@ -169,10 +170,10 @@ namespace Twins
             // Open Free Game men
             try 
             {
-            InitGameConfiguration();
-            gameBuilder.OfKind(GameBuilder.GameKind.ReferenceCard);
-            game = gameBuilder.Build();
-            await Navigation.PushAsync(new BoardView(game.Board));
+                InitGameConfiguration();
+                gameBuilder.OfKind(GameBuilder.GameKind.ReferenceCard);
+                game = gameBuilder.Build();
+                await Navigation.PushAsync(new BoardView(game.Board));
             }
             catch (Exception error)
             {
@@ -202,11 +203,24 @@ namespace Twins
             
         }
 
-        private void OnMultiplayerGame(object sender, EventArgs e)
+        private async void OnMultiplayerGame(object sender, EventArgs e)
         {
             // resume
             // Open Multiplayer menu
-            CommingSoonView.ButtonNotImplemented();
+            try
+            {
+                InitGameConfiguration();
+                game = gameBuilder
+                    .WithPlayer(new Player("1"))
+                    .WithPlayer(new Player("2"))
+                    .Build();
+                await Navigation.PushAsync(new BoardView(game.Board));
+            }
+            catch (Exception error)
+            {
+                ErrorView.IsVisible = true;
+                ErrorView.SetTextError(error.Message);
+            }
             MainPage.EffectsPlayer.Play();
         }
 

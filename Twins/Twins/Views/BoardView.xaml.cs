@@ -2,7 +2,9 @@
 using System.Linq;
 using Twins.Components;
 using Twins.Models;
+using Twins.Models.Game;
 using Twins.Models.Singletons;
+using Twins.Utils;
 using Twins.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,6 +14,8 @@ namespace Twins.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BoardView : ContentPage
     {
+        AudioPlayer tickPlayer = new AudioPlayer();
+
         public BoardView(Board board)
         {
             InitializeComponent();
@@ -29,9 +33,6 @@ namespace Twins.Views
             turnTimeLabel.SetBinding(Label.TextColorProperty, "Color");
             turnTimeLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
 
-            board.Game.Score.Changed += OnScoreChanged;
-            OnScoreChanged(board.Game.Score.Value);
-
             board.ReferenceCategoryChanged += OnReferenceCategoryChanged;
             OnReferenceCategoryChanged(board.ReferenceCategory);
 
@@ -41,6 +42,27 @@ namespace Twins.Views
             turnTextLabel.SetBinding(Label.TextColorProperty, "Color");
             turnTextLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
 
+            if (board.Game.IsMultiplayer) {
+                var game = (IMultiplayerGame)board.Game;
+                game.PlayerChanged += OnPlayerChanged;
+                OnPlayerChanged(game.CurrentPlayer);
+
+                game.Players[0].Score.Changed += (old, @new) => OnScoreChanged(1, @new);
+                OnScoreChanged(1, board.Game.Score.Value);
+                game.Players[1].Score.Changed += (old, @new) => OnScoreChanged(2, @new);
+                OnScoreChanged(2, board.Game.Score.Value);
+
+                scoreLabelVs.IsVisible = true;
+                scoreLabel2.IsVisible = true;
+
+                tickPlayer.LoadEffect("PlayerChange.wav");
+            }
+            else
+            {
+                board.Game.Score.Changed += (old, @new) => OnScoreChanged(1, @new);
+                OnScoreChanged(1, board.Game.Score.Value);
+            }
+
             board.Game.GameEnded += OnGameEnded;
 
             referenceCard.Clicked += () => { };
@@ -48,8 +70,27 @@ namespace Twins.Views
             FillBoard(board.Height, board.Width);
         }
 
-        private void OnScoreChanged(int score)
+        private void OnPlayerChanged(Player currentPlayer)
         {
+            multiplayerFrame.IsVisible = true;
+            playerLabel.Text = currentPlayer.Name;
+
+            tickPlayer.Play();
+        }
+
+        private void OnScoreChanged(int counterId, int score)
+        {
+            Label scoreLabel;
+
+            if (counterId == 1)
+            {
+                scoreLabel = scoreLabel1;
+            }
+            else
+            {
+                scoreLabel = scoreLabel2;
+            }
+
             if (score < 0)
             {
                 scoreLabel.TextColor = Color.Red;
@@ -83,8 +124,19 @@ namespace Twins.Views
 
         private void OnGameEnded(GameResult result)
         {
-            EndGameModal.SetStadistics(result);
-            EndGameModal.IsVisible = true;
+            var game = ((BoardViewModel)BindingContext).Board.Game;
+            if (game.IsMultiplayer)
+            {
+                EndGameModal.SetMultiplayerStatistics(result,
+                    ((IMultiplayerGame)game).DetermineWinner(out bool conclusive),
+                    conclusive);
+                EndGameModal.IsVisible = true;
+            }
+            else
+            {
+                EndGameModal.SetStadistics(result);
+                EndGameModal.IsVisible = true;
+            }
         }
 
         private void FillBoard(int height, int width)

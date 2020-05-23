@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Twins.Models
 {
-    public class Score
+    public class Score : IComparable<Score>
     {
         public const int DefaultStartingScore = 0;
 
@@ -13,13 +13,14 @@ namespace Twins.Models
         public int TimedOutDelta { get; set; } = 2;
         public int MatchFailDeltaMax { get; set; } = 10;
 
-        public event Action<int> Changed;
+        public event Action<int, int> Changed;
 
         public int Value {
             get => value;
             set {
+                var previous = this.value;
                 this.value = value;
-                Changed?.Invoke(value);
+                Changed?.Invoke(previous, value);
             }
         }
         public int value;
@@ -43,6 +44,11 @@ namespace Twins.Models
         public void DecrementTimedOut()
         {
             Value -= TimedOutDelta;
+        }
+
+        public int CompareTo(Score other)
+        {
+            return value - other.value;
         }
     }
 }

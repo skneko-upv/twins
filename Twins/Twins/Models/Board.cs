@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Twins.Models.Game;
 using Twins.Models.Strategies;
 
 namespace Twins.Models
@@ -10,7 +11,7 @@ namespace Twins.Models
 
         public int Width { get; }
 
-        public Game Game { get; }
+        public IGame Game { get; set; }
 
         /// <summary>
         /// The reference card shown to the player to help them achieve
@@ -84,14 +85,14 @@ namespace Twins.Models
         /// <summary>
         /// Create a new board populated randomly.
         /// </summary>
-        public Board(int height, int width, Game game, IBoardPopulationStrategy populationStrategy)
+        public Board(int height, int width, IGame game, IBoardPopulationStrategy populationStrategy)
             : this(height, width, game, populationStrategy.Populate(height, width))
         { }
 
         /// <summary>
         /// Create a new board from the given cell matrix.
         /// </summary>
-        public Board(int height, int width, Game game, Cell[,] cells)
+        public Board(int height, int width, IGame game, Cell[,] cells)
         {
             Height = height;
             Width = width;

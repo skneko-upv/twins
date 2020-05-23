@@ -83,6 +83,44 @@ namespace Twins.Views
             }
         }
 
+        public void SetMultiplayerStatistics(GameResult result, Player winner, bool conclusive)
+        {
+            Score = winner.Score.Value;
+            Time = result.Time;
+
+            var player = new AudioPlayer();
+            if (result.IsVictory)
+            {
+                background.Source = "Assets/Backgrounds/winBackground.png";
+                player.LoadEffect(PlayerPreferences.Instance.WinEffect + ".wav");
+            } 
+            else
+            {
+                background.Source = "Assets/Backgrounds/lostBackground.png";
+                player.LoadEffect(PlayerPreferences.Instance.LoseEffect + ".wav");
+            }
+            player.Play();
+
+            modeReminder.Text = "Multijugador";
+
+            multiplayerResultLabel.IsVisible = true;
+            if (conclusive)
+            {
+                multiplayerResultLabel.Text = "Gana el jugador ";
+                winningPlayerLabel.IsVisible = true;
+                winningPlayerLabel.Text = winner.Name;
+            }
+            else
+            {
+                multiplayerResultLabel.Text = "Empate";
+            }
+
+            if (winner.Score.Value < 0)
+            {
+                PointsLabel.TextColor = Color.Red;
+            }
+        }
+
         public async void OnHome(object sender, EventArgs e)
         {
             await Navigation.PopToRootAsync();
