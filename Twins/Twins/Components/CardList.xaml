@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<StackLayout xmlns="http://xamarin.com/schemas/2014/forms" 
+<ScrollView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Twins.Components.CardList"
              Orientation="Horizontal">
@@ -7,4 +7,4 @@
             <ImageButton Source="Assets/Icons/Add.png"/>
             <!--Aqui han de irse añadiendo las cartas-->
     </Grid>
-</StackLayout>
+</ScrollView>

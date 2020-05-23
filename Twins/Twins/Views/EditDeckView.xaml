@@ -32,8 +32,9 @@
                         <Label Text="Nombre de la Baraja: "  HorizontalOptions="Center" Padding="0,5,0,0"/>
                         <Entry Keyboard="Text" HorizontalOptions="Center" x:Name="DeckName" FlowDirection="RightToLeft"/>
                     </StackLayout>
-                    <StackLayout>
-                        <Picker Title=" Categoria:" HorizontalOptions="Center"
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label Text="Categoría:  "  HorizontalOptions="Center" Padding="0,5,0,0"/>
+                        <Picker  HorizontalOptions="Center"
                                 x:Name="SelectorCategory"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
@@ -41,10 +42,8 @@
                         <Entry Keyboard="Text" HorizontalOptions="Center" x:Name="NewDeckName" FlowDirection="RightToLeft"/>
                         <ImageButton Source="Assets/Icons/save.png"/>
                     </StackLayout>
-                    <StackLayout>
-                        <!--Aqui va a ir el componente de las imagenes de las cartas-->
-                        <common1:CardList x:Name="CardList" />
-                    </StackLayout>
+                    <!--Aqui va a ir el componente de las imagenes de las cartas-->
+                    <common1:CardList x:Name="CardList"/>
                     <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center">
                         <Button Text="Guardar" Clicked="OnSave"/>
                         <Button Text="Cancelar" Clicked="OnCancel"/>
