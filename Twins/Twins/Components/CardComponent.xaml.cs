@@ -31,12 +31,21 @@ namespace Twins.Components
             Card = card;
             Flipped = false;
             button.ImageSource = card.Deck.BackImage;
+            button.HeightRequest = 120;
+            button.WidthRequest = 120;
             IsBlocked = isBlocked;
 
 
             BubblePoint = new BubblePoint();
             root.Children.Add(BubblePoint);
             BubblePoint.SetPosition(0, -30);
+        }
+
+        public CardComponent SetToEdit() 
+        {
+            button.ImageSource = Card.Image;
+            button.IsEnabled = false;
+            return this;
         }
 
         public async Task Flip()

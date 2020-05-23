@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace Twins.Models.Singletons
@@ -7,6 +8,8 @@ namespace Twins.Models.Singletons
     {
 
         public Deck Deck { get; }
+
+        public event EventHandler CardsModified;
 
         public DeckEditor() 
         {
@@ -21,6 +24,7 @@ namespace Twins.Models.Singletons
         public void AddCard(ImageSource image, ISet<Category> category) 
         {
             Deck.Cards.Add(new Card(Deck.Cards.Count + 1, Deck, image, category));
+            CardsModified?.Invoke(this, null);
         }
 
         public void RemoveCard(int id) 
@@ -49,5 +53,6 @@ namespace Twins.Models.Singletons
         }
 
         public void SaveDeck() { }
+
     }
 }

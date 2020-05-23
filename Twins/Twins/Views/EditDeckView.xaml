@@ -24,7 +24,7 @@
     <ContentPage.Content>
         <AbsoluteLayout>
             <StackLayout AbsoluteLayout.LayoutBounds=".5,.5,1,1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="Center" VerticalOptions="Center" Padding="0,-20,0,0" >
-                <StackLayout Orientation="Vertical" VerticalOptions="Center" BackgroundColor="WhiteSmoke" HorizontalOptions="Center" Padding="100,10,100,10">
+                <StackLayout Orientation="Vertical" VerticalOptions="Center" BackgroundColor="WhiteSmoke" HorizontalOptions="Center" Padding="100,10,100,10" Spacing="10">
                     <StackLayout VerticalOptions="Start" HorizontalOptions="Center">
                         <Label Text="Edición de barajas" FontSize="Header" FontAttributes="Bold"/>
                     </StackLayout>
