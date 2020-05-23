@@ -11,7 +11,7 @@ namespace Twins.Components
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
 
-    public partial class CardList : StackLayout
+    public partial class CardList : ScrollView
     {
         public CardList()
         {
