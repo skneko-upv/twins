@@ -128,7 +128,8 @@ namespace Twins.Views
             if (game.IsMultiplayer)
             {
                 EndGameModal.SetMultiplayerStatistics(result,
-                    ((IMultiplayerGame)game).DetermineWinner());
+                    ((IMultiplayerGame)game).DetermineWinner(out bool conclusive),
+                    conclusive);
                 EndGameModal.IsVisible = true;
             }
             else

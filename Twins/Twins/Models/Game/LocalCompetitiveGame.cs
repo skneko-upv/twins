@@ -119,12 +119,22 @@ namespace Twins.Models.Game
             NextPlayer();
         }
 
-        public Player DetermineWinner()
+        public Player DetermineWinner(out bool conclusive)
         {
             if (IsFinished)
             {
-                return players.Aggregate((p1, p2) =>
+                var winner = players.Aggregate((p1, p2) =>
                     p1.Score.CompareTo(p2.Score) > 0 ? p1 : p2);    // select player with the higher score
+
+                if (players.Any(p => p != winner && p.Score.Value == winner.Score.Value))
+                {
+                    conclusive = false;    // draw
+                }
+                else
+                {
+                    conclusive = true;
+                }
+                return winner;
             }
             else
             {

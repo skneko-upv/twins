@@ -12,6 +12,6 @@ namespace Twins.Models.Game
 
         event Action<Player> PlayerChanged;
 
-        Player DetermineWinner();
+        Player DetermineWinner(out bool conclusive);
     }
 }
