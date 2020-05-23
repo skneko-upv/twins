@@ -67,6 +67,7 @@ namespace Twins.Models.Singletons
             return categories;
         }
 
+        // Metodo que deberá llamar al metodo de persistencia de la BD para almacenar el Deck
         public void SaveDeck() { }
 
     }
