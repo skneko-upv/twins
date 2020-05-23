@@ -8,7 +8,7 @@ namespace Twins.Models.Singletons
     {
 
         public Deck Deck { get; }
-
+        public event EventHandler CategoriesModified;
         public event EventHandler CardsModified;
 
         public DeckEditor() 
@@ -21,9 +21,9 @@ namespace Twins.Models.Singletons
             Deck = deck;
         }
 
-        public void AddCard(ImageSource image, ISet<Category> category) 
+        public void AddCard(ImageSource image, Category category) 
         {
-            Deck.Cards.Add(new Card(Deck.Cards.Count + 1, Deck, image, category));
+            Deck.Cards.Add(new Card(Deck.Cards.Count + 1, Deck, image, new HashSet<Category> { category }));
             CardsModified?.Invoke(this, null);
         }
 
@@ -44,12 +44,27 @@ namespace Twins.Models.Singletons
 
         public void AddCategory(string name) 
         {
-            Deck.Categories.Add(new Category(Deck.Categories.Count+1, name));
+            Category category = new Category(Deck.Categories.Count + 1, name);
+            Deck.Categories.Add(category);
+            CategoriesModified?.Invoke(this, null);
+        }
+
+        internal void AddName(string name)
+        {
+            Deck.Name = name;
         }
 
         public void RemoveCategory(Category category)
         {
             Deck.Categories.Remove(category);
+        }
+
+        public List<Category> GetCategories() 
+        {
+            var categories = new List<Category>();
+            foreach (Category category in Deck.Categories)
+                categories.Add(category);
+            return categories;
         }
 
         public void SaveDeck() { }

@@ -11,7 +11,7 @@ namespace Twins.Models
 
         public IList<Card> Cards { get; } = new List<Card>();
 
-        public string Name { get; }
+        public string Name { get; set; }
 
         public Deck(string name, ImageSource backImage, IList<ImageSource> cardImages, IDictionary<int, ISet<Category>> categories = null)
         {

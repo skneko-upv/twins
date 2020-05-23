@@ -30,20 +30,31 @@
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                         <Label Text="Nombre de la Baraja: "  HorizontalOptions="Center" Padding="0,5,0,0"/>
-                        <Entry Keyboard="Text" HorizontalOptions="Center" x:Name="DeckName" FlowDirection="RightToLeft"/>
+                        <Entry Keyboard="Text" HorizontalOptions="Center" x:Name="DeckName" WidthRequest="150"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                         <Label Text="Categoría:  "  HorizontalOptions="Center" Padding="0,5,0,0"/>
-                        <Picker  HorizontalOptions="Center"
-                                x:Name="SelectorCategory"/>
+                        <Picker  HorizontalOptions="Center" SelectedIndexChanged="SelectorCategory_SelectedIndexChanged"
+                                x:Name="SelectorCategory" WidthRequest="150"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                        <Label Text="Nueva Categoría: " HorizontalOptions="Center" Padding="0,5,0,0"/>
-                        <Entry Keyboard="Text" HorizontalOptions="Center" x:Name="NewDeckName" FlowDirection="RightToLeft"/>
-                        <ImageButton Source="Assets/Icons/save.png"/>
+                        <Label Text="Nueva Categoría: " HorizontalOptions="Center" Padding="0,5,0,0" />
+                        <Entry Keyboard="Text" HorizontalOptions="Center" x:Name="NewCategory" WidthRequest="150"/>
+                        <ImageButton Source="Assets/Icons/save.png" Clicked="OnAddCategory"/>
                     </StackLayout>
                     <!--Aqui va a ir el componente de las imagenes de las cartas-->
-                    <common1:CardList x:Name="CardList"/>
+                    <ScrollView Orientation="Horizontal"
+                     WidthRequest="500"
+                     HeightRequest="140"
+                     BackgroundColor="White"
+                     >
+                        <StackLayout Orientation="Horizontal" Spacing="5">
+                            <ImageButton Source="Assets/Icons/Add.png"  Clicked="OnAddCard" x:Name="AddButton" HeightRequest="100" WidthRequest="100"/>
+                            <StackLayout x:Name="ListCard" Spacing="5" Orientation="Horizontal">
+                                <!--Aqui han de irse añadiendo las cartas-->
+                            </StackLayout>
+                        </StackLayout>
+                    </ScrollView>
                     <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center">
                         <Button Text="Guardar" Clicked="OnSave"/>
                         <Button Text="Cancelar" Clicked="OnCancel"/>
