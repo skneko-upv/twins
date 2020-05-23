@@ -5,7 +5,7 @@ namespace Twins.Models
 {
     public partial class Deck
     {
-        public ImageSource BackImage { get; }
+        public ImageSource BackImage { get; set; }
 
         public ISet<Category> Categories = new HashSet<Category>();
 
