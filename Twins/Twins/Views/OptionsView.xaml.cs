@@ -257,8 +257,11 @@ namespace Twins.Views
         private void Volume_ValueChanged(object sender, ValueChangedEventArgs e)
         {
             //here is the control logic volume
-            MainPage.Player.ChangeVolume(Volume.Value);
-            MainPage.EffectsPlayer.ChangeVolume(Volume.Value);
+            if (Volume.Value != 0.0 && MainPage.Player.GetVolume() != 0.0) 
+            {
+                MainPage.Player.ChangeVolume(Volume.Value);
+                MainPage.EffectsPlayer.ChangeVolume(Volume.Value);
+            }
         }
 
         private void OnlyNumbersTime(object sender, TextChangedEventArgs e)
