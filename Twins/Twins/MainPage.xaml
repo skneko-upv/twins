@@ -110,7 +110,7 @@
                             HorizontalOptions="Center" 
                             VerticalOptions="End"
                             ScaleY="0.8"
-                            Clicked="OnDesck"
+                            Clicked="OnDeckList"
                             Style="{StaticResource buttonStyle}"
                         />
                 

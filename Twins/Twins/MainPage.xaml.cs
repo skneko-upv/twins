@@ -218,11 +218,11 @@ namespace Twins
             MainPage.EffectsPlayer.Play();
         }
 
-        private void OnDesck(object sender, EventArgs e)
+        private async void OnDeckList(object sender, EventArgs e)
         {
             // resume
             // Open Desck menu
-            CommingSoonView.ButtonNotImplemented();
+            await Navigation.PushAsync(new Views.DeckListForm());
             MainPage.EffectsPlayer.Play();
         }
 
