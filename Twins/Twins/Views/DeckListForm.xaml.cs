@@ -4,6 +4,7 @@ using System.Data;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Twins.Components;
+using Twins.Models;
 using Twins.Models.Singletons;
 using Twins.Persistence;
 using Xamarin.Forms;
@@ -17,6 +18,15 @@ namespace Twins.Views
         public DeckListForm()
         {
             InitializeComponent();
+            FillScrollViewAsync();
+        }
+
+        private async void FillScrollViewAsync() {
+            ICollection<Persistence.DataTypes.Deck> decks = await Database.Instance.GetDecksAsync();
+            foreach (var savedDeck in decks) 
+            {
+                deckArea.Children.Add(new DeckViewComponent(deck));
+            }
         }
 
         private async void OnCancel(object sender, EventArgs e)

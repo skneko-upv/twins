@@ -12,8 +12,7 @@
                 <Image x:Name="BackCardImage"></Image>
                 <Image x:Name="FrontCardImage"></Image>
             </StackLayout>
-
-            <RadioButton x:Name="CheckedRadioButton"></RadioButton>
+            <RadioButton x:Name="checkedRadioButton" GroupName="selectedDeck"></RadioButton>
         </StackLayout>
         </Frame>
 </StackLayout>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Twins.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,16 +12,20 @@ namespace Twins.Components
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DeckViewComponent : StackLayout
     {
-        public DeckViewComponent()
+        Deck Deck { get; }
+
+        public DeckViewComponent(Deck deck)
         {
             InitializeComponent();
-            //BuildDeckView();
+            Deck = deck;
+            BuildDeckView();
         }
 
         private void BuildDeckView()
         {
-            //BackCardImage.Source = "Assets/Decks/Deck1/backimage.png";
-            //FrontCardImage.Source = "Assets/Decks/Deck1/card1.png";
+            Device.SetFlags(new string[] { "RadioButton_Experimental" });
+            BackCardImage.Source = Deck.BackImage;
+            FrontCardImage.Source = Deck.Cards[0].Image;
         }
     }
 }
