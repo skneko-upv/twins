@@ -36,6 +36,7 @@
                         <Label Text="Categoría:  "  HorizontalOptions="Center" Padding="0,5,0,0"/>
                         <Picker  HorizontalOptions="Center" SelectedIndexChanged="SelectorCategory_SelectedIndexChanged"
                                 x:Name="SelectorCategory" WidthRequest="150"/>
+                        <ImageButton Source="Assets/Icons/delete.png" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                         <Label Text="Nueva Categoría: " HorizontalOptions="Center" Padding="0,5,0,0" />
@@ -55,6 +56,11 @@
                             </StackLayout>
                         </StackLayout>
                     </ScrollView>
+                    <StackLayout Orientation="Vertical" HorizontalOptions="Center" Spacing="5">
+                        <Button  Text="Añadir Imagen Dorso" x:Name="AddButtonBackCard" HeightRequest="50"  />
+                        <Image x:Name="backImage"  Source="Assets/Icons/Add.png"/> 
+
+                    </StackLayout>
                     <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center">
                         <Button Text="Guardar" Clicked="OnSave"/>
                         <Button Text="Cancelar" Clicked="OnCancel"/>
@@ -63,7 +69,6 @@
             </StackLayout>
             <common:ErrorView x:Name="ErrorView" AbsoluteLayout.LayoutBounds=".5,.5" 
                               AbsoluteLayout.LayoutFlags="PositionProportional" IsVisible="False">
-
             </common:ErrorView>
         </AbsoluteLayout>
     </ContentPage.Content>

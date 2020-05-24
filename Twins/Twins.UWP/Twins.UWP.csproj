@@ -147,6 +147,7 @@
     <Content Include="Assets\Icons\Add.png" />
     <Content Include="Assets\Icons\cronometro.png" />
     <Content Include="Assets\Icons\cronometroColor.png" />
+    <Content Include="Assets\Icons\delete.png" />
     <Content Include="Assets\Icons\error.png" />
     <Content Include="Assets\Icons\home.png" />
     <Content Include="Assets\Icons\levelBlocked.png" />

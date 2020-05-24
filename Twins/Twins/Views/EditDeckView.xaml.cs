@@ -106,9 +106,19 @@ namespace Twins.Views
             {
                 CardComponent cardComponent = new CardComponent(card);
                 ListCard.Children.Add(cardComponent.SetToEdit());
+                ImageButton imageButton = new ImageButton
+                {
+                    Source = "Assets/Icons/delete.png",
+                    HorizontalOptions = LayoutOptions.Center,
+                    VerticalOptions = LayoutOptions.Center,
+                };
+                //esto no se si funciona bien
+                //imageButton.Clicked += OndeleteCard(card);
+                ListCard.Children.Add(imageButton);
             }
 
         }
+
 
         private void OnAddCategory(object sender, EventArgs e)
         {
