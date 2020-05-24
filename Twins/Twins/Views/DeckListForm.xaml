@@ -59,14 +59,10 @@
                                   VerticalOptions="CenterAndExpand"
                                   HorizontalOptions="CenterAndExpand"
                                   Orientation="Both">
-                                    
-                                  <Grid x:Name="decks"
-                                  ColumnSpacing="2"
-                                  RowSpacing="2"
-                      
-                                  BackgroundColor="{StaticResource backgroundColor}"                      
-                                  VerticalOptions="Center"
-                                  HorizontalOptions="Center"/>
+
+                                    <StackLayout Orientation="Vertical" HorizontalOptions="Center" >
+                                        <twinsc:DeckViewComponent x:Name="SelectorDeck"/>
+                                    </StackLayout>
 
                                 </ScrollView>
                                 <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center">
