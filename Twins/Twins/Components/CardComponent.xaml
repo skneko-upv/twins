@@ -7,6 +7,11 @@
              HorizontalOptions="Center"
              x:Class="Twins.Components.CardComponent"
              x:Name="root">
+    <Image VerticalOptions="Center"
+            HorizontalOptions="Center"
+            HeightRequest="100"
+            WidthRequest="100"
+           x:Name="image"/>
     <Button x:Name="button"
             BackgroundColor="Transparent"
             
@@ -18,4 +23,5 @@
             HeightRequest="120"
             WidthRequest="120"
             Clicked="OnClicked" />
+    
 </Grid>

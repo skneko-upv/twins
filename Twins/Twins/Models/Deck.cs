@@ -5,13 +5,13 @@ namespace Twins.Models
 {
     public partial class Deck
     {
-        public ImageSource BackImage { get; }
+        public ImageSource BackImage { get; set; }
 
         public ISet<Category> Categories = new HashSet<Category>();
 
         public IList<Card> Cards { get; } = new List<Card>();
 
-        public string Name { get; }
+        public string Name { get; set; }
 
         public Deck(string name, ImageSource backImage, IList<ImageSource> cardImages, IDictionary<int, ISet<Category>> categories = null)
         {

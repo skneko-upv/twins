@@ -13,5 +13,10 @@ namespace Twins.Models
             Id = id;
             Name = name;
         }
+        
+        public override string ToString() 
+        {
+            return this.Name;
+        }
     }
 }
