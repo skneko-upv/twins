@@ -30,9 +30,7 @@ namespace Twins.Components
 
             Card = card;
             Flipped = false;
-            button.ImageSource = card.Deck.BackImage;
-            button.HeightRequest = 120;
-            button.WidthRequest = 120;
+            image.Source = card.Deck.BackImage;
             IsBlocked = isBlocked;
 
 
@@ -43,8 +41,8 @@ namespace Twins.Components
 
         public CardComponent SetToEdit() 
         {
-            button.ImageSource = Card.Image;
-            button.IsEnabled = false;
+            image.Source = Card.Image;
+            button.IsVisible = false;
             return this;
         }
 
@@ -57,7 +55,7 @@ namespace Twins.Components
 
             Flipped = true;
             await AnimationFlip(90, 150);
-            button.ImageSource = Card.Image;
+            image.Source = Card.Image;
             await AnimationFlip(0, 150);
         }
 
@@ -70,15 +68,15 @@ namespace Twins.Components
 
             Flipped = false;
             await AnimationFlip(90, 150);
-            button.ImageSource = Card.Deck.BackImage;
+            image.Source= Card.Deck.BackImage;
             await AnimationFlip(0, 150);
         }
 
         public async Task Matched()
         {
-            button.RotationY = 0;
+            image.RotationY = 0;
             await AnimationFlip(360, 250);
-            button.RotationY = 0;
+            image.RotationY = 0;
         }
 
         private void OnClicked(object sender, EventArgs e)
@@ -88,7 +86,7 @@ namespace Twins.Components
         }
         private async Task AnimationFlip(int angle, uint seconds)
         {
-            await button.RotateYTo(angle, seconds);
+            await image.RotateYTo(angle, seconds);
         }
         public async Task ShowRedPoints(int points)
         {
