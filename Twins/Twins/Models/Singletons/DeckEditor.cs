@@ -35,6 +35,7 @@ namespace Twins.Models.Singletons
                     break;
                 }
             }
+            CardsModified?.Invoke(this, null);
         }
 
         public void AddBackImage(ImageSource image) 
@@ -56,7 +57,19 @@ namespace Twins.Models.Singletons
 
         public void RemoveCategory(Category category)
         {
+            if (IsCategoryAlreadyAsigned(category)) throw new Exception("No se puede borrar la categoría porque tiene " +
+                 "cartas asiganadas. Borre las cartas primero y luego la categoría");
             Deck.Categories.Remove(category);
+            CategoriesModified?.Invoke(this, null);
+        }
+
+        private bool IsCategoryAlreadyAsigned(Category category)
+        {
+            foreach (Card card in Deck.Cards) 
+            {
+                if (card.Categories.Contains(category)) { return true; }
+            }
+            return false;
         }
 
         public List<Category> GetCategories() 
