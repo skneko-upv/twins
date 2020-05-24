@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Xamarin.Forms;
 
-namespace Twins.Models.Singletons
+namespace Twins.Models
 {
     class DeckEditor
     {
