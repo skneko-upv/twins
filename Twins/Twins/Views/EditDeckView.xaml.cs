@@ -48,6 +48,12 @@ namespace Twins.Views
                 ErrorView.IsVisible = true;
                 return;
             }
+            if (deckEditor.Deck.Categories.Count <= 1) 
+            {
+                ErrorView.SetTextError("Añada como mínimo 2 categorias a la baraja.");
+                ErrorView.IsVisible = true;
+                return;
+            }
             if (deckEditor.Deck.Cards.Count >= 6)
             {
                 deckEditor.SaveDeck();
@@ -112,8 +118,7 @@ namespace Twins.Views
                     HorizontalOptions = LayoutOptions.Center,
                     VerticalOptions = LayoutOptions.Center,
                 };
-                //esto no se si funciona bien
-                //imageButton.Clicked += OndeleteCard(card);
+                imageButton.Clicked += (sender, e) => deckEditor.RemoveCard(card.Id);
                 ListCard.Children.Add(imageButton);
             }
 
@@ -132,6 +137,21 @@ namespace Twins.Views
             if (SelectorCategory.SelectedItem != null) {
                 indexSelector = SelectorCategory.SelectedIndex;
             }
+        }
+
+        private async void OnAddBackCard(object sender, EventArgs e)
+        {
+            FileData file = await OpenFileDialog();
+            if (file == null)
+                return;
+            backImage.Source = ImageSource.FromStream(file.GetStream);
+            deckEditor.AddBackImage(backImage.Source);
+        }
+
+        private void OnRemoveCategory(object sender, EventArgs e)
+        {
+            if(indexSelector != -1 && SelectorCategory.SelectedItem != null)
+                deckEditor.RemoveCategory(((Category) SelectorCategory.SelectedItem));
         }
     }
 }
