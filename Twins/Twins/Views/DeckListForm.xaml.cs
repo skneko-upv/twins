@@ -36,22 +36,6 @@ namespace Twins.Views
             MainPage.EffectsPlayer.Play();
         }
 
-        private async Task UpdateDatabase()
-        {
-            var database = Database.Instance;
-            var playerPreferencesDB = await database.GetPlayerPreferences();
-            var playerPreferences = PlayerPreferences.Instance;
-            playerPreferencesDB.Column = playerPreferences.Column;
-            playerPreferencesDB.Row = playerPreferences.Row;
-            playerPreferencesDB.SelectedDeck = playerPreferences.SelectedDeck;
-            playerPreferencesDB.SelectedSong = playerPreferences.SelectedSong;
-            playerPreferencesDB.Volume = playerPreferences.Volume;
-            playerPreferencesDB.LimitTime = playerPreferences.LimitTime;
-            playerPreferencesDB.TurnTime = playerPreferences.TurnTime;
-
-            Database.Instance.SavePlayerPreferences(playerPreferencesDB);
-        }
-
         private void ErrorViewClicked(object sender, EventArgs e)
         {
             ErrorView.IsVisible = false;

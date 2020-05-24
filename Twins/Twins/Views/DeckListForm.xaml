@@ -55,12 +55,12 @@
                             CornerRadius="0"
                             HasShadow="False">
                             <StackLayout HeightRequest="400">
-                                <ScrollView x:Name="boardArea"
+                                <ScrollView x:Name="deckArea"
                                   VerticalOptions="CenterAndExpand"
                                   HorizontalOptions="CenterAndExpand"
                                   Orientation="Both">
                                     
-                                  <Grid x:Name="board"
+                                  <Grid x:Name="decks"
                                   ColumnSpacing="2"
                                   RowSpacing="2"
                       
