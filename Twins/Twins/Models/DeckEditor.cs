@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Twins.Models.Singletons;
 using Xamarin.Forms;
 
 namespace Twins.Models
@@ -81,7 +82,10 @@ namespace Twins.Models
         }
 
         // Metodo que deberá llamar al metodo de persistencia de la BD para almacenar el Deck
-        public void SaveDeck() { }
+        public void SaveDeck() 
+        {
+            PlayerPreferences.Instance.Decks.Add(Deck);
+        }
 
     }
 }

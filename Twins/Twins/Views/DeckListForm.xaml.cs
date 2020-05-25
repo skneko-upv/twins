@@ -69,8 +69,7 @@ namespace Twins.Views
 
         private async void OnCreateDeck(object sender, EventArgs e)
         {
-            ErrorView.IsVisible = true;
-            MainPage.EffectsPlayer.Play();
+            await Navigation.PushAsync(new EditDeckView());
         }
 
         private async void OnApply(object sender, EventArgs e)

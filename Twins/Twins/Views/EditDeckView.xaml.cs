@@ -54,13 +54,14 @@ namespace Twins.Views
                 ErrorView.IsVisible = true;
                 return;
             }
-            if (deckEditor.Deck.Cards.Count >= 6)
+            if (deckEditor.Deck.Cards.Count > 6)
             {
                 deckEditor.SaveDeck();
+                Navigation.PopAsync();
             }
             else
             {
-                ErrorView.SetTextError("Añada como mínimo 6 cartas a la baraja.");
+                ErrorView.SetTextError("Añada como mínino 7 cartas a la baraja.");
                 ErrorView.IsVisible = true;
             }
         }
