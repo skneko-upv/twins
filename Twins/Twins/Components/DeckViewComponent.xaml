@@ -9,8 +9,8 @@
                HasShadow="True">
                <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Vertical">
                     <StackLayout Orientation="Horizontal">
-                        <Image x:Name="BackCardImage"></Image>
-                        <Image x:Name="FrontCardImage"></Image>
+                        <Image x:Name="BackCardImage" WidthRequest="100" HeightRequest="100"></Image>
+                <Image x:Name="FrontCardImage" WidthRequest="100" HeightRequest="100"></Image>
                     </StackLayout>
                     <RadioButton x:Name="checkedRadioButton"  Margin="92,0,0,0"  HorizontalOptions="CenterAndExpand" GroupName="selectedDeck"></RadioButton>  
                </StackLayout>
