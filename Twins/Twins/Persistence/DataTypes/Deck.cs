@@ -1,19 +1,31 @@
 ﻿using SQLite;
-using SQLiteNetExtensions.Attributes;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using Twins.Models;
 
 namespace Twins.Persistence.DataTypes
 {
     [SQLite.Table("Decks")]
     public class Deck
     {
-        [PrimaryKey]
+        [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
         public string Name { get; set; }
-
-        public Deck() { ID = 1; }
-
+        public string[] Images { get; set; }
+        public string[][] Categories { get; set; }
+        
+        public Deck() 
+        { 
+            Images = new string[0];
         }
+        
+        public Deck(ICollection<string> images, IDictionary<int, ISet<Category>> categories) 
+        {
+            Images = images.ToArray();
+            foreach (var entry in categories)
+            {
+                Categories[entry.Key] = entry.Value.Select(e => e.Name).ToArray();
+            }
+        }
+    }
 }

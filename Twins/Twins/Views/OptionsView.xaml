@@ -44,21 +44,21 @@
                                     BindingContext="{x:Reference Name=HasTimeLimit}" IsEnabled="{Binding Path=IsChecked}" Text="00"/>
                     <Label Text="Segundos" VerticalOptions="Center"/>
                     </StackLayout>
-                <StackLayout Orientation="Horizontal"  Margin="0,5,0,0">
-                    <Label Text="Tiempo por turno: " VerticalOptions="Center" FontAttributes="Bold" />
-                    <CheckBox IsChecked="True" x:Name="HasTimeTLimit"/>
-                    <Entry Keyboard="Numeric" MaxLength="2" FlowDirection="RightToLeft" x:Name="TMinutesEntry" TextChanged="OnlyNumbersTime"
+                    <StackLayout Orientation="Horizontal"  Margin="0,5,0,0">
+                        <Label Text="Tiempo por turno: " VerticalOptions="Center" FontAttributes="Bold" />
+                        <CheckBox IsChecked="True" x:Name="HasTimeTLimit"/>
+                        <Entry Keyboard="Numeric" MaxLength="2" FlowDirection="RightToLeft" x:Name="TMinutesEntry" TextChanged="OnlyNumbersTime"
                                     BindingContext="{x:Reference Name=HasTimeTLimit}" IsEnabled="{Binding Path=IsChecked}" Text="0"/>
-                    <Label Text="Minutos, " VerticalOptions="Center"/>
-                    <Entry Keyboard="Numeric" MaxLength="2" FlowDirection="RightToLeft" x:Name="TSecondsEntry" TextChanged="OnlyNumbersTime"
+                        <Label Text="Minutos, " VerticalOptions="Center"/>
+                        <Entry Keyboard="Numeric" MaxLength="2" FlowDirection="RightToLeft" x:Name="TSecondsEntry" TextChanged="OnlyNumbersTime"
                                     BindingContext="{x:Reference Name=HasTimeTLimit}" IsEnabled="{Binding Path=IsChecked}" Text="5"/>
-                    <Label Text="Segundos" VerticalOptions="Center"/>
+                        <Label Text="Segundos" VerticalOptions="Center"/>
 
                     </StackLayout>
-                <StackLayout Orientation="Vertical" HorizontalOptions="Center" >
-                    <twinsc:DeckSelector x:Name="SelectorDeck"/>
-                </StackLayout>
-                <StackLayout >
+                    <StackLayout Orientation="Vertical" HorizontalOptions="Center" >
+                        <twinsc:DeckSelector x:Name="SelectorDeck"/>
+                    </StackLayout>
+                    <StackLayout >
                     <Picker Title="Selecciona una canción" HorizontalOptions="Center"
                             x:Name="SelectSong"/>
                 </StackLayout>

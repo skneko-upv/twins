@@ -214,8 +214,8 @@ namespace Twins.Views
                         }
                         else
                         {
-                           
                             SelectorDeck.UpdateDeck();
+
                             UpdateSong();
                             UpdateVolume();
                             await Navigation.PopAsync();
@@ -239,7 +239,6 @@ namespace Twins.Views
             var playerPreferences = PlayerPreferences.Instance;
             playerPreferencesDB.Column=playerPreferences.Column;
             playerPreferencesDB.Row = playerPreferences.Row;
-            playerPreferencesDB.SelectedDeck = playerPreferences.SelectedDeck;
             playerPreferencesDB.SelectedSong = playerPreferences.SelectedSong;
             playerPreferencesDB.Volume = playerPreferences.Volume;
             playerPreferencesDB.LimitTime = playerPreferences.LimitTime;
@@ -257,8 +256,11 @@ namespace Twins.Views
         private void Volume_ValueChanged(object sender, ValueChangedEventArgs e)
         {
             //here is the control logic volume
-            MainPage.Player.ChangeVolume(Volume.Value);
-            MainPage.EffectsPlayer.ChangeVolume(Volume.Value);
+            if (Volume.Value != 0.0 && MainPage.Player.GetVolume() != 0.0) 
+            {
+                MainPage.Player.ChangeVolume(Volume.Value);
+                MainPage.EffectsPlayer.ChangeVolume(Volume.Value);
+            }
         }
 
         private void OnlyNumbersTime(object sender, TextChangedEventArgs e)

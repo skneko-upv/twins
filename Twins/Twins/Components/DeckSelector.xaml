@@ -5,4 +5,4 @@
     <Picker Title="Selecciona una baraja" HorizontalOptions="Center"
                         x:Name="SelectDeck" SelectedIndexChanged="SelectDeck_SelectedIndexChanged"/>
     <Image  Scale="0.5" VerticalOptions="Center" x:Name="ImageCard"/>
-</StackLayout>
+</StackLayout> 

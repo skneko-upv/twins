@@ -22,6 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\DeckListForm.xaml.cs">
+      <DependentUpon>DeckListForm.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\PauseView.xaml.cs">
       <DependentUpon>PauseView.xaml</DependentUpon>
     </Compile>
@@ -32,7 +35,10 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Components\DeckSelector.xaml">
-        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Components\DeckViewComponent.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Components\LevelComponent.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -47,6 +53,9 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Components\CardComponent.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\DeckListForm.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\DeckManagerView.xaml">

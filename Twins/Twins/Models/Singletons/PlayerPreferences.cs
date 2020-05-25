@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Twins.Components;
 
 namespace Twins.Models.Singletons
 {
@@ -20,9 +22,13 @@ namespace Twins.Models.Singletons
 
         public int Row { get; set; }
 
-        public List<string> Decks { get; set; }
+        public IList<Deck> Decks => this.BuiltInDecks.Concat(PlayerDecks).ToList();
+
+        public IList<Deck> BuiltInDecks { get; }
+
+        public IList<Deck> PlayerDecks { get; }
         
-        public string SelectedDeck { get; set; }
+        public Deck SelectedDeck { get; set; }
 
         public string SelectedSong { get; set; }
 
@@ -46,17 +52,11 @@ namespace Twins.Models.Singletons
 
         private PlayerPreferences()
         {
-   
-            var decks = new List<string>
-            {
-                "Animales",
-                "Numeros",
-                "Deportes"
-            };
             Column = 6;
             Row = 4;
-            Decks = decks;
-            SelectedDeck = "Animales";
+            BuiltInDecks = new List<Deck> { Components.BuiltInDecks.Animals.Value, Components.BuiltInDecks.Numbers.Value, Components.BuiltInDecks.Sports.Value };
+            PlayerDecks = new List<Deck>();
+            SelectedDeck = BuiltInDecks[0];
             SelectedSong = "Solve The Puzzle";
             ButtonEffect = "menuButtonSound";
             TurnCardEffect = "Voltear Carta";

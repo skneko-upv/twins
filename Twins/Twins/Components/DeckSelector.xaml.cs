@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using Twins.Models;
 using Twins.Models.Singletons;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,55 +13,28 @@ namespace Twins.Components
         public DeckSelector()
         {
             InitializeComponent();
-            
         }
 
         public void InitSelectionDeckList()
         {
             var defaultparameters = PlayerPreferences.Instance;
 
-            SelectDeck.ItemsSource = defaultparameters.Decks;
+            SelectDeck.ItemsSource = defaultparameters.Decks.Select(x => x.Name).ToList();
             var index = defaultparameters.Decks.IndexOf(defaultparameters.SelectedDeck);
             SelectDeck.SelectedIndex = index;
-            if (defaultparameters.SelectedDeck == "Animales")
-            {
-                ImageCard.Source = "Assets/Decks/Deck1/card1.png";
-            }
-            else if (defaultparameters.SelectedDeck == "Numeros")
-            {
-                ImageCard.Source = "Assets/Decks/Deck2/card1.png";
-            }
-            else
-            {
-                ImageCard.Source = "Assets/Decks/Deck3/card1.png";
-            }
-            
+            ImageCard.Source = defaultparameters.SelectedDeck.Cards[0].Image;
         }
 
-        public void UpdateDeck() 
+        public void UpdateDeck()
         {
             var defaultparameters = PlayerPreferences.Instance;
-            defaultparameters.SelectedDeck = SelectDeck.SelectedItem.ToString();
-            
+            defaultparameters.SelectedDeck = defaultparameters.Decks[SelectDeck.SelectedIndex];
         }
 
         private void SelectDeck_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            
-            //Here we have to update ImageCard , with the new image of de deck selected
-            if (SelectDeck.SelectedItem.ToString() == "Animales")
-            {
-                ImageCard.Source = "Assets/Decks/Deck1/card1.png";
-            }
-            else if (SelectDeck.SelectedItem.ToString() == "Numeros")
-            {
-                ImageCard.Source = "Assets/Decks/Deck2/card1.png";
-            }
-            else
-            {
-                ImageCard.Source = "Assets/Decks/Deck3/card1.png";
-            }
+            var defaultparameters = PlayerPreferences.Instance;
+            ImageCard.Source = defaultparameters.Decks[SelectDeck.SelectedIndex].Cards[0].Image;
         }
     }
 }
