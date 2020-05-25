@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Twins.Components;
 using Twins.Models;
 using Twins.Models.Singletons;
 using Twins.Persistence;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,17 +17,47 @@ namespace Twins.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DeckListForm : ContentPage
     {
+
         public DeckListForm()
         {
             InitializeComponent();
-            FillScrollViewAsync();
         }
 
-        private async void FillScrollViewAsync() {
-            ICollection<Persistence.DataTypes.Deck> decks = await Database.Instance.GetDecksAsync();
-            foreach (var savedDeck in decks) 
+        private void FillScrollView() {
+            bool hasTwoStackLayoutChilds = false;
+            StackLayout generatedStackLayout = null;
+            foreach (var deck in PlayerPreferences.Instance.Decks) 
             {
-                deckArea.Children.Add(new DeckViewComponent(deck));
+                if (!hasTwoStackLayoutChilds)
+                {
+                    generatedStackLayout = new StackLayout() { Orientation = StackOrientation.Horizontal };
+                    deckArea.Children.Add(generatedStackLayout);
+                    generatedStackLayout.Children.Add(new DeckViewComponent(deck));
+                    hasTwoStackLayoutChilds = true;
+                } 
+                else
+                {
+                    generatedStackLayout.Children.Add(new DeckViewComponent(deck));
+                    hasTwoStackLayoutChilds = false;
+                }
+            }
+        }
+
+        protected override void OnAppearing()
+        {
+            FillScrollView();
+
+            var defaultParameters = PlayerPreferences.Instance;
+
+            foreach (View stackLayout in deckArea.Children)
+            {
+                foreach (DeckViewComponent deck in ((StackLayout)stackLayout).Children)
+                {
+                    if (deck.Deck == defaultParameters.SelectedDeck)
+                    {
+                        deck.MarkChecked();
+                    }
+                }
             }
         }
 
@@ -37,14 +69,53 @@ namespace Twins.Views
 
         private async void OnCreateDeck(object sender, EventArgs e)
         {
-            //await Navigation.PopAsync();
+            ErrorView.IsVisible = true;
             MainPage.EffectsPlayer.Play();
         }
 
         private async void OnApply(object sender, EventArgs e)
         {
+            var defaultParameters = PlayerPreferences.Instance;
+            defaultParameters.SelectedDeck = GetSelectedDeck();
+
             MainPage.EffectsPlayer.Play();
+            await UpdateDatabase();
+            await Navigation.PopAsync();
         }
+
+        private Deck GetSelectedDeck()
+        {
+            foreach (View stackLayout in deckArea.Children)
+            {
+                foreach(DeckViewComponent deck in ((StackLayout) stackLayout).Children) 
+                {
+                    if (deck.IsChecked())
+                    {
+                        System.Diagnostics.Debug.WriteLine(deck.Deck.Name);
+                        return deck.Deck;
+                    }
+                }
+            }
+            return null;
+        }
+
+        //Intentar centralizar
+        private async Task UpdateDatabase()
+        {
+            var database = Database.Instance;
+            var playerPreferencesDB = await database.GetPlayerPreferences();
+            var playerPreferences = PlayerPreferences.Instance;
+            playerPreferencesDB.Column=playerPreferences.Column;
+            playerPreferencesDB.Row = playerPreferences.Row;
+            playerPreferencesDB.SelectedSong = playerPreferences.SelectedSong;
+            playerPreferencesDB.Volume = playerPreferences.Volume;
+            playerPreferencesDB.LimitTime = playerPreferences.LimitTime;
+            playerPreferencesDB.TurnTime = playerPreferences.TurnTime;
+
+            Database.Instance.SavePlayerPreferences(playerPreferencesDB);
+        }
+
+
 
         private void ErrorViewClicked(object sender, EventArgs e)
         {
@@ -52,20 +123,5 @@ namespace Twins.Views
             MainPage.EffectsPlayer.Play();
         }
 
-        private void OnlyNumbersTime(object sender, TextChangedEventArgs e)
-        {
-            try
-            {
-                if (((Entry)sender).Text.Length != 0)
-                {
-                    if (Int32.Parse(((Entry)sender).Text) / 60 > 0)
-                        throw new Exception();
-                }
-            }
-            catch (Exception)
-            {
-                ((Entry)sender).Text = ((Entry)sender).Text.Substring(0, ((Entry)sender).Text.Length - 1);
-            }
-        }
     }
 }

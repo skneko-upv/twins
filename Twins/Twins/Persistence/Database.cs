@@ -28,7 +28,9 @@ namespace Twins.Persistence
             _database = new SQLiteAsyncConnection(dbPath, Flags);
             _database.CreateTableAsync<PlayerInfo>().Wait();
             _database.CreateTableAsync<PlayerPreferences>().Wait();
-            _database.CreateTableAsync<Deck>().Wait();
+
+            //IMPORTANTE VOLVER A CARGAR LA LINEA
+            //_database.CreateTableAsync<Deck>().Wait();
             this.InitializeDB();
         }
 

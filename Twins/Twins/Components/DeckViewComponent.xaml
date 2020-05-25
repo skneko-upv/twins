@@ -2,17 +2,17 @@
 <StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Twins.Components.DeckViewComponent"
-             WidthRequest="200" HeightRequest="120">
+             WidthRequest="225" HeightRequest="120" Margin="0,0,0,40">
         <Frame Padding="10"
                BorderColor="Black"
                CornerRadius="5"
                HasShadow="True">
-               <StackLayout Orientation="Vertical">
-            <StackLayout Orientation="Horizontal">
-                <Image x:Name="BackCardImage"></Image>
-                <Image x:Name="FrontCardImage"></Image>
-            </StackLayout>
-            <RadioButton x:Name="checkedRadioButton" GroupName="selectedDeck"></RadioButton>
-        </StackLayout>
+               <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Vertical">
+                    <StackLayout Orientation="Horizontal">
+                        <Image x:Name="BackCardImage"></Image>
+                        <Image x:Name="FrontCardImage"></Image>
+                    </StackLayout>
+                    <RadioButton x:Name="checkedRadioButton"  Margin="92,0,0,0"  HorizontalOptions="CenterAndExpand" GroupName="selectedDeck"></RadioButton>  
+               </StackLayout>
         </Frame>
 </StackLayout>

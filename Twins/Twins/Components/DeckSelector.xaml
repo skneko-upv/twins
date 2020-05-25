@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<StackLayout xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Twins.Components.DeckSelector">
-    <Picker Title="Selecciona una baraja" HorizontalOptions="Center"
-                        x:Name="SelectDeck" SelectedIndexChanged="SelectDeck_SelectedIndexChanged"/>
-    <Image  Scale="0.5" VerticalOptions="Center" x:Name="ImageCard"/>
-</StackLayout>

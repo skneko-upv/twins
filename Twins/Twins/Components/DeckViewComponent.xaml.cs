@@ -12,7 +12,7 @@ namespace Twins.Components
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DeckViewComponent : StackLayout
     {
-        Deck Deck { get; }
+        public Deck Deck { get; }
 
         public DeckViewComponent(Deck deck)
         {
@@ -26,6 +26,16 @@ namespace Twins.Components
             Device.SetFlags(new string[] { "RadioButton_Experimental" });
             BackCardImage.Source = Deck.BackImage;
             FrontCardImage.Source = Deck.Cards[0].Image;
+        }
+
+        public bool IsChecked()
+        {
+            return checkedRadioButton.IsChecked;
+        }
+
+        public void MarkChecked()
+        {
+            checkedRadioButton.IsChecked = true;
         }
     }
 }

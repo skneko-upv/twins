@@ -41,17 +41,8 @@ namespace Twins
                 gameConfiguration.SelectedSong = saved.SelectedSong;
                 gameConfiguration.Volume = saved.Volume;
 
-                var savedDecks = await database.GetDecksAsync();
-                var decks = new List<string>();
-                foreach (var d in savedDecks)
-                {
-                    decks.Add(d.Name);
-                };
-
                 gameConfiguration.Column = saved.Column;
                 gameConfiguration.Row = saved.Row;
-                gameConfiguration.Decks = decks;
-                gameConfiguration.SelectedDeck = saved.SelectedDeck;
                 gameConfiguration.LimitTime = saved.LimitTime;
                 gameConfiguration.TurnTime = saved.TurnTime;
             }
@@ -140,18 +131,7 @@ namespace Twins
 
         private void SetDeck(GameBuilder gameBuilder)
         {
-            if (gameConfiguration.SelectedDeck == "Animales")
-            {
-                gameBuilder.WithDeck(BuiltInDecks.Animals.Value);
-            }
-            else if (gameConfiguration.SelectedDeck == "Numeros")
-            {
-                gameBuilder.WithDeck(BuiltInDecks.Numbers.Value);
-            }
-            else
-            {
-                gameBuilder.WithDeck(BuiltInDecks.Sports.Value);
-            }
+            gameBuilder.WithDeck(gameConfiguration.SelectedDeck);
         }
 
         private void SetTurnTimeOfGame(GameBuilder gameBuilder)
