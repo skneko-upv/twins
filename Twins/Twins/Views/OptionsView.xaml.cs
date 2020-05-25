@@ -27,6 +27,7 @@ namespace Twins.Views
             InitSelectionSongList();
             InitVolume();
             InitTime();
+            SelectorDeck.InitSelectionDeckList();
         }
 
         private void InitTime()
@@ -128,7 +129,7 @@ namespace Twins.Views
                                     defaultParameters.TurnTime = TimeSpan.Parse("0:" + TMinutesEntry.Text + ":" + TSecondsEntry.Text);
                                     defaultParameters.Row = int.Parse(DefaultRow.Text);
                                     defaultParameters.Column = int.Parse(DefaultColum.Text);
-                                    
+                                    SelectorDeck.UpdateDeck();
                                     UpdateSong();
                                     UpdateVolume();
                                     await UpdateDatabase();
@@ -139,7 +140,7 @@ namespace Twins.Views
                                     defaultParameters.LimitTime = TimeSpan.Parse("0:" + MinutesEntry.Text + ":" + SecondsEntry.Text);
                                     defaultParameters.Row = int.Parse(DefaultRow.Text);
                                     defaultParameters.Column = int.Parse(DefaultColum.Text);
-                                    
+                                    SelectorDeck.UpdateDeck();
                                     UpdateSong();
                                     UpdateVolume();
                                     await UpdateDatabase();
@@ -154,7 +155,7 @@ namespace Twins.Views
                                     defaultParameters.TurnTime = TimeSpan.Parse("0:" + TMinutesEntry.Text + ":" + TSecondsEntry.Text);
                                     defaultParameters.Row = int.Parse(DefaultRow.Text);
                                     defaultParameters.Column = int.Parse(DefaultColum.Text);
-                                    
+                                    SelectorDeck.UpdateDeck();
                                     UpdateSong();
                                     UpdateVolume();
                                     await UpdateDatabase();
@@ -164,7 +165,7 @@ namespace Twins.Views
                                 {
                                     defaultParameters.Row = int.Parse(DefaultRow.Text);
                                     defaultParameters.Column = int.Parse(DefaultColum.Text);
-                                    
+                                    SelectorDeck.UpdateDeck();
                                     UpdateSong();
                                     UpdateVolume();
                                     await UpdateDatabase();
@@ -184,7 +185,7 @@ namespace Twins.Views
                         {
                             defaultParameters.LimitTime = TimeSpan.Parse("0:" + MinutesEntry.Text + ":" + SecondsEntry.Text);
                             defaultParameters.TurnTime = TimeSpan.Parse("0:" + TMinutesEntry.Text + ":" + TSecondsEntry.Text);
-                            
+                            SelectorDeck.UpdateDeck();
                             UpdateSong();
                             UpdateVolume();
                             await UpdateDatabase();
@@ -193,7 +194,7 @@ namespace Twins.Views
                         else
                         {
                             defaultParameters.LimitTime = TimeSpan.Parse("0:" + MinutesEntry.Text + ":" + SecondsEntry.Text);
-                            
+                            SelectorDeck.UpdateDeck();
                             UpdateSong();
                             UpdateVolume();
                             await UpdateDatabase();
@@ -206,15 +207,15 @@ namespace Twins.Views
                         if (HasTimeTLimit.IsChecked && IsTurnTimeLimitCorrect())
                         {
                             defaultParameters.TurnTime = TimeSpan.Parse("0:" + TMinutesEntry.Text + ":" + TSecondsEntry.Text);
-                            
+                            SelectorDeck.UpdateDeck();
                             UpdateSong();
                             UpdateVolume();
                             await Navigation.PopAsync();
                         }
                         else
                         {
-                           
-                            
+                            SelectorDeck.UpdateDeck();
+
                             UpdateSong();
                             UpdateVolume();
                             await Navigation.PopAsync();

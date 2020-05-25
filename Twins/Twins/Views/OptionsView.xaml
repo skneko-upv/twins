@@ -55,6 +55,9 @@
                         <Label Text="Segundos" VerticalOptions="Center"/>
 
                     </StackLayout>
+                    <StackLayout Orientation="Vertical" HorizontalOptions="Center" >
+                        <twinsc:DeckSelector x:Name="SelectorDeck"/>
+                    </StackLayout>
                     <StackLayout >
                     <Picker Title="Selecciona una canción" HorizontalOptions="Center"
                             x:Name="SelectSong"/>
