@@ -24,6 +24,7 @@ namespace Twins.Views
         }
 
         private void FillScrollView() {
+            deckArea.Children.Clear();
             bool hasTwoStackLayoutChilds = false;
             StackLayout generatedStackLayout = null;
             foreach (var deck in PlayerPreferences.Instance.Decks) 
