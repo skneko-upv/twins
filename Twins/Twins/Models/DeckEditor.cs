@@ -84,7 +84,7 @@ namespace Twins.Models
         // Metodo que deberá llamar al metodo de persistencia de la BD para almacenar el Deck
         public void SaveDeck() 
         {
-            PlayerPreferences.Instance.Decks.Add(Deck);
+            PlayerPreferences.Instance.PlayerDecks.Add(Deck);
         }
 
     }

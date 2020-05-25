@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using Twins.Models;
 using Twins.Models.Singletons;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using static Twins.Utils.CollectionExtensions;
 
 namespace Twins.Components
 {

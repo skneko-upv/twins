@@ -22,7 +22,7 @@ namespace Twins.Models.Singletons
 
         public int Row { get; set; }
 
-        public IList<Deck> Decks => this.BuiltInDecks.Concat(PlayerDecks).ToList();
+        public IReadOnlyList<Deck> Decks => this.BuiltInDecks.Concat(PlayerDecks).ToList();
 
         public IList<Deck> BuiltInDecks { get; }
 
