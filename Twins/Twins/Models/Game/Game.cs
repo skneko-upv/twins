@@ -91,7 +91,9 @@ namespace Twins.Models.Game
 
             Device.StartTimer(TimeSpan.FromMilliseconds(500.0), () =>
             {
-                if(Int32.Parse(GameClock.TimeLeft.Time.Substring(3)) < 10 && ClockEffect == null) {
+                if(Int32.Parse(GameClock.TimeLeft.Time.Substring(0,2)) == 0 && 
+                     Int32.Parse(GameClock.TimeLeft.Time.Substring(3)) < 10 && ClockEffect == null)
+                {
                     var preferences = PlayerPreferences.Instance;
                     ClockEffect = new AudioPlayer();
                     ClockEffect.LoadEffect(preferences.ClockTimerEffect + ".wav");
