@@ -4,5 +4,5 @@
              x:Class="Twins.Components.DeckSelector">
     <Picker Title="Selecciona una baraja" HorizontalOptions="Center"
                         x:Name="SelectDeck" SelectedIndexChanged="SelectDeck_SelectedIndexChanged"/>
-    <Image  Scale="0.5" VerticalOptions="Center" x:Name="ImageCard"/>
+    <Image  WidthRequest="100" HeightRequest="100" VerticalOptions="Center" x:Name="ImageCard"/>
 </StackLayout> 

@@ -20,11 +20,18 @@ namespace Twins.Views
 
         private void InitPlayerPreferences()
         {
-
+            InitRowsAndColumns();
             InitSelectionSongList();
             InitVolume();
             InitTime();
             SelectorDeck.InitSelectionDeckList();
+        }
+
+        private void InitRowsAndColumns()
+        {
+            PlayerPreferences defaultParameters = PlayerPreferences.Instance;
+            DefaultRow.Text = defaultParameters.Row.ToString();
+            DefaultColumn.Text = defaultParameters.Column.ToString();
         }
 
         private void InitTime()
@@ -132,11 +139,11 @@ namespace Twins.Views
             {
                 PlayerPreferences defaultParameters = PlayerPreferences.Instance;
 
-                if (DefaultRow.Text != null || DefaultColum.Text != null)
+                if (DefaultRow.Text != null || DefaultColumn.Text != null)
                 {
-                    if (DefaultRow.Text != null && DefaultColum.Text != null)
+                    if (DefaultRow.Text != null && DefaultColumn.Text != null)
                     {
-                        if (CheckSizeboard(int.Parse(DefaultColum.Text), int.Parse(DefaultRow.Text)))
+                        if (CheckSizeboard(int.Parse(DefaultColumn.Text), int.Parse(DefaultRow.Text)))
                         {
                             if (HasTimeLimit.IsChecked && IsTimeLimitCorrect())
                             {
@@ -145,7 +152,7 @@ namespace Twins.Views
                                     defaultParameters.LimitTime = TimeSpan.Parse("0:" + MinutesEntry.Text + ":" + SecondsEntry.Text);
                                     defaultParameters.TurnTime = TimeSpan.Parse("0:" + TMinutesEntry.Text + ":" + TSecondsEntry.Text);
                                     defaultParameters.Row = int.Parse(DefaultRow.Text);
-                                    defaultParameters.Column = int.Parse(DefaultColum.Text);
+                                    defaultParameters.Column = int.Parse(DefaultColumn.Text);
                                     SelectorDeck.UpdateDeck();
                                     UpdateSong();
                                     UpdateVolume();
@@ -156,7 +163,7 @@ namespace Twins.Views
                                 {
                                     defaultParameters.LimitTime = TimeSpan.Parse("0:" + MinutesEntry.Text + ":" + SecondsEntry.Text);
                                     defaultParameters.Row = int.Parse(DefaultRow.Text);
-                                    defaultParameters.Column = int.Parse(DefaultColum.Text);
+                                    defaultParameters.Column = int.Parse(DefaultColumn.Text);
                                     SelectorDeck.UpdateDeck();
                                     UpdateSong();
                                     UpdateVolume();
@@ -171,7 +178,7 @@ namespace Twins.Views
                                 {
                                     defaultParameters.TurnTime = TimeSpan.Parse("0:" + TMinutesEntry.Text + ":" + TSecondsEntry.Text);
                                     defaultParameters.Row = int.Parse(DefaultRow.Text);
-                                    defaultParameters.Column = int.Parse(DefaultColum.Text);
+                                    defaultParameters.Column = int.Parse(DefaultColumn.Text);
                                     SelectorDeck.UpdateDeck();
                                     UpdateSong();
                                     UpdateVolume();
@@ -181,7 +188,7 @@ namespace Twins.Views
                                 else
                                 {
                                     defaultParameters.Row = int.Parse(DefaultRow.Text);
-                                    defaultParameters.Column = int.Parse(DefaultColum.Text);
+                                    defaultParameters.Column = int.Parse(DefaultColumn.Text);
                                     SelectorDeck.UpdateDeck();
                                     UpdateSong();
                                     UpdateVolume();
