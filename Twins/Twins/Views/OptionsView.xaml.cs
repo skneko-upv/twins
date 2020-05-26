@@ -41,6 +41,8 @@ namespace Twins.Views
 
         private void InitVolume() 
         {
+            volumeIcon.Source = MainPage.Player.GetVolume() == 0.0 ? "Assets/Icons/mute.png" : "Assets/Icons/volume.png";
+
             var defaultParameters = PlayerPreferences.Instance;
             Volume.Value = defaultParameters.Volume;
         }
