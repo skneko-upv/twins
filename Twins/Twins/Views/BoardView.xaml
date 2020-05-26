@@ -28,7 +28,7 @@
                                         Clicked="OnPause" 
                                         BackgroundColor="Transparent"
                                         />
-                            <Button ImageSource="Assets/Icons/muteW.png" x:Name="MuteButton"
+                            <Button ImageSource="Assets/Icons/volumeW.png" x:Name="MuteButton"
                                         Clicked="OnMute"
                                         BackgroundColor="Transparent"/>
                         </StackLayout>

@@ -29,7 +29,6 @@ namespace Twins
         public MainPage()
         {
             InitializeComponent();
-
         }
 
         private async void InitPlayerPreferences()
@@ -60,7 +59,6 @@ namespace Twins
                 Player.ChangeVolume(gameConfiguration.Volume);
                 EffectsPlayer.LoadEffect(gameConfiguration.ButtonEffect + ".wav");
             }
-
         }
 
         private void InitGameConfiguration()
@@ -89,12 +87,8 @@ namespace Twins
         {
             // resume
             // Mute music
-            if ( Player.GetVolume() == 0.0 ) {
-                Player.ChangeVolume(gameConfiguration.Volume); 
-            }
-            else {
-                Player.ChangeVolume(0.0); 
-            }
+            Player.Mute();
+            volumeIcon.Source = Player.GetVolume() == 0.0 ? "Assets/Icons/mute.png" : "Assets/Icons/volume.png";
         }
 
         private void OnLogout(object sender, EventArgs e)

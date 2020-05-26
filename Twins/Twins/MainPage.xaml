@@ -32,7 +32,8 @@
                         Clicked="OnOption"
                         />
                 <ImageButton
-                        Source="Assets\Icons\mute.png" 
+                        Source="Assets\Icons\volume.png"
+                        x:Name="volumeIcon"
                         Padding="15"
                         HorizontalOptions="Start"
                         VerticalOptions="Start"

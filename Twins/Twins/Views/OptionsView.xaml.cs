@@ -261,7 +261,6 @@ namespace Twins.Views
             if (Volume.Value != 0.0 && MainPage.Player.GetVolume() != 0.0) 
             {
                 MainPage.Player.ChangeVolume(Volume.Value);
-                MainPage.EffectsPlayer.ChangeVolume(Volume.Value);
             }
         }
 
