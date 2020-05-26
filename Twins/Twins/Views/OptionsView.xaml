@@ -72,8 +72,8 @@
                              Minimum="0"  Value="100" Maximum="100"  Margin="5" ValueChanged="Volume_ValueChanged" />
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center">
-                    <Button Text="Aplicar" Clicked="OnApply"/>
-                    <Button Text="Cancelar" Clicked="OnCancel"/>
+                        <Button Text="Aplicar" Style="{StaticResource buttonStyle}" Clicked="OnApply"/>
+                        <Button Text="Cancelar" Style="{StaticResource buttonStyle}" Clicked="OnCancel"/>
 
                 </StackLayout>
                 <twinsc:NotImplementedMessage x:Name="CommingSoonView"/>

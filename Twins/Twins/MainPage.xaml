@@ -89,7 +89,7 @@
                             Clicked="OnCategoryGame"
                             Style="{StaticResource buttonStyle}"
                         />
-                        <Button 
+                    <Button 
                             ClassId="ButtonPlay"
                             Text="MULTIJUGADOR" 
                             HorizontalOptions="Center" 
@@ -97,20 +97,11 @@
                             Clicked="OnMultiplayerGame"
                             Style="{StaticResource buttonStyle}"
                         />
-                        <Button 
-                            ClassId="ButtonPlay"
-                            Text="DESAFIOS" 
-                            HorizontalOptions="Center" 
-                            VerticalOptions="End"
-                            Clicked="OnChallengeGame"
-                            Style="{StaticResource buttonStyle}"
-                        />
-                        <Button 
+                    <Button 
                             ClassId="ButtonPlay"
                             Text="MIS BARAJAS" 
                             HorizontalOptions="Center" 
                             VerticalOptions="End"
-                            ScaleY="0.8"
                             Clicked="OnDeckList"
                             Style="{StaticResource buttonStyle}"
                         />
