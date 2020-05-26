@@ -204,14 +204,6 @@ namespace Twins
             MainPage.EffectsPlayer.Play();
         }
 
-        private void OnChallengeGame(object sender, EventArgs e)
-        {
-            // resume
-            // Open Challenge menu
-            CommingSoonView.ButtonNotImplemented();
-            MainPage.EffectsPlayer.Play();
-        }
-
         private async void OnDeckList(object sender, EventArgs e)
         {
             // resume

@@ -6,6 +6,19 @@
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:twinsc="clr-namespace:Twins.Components"
                 mc:Ignorable="d"
                 x:Class="Twins.Views.PauseView" IsVisible="True">
+    <AbsoluteLayout.Resources>
+        <ResourceDictionary>
+            <Style x:Key="buttonStyle" TargetType="Button">
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="CornerRadius" Value="20" />
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="BorderColor" Value="Black" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontFamily" Value="Medium" />
+                <Setter Property="Padding" Value="10" />
+            </Style>
+        </ResourceDictionary>
+    </AbsoluteLayout.Resources>
     <StackLayout BackgroundColor="#6bc5f3"
                  WidthRequest="2000" HeightRequest="2000" 
                  AbsoluteLayout.LayoutBounds=".5,.5,1.0,1.0"
@@ -34,10 +47,12 @@
         </StackLayout>
         <Button Text="Reaunudar"
                 Clicked="OnResume"
+                Style="{StaticResource buttonStyle}"
                 Margin="50,20" />
         
-    <Button Text="Abandonar"
-            Margin="50,20" Clicked="OnAbandon" />
+        <Button Text="Abandonar"
+                Style="{StaticResource buttonStyle}"
+                Margin="50,20" Clicked="OnAbandon" />
     </StackLayout>
     <twinsc:NotImplementedMessage x:Name="CommingSoonView"/>
 </AbsoluteLayout>
