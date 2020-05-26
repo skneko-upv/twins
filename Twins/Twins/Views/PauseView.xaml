@@ -6,11 +6,31 @@
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:twinsc="clr-namespace:Twins.Components"
                 mc:Ignorable="d"
                 x:Class="Twins.Views.PauseView" IsVisible="True">
+    <AbsoluteLayout.Resources>
+        <ResourceDictionary>
+            <Style x:Key="buttonStyle" TargetType="Button">
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="CornerRadius" Value="20" />
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="BorderColor" Value="Black" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontFamily" Value="Medium" />
+                <Setter Property="Padding" Value="10" />
+            </Style>
+        </ResourceDictionary>
+    </AbsoluteLayout.Resources>
     <StackLayout BackgroundColor="#6bc5f3"
                  WidthRequest="2000" HeightRequest="2000" 
                  AbsoluteLayout.LayoutBounds=".5,.5,1.0,1.0"
                  AbsoluteLayout.LayoutFlags="All"/>
-    <StackLayout BackgroundColor="{StaticResource backgroundColor}"
+    <Frame Padding="0" BackgroundColor="Black"
+           CornerRadius="0" HasShadow="False"
+           AbsoluteLayout.LayoutFlags="PositionProportional"
+           AbsoluteLayout.LayoutBounds="0.5, 0.5">
+        <Frame Margin="7" Padding="0,7"
+               BackgroundColor="White"
+               CornerRadius="0" HasShadow="False">
+            <StackLayout
                  HeightRequest="200"
                  WidthRequest="275"
                  Padding="20"
@@ -18,26 +38,30 @@
                  HorizontalOptions="Center"
                  AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
                  AbsoluteLayout.LayoutFlags="All">
-    <Label Text="Pausa" FontSize="Medium" FontAttributes="Bold" 
+                <Label Text="Pausa" FontSize="Medium" FontAttributes="Bold" 
                    HorizontalOptions="Center"/>
-        <StackLayout x:Name="timeNotHaltedWarning"
+                <StackLayout x:Name="timeNotHaltedWarning"
                      Orientation="Horizontal" 
                      Spacing="10" 
                      BackgroundColor="#FFB3B3"
                      HorizontalOptions="Center"
                      Margin="20,5"
                      Padding="5">
-            <Image Source="Assets/Icons/alert.png"/>
-            <Label Text="El juego no se ha detenido"
+                    <Image Source="Assets/Icons/alert.png"/>
+                    <Label Text="El juego no se ha detenido"
                    HorizontalOptions="Center"
                    TextColor="Red" />
-        </StackLayout>
-        <Button Text="Reaunudar"
+                </StackLayout>
+                <Button Text="Reaunudar"
                 Clicked="OnResume"
+                Style="{StaticResource buttonStyle}"
                 Margin="50,20" />
-        
-    <Button Text="Abandonar"
-            Margin="50,20" Clicked="OnAbandon" />
-    </StackLayout>
+
+                <Button Text="Abandonar"
+                Style="{StaticResource buttonStyle}"
+                Margin="50,20" Clicked="OnAbandon" />
+            </StackLayout>
+        </Frame>
+    </Frame>
     <twinsc:NotImplementedMessage x:Name="CommingSoonView"/>
 </AbsoluteLayout>

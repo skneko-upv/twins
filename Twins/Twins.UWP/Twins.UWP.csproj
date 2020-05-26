@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Twins.UWP</RootNamespace>
     <AssemblyName>Twins.UWP</AssemblyName>
-    <DefaultLanguage>en-US</DefaultLanguage>
+    <DefaultLanguage>es-ES</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.18362.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
@@ -110,9 +110,14 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Backgrounds\bubbleGBackground.png" />
+    <Content Include="Assets\Backgrounds\bubbleRBackground.png" />
+    <Content Include="Assets\Backgrounds\errorDialogBackground.png" />
     <Content Include="Assets\Backgrounds\levelBackground.png" />
+    <Content Include="Assets\Backgrounds\lostBackground.png" />
     <Content Include="Assets\Backgrounds\menuprincipal.png" />
     <Content Include="Assets\Backgrounds\menuprincipal2.png" />
+    <Content Include="Assets\Backgrounds\winBackground.png" />
     <Content Include="Assets\Decks\Deck2\backimage.png" />
     <Content Include="Assets\Decks\Deck2\card1.png" />
     <Content Include="Assets\Decks\Deck2\card10.png" />
@@ -139,18 +144,27 @@
     <Content Include="Assets\Decks\Deck3\card7.png" />
     <Content Include="Assets\Decks\Deck3\card8.png" />
     <Content Include="Assets\Decks\Deck3\card9.png" />
+    <Content Include="Assets\Icons\Add.png" />
     <Content Include="Assets\Icons\cronometro.png" />
+    <Content Include="Assets\Icons\cronometroColor.png" />
+    <Content Include="Assets\Icons\delete.png" />
+    <Content Include="Assets\Icons\error.png" />
     <Content Include="Assets\Icons\home.png" />
     <Content Include="Assets\Icons\levelBlocked.png" />
     <Content Include="Assets\Icons\levelPassed.png" />
     <Content Include="Assets\Icons\logout.png" />
     <Content Include="Assets\Icons\mute.png" />
+    <Content Include="Assets\Icons\muteW.png" />
     <Content Include="Assets\Icons\next.png" />
     <Content Include="Assets\Icons\Options.png" />
+    <Content Include="Assets\Icons\pauseW.png" />
     <Content Include="Assets\Icons\restart.png" />
+    <Content Include="Assets\Icons\save.png" />
+    <Content Include="Assets\Icons\score.png" />
     <Content Include="Assets\Icons\title.png" />
     <Content Include="Assets\Icons\title2.png" />
     <Content Include="Assets\Icons\title4.png" />
+    <Content Include="Assets\Icons\logo.png" />
     <Content Include="Assets\Icons\volume.png" />
     <Content Include="Assets\Backgrounds\menuprincipal2.png" />
     <Content Include="Assets\Decks\Deck1\backimage.png" />
@@ -172,33 +186,64 @@
     <Content Include="Assets\Icons\Options.png" />
     <Content Include="Assets\Icons\pause.png" />
     <Content Include="Assets\Icons\volume.png" />
+    <Content Include="Assets\Icons\volumeW.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
+    <Content Include="Assets\LargeTile.scale-125.png" />
+    <Content Include="Assets\LargeTile.scale-150.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
     <Content Include="Assets\SmallTile.scale-100.png" />
+    <Content Include="Assets\SmallTile.scale-125.png" />
+    <Content Include="Assets\SmallTile.scale-150.png" />
     <Content Include="Assets\SmallTile.scale-200.png" />
     <Content Include="Assets\SmallTile.scale-400.png" />
     <Content Include="Assets\Sounds\Chiptronical.wav" />
+    <Content Include="Assets\Sounds\clockticksound.wav" />
+    <Content Include="Assets\Sounds\Lose Sound.wav" />
+    <Content Include="Assets\Sounds\menuButtonSound.wav" />
+    <Content Include="Assets\Sounds\PlayerChange.wav" />
     <Content Include="Assets\Sounds\Solve The Puzzle.wav" />
+    <Content Include="Assets\Sounds\Ta Da.wav" />
+    <Content Include="Assets\Sounds\Voltear Carta Invertido.wav" />
+    <Content Include="Assets\Sounds\Voltear Carta.wav" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
+    <Content Include="Assets\SplashScreen.scale-125.png" />
+    <Content Include="Assets\SplashScreen.scale-150.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-400.png" />
     <Content Include="Assets\Square150x150Logo.scale-100.png" />
+    <Content Include="Assets\Square150x150Logo.scale-125.png" />
+    <Content Include="Assets\Square150x150Logo.scale-150.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png" />
     <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-24.png" />
     <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-32.png" />
     <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-48.png" />
     <Content Include="Assets\Square44x44Logo.scale-100.png" />
+    <Content Include="Assets\Square44x44Logo.scale-125.png" />
+    <Content Include="Assets\Square44x44Logo.scale-150.png" />
     <Content Include="Assets\Square44x44Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.scale-400.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-32.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-48.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\StoreLogo.scale-125.png" />
+    <Content Include="Assets\StoreLogo.scale-150.png" />
     <Content Include="Assets\StoreLogo.scale-200.png" />
     <Content Include="Assets\StoreLogo.scale-400.png" />
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-125.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Properties\Default.rd.xml" />
@@ -217,9 +262,12 @@
     <PackageReference Include="Xam.Plugin.SimpleAudioPlayer">
       <Version>1.4.0</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.6.0.726" />
+    <PackageReference Include="Xamarin.Forms" Version="4.6.0.800" />
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.10" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.1" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+    <PackageReference Include="Xamarin.Plugin.FilePicker">
+      <Version>2.1.41</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Twins\Twins.csproj">

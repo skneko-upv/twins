@@ -42,8 +42,9 @@ namespace Twins.Models.Strategies
                 if (!availableCards.Any())
                 {
                     // If there are no more cards available to make pairs, we
-                    // reuse the same deck to introduce duplicate pairs.
-                    availableCards = Deck.Cards.Clone();
+                    // throw an exception for catch it later
+                    throw new System.Exception("La baraja seleccionada no tiene tantas parejas para" +
+                        " el tamaño del tablero elegido. Cambie a un tamaño menor.");
                 }
                 Card card = availableCards.PickAndRemoveRandom();
 

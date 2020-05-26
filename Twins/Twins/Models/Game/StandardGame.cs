@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Twins.Models
+namespace Twins.Models.Game
 {
-    public class StandardGame : Game
+    public class StandardGame : AbstractGame
     {
         public StandardGame(int height, int width, Deck deck, TimeSpan timeLimit, TimeSpan turnLimit, Board.Cell[,] cells = null, int level = 0)
             : base(height, width, deck, timeLimit, turnLimit, cells, level)

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Twins.Components;
 using Twins.Models;
 using Twins.Persistence;
@@ -37,7 +33,7 @@ namespace Twins.Views
         {
             int level = 1;
 
-            var saved = await Database.Instance.GetPlayerInfo();
+            PlayerInfo saved = await Database.Instance.GetPlayerInfo();
             Grid.Children.Add(new LevelComponent(Levels.Level1, level++, saved.LastLevelPassed), 0, 0);
             Grid.Children.Add(new LevelComponent(Levels.Level2, level++, saved.LastLevelPassed), 1, 0);
             Grid.Children.Add(new LevelComponent(Levels.Level3, level++, saved.LastLevelPassed), 2, 0);
@@ -52,6 +48,7 @@ namespace Twins.Views
 
         private async void Back(object sender, EventArgs e)
         {
+            MainPage.EffectsPlayer.Play();
             await Navigation.PopAsync();
         }
     }

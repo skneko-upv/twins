@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:twinsc="clr-namespace:Twins.Components"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:twinsc="clr-namespace:Twins.Components" xmlns:common="clr-namespace:Twins.Views"
              mc:Ignorable="d"
              x:Class="Twins.Views.OptionsView"
              NavigationPage.HasBackButton="False"
@@ -23,50 +23,82 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <AbsoluteLayout>
-            <StackLayout AbsoluteLayout.LayoutBounds=".5,.5,0.5,0.5" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="Center" VerticalOptions="Center" Padding="0,-20,0,0" >
-            <StackLayout Orientation="Vertical" VerticalOptions="Center" BackgroundColor="WhiteSmoke" HorizontalOptions="Center" Padding="100,10,100,10">
-                <StackLayout VerticalOptions="Start" HorizontalOptions="Center">
-                    <Label Text="OPCIONES" FontSize="Header"/>
-                </StackLayout>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Label Text="Fila"  HorizontalOptions="Center" Padding="0,5,0,0"/>
-                    <Entry Keyboard="Numeric" HorizontalOptions="Center" x:Name="DefaultRow" TextChanged="OnlyNumbers" FlowDirection="RightToLeft"/>
-                    <Label Text="Columna"  HorizontalOptions="Center" Padding="0,5,0,0"/>
-                    <Entry Keyboard="Numeric" x:Name="DefaultColum" HorizontalOptions="Center" TextChanged="OnlyNumbers" FlowDirection="RightToLeft"/>
-                </StackLayout>
-                <StackLayout Orientation="Vertical" HorizontalOptions="Center" >
-                    <twinsc:DeckSelector x:Name="SelectorDeck"/>
-                </StackLayout>
-                <StackLayout >
-                    <Picker Title="Selecciona una canción" HorizontalOptions="Center"
-                            x:Name="SelectSong"/>
-                </StackLayout>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-                    <Label Text="Volumen" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    <Image Source="Assets/Icons/volume.png"/>
-                </StackLayout>
-                <StackLayout >
-                    <!-- Aqui va el control de volumen de la música-->
-                    <Slider x:Name="Volume" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="4" VerticalOptions="Center" 
-                             Minimum="0"  Value="100" Maximum="100"  Margin="5" ValueChanged="Volume_ValueChanged" />
-                </StackLayout>
-                <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center">
-                    <Button Text="Aplicar" Clicked="OnApply"/>
-                    <Button Text="Cancelar" Clicked="OnCancel"/>
+            <Frame
+                  Padding="0"
+                  Margin="0,-15,0,0"
+                  BackgroundColor="Black"
+                  CornerRadius="0"
+                  HasShadow="False" 
+                  AbsoluteLayout.LayoutFlags="PositionProportional" 
+                  AbsoluteLayout.LayoutBounds="0.5,0.5">
+                <Frame
+                       Margin="7"
+                       Padding="10"
+                       BackgroundColor="WhiteSmoke"
+                       CornerRadius="0"
+                       HasShadow="False">
+                        <StackLayout AbsoluteLayout.LayoutBounds=".5,.5,1,1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="Center" VerticalOptions="Center" Padding="0,-20,0,0" >
+                        <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" Padding="100,10,100,10">
+                            <StackLayout VerticalOptions="Start" HorizontalOptions="Center">
+                                <Label Text="Opciones" FontSize="Header" FontAttributes="Bold"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                <Label Text="Fila"  HorizontalOptions="Center" Padding="0,5,0,0"/>
+                                <Entry Keyboard="Numeric" HorizontalOptions="Center" x:Name="DefaultRow" TextChanged="OnlyNumbers" FlowDirection="RightToLeft"/>
+                                <Label Text="Columna"  HorizontalOptions="Center" Padding="0,5,0,0"/>
+                                <Entry Keyboard="Numeric" x:Name="DefaultColumn" HorizontalOptions="Center" TextChanged="OnlyNumbers" FlowDirection="RightToLeft"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal"  Margin="0,5,0,0">
+                                <Label Text="Límite de tiempo: " VerticalOptions="Center"/>
+                                <CheckBox IsChecked="True" x:Name="HasTimeLimit"/>
+                                <Entry Keyboard="Numeric" MaxLength="2" FlowDirection="RightToLeft" x:Name="MinutesEntry" TextChanged="OnlyNumbersTime"
+                                            BindingContext="{x:Reference Name=HasTimeLimit}" IsEnabled="{Binding Path=IsChecked}"  Text="1"/>
+                                <Label Text="Minutos, " VerticalOptions="Center"/>
+                                <Entry Keyboard="Numeric" MaxLength="2" FlowDirection="RightToLeft" x:Name="SecondsEntry" TextChanged="OnlyNumbersTime"
+                                            BindingContext="{x:Reference Name=HasTimeLimit}" IsEnabled="{Binding Path=IsChecked}" Text="00"/>
+                                <Label Text="Segundos" VerticalOptions="Center"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal"  Margin="0,5,0,0">
+                                <Label Text="Tiempo por turno: " VerticalOptions="Center"/>
+                                <CheckBox IsChecked="True" x:Name="HasTimeTLimit"/>
+                                <Entry Keyboard="Numeric" MaxLength="2" FlowDirection="RightToLeft" x:Name="TMinutesEntry" TextChanged="OnlyNumbersTime"
+                                            BindingContext="{x:Reference Name=HasTimeTLimit}" IsEnabled="{Binding Path=IsChecked}" Text="0"/>
+                                <Label Text="Minutos, " VerticalOptions="Center"/>
+                                <Entry Keyboard="Numeric" MaxLength="2" FlowDirection="RightToLeft" x:Name="TSecondsEntry" TextChanged="OnlyNumbersTime"
+                                            BindingContext="{x:Reference Name=HasTimeTLimit}" IsEnabled="{Binding Path=IsChecked}" Text="5"/>
+                                <Label Text="Segundos" VerticalOptions="Center"/>
 
-                </StackLayout>
-                <twinsc:NotImplementedMessage x:Name="CommingSoonView"/>
-            </StackLayout>
-            </StackLayout>
-            <AbsoluteLayout AbsoluteLayout.LayoutBounds=".5,.5,1,1" AbsoluteLayout.LayoutFlags="All" x:Name="ErrorView" IsVisible="False">
-                <StackLayout BackgroundColor="#595959" Opacity="0.6"  WidthRequest="2000" HeightRequest="2000" />
-                <StackLayout AbsoluteLayout.LayoutBounds=".5,.5,.5,.3" AbsoluteLayout.LayoutFlags="All"
-                              Spacing="10"  BackgroundColor="White" Padding="10" Margin="10">
-                    <Label Text="Próximamente se implementará!" FontSize="Medium" FontAttributes="Bold" Margin="10" HorizontalOptions="Center" HorizontalTextAlignment="Center" x:Name="TextError"
-                           TextColor="Red"/>
-                    <Button Text="Aceptar" Clicked="ErrorViewClicked" HorizontalOptions="Center" VerticalOptions="End" Margin="10"/>
-                </StackLayout>
-            </AbsoluteLayout>
+                            </StackLayout>
+                            <StackLayout Orientation="Vertical" HorizontalOptions="Center" >
+                                <twinsc:DeckSelector x:Name="SelectorDeck"/>
+                            </StackLayout>
+                            <StackLayout >
+                                <Picker Title="Selecciona una canción" HorizontalOptions="Center"
+                                    x:Name="SelectSong"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                                <Label Text="Volumen" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <ImageButton x:Name="volumeIcon" Clicked="OnMute"/>
+                            </StackLayout>
+                            <StackLayout >
+                                <!-- Aqui va el control de volumen de la música-->
+                                <Slider x:Name="Volume" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="4" VerticalOptions="Center" 
+                                     Minimum="0"  Value="100" Maximum="100"  Margin="5" ValueChanged="Volume_ValueChanged"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center">
+                                <Button Text="Aplicar" Style="{StaticResource buttonStyle}" Clicked="OnApply"/>
+                                <Button Text="Cancelar" Style="{StaticResource buttonStyle}" Clicked="OnCancel"/>
+
+                            </StackLayout>
+                            <twinsc:NotImplementedMessage x:Name="CommingSoonView"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </Frame>
+            <common:ErrorView x:Name="ErrorView" AbsoluteLayout.LayoutBounds=".5,.5" 
+                              AbsoluteLayout.LayoutFlags="PositionProportional" IsVisible="False">
+
+            </common:ErrorView>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

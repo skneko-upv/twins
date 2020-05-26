@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:twinsc="clr-namespace:Twins.Components" xmlns:common="clr-namespace:Twins.Views"
+             mc:Ignorable="d"
+             x:Class="Twins.Views.DeckListForm"
+             NavigationPage.HasBackButton="False"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundImageSource="Assets/Backgrounds/menuprincipal2.png">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="buttonStyle" TargetType="Button">
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="CornerRadius" Value="20" />
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="BorderColor" Value="Black" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontFamily" Value="Medium" />
+                <Setter Property="Padding" Value="10" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <StackLayout AbsoluteLayout.LayoutBounds=".5,.5,1,1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="Center" VerticalOptions="Center" Padding="0,-20,0,0">
+                <StackLayout Orientation="Vertical" VerticalOptions="Center" BackgroundColor="WhiteSmoke" HorizontalOptions="Center" WidthRequest="500">
+                    <Frame
+                        Padding="0"
+                        BackgroundColor="Black"
+                        CornerRadius="0"
+                        HasShadow="False">
+                        <Frame
+                            Margin="7"
+                            Padding="0,7"
+                            BackgroundColor="White"
+                            CornerRadius="0"
+                            HasShadow="False">
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="Fill">
+                                <Label Text="Lista de barajas" FontSize="Medium" Margin="10,2,0,0" HorizontalOptions="Start"/>
+                                <Button Text="Crear baraja" Clicked="OnCreateDeck" Style="{StaticResource buttonStyle}" Margin="10,0" HorizontalOptions="EndAndExpand"/>
+                            </StackLayout>
+                        </Frame>
+                    </Frame>
+                    <Frame
+                        Padding="0"
+                        Margin="0,-15,0,0"
+                        BackgroundColor="Black"
+                        CornerRadius="0"
+                        HasShadow="False">
+                        <Frame
+                            Margin="7"
+                            Padding="10"
+                            BackgroundColor="White"
+                            CornerRadius="0"
+                            HasShadow="False">
+                            <StackLayout HeightRequest="400">
+                                <ScrollView
+                                  VerticalOptions="StartAndExpand"
+                                  HorizontalOptions="CenterAndExpand"
+                                  VerticalScrollBarVisibility="Never"
+                                  Orientation="Both">
+                                    <StackLayout x:Name="deckArea">
+                                      
+                                    </StackLayout>
+                                </ScrollView>
+                                <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center">
+                                    <Button Text="Aplicar" Clicked="OnApply" Padding="20,10" Style="{StaticResource buttonStyle}"/>
+                                    <Button Text="Cancelar" Clicked="OnCancel" Padding="20,10" Style="{StaticResource buttonStyle}"/>
+
+                                </StackLayout>
+                                <twinsc:NotImplementedMessage x:Name="CommingSoonView"/>
+                            </StackLayout>
+                        </Frame>
+                    </Frame>
+                </StackLayout>
+            </StackLayout>
+            <common:ErrorView x:Name="ErrorView" AbsoluteLayout.LayoutBounds=".5,.5" 
+                              AbsoluteLayout.LayoutFlags="PositionProportional" IsVisible="False">
+                    <Label Text="No se ha implementado" TextColor="Red" Margin="50,150,0,0"></Label>
+            </common:ErrorView>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

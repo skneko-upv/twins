@@ -16,6 +16,7 @@ namespace Twins.Components
         public void OnAcceptButton(object sender, EventArgs e)
         {
             CommingSoonView.IsVisible = false;
+            MainPage.EffectsPlayer.Play();
         }
 
         public void ButtonNotImplemented()
@@ -23,7 +24,7 @@ namespace Twins.Components
             CommingSoonView.IsVisible = true;
         }
 
-        public void ChangeMessage(string message) 
+        public void ChangeMessage(string message)
         {
             Message.Text = message;
         }

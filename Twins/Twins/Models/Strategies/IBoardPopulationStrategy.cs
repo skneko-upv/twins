@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Twins.Models.Strategies
+﻿namespace Twins.Models.Strategies
 {
     public interface IBoardPopulationStrategy
     {

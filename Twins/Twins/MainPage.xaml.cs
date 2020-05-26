@@ -1,7 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using Twins.Models;
+using Twins.Models.Builders;
+using Twins.Models.Game;
+using Twins.Models.Singletons;
+using Twins.Persistence;
 using Twins.Utils;
+using Twins.Views;
 using Xamarin.Forms;
 
 namespace Twins
@@ -10,24 +16,61 @@ namespace Twins
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
 
-    
     public partial class MainPage : ContentPage
     {
-        public static AudioPlayer player { get; set; }
+        public static AudioPlayer Player { get; set; }
+        public static AudioPlayer EffectsPlayer { get; set; }
+
+        private readonly PlayerPreferences gameConfiguration = PlayerPreferences.Instance;
+        private IGame game;
+        private GameBuilder gameBuilder;
         public MainPage()
         {
             InitializeComponent();
-
         }
 
-       
-        protected override void OnAppearing()
+        private async Task InitPlayerPreferences()
         {
-            player = new AudioPlayer();
-            var defaultParameter = DefaultParameters.Instance;
-            player.LoadSong(defaultParameter.SelectedSong +".wav");
-            player.Player.Play();
-            player.ChangeVolume(defaultParameter.Volume);
+            try
+            {
+                Database database = Database.Instance;
+                Persistence.DataTypes.PlayerPreferences saved = await database.GetPlayerPreferences();
+                gameConfiguration.SelectedSong = saved.SelectedSong;
+                gameConfiguration.Volume = saved.Volume;
+
+                gameConfiguration.Column = saved.Column;
+                gameConfiguration.Row = saved.Row;
+                gameConfiguration.LimitTime = saved.LimitTime;
+                gameConfiguration.TurnTime = saved.TurnTime;
+            }
+            catch (Exception) { }
+
+            if (Player == null)
+            {
+                Player = new AudioPlayer();
+                EffectsPlayer = new AudioPlayer();
+            }
+
+            if (string.IsNullOrEmpty(Player.CurrentSong))
+            {
+                Player.LoadSong(gameConfiguration.SelectedSong + ".wav");
+                Player.ChangeVolume(gameConfiguration.Volume);
+                EffectsPlayer.LoadEffect(gameConfiguration.ButtonEffect + ".wav");
+            }
+        }
+
+        private void InitGameConfiguration()
+        {
+            gameBuilder = new GameBuilder(gameConfiguration.Column, gameConfiguration.Row);
+            SetTimeOfGame(gameBuilder);
+            SetTurnTimeOfGame(gameBuilder);
+            SetDeck(gameBuilder);
+        }
+
+        protected override async void OnAppearing()
+        {
+            await InitPlayerPreferences();
+            volumeIcon.Source = Player.GetVolume() == 0.0 ? "Assets/Icons/mute.png" : "Assets/Icons/volume.png";
         }
 
         private async void OnOption(object sender, EventArgs e)
@@ -36,21 +79,15 @@ namespace Twins
             // resume
             // Open Option menu
             await Navigation.PushAsync(new Views.OptionsView());
+            MainPage.EffectsPlayer.Play();
         }
 
         private void OnMute(object sender, EventArgs e)
         {
             // resume
             // Mute music
-            var defaultparameters = DefaultParameters.Instance;
-            if ( player.GetVolume() == 0.0 ) {
-                defaultparameters.Volume = 100.0;
-                player.ChangeVolume(defaultparameters.Volume); 
-            }
-            else {
-                defaultparameters.Volume = 0.0;
-                player.ChangeVolume(defaultparameters.Volume); 
-            }
+            Player.Mute();
+            volumeIcon.Source = Player.GetVolume() == 0.0 ? "Assets/Icons/mute.png" : "Assets/Icons/volume.png";
         }
 
         private void OnLogout(object sender, EventArgs e)
@@ -64,35 +101,109 @@ namespace Twins
         {
             // resume
             // Open History menu
-            await Navigation.PushAsync(new Views.LevelsView());
+            await Navigation.PushAsync(new LevelsView());
+            EffectsPlayer.Play();
         }
 
-        private async void OnFreeGame(object sender, EventArgs e)
+        private async void OnStandardGame(object sender, EventArgs e)
         {
             // resume
             // Open Free Game menu
-            await Navigation.PushAsync(new Views.FreeModeForm());
+            try
+            {
+                InitGameConfiguration();
+                gameBuilder.OfKind(GameBuilder.GameKind.Standard);
+                game = gameBuilder.Build();
+                await Navigation.PushAsync(new BoardView(game.Board));
+            }
+            catch (Exception error)
+            {
+                ErrorView.IsVisible = true;
+                ErrorView.SetTextError(error.Message);
+            }
         }
 
-        private void OnMultiplayerGame(object sender, EventArgs e)
+        private void SetDeck(GameBuilder gameBuilder)
+        {
+            gameBuilder.WithDeck(gameConfiguration.SelectedDeck);
+        }
+
+        private void SetTurnTimeOfGame(GameBuilder gameBuilder)
+        {
+            gameBuilder.WithTurnTimeLimit(gameConfiguration.TurnTime);
+        }
+
+        private void SetTimeOfGame(GameBuilder gameBuilder)
+        {
+            gameBuilder.WithTimeLimit(gameConfiguration.LimitTime);
+        }
+
+        private async void OnCardGame(object sender, EventArgs e)
+        {
+            // resume
+            // Open Free Game men
+            try
+            {
+                InitGameConfiguration();
+                gameBuilder.OfKind(GameBuilder.GameKind.ReferenceCard);
+                game = gameBuilder.Build();
+                await Navigation.PushAsync(new BoardView(game.Board));
+            }
+            catch (Exception error)
+            {
+                ErrorView.IsVisible = true;
+                ErrorView.SetTextError(error.Message);
+            }
+
+
+        }
+        private async void OnCategoryGame(object sender, EventArgs e)
+        {
+            // resume
+            // Open Free Game menu
+            try
+            {
+                InitGameConfiguration();
+                gameBuilder.OfKind(GameBuilder.GameKind.Category);
+                game = gameBuilder.Build();
+                await Navigation.PushAsync(new BoardView(game.Board));
+                MainPage.EffectsPlayer.Play();
+            }
+            catch (Exception error)
+            {
+                ErrorView.IsVisible = true;
+                ErrorView.SetTextError(error.Message);
+            }
+
+        }
+
+        private async void OnMultiplayerGame(object sender, EventArgs e)
         {
             // resume
             // Open Multiplayer menu
-            CommingSoonView.ButtonNotImplemented();
+            try
+            {
+                InitGameConfiguration();
+                game = gameBuilder
+                    .WithPlayer(new Player("1"))
+                    .WithPlayer(new Player("2"))
+                    .Build();
+                await Navigation.PushAsync(new BoardView(game.Board));
+            }
+            catch (Exception error)
+            {
+                ErrorView.IsVisible = true;
+                ErrorView.SetTextError(error.Message);
+            }
+            MainPage.EffectsPlayer.Play();
         }
 
-        private void OnChallengeGame(object sender, EventArgs e)
-        {
-            // resume
-            // Open Challenge menu
-            CommingSoonView.ButtonNotImplemented();
-        }
-
-        private void OnDesck(object sender, EventArgs e)
+        private async void OnDeckList(object sender, EventArgs e)
         {
             // resume
             // Open Desck menu
-            CommingSoonView.ButtonNotImplemented();
+            await Navigation.PushAsync(new Views.DeckListForm());
+            MainPage.EffectsPlayer.Play();
         }
 
     }

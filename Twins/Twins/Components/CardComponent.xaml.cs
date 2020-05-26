@@ -7,7 +7,7 @@ using Xamarin.Forms.Xaml;
 namespace Twins.Components
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CardComponent : StackLayout
+    public partial class CardComponent : Grid
     {
         public Card Card { get; set; }
         public bool Flipped { get; private set; }
@@ -16,19 +16,33 @@ namespace Twins.Components
 
         public bool IsBlocked { get; set; }
 
+        public BubblePoint BubblePoint { get; }
+
         public CardComponent()
         {
             InitializeComponent();
+
         }
 
         public CardComponent(Card card, bool isBlocked = false)
         {
             InitializeComponent();
-
-            Card = card;
+            Card = card ?? throw new ArgumentNullException(nameof(card));
             Flipped = false;
-            button.ImageSource = card.Deck.BackImage;
+            image.Source = card.Deck.BackImage;
             IsBlocked = isBlocked;
+
+
+            BubblePoint = new BubblePoint();
+            root.Children.Add(BubblePoint);
+            BubblePoint.SetPosition(0, -30);
+        }
+
+        public CardComponent SetToEdit()
+        {
+            image.Source = Card.Image;
+            button.IsVisible = false;
+            return this;
         }
 
         public async Task Flip()
@@ -40,7 +54,7 @@ namespace Twins.Components
 
             Flipped = true;
             await AnimationFlip(90, 150);
-            button.ImageSource = Card.Image;
+            image.Source = Card.Image;
             await AnimationFlip(0, 150);
         }
 
@@ -53,25 +67,39 @@ namespace Twins.Components
 
             Flipped = false;
             await AnimationFlip(90, 150);
-            button.ImageSource = Card.Deck.BackImage;
+            image.Source = Card.Deck.BackImage;
             await AnimationFlip(0, 150);
         }
 
         public async Task Matched()
         {
-            button.RotationY = 0;
+            image.RotationY = 0;
             await AnimationFlip(360, 250);
-            button.RotationY = 0;
+            image.RotationY = 0;
         }
 
         private void OnClicked(object sender, EventArgs e)
         {
-            if(!Flipped)
+            if (!Flipped)
+            {
                 Clicked();
+            }
         }
         private async Task AnimationFlip(int angle, uint seconds)
         {
-            await button.RotateYTo(angle, seconds);
+            await image.RotateYTo(angle, seconds);
+        }
+        public async Task ShowRedPoints(int points)
+        {
+
+            await BubblePoint.SetRedBubble().SetPoints(points).GoUp();
+            BubblePoint.SetPosition(0, -30);
+        }
+        public async Task ShowGreenPoints(int points)
+        {
+
+            await BubblePoint.SetGreenBubble().SetPoints(points).GoUp();
+            BubblePoint.SetPosition(0, -30);
         }
     }
 }

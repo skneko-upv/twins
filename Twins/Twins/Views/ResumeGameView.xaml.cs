@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Twins.Models;
+using Twins.Models.Singletons;
 using Twins.Persistence;
+using Twins.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,8 +13,15 @@ namespace Twins.Views
     {
         public GameResult GameResult { get; private set; }
 
+        private bool AlreadyPlayed { get; set; }
+
         public int Score {
             set => PointsLabel.Text = value.ToString();
+        }
+
+        internal void DisbleNextButton()
+        {
+            NextButton.IsVisible = false;
         }
 
         public TimeSpan Time {
@@ -23,6 +31,7 @@ namespace Twins.Views
         public ResumeGameView()
         {
             InitializeComponent();
+            AlreadyPlayed = false;
         }
 
         public void OnRetry(object sender, EventArgs e)
@@ -32,35 +41,90 @@ namespace Twins.Views
 
         public async void SetStadistics(GameResult result)
         {
+            AudioPlayer effects = new AudioPlayer();
+            PlayerPreferences preferences = PlayerPreferences.Instance;
+
             GameResult = result;
             Score = result.Score;
             Time = result.Time;
             if (result.IsVictory)
             {
-                ResultLabel.Text = "Victoria";
-                ResultLabel.TextColor = Color.Green;
+                background.Source = "Assets/Backgrounds/winBackground.png";
+                effects.LoadEffect(preferences.WinEffect + ".wav");
             }
             else
             {
-                ResultLabel.Text = "Derrota";
-                ResultLabel.TextColor = Color.Red;
+                background.Source = "Assets/Backgrounds/lostBackground.png";
+                effects.LoadEffect(preferences.LoseEffect + ".wav");
+            }
+
+            if (!AlreadyPlayed)
+            {
+                effects.Play();
+                AlreadyPlayed = true;
             }
 
             if (result.LevelNumber > 0)
             {
-                modeReminder.Text = $"Nivel {result.LevelNumber}"; 
+                modeReminder.Text += $"{result.LevelNumber}";
             }
             else
             {
                 modeReminder.Text = "Modo libre";
             }
 
+            if (result.Score < 0)
+            {
+                PointsLabel.TextColor = Color.Red;
+            }
+
             if (GameResult.IsVictory)
             {
-                var saved = await Database.Instance.GetPlayerInfo();
+                PlayerInfo saved = await Database.Instance.GetPlayerInfo();
                 if (saved.LastLevelPassed < GameResult.LevelNumber)
+                {
                     saved.LastLevelPassed = GameResult.LevelNumber;
+                }
+
                 await Database.Instance.SavePlayerInfo(saved);
+            }
+        }
+
+        public void SetMultiplayerStatistics(GameResult result, Player winner, bool conclusive)
+        {
+            Score = winner.Score.Value;
+            Time = result.Time;
+
+            AudioPlayer player = new AudioPlayer();
+            if (result.IsVictory)
+            {
+                background.Source = "Assets/Backgrounds/winBackground.png";
+                player.LoadEffect(PlayerPreferences.Instance.WinEffect + ".wav");
+            }
+            else
+            {
+                background.Source = "Assets/Backgrounds/lostBackground.png";
+                player.LoadEffect(PlayerPreferences.Instance.LoseEffect + ".wav");
+            }
+            player.Play();
+
+            modeReminder.Text = "Multijugador";
+
+            multiplayerResultLabel.IsVisible = true;
+            if (conclusive)
+            {
+                multiplayerResultLabel.Text = "Gana el jugador ";
+                winningPlayerLabel.IsVisible = true;
+                winningPlayerLabel.Text = winner.Name;
+            }
+            else
+            {
+                multiplayerResultLabel.Text = "Empate";
+            }
+
+            if (winner.Score.Value < 0)
+            {
+                PointsLabel.TextColor = Color.Red;
             }
         }
 
@@ -72,10 +136,6 @@ namespace Twins.Views
         public async void OnNext(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
-            //Models.StandardGame game = new Models.StandardGame(6, 4, Components.BasicDeck.Animales,
-                //TimeSpan.FromMinutes(1),
-                //TimeSpan.FromSeconds(5));
-            //await Navigation.PushAsync(new Views.BoardView(game.Board));
         }
     }
 }

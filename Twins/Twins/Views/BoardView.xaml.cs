@@ -1,6 +1,7 @@
 ﻿using System;
 using Twins.Components;
 using Twins.Models;
+using Twins.Models.Game;
 using Twins.Utils;
 using Twins.ViewModels;
 using Xamarin.Forms;
@@ -11,9 +12,16 @@ namespace Twins.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BoardView : ContentPage
     {
+        private readonly AudioPlayer tickPlayer = new AudioPlayer();
+
         public BoardView(Board board)
         {
             InitializeComponent();
+            if (board.Game.LevelNumber == 0)
+            {
+                EndGameModal.DisbleNextButton();
+            }
+
             BoardViewModel boardViewModel = new BoardViewModel(board);
             BindingContext = boardViewModel;
             PauseMenu.BindingContext = boardViewModel;
@@ -28,15 +36,6 @@ namespace Twins.Views
             turnTimeLabel.SetBinding(Label.TextColorProperty, "Color");
             turnTimeLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
 
-            successLabel.SetBinding(Label.TextProperty, "Value");
-            successLabel.BindingContext = boardViewModel.Board.Game.MatchSuccesses;
-
-            board.Game.Score.Changed += (_) =>
-            {
-                scoreLabel.Text = board.Game.Score.PositiveValue.ToString();
-            };
-            scoreLabel.Text = board.Game.Score.PositiveValue.ToString();
-
             board.ReferenceCategoryChanged += OnReferenceCategoryChanged;
             OnReferenceCategoryChanged(board.ReferenceCategory);
 
@@ -46,11 +45,65 @@ namespace Twins.Views
             turnTextLabel.SetBinding(Label.TextColorProperty, "Color");
             turnTextLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
 
+            if (board.Game.IsMultiplayer)
+            {
+                IMultiplayerGame game = (IMultiplayerGame)board.Game;
+                game.PlayerChanged += OnPlayerChanged;
+                OnPlayerChanged(game.CurrentPlayer);
+
+                game.Players[0].Score.Changed += (old, @new) => OnScoreChanged(1, @new);
+                OnScoreChanged(1, board.Game.Score.Value);
+                game.Players[1].Score.Changed += (old, @new) => OnScoreChanged(2, @new);
+                OnScoreChanged(2, board.Game.Score.Value);
+
+                scoreLabelVs.IsVisible = true;
+                scoreLabel2.IsVisible = true;
+
+                tickPlayer.LoadEffect("PlayerChange.wav");
+            }
+            else
+            {
+                board.Game.Score.Changed += (old, @new) => OnScoreChanged(1, @new);
+                OnScoreChanged(1, board.Game.Score.Value);
+            }
+
             board.Game.GameEnded += OnGameEnded;
 
             referenceCard.Clicked += () => { };
 
             FillBoard(board.Height, board.Width);
+        }
+
+        private void OnPlayerChanged(Player currentPlayer)
+        {
+            multiplayerFrame.IsVisible = true;
+            playerLabel.Text = currentPlayer.Name;
+
+            tickPlayer.Play();
+        }
+
+        private void OnScoreChanged(int counterId, int score)
+        {
+            Label scoreLabel;
+
+            if (counterId == 1)
+            {
+                scoreLabel = scoreLabel1;
+            }
+            else
+            {
+                scoreLabel = scoreLabel2;
+            }
+
+            if (score < 0)
+            {
+                scoreLabel.TextColor = Color.Red;
+            }
+            else
+            {
+                scoreLabel.TextColor = Color.White;
+            }
+            scoreLabel.Text = score.ToString();
         }
 
         private void OnReferenceCategoryChanged(Category category)
@@ -68,15 +121,27 @@ namespace Twins.Views
 
         protected override void OnAppearing()
         {
-            var board = ((BoardViewModel)BindingContext).Board;
+            Board board = ((BoardViewModel)BindingContext).Board;
             board.ReferenceCardChanged += OnReferenceCardChanged;
             OnReferenceCardChanged(board.ReferenceCard);
+            MuteButton.ImageSource = MainPage.Player.GetVolume() == 0.0 ? "Assets/Icons/muteW.png" : "Assets/Icons/volumeW.png";
         }
 
         private void OnGameEnded(GameResult result)
         {
-            EndGameModal.SetStadistics(result);
-            EndGameModal.IsVisible = true;
+            IGame game = ((BoardViewModel)BindingContext).Board.Game;
+            if (game.IsMultiplayer)
+            {
+                EndGameModal.SetMultiplayerStatistics(result,
+                    ((IMultiplayerGame)game).DetermineWinner(out bool conclusive),
+                    conclusive);
+                EndGameModal.IsVisible = true;
+            }
+            else
+            {
+                EndGameModal.SetStadistics(result);
+                EndGameModal.IsVisible = true;
+            }
         }
 
         private void FillBoard(int height, int width)
@@ -100,10 +165,9 @@ namespace Twins.Views
                 board.Children.Add(card, cell.Row, cell.Column);
             }
             boardArea.WidthRequest = 122 * height;
-            boardArea.HeightRequest = 122 *  width;
+            boardArea.HeightRequest = 122 * width;
             board.WidthRequest = 122 * height;
-            board.HeightRequest = 122 *  width;
-
+            board.HeightRequest = 122 * width;
         }
 
         private async void OnReferenceCardChanged(Card card)
@@ -134,22 +198,14 @@ namespace Twins.Views
 
         private void OnMute(object sender, EventArgs e)
         {
-            var defaultparameters = DefaultParameters.Instance;
-            if (MainPage.player.GetVolume() == 0.0)
-            {
-                defaultparameters.Volume = 100.0;
-                MainPage.player.ChangeVolume(defaultparameters.Volume);
-            }
-            else
-            {
-                defaultparameters.Volume = 0.0;
-                MainPage.player.ChangeVolume(defaultparameters.Volume);
-            }
+            MainPage.Player.Mute();
+            MuteButton.ImageSource = MainPage.Player.GetVolume() == 0.0 ? "Assets/Icons/muteW.png" : "Assets/Icons/volumeW.png";
         }
 
-        public ResumeGameView GetResumeGameView() 
+        public ResumeGameView GetResumeGameView()
         {
             return EndGameModal;
         }
+
     }
 }

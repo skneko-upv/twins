@@ -1,10 +1,11 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using SQLite;
 using Twins.Models;
-using Twins.Components;
+using Twins.Persistence.DataTypes;
+using Deck = Twins.Persistence.DataTypes.Deck;
 
 namespace Twins.Persistence
 {
@@ -19,41 +20,61 @@ namespace Twins.Persistence
             SQLiteOpenFlags.SharedCache;
         private readonly SQLiteAsyncConnection _database;
         private static readonly Lazy<Database> instance = new Lazy<Database>(() => new Database(Path.Combine(Environment.GetFolderPath(
-            Environment.SpecialFolder.LocalApplicationData), "database.db3"))); 
+            Environment.SpecialFolder.LocalApplicationData), "database.db3")));
 
         private Database(string dbPath)
         {
             _database = new SQLiteAsyncConnection(dbPath, Flags);
             _database.CreateTableAsync<PlayerInfo>().Wait();
-            //_database.CreateTableAsync<DefaultConfiguration>().Wait();
-            this.InitializeDB();
+            _database.CreateTableAsync<PlayerPreferences>().Wait();
+
+            //IMPORTANTE VOLVER A CARGAR LA LINEA
+            //_database.CreateTableAsync<Deck>().Wait();
+            InitializeDB();
         }
 
-        public static Database Instance
-        {
-            get 
-            {
-                return instance.Value;
-            }
-        }
+        public static Database Instance => instance.Value;
 
-        public async void InitializeDB() 
+        public async void InitializeDB()
         {
             int numberOfPlayers = await _database.Table<PlayerInfo>().CountAsync();
-            if(numberOfPlayers == 0)
+            int numberOfPlayersPreferences = await _database.Table<PlayerPreferences>().CountAsync();
+            if (numberOfPlayers == 0)
+            {
                 _database.InsertOrReplaceAsync(new PlayerInfo()).Wait();
-
+            }
+            if (numberOfPlayersPreferences == 0)
+            {
+                _database.InsertOrReplaceAsync(new PlayerPreferences()).Wait();
+            }
         }
 
         public async Task<PlayerInfo> GetPlayerInfo()
         {
             return await _database.GetAsync<PlayerInfo>(1); ;
         }
-        public async Task<int> SavePlayerInfo(PlayerInfo playerInfo) 
+        public async Task<int> SavePlayerInfo(PlayerInfo playerInfo)
         {
             //return await _database.InsertOrReplaceAsync(playerInfo);
             await _database.DeleteAsync<PlayerInfo>(1);
             return await _database.InsertAsync(playerInfo);
+        }
+
+        public async Task<PlayerPreferences> GetPlayerPreferences()
+        {
+            return await _database.GetAsync<PlayerPreferences>(1);
+        }
+
+        public async Task<List<Deck>> GetDecksAsync()
+        {
+            return await _database.Table<Deck>().ToListAsync();
+
+        }
+
+        internal async void SavePlayerPreferences(PlayerPreferences playerPreferences)
+        {
+            await _database.DeleteAsync<PlayerPreferences>(1);
+            await _database.InsertAsync(playerPreferences);
         }
     }
 }

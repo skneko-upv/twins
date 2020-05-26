@@ -1,5 +1,4 @@
 ﻿using System;
-using Twins.Models;
 using Twins.Models.Builders;
 using Twins.Views;
 using Xamarin.Forms;
@@ -43,7 +42,8 @@ namespace Twins.Components
 
         private async void ClickedLevel(object sender, EventArgs e)
         {
-            var game = gameBuilder
+            MainPage.EffectsPlayer.Play();
+            Models.Game.IGame game = gameBuilder
                         .WithLevelNumber(number).Build();
             await Navigation.PushAsync(new BoardView(game.Board));
         }

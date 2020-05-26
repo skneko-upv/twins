@@ -15,7 +15,9 @@ namespace Twins.Utils
         }
 
         public static T PickAndRemoveRandom<T>(this IList<T> list)
-            => list.PickAndRemove(random.Next(list.Count));
+        {
+            return list.PickAndRemove(random.Next(list.Count));
+        }
 
         public static T PickAndRemove<T>(this IList<T> list, int index)
         {
@@ -25,12 +27,14 @@ namespace Twins.Utils
         }
 
         public static T PickRandom<T>(this IList<T> list)
-            => list[random.Next(list.Count)];
+        {
+            return list[random.Next(list.Count)];
+        }
 
         public static IList<T> Repeat<T>(this IList<T> list, int count)
         {
-            var result = new List<T>(list.Count * count);
-            foreach (var item in list)
+            List<T> result = new List<T>(list.Count * count);
+            foreach (T item in list)
             {
                 for (int i = 0; i < count; i++)
                 {
@@ -38,6 +42,20 @@ namespace Twins.Utils
                 }
             }
             return result;
+        }
+
+        public static int IndexOf<T>(this IReadOnlyList<T> self, T elementToFind)
+        {
+            int i = 0;
+            foreach (T element in self)
+            {
+                if (Equals(element, elementToFind))
+                {
+                    return i;
+                }
+                i++;
+            }
+            return -1;
         }
     }
 }

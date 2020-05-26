@@ -1,6 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
+using System.Collections.Generic;
+using System.Linq;
 using Twins.Components;
+using Twins.Models.Game;
 using Twins.Models.Strategies;
 
 namespace Twins.Models.Builders
@@ -17,17 +19,14 @@ namespace Twins.Models.Builders
         public int Height { get; private set; }
         public int Width { get; private set; }
 
-        GameKind kind = GameKind.Standard;
-         
-        Deck deck = BuiltInDecks.Animals.Value;
-
-        TimeSpan timeLimit = TimeSpan.FromMinutes(1);
-        TimeSpan turnTimeLimit = TimeSpan.FromSeconds(5);
-
-        Board.Cell[,] cells = null;
-        int groupSize = 2;
-
-        int level = 0;
+        private GameKind kind = GameKind.Standard;
+        private Deck deck = BuiltInDecks.Animals.Value;
+        private TimeSpan timeLimit = TimeSpan.FromMinutes(1);
+        private TimeSpan turnTimeLimit = TimeSpan.FromSeconds(5);
+        private Board.Cell[,] cells = null;
+        private int groupSize = 2;
+        private int level = 0;
+        private readonly IList<Player> players = new List<Player>();
 
         public GameBuilder(int height, int width)
         {
@@ -41,7 +40,7 @@ namespace Twins.Models.Builders
             return this;
         }
 
-        public GameBuilder WithDeck(Deck deck) 
+        public GameBuilder WithDeck(Deck deck)
         {
             this.deck = deck;
             return this;
@@ -87,7 +86,36 @@ namespace Twins.Models.Builders
             return this;
         }
 
-        public Game Build()
+        public GameBuilder SetMultiplayer(IList<Player> players)
+        {
+            this.players.Clear();
+            if (players != null)
+            {
+                this.players.Concat(players);
+            }
+
+            return this;
+        }
+
+        public GameBuilder WithPlayer(Player player)
+        {
+            players.Add(player);
+            return this;
+        }
+
+        public IGame Build()
+        {
+            if (players != null && players.Count > 1)
+            {
+                return new LocalCompetitiveGame(BuildByKind(), players.ToArray());
+            }
+            else
+            {
+                return BuildByKind();
+            }
+        }
+
+        private IGame BuildByKind()
         {
             switch (kind)
             {

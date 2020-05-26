@@ -7,17 +7,17 @@ namespace Twins.Components
 {
     public static class BuiltInDecks
     {
-        public static Lazy<Deck> Animals = new Lazy<Deck>(CreateAnimalsDeck);
-        public static Lazy<Deck> Numbers = new Lazy<Deck>(CreateNumbersDeck);
-        public static Lazy<Deck> Sports = new Lazy<Deck>(CreateSportsDeck);
+        public static readonly Lazy<Deck> Animals = new Lazy<Deck>(CreateAnimalsDeck);
+        public static readonly Lazy<Deck> Numbers = new Lazy<Deck>(CreateNumbersDeck);
+        public static readonly Lazy<Deck> Sports = new Lazy<Deck>(CreateSportsDeck);
 
         private static Deck CreateAnimalsDeck()
         {
-            var mammals = new Category(0, "Mamíferos");
-            var birds = new Category(1, "Aves");
-            var others = new Category(2, "Otros");
+            Category mammals = new Category(0, "Mamíferos");
+            Category birds = new Category(1, "Aves");
+            Category others = new Category(2, "Otros");
 
-            var animalsCategories = new Dictionary<int, ISet<Category>>
+            Dictionary<int, ISet<Category>> animalsCategories = new Dictionary<int, ISet<Category>>
             {
                 [0] = new HashSet<Category> { mammals },
                 [1] = new HashSet<Category> { mammals },
@@ -35,13 +35,13 @@ namespace Twins.Components
 
             return new Deck("Animales", ImageSource.FromFile("Assets/Decks/Deck1/backimage.png"), LoadImages("Assets/Decks/Deck1/"), animalsCategories);
         }
-        
+
         private static Deck CreateNumbersDeck()
         {
-            var numbers = new Category(0, "Números");
-            var operators = new Category(1, "Operadores");
+            Category numbers = new Category(0, "Números");
+            Category operators = new Category(1, "Operadores");
 
-            var numbersCategories = new Dictionary<int, ISet<Category>>
+            Dictionary<int, ISet<Category>> numbersCategories = new Dictionary<int, ISet<Category>>
             {
                 [0] = new HashSet<Category> { numbers },
                 [1] = new HashSet<Category> { numbers },
@@ -62,12 +62,32 @@ namespace Twins.Components
 
         private static Deck CreateSportsDeck()
         {
-            return new Deck("Deportes", ImageSource.FromFile("Assets/Decks/Deck3/backimage.png"), LoadImages("Assets/Decks/Deck3/"));
+            Category indoors = new Category(0, "De salón");
+            Category outdoors = new Category(1, "De exterior");
+            Category table = new Category(2, "De mesa");
+
+            Dictionary<int, ISet<Category>> sportsCategories = new Dictionary<int, ISet<Category>>
+            {
+                [0] = new HashSet<Category> { indoors, table },
+                [1] = new HashSet<Category> { outdoors },
+                [2] = new HashSet<Category> { indoors, outdoors },
+                [3] = new HashSet<Category> { indoors, table },
+                [4] = new HashSet<Category> { outdoors },
+                [5] = new HashSet<Category> { outdoors, indoors },
+                [6] = new HashSet<Category> { indoors },
+                [7] = new HashSet<Category> { outdoors },
+                [8] = new HashSet<Category> { outdoors, indoors },
+                [9] = new HashSet<Category> { indoors },
+                [10] = new HashSet<Category> { outdoors, indoors },
+                [11] = new HashSet<Category> { outdoors }
+            };
+
+            return new Deck("Deportes", ImageSource.FromFile("Assets/Decks/Deck3/backimage.png"), LoadImages("Assets/Decks/Deck3/"), sportsCategories);
         }
 
         private static IList<ImageSource> LoadImages(string path)
         {
-            var imageCards = new List<ImageSource>();
+            List<ImageSource> imageCards = new List<ImageSource>();
             for (int i = 1; i < 13; i++)
             {
                 imageCards.Add(ImageSource.FromFile(path + "card" + i + ".png"));
