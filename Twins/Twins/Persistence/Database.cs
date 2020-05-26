@@ -48,29 +48,13 @@ namespace Twins.Persistence
             int numberOfPlayersPreferences = await _database.Table<PlayerPreferences>().CountAsync();
             if (numberOfPlayers == 0)
             {
-               
-                
                 _database.InsertOrReplaceAsync(new PlayerInfo()).Wait();
-                
-                
             }
             if (numberOfPlayersPreferences == 0)
             {
-                var animales = new Deck();
-                var numeros = new Deck();
-                var deportes = new Deck();
-                animales.Name = "Animales";
-                numeros.Name = "Numeros";
-                numeros.ID = 2;
-                deportes.Name = "Deportes";
-                deportes.ID = 3;
                 _database.InsertOrReplaceAsync(new PlayerPreferences()).Wait();
-                _database.InsertOrReplaceAsync(animales).Wait();
-                _database.InsertOrReplaceAsync(numeros).Wait();
-                _database.InsertOrReplaceAsync(deportes).Wait();
             }
-
-            }
+        }
 
         public async Task<PlayerInfo> GetPlayerInfo()
         {
