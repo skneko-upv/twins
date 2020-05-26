@@ -121,6 +121,7 @@ namespace Twins.Views
             var board = ((BoardViewModel)BindingContext).Board;
             board.ReferenceCardChanged += OnReferenceCardChanged;
             OnReferenceCardChanged(board.ReferenceCard);
+            MuteButton.ImageSource = MainPage.Player.GetVolume() == 0.0 ? "Assets/Icons/muteW.png" : "Assets/Icons/volumeW.png";
         }
 
         private void OnGameEnded(GameResult result)
