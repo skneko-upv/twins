@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Twins.Models.Singletons;
 
 namespace Twins.Utils
 {
@@ -38,6 +39,18 @@ namespace Twins.Utils
         public void LoadEffect(string effectName)
         {
             Player.Load("Sounds\\" + effectName);
+        }
+
+        public void Mute()
+        {
+            if (GetVolume() == 0.0)
+            {
+                ChangeVolume(PlayerPreferences.Instance.Volume);
+            }
+            else
+            {
+                ChangeVolume(0.0);
+            }
         }
 
         public void Play() { Player.Play(); }

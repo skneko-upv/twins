@@ -193,17 +193,8 @@ namespace Twins.Views
 
         private void OnMute(object sender, EventArgs e)
         {
-            var preferences = PlayerPreferences.Instance;
-            if (Twins.MainPage.Player.GetVolume() == 0.0)
-            {
-                preferences.Volume = 100.0;
-                Twins.MainPage.Player.ChangeVolume(preferences.Volume);
-            }
-            else
-            {
-                preferences.Volume = 0.0;
-                MainPage.Player.ChangeVolume(preferences.Volume);
-            }
+            MainPage.Player.Mute();
+            MuteButton.ImageSource = MainPage.Player.GetVolume() == 0.0 ? "Assets/Icons/muteW.png" : "Assets/Icons/volumeW.png";
         }
 
         public ResumeGameView GetResumeGameView() 
