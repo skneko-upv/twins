@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -8,8 +7,8 @@ namespace Twins.Components
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BubblePoint : Grid
     {
-        double posX;
-        double posY;
+        private double posX;
+        private double posY;
 
         public BubblePoint()
         {
@@ -30,9 +29,14 @@ namespace Twins.Components
         public BubblePoint SetPoints(int points)
         {
             if (points <= 0)
+            {
                 LabelText.Text = "" + points;
+            }
             else
+            {
                 LabelText.Text = "+" + points;
+            }
+
             return this;
         }
 
@@ -43,13 +47,13 @@ namespace Twins.Components
             await this.TranslateTo(x, y, 0);
         }
 
-        public async Task GoUp() 
+        public async Task GoUp()
         {
-            this.Opacity = 1;
-            this.IsVisible = true;
+            Opacity = 1;
+            IsVisible = true;
             await this.TranslateTo(posX, posY - 15, 700);
             await this.FadeTo(0);
-            this.IsVisible = false;
+            IsVisible = false;
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Twins.Models
+﻿namespace Twins.Models
 {
     public class Category
     {
@@ -13,10 +11,10 @@ namespace Twins.Models
             Id = id;
             Name = name;
         }
-        
-        public override string ToString() 
+
+        public override string ToString()
         {
-            return this.Name;
+            return Name;
         }
     }
 }

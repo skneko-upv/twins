@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Twins.Components;
 using Twins.Models;
 using Twins.Models.Singletons;
 using Twins.Persistence;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -23,11 +18,12 @@ namespace Twins.Views
             InitializeComponent();
         }
 
-        private void FillScrollView() {
+        private void FillScrollView()
+        {
             deckArea.Children.Clear();
             bool hasTwoStackLayoutChilds = false;
             StackLayout generatedStackLayout = null;
-            foreach (var deck in PlayerPreferences.Instance.Decks) 
+            foreach (Deck deck in PlayerPreferences.Instance.Decks)
             {
                 if (!hasTwoStackLayoutChilds)
                 {
@@ -35,7 +31,7 @@ namespace Twins.Views
                     deckArea.Children.Add(generatedStackLayout);
                     generatedStackLayout.Children.Add(new DeckViewComponent(deck));
                     hasTwoStackLayoutChilds = true;
-                } 
+                }
                 else
                 {
                     generatedStackLayout.Children.Add(new DeckViewComponent(deck));
@@ -48,7 +44,7 @@ namespace Twins.Views
         {
             FillScrollView();
 
-            var defaultParameters = PlayerPreferences.Instance;
+            PlayerPreferences defaultParameters = PlayerPreferences.Instance;
 
             foreach (View stackLayout in deckArea.Children)
             {
@@ -75,7 +71,7 @@ namespace Twins.Views
 
         private async void OnApply(object sender, EventArgs e)
         {
-            var defaultParameters = PlayerPreferences.Instance;
+            PlayerPreferences defaultParameters = PlayerPreferences.Instance;
             defaultParameters.SelectedDeck = GetSelectedDeck();
 
             MainPage.EffectsPlayer.Play();
@@ -87,7 +83,7 @@ namespace Twins.Views
         {
             foreach (View stackLayout in deckArea.Children)
             {
-                foreach(DeckViewComponent deck in ((StackLayout) stackLayout).Children) 
+                foreach (DeckViewComponent deck in ((StackLayout)stackLayout).Children)
                 {
                     if (deck.IsChecked())
                     {
@@ -102,10 +98,10 @@ namespace Twins.Views
         //Intentar centralizar
         private async Task UpdateDatabase()
         {
-            var database = Database.Instance;
-            var playerPreferencesDB = await database.GetPlayerPreferences();
-            var playerPreferences = PlayerPreferences.Instance;
-            playerPreferencesDB.Column=playerPreferences.Column;
+            Database database = Database.Instance;
+            Persistence.DataTypes.PlayerPreferences playerPreferencesDB = await database.GetPlayerPreferences();
+            PlayerPreferences playerPreferences = PlayerPreferences.Instance;
+            playerPreferencesDB.Column = playerPreferences.Column;
             playerPreferencesDB.Row = playerPreferences.Row;
             playerPreferencesDB.SelectedSong = playerPreferences.SelectedSong;
             playerPreferencesDB.Volume = playerPreferences.Volume;

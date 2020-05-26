@@ -6,7 +6,7 @@ using Twins.Models;
 
 namespace Twins.Persistence.DataTypes
 {
-   [SQLite.Table("PlayerPreferences")]
+    [SQLite.Table("PlayerPreferences")]
     public class PlayerPreferences
     {
         [PrimaryKey]
@@ -34,9 +34,10 @@ namespace Twins.Persistence.DataTypes
         [OneToMany]
         public List<Deck> PlayerDecks { get; set; }
 
-        public PlayerPreferences() {
+        public PlayerPreferences()
+        {
             ID = 1;
-           
+
             Column = 6;
             Row = 4;
             SelectedDeck = "Animales";

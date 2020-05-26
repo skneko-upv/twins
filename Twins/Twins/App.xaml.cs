@@ -9,7 +9,7 @@ namespace Twins
         {
             InitializeComponent();
 
-            var _ = Database.Instance;
+            Database _ = Database.Instance;
             MainPage = new NavigationPage(new MainPage());
         }
 

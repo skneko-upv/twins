@@ -19,19 +19,14 @@ namespace Twins.Models.Builders
         public int Height { get; private set; }
         public int Width { get; private set; }
 
-        GameKind kind = GameKind.Standard;
-         
-        Deck deck = BuiltInDecks.Animals.Value;
-
-        TimeSpan timeLimit = TimeSpan.FromMinutes(1);
-        TimeSpan turnTimeLimit = TimeSpan.FromSeconds(5);
-
-        Board.Cell[,] cells = null;
-        int groupSize = 2;
-
-        int level = 0;
-
-        IList<Player> players = new List<Player>();
+        private GameKind kind = GameKind.Standard;
+        private Deck deck = BuiltInDecks.Animals.Value;
+        private TimeSpan timeLimit = TimeSpan.FromMinutes(1);
+        private TimeSpan turnTimeLimit = TimeSpan.FromSeconds(5);
+        private Board.Cell[,] cells = null;
+        private int groupSize = 2;
+        private int level = 0;
+        private readonly IList<Player> players = new List<Player>();
 
         public GameBuilder(int height, int width)
         {
@@ -45,7 +40,7 @@ namespace Twins.Models.Builders
             return this;
         }
 
-        public GameBuilder WithDeck(Deck deck) 
+        public GameBuilder WithDeck(Deck deck)
         {
             this.deck = deck;
             return this;
@@ -98,7 +93,7 @@ namespace Twins.Models.Builders
             {
                 this.players.Concat(players);
             }
-            
+
             return this;
         }
 

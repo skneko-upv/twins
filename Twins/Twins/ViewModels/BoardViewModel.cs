@@ -6,7 +6,6 @@ using Twins.Components;
 using Twins.Models;
 using Twins.Models.Singletons;
 using Twins.Utils;
-using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace Twins.ViewModels
 {
@@ -57,7 +56,7 @@ namespace Twins.ViewModels
             Board.CellKeepRevealedStatusChanged += OnCellKeepRevealedStatusChanged;
             Board.Game.TurnTimedOut += OnTurnTimedOut;
 
-            var preferences = PlayerPreferences.Instance;
+            PlayerPreferences preferences = PlayerPreferences.Instance;
 
             FlipEffect = new AudioPlayer();
             FlipEffect.LoadEffect(preferences.TurnCardEffect + ".wav");
@@ -136,7 +135,7 @@ namespace Twins.ViewModels
                 if (matched.Any())
                 {
                     OnCellsMatched(matched);
-                    
+
                     Board.ReferenceCard = null;
                     await CardComponents[cell].ShowGreenPoints(lastScoreChange);
                     await Task.Delay(150);

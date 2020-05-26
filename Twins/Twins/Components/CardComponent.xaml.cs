@@ -16,7 +16,7 @@ namespace Twins.Components
 
         public bool IsBlocked { get; set; }
 
-        public BubblePoint BubblePoint { get;  }
+        public BubblePoint BubblePoint { get; }
 
         public CardComponent()
         {
@@ -38,7 +38,7 @@ namespace Twins.Components
             BubblePoint.SetPosition(0, -30);
         }
 
-        public CardComponent SetToEdit() 
+        public CardComponent SetToEdit()
         {
             image.Source = Card.Image;
             button.IsVisible = false;
@@ -67,7 +67,7 @@ namespace Twins.Components
 
             Flipped = false;
             await AnimationFlip(90, 150);
-            image.Source= Card.Deck.BackImage;
+            image.Source = Card.Deck.BackImage;
             await AnimationFlip(0, 150);
         }
 
@@ -80,8 +80,10 @@ namespace Twins.Components
 
         private void OnClicked(object sender, EventArgs e)
         {
-            if(!Flipped)
+            if (!Flipped)
+            {
                 Clicked();
+            }
         }
         private async Task AnimationFlip(int angle, uint seconds)
         {

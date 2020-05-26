@@ -18,7 +18,7 @@ namespace Twins.Models
         public int Value {
             get => value;
             set {
-                var previous = this.value;
+                int previous = this.value;
                 this.value = value;
                 Changed?.Invoke(previous, value);
             }
@@ -37,7 +37,7 @@ namespace Twins.Models
 
         public void DecrementMatchFail(params int[] flipCounts)
         {
-            var delta = MatchFailDeltaBase + flipCounts.Select(c => Math.Max(c - 1, 0) * MatchFailDeltaPerCell).Sum();
+            int delta = MatchFailDeltaBase + flipCounts.Select(c => Math.Max(c - 1, 0) * MatchFailDeltaPerCell).Sum();
             Value -= Math.Min(delta, 10);
         }
 

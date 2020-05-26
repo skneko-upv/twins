@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Twins.Components;
 
 namespace Twins.Models.Singletons
 {
-    class PlayerPreferences
+    internal class PlayerPreferences
     {
         public static PlayerPreferences Instance {
             get {
@@ -22,12 +21,12 @@ namespace Twins.Models.Singletons
 
         public int Row { get; set; }
 
-        public IReadOnlyList<Deck> Decks => this.BuiltInDecks.Concat(PlayerDecks).ToList();
+        public IReadOnlyList<Deck> Decks => BuiltInDecks.Concat(PlayerDecks).ToList();
 
         public IList<Deck> BuiltInDecks { get; }
 
         public IList<Deck> PlayerDecks { get; }
-        
+
         public Deck SelectedDeck { get; set; }
 
         public string SelectedSong { get; set; }

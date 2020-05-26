@@ -13,11 +13,11 @@ namespace Twins.Components
 
         private static Deck CreateAnimalsDeck()
         {
-            var mammals = new Category(0, "Mamíferos");
-            var birds = new Category(1, "Aves");
-            var others = new Category(2, "Otros");
+            Category mammals = new Category(0, "Mamíferos");
+            Category birds = new Category(1, "Aves");
+            Category others = new Category(2, "Otros");
 
-            var animalsCategories = new Dictionary<int, ISet<Category>>
+            Dictionary<int, ISet<Category>> animalsCategories = new Dictionary<int, ISet<Category>>
             {
                 [0] = new HashSet<Category> { mammals },
                 [1] = new HashSet<Category> { mammals },
@@ -35,13 +35,13 @@ namespace Twins.Components
 
             return new Deck("Animales", ImageSource.FromFile("Assets/Decks/Deck1/backimage.png"), LoadImages("Assets/Decks/Deck1/"), animalsCategories);
         }
-        
+
         private static Deck CreateNumbersDeck()
         {
-            var numbers = new Category(0, "Números");
-            var operators = new Category(1, "Operadores");
+            Category numbers = new Category(0, "Números");
+            Category operators = new Category(1, "Operadores");
 
-            var numbersCategories = new Dictionary<int, ISet<Category>>
+            Dictionary<int, ISet<Category>> numbersCategories = new Dictionary<int, ISet<Category>>
             {
                 [0] = new HashSet<Category> { numbers },
                 [1] = new HashSet<Category> { numbers },
@@ -62,11 +62,11 @@ namespace Twins.Components
 
         private static Deck CreateSportsDeck()
         {
-            var indoors = new Category(0, "De salón");
-            var outdoors = new Category(1, "De exterior");
-            var table = new Category(2, "De mesa");
+            Category indoors = new Category(0, "De salón");
+            Category outdoors = new Category(1, "De exterior");
+            Category table = new Category(2, "De mesa");
 
-            var sportsCategories = new Dictionary<int, ISet<Category>>
+            Dictionary<int, ISet<Category>> sportsCategories = new Dictionary<int, ISet<Category>>
             {
                 [0] = new HashSet<Category> { indoors, table },
                 [1] = new HashSet<Category> { outdoors },
@@ -87,7 +87,7 @@ namespace Twins.Components
 
         private static IList<ImageSource> LoadImages(string path)
         {
-            var imageCards = new List<ImageSource>();
+            List<ImageSource> imageCards = new List<ImageSource>();
             for (int i = 1; i < 13; i++)
             {
                 imageCards.Add(ImageSource.FromFile(path + "card" + i + ".png"));

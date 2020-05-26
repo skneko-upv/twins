@@ -1,11 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Plugin.FilePicker;
+﻿using Plugin.FilePicker;
 using Plugin.FilePicker.Abstractions;
 using System;
 using System.Threading.Tasks;
 using Twins.Components;
 using Twins.Models;
-using Twins.Models.Singletons;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,7 +12,7 @@ namespace Twins.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EditDeckView : ContentPage
     {
-        private DeckEditor deckEditor;
+        private readonly DeckEditor deckEditor;
         private int indexSelector;
 
         public EditDeckView()
@@ -43,12 +41,14 @@ namespace Twins.Views
             if (DeckName.Text != null && !DeckName.Text.Trim().Equals(""))
             {
                 deckEditor.AddName(DeckName.Text);
-            } else {
+            }
+            else
+            {
                 ErrorView.SetTextError("Asigne un nombre para la baraja.");
                 ErrorView.IsVisible = true;
                 return;
             }
-            if (deckEditor.Deck.Categories.Count <= 1) 
+            if (deckEditor.Deck.Categories.Count <= 1)
             {
                 ErrorView.SetTextError("Añada como mínimo 2 categorias a la baraja.");
                 ErrorView.IsVisible = true;
@@ -76,9 +76,11 @@ namespace Twins.Views
                 string[] types = { ".png", ".jpg" };
                 FileData fileData = await CrossFilePicker.Current.PickFile(types);
                 if (fileData != null) // user canceled file picking
+                {
                     return fileData;
+                }
             }
-            catch (Exception _)
+            catch (Exception)
             {
             }
             return null;
@@ -91,7 +93,7 @@ namespace Twins.Views
             {
                 category = (Category)SelectorCategory.SelectedItem;
             }
-            else 
+            else
             {
                 indexSelector = -1;
                 ErrorView.SetTextError("Seleccione primero una categoría o cree una antes de añadir una imagen.");
@@ -100,10 +102,11 @@ namespace Twins.Views
             }
             FileData file = await OpenFileDialog();
             if (file == null)
+            {
                 return;
+            }
 
-
-            deckEditor.AddCard(ImageSource.FromStream(file.GetStream),category);
+            deckEditor.AddCard(ImageSource.FromStream(file.GetStream), category);
         }
 
         private void RefreshList()
@@ -129,13 +132,17 @@ namespace Twins.Views
         private void OnAddCategory(object sender, EventArgs e)
         {
             if (NewCategory.Text != null && !NewCategory.Text.Trim().Equals(""))
+            {
                 deckEditor.AddCategory(NewCategory.Text.Trim());
+            }
+
             NewCategory.Text = "";
         }
 
         private void SelectorCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (SelectorCategory.SelectedItem != null) {
+            if (SelectorCategory.SelectedItem != null)
+            {
                 indexSelector = SelectorCategory.SelectedIndex;
             }
         }
@@ -144,15 +151,20 @@ namespace Twins.Views
         {
             FileData file = await OpenFileDialog();
             if (file == null)
+            {
                 return;
+            }
+
             backImage.Source = ImageSource.FromStream(file.GetStream);
             deckEditor.AddBackImage(backImage.Source);
         }
 
         private void OnRemoveCategory(object sender, EventArgs e)
         {
-            if(indexSelector != -1 && SelectorCategory.SelectedItem != null)
-                deckEditor.RemoveCategory(((Category) SelectorCategory.SelectedItem));
+            if (indexSelector != -1 && SelectorCategory.SelectedItem != null)
+            {
+                deckEditor.RemoveCategory(((Category)SelectorCategory.SelectedItem));
+            }
         }
     }
 }

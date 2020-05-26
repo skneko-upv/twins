@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Twins.Models;
 using Twins.Models.Singletons;
 using Twins.Persistence;
@@ -42,8 +41,8 @@ namespace Twins.Views
 
         public async void SetStadistics(GameResult result)
         {
-            var effects = new AudioPlayer();
-            var preferences = PlayerPreferences.Instance;         
+            AudioPlayer effects = new AudioPlayer();
+            PlayerPreferences preferences = PlayerPreferences.Instance;
 
             GameResult = result;
             Score = result.Score;
@@ -67,7 +66,7 @@ namespace Twins.Views
 
             if (result.LevelNumber > 0)
             {
-                modeReminder.Text += $"{result.LevelNumber}"; 
+                modeReminder.Text += $"{result.LevelNumber}";
             }
             else
             {
@@ -81,9 +80,12 @@ namespace Twins.Views
 
             if (GameResult.IsVictory)
             {
-                var saved = await Database.Instance.GetPlayerInfo();
+                PlayerInfo saved = await Database.Instance.GetPlayerInfo();
                 if (saved.LastLevelPassed < GameResult.LevelNumber)
+                {
                     saved.LastLevelPassed = GameResult.LevelNumber;
+                }
+
                 await Database.Instance.SavePlayerInfo(saved);
             }
         }
@@ -93,12 +95,12 @@ namespace Twins.Views
             Score = winner.Score.Value;
             Time = result.Time;
 
-            var player = new AudioPlayer();
+            AudioPlayer player = new AudioPlayer();
             if (result.IsVictory)
             {
                 background.Source = "Assets/Backgrounds/winBackground.png";
                 player.LoadEffect(PlayerPreferences.Instance.WinEffect + ".wav");
-            } 
+            }
             else
             {
                 background.Source = "Assets/Backgrounds/lostBackground.png";

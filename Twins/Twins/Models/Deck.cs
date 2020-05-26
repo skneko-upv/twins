@@ -24,14 +24,15 @@ namespace Twins.Models
             }
 
             int i = 0;
-            foreach(var image in cardImages)
+            foreach (ImageSource image in cardImages)
             {
-                var cardCategories = new HashSet<Category>(); 
-                if (categories.TryGetValue(i, out ISet<Category> declaredCategories)) {
+                HashSet<Category> cardCategories = new HashSet<Category>();
+                if (categories.TryGetValue(i, out ISet<Category> declaredCategories))
+                {
                     cardCategories.UnionWith(declaredCategories);
                 }
 
-                var card = new Card(i, this, image, cardCategories);
+                Card card = new Card(i, this, image, cardCategories);
                 Cards.Add(card);
                 Categories.UnionWith(cardCategories);
 

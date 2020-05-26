@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.CompilerServices;
 
@@ -8,11 +7,9 @@ namespace Twins.Models.Properties
     public class TimeProperty : INotifyPropertyChanged
     {
         public Color color;
-        public Color Color
-        {
+        public Color Color {
             get => color;
-            set
-            {
+            set {
                 color = value;
                 OnPropertyChanged(nameof(Color));
             }
@@ -22,10 +19,15 @@ namespace Twins.Models.Properties
             get => time;
             set {
                 time = value.Substring(3);
-                if (Int32.Parse(value.Substring(6)) <= 2)
+                if (int.Parse(value.Substring(6)) <= 2)
+                {
                     Color = Color.Red;
+                }
                 else
+                {
                     Color = Color.White;
+                }
+
                 OnPropertyChanged(nameof(Time));
             }
         }

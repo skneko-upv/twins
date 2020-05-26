@@ -29,7 +29,7 @@ namespace Twins.Models.Properties
 
         public Observable(Func<IEnumerable<T>, T> valueFactory, params Observable<T>[] sources)
         {
-            foreach (var source in sources)
+            foreach (Observable<T> source in sources)
             {
                 source.PropertyChanged += (_0, _1) =>
                 {
@@ -51,10 +51,10 @@ namespace Twins.Models.Properties
         }
     }
 
-    class Unsubscriber<T> : IDisposable
+    internal class Unsubscriber<T> : IDisposable
     {
-        readonly ICollection<IObserver<T>> observers;
-        readonly IObserver<T> observer;
+        private readonly ICollection<IObserver<T>> observers;
+        private readonly IObserver<T> observer;
 
         public Unsubscriber(ICollection<IObserver<T>> observers, IObserver<T> observer)
         {

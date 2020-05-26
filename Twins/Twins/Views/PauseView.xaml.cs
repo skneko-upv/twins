@@ -23,7 +23,8 @@ namespace Twins.Views
             window.IsVisible = false;
         }
 
-        public void OnPause() {
+        public void OnPause()
+        {
             MainPage.EffectsPlayer.Play();
             window.IsVisible = true;
         }
@@ -34,6 +35,6 @@ namespace Twins.Views
             await Navigation.PopToRootAsync();
         }
 
-        
+
     }
 }

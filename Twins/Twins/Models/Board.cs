@@ -80,7 +80,7 @@ namespace Twins.Models
 
         public IList<Cell> Cells { get; private set; }
 
-        int[,] cellMap;
+        private readonly int[,] cellMap;
 
         /// <summary>
         /// Create a new board populated randomly.
@@ -102,7 +102,7 @@ namespace Twins.Models
             cellMap = new int[height, width];
             Cells = new List<Cell>(height * width);
             int i = 0;
-            foreach (var cell in cells)
+            foreach (Cell cell in cells)
             {
                 Cells.Add(cell);
                 cellMap[cell.Row, cell.Column] = i;

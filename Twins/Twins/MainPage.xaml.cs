@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Twins.Components;
 using Twins.Models;
 using Twins.Models.Builders;
 using Twins.Models.Game;
@@ -18,15 +15,15 @@ namespace Twins
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
-    
+
     public partial class MainPage : ContentPage
     {
         public static AudioPlayer Player { get; set; }
         public static AudioPlayer EffectsPlayer { get; set; }
 
-        readonly PlayerPreferences gameConfiguration = PlayerPreferences.Instance;
-        IGame game;
-        GameBuilder gameBuilder; 
+        private readonly PlayerPreferences gameConfiguration = PlayerPreferences.Instance;
+        private IGame game;
+        private GameBuilder gameBuilder;
         public MainPage()
         {
             InitializeComponent();
@@ -36,8 +33,8 @@ namespace Twins
         {
             try
             {
-                var database = Database.Instance;
-                var saved = await database.GetPlayerPreferences();
+                Database database = Database.Instance;
+                Persistence.DataTypes.PlayerPreferences saved = await database.GetPlayerPreferences();
                 gameConfiguration.SelectedSong = saved.SelectedSong;
                 gameConfiguration.Volume = saved.Volume;
 
@@ -70,7 +67,7 @@ namespace Twins
             SetDeck(gameBuilder);
         }
 
-        protected async override void OnAppearing()
+        protected override async void OnAppearing()
         {
             await InitPlayerPreferences();
             volumeIcon.Source = Player.GetVolume() == 0.0 ? "Assets/Icons/mute.png" : "Assets/Icons/volume.png";
@@ -112,7 +109,8 @@ namespace Twins
         {
             // resume
             // Open Free Game menu
-            try{
+            try
+            {
                 InitGameConfiguration();
                 gameBuilder.OfKind(GameBuilder.GameKind.Standard);
                 game = gameBuilder.Build();
@@ -144,7 +142,7 @@ namespace Twins
         {
             // resume
             // Open Free Game men
-            try 
+            try
             {
                 InitGameConfiguration();
                 gameBuilder.OfKind(GameBuilder.GameKind.ReferenceCard);
@@ -157,14 +155,14 @@ namespace Twins
                 ErrorView.SetTextError(error.Message);
             }
 
-    
+
         }
         private async void OnCategoryGame(object sender, EventArgs e)
         {
             // resume
             // Open Free Game menu
             try
-            { 
+            {
                 InitGameConfiguration();
                 gameBuilder.OfKind(GameBuilder.GameKind.Category);
                 game = gameBuilder.Build();
@@ -176,7 +174,7 @@ namespace Twins
                 ErrorView.IsVisible = true;
                 ErrorView.SetTextError(error.Message);
             }
-            
+
         }
 
         private async void OnMultiplayerGame(object sender, EventArgs e)

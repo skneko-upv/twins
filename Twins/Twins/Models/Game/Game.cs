@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using Twins.Models.Properties;
 using Twins.Models.Singletons;
 using Twins.Models.Strategies;
@@ -36,9 +35,7 @@ namespace Twins.Models.Game
 
         public int LevelNumber { get; }
 
-        public bool IsMultiplayer {
-            get => false;
-        }
+        public bool IsMultiplayer => false;
 
         public event Action TurnTimedOut;
         public event Action<GameResult> GameEnded;
@@ -54,7 +51,8 @@ namespace Twins.Models.Game
             {
                 GameClock = new Clock();
             }
-            GameClock.TimedOut += () => {
+            GameClock.TimedOut += () =>
+            {
                 if (!IsFinished)
                 {
                     EndGame(false);
@@ -77,7 +75,7 @@ namespace Twins.Models.Game
             }
             else
             {
-                var populationStrategy = new CyclicRandomPopulationStrategy(GroupSize, deck);
+                CyclicRandomPopulationStrategy populationStrategy = new CyclicRandomPopulationStrategy(GroupSize, deck);
                 Board = new Board(height, width, this, populationStrategy);
             }
 
@@ -91,10 +89,10 @@ namespace Twins.Models.Game
 
             Device.StartTimer(TimeSpan.FromMilliseconds(500.0), () =>
             {
-                if(Int32.Parse(GameClock.TimeLeft.Time.Substring(0,2)) == 0 && 
-                     Int32.Parse(GameClock.TimeLeft.Time.Substring(3)) < 10 && ClockEffect == null)
+                if (int.Parse(GameClock.TimeLeft.Time.Substring(0, 2)) == 0 &&
+                     int.Parse(GameClock.TimeLeft.Time.Substring(3)) < 10 && ClockEffect == null)
                 {
-                    var preferences = PlayerPreferences.Instance;
+                    PlayerPreferences preferences = PlayerPreferences.Instance;
                     ClockEffect = new AudioPlayer();
                     ClockEffect.LoadEffect(preferences.ClockTimerEffect + ".wav");
                     ClockEffect.Player.Loop = true;
@@ -118,7 +116,7 @@ namespace Twins.Models.Game
 
         public virtual void Resume()
         {
-            if (!IsFinished) 
+            if (!IsFinished)
             {
                 GameClock.Start();
                 TurnClock.Start();
@@ -185,9 +183,11 @@ namespace Twins.Models.Game
         }
 
         protected static Card RandomHiddenCard(IEnumerable<Board.Cell> cells)
-            => cells.Where(c => !c.KeepRevealed)
-                    .Select(c => c.Card)
-                    .ToList()
-                    .PickRandom();
+        {
+            return cells.Where(c => !c.KeepRevealed)
+                               .Select(c => c.Card)
+                               .ToList()
+                               .PickRandom();
+        }
     }
 }

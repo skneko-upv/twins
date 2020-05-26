@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Linq;
 using Twins.Components;
 using Twins.Models;
 using Twins.Models.Game;
-using Twins.Models.Singletons;
 using Twins.Utils;
 using Twins.ViewModels;
 using Xamarin.Forms;
@@ -14,12 +12,16 @@ namespace Twins.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BoardView : ContentPage
     {
-        AudioPlayer tickPlayer = new AudioPlayer();
+        private readonly AudioPlayer tickPlayer = new AudioPlayer();
 
         public BoardView(Board board)
         {
             InitializeComponent();
-            if (board.Game.LevelNumber == 0) EndGameModal.DisbleNextButton();
+            if (board.Game.LevelNumber == 0)
+            {
+                EndGameModal.DisbleNextButton();
+            }
+
             BoardViewModel boardViewModel = new BoardViewModel(board);
             BindingContext = boardViewModel;
             PauseMenu.BindingContext = boardViewModel;
@@ -43,8 +45,9 @@ namespace Twins.Views
             turnTextLabel.SetBinding(Label.TextColorProperty, "Color");
             turnTextLabel.BindingContext = boardViewModel.Board.Game.TurnClock.TimeLeft;
 
-            if (board.Game.IsMultiplayer) {
-                var game = (IMultiplayerGame)board.Game;
+            if (board.Game.IsMultiplayer)
+            {
+                IMultiplayerGame game = (IMultiplayerGame)board.Game;
                 game.PlayerChanged += OnPlayerChanged;
                 OnPlayerChanged(game.CurrentPlayer);
 
@@ -118,7 +121,7 @@ namespace Twins.Views
 
         protected override void OnAppearing()
         {
-            var board = ((BoardViewModel)BindingContext).Board;
+            Board board = ((BoardViewModel)BindingContext).Board;
             board.ReferenceCardChanged += OnReferenceCardChanged;
             OnReferenceCardChanged(board.ReferenceCard);
             MuteButton.ImageSource = MainPage.Player.GetVolume() == 0.0 ? "Assets/Icons/muteW.png" : "Assets/Icons/volumeW.png";
@@ -126,7 +129,7 @@ namespace Twins.Views
 
         private void OnGameEnded(GameResult result)
         {
-            var game = ((BoardViewModel)BindingContext).Board.Game;
+            IGame game = ((BoardViewModel)BindingContext).Board.Game;
             if (game.IsMultiplayer)
             {
                 EndGameModal.SetMultiplayerStatistics(result,
@@ -162,9 +165,9 @@ namespace Twins.Views
                 board.Children.Add(card, cell.Row, cell.Column);
             }
             boardArea.WidthRequest = 122 * height;
-            boardArea.HeightRequest = 122 *  width;
+            boardArea.HeightRequest = 122 * width;
             board.WidthRequest = 122 * height;
-            board.HeightRequest = 122 *  width;
+            board.HeightRequest = 122 * width;
         }
 
         private async void OnReferenceCardChanged(Card card)
@@ -199,7 +202,7 @@ namespace Twins.Views
             MuteButton.ImageSource = MainPage.Player.GetVolume() == 0.0 ? "Assets/Icons/muteW.png" : "Assets/Icons/volumeW.png";
         }
 
-        public ResumeGameView GetResumeGameView() 
+        public ResumeGameView GetResumeGameView()
         {
             return EndGameModal;
         }

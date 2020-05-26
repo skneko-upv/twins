@@ -24,7 +24,7 @@ namespace Twins.Components
             CommingSoonView.IsVisible = true;
         }
 
-        public void ChangeMessage(string message) 
+        public void ChangeMessage(string message)
         {
             Message.Text = message;
         }

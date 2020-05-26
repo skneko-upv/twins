@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Twins.Models.Singletons;
+﻿using Twins.Models.Singletons;
 
 namespace Twins.Utils
 {
@@ -15,7 +12,7 @@ namespace Twins.Utils
         //Arreglar bug que se stackean las canciones
         public AudioPlayer() { Player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.CreateSimpleAudioPlayer(); }
 
-        public void ChangeVolume(double newVolume) 
+        public void ChangeVolume(double newVolume)
         {
             Volume = newVolume / 100;
             Player.Volume = Volume;
@@ -31,7 +28,7 @@ namespace Twins.Utils
                 Player.Volume = Volume;
                 Player.Loop = true;
                 CurrentSong = songName;
-       
+
                 Player.Play();
             }
         }
@@ -59,4 +56,4 @@ namespace Twins.Utils
     }
 }
 
-    
+

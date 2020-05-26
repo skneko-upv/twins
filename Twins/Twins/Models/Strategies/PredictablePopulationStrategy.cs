@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using static Twins.Models.Board;
 using static Twins.Utils.CollectionExtensions;
 
@@ -33,7 +32,7 @@ namespace Twins.Models.Strategies
             {
                 for (int column = 0; column < width; column++)
                 {
-                    var card = availableCards[(width * row + column) % availableCards.Count];
+                    Card card = availableCards[(width * row + column) % availableCards.Count];
                     cells[row, column] = new Cell(row, column, card);
                 }
             }
