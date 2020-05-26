@@ -19,6 +19,7 @@ namespace Twins.Views
         public BoardView(Board board)
         {
             InitializeComponent();
+            if (board.Game.LevelNumber == 0) EndGameModal.DisbleNextButton();
             BoardViewModel boardViewModel = new BoardViewModel(board);
             BindingContext = boardViewModel;
             PauseMenu.BindingContext = boardViewModel;

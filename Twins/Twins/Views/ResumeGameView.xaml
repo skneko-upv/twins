@@ -48,7 +48,7 @@
             <Button ImageSource="Assets/Icons/home.png" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Transparent"
                     Clicked="OnHome"/>
             <Button ImageSource="Assets/Icons/next.png" VerticalOptions="Center" HorizontalOptions="End" BackgroundColor="Transparent"
-                    Clicked="OnNext"/>
+                    Clicked="OnNext" x:Name="NextButton"/>
         </Grid>
     </StackLayout>
 
