@@ -11,7 +11,8 @@
                  WidthRequest="2000" HeightRequest="2000" 
                  AbsoluteLayout.LayoutBounds=".5,.5,1.0,1.0"
                  AbsoluteLayout.LayoutFlags="All"/>
-    <Image x:Name="background" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,0.4,0.4"/>
+    <Image x:Name="background" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5"
+           HeightRequest="375" WidthRequest="400"/>
     <StackLayout 
                  HeightRequest="260"
                  WidthRequest="275"
