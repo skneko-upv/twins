@@ -64,7 +64,7 @@
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
                     <Label Text="Volumen" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    <Image x:Name="volumeIcon"/>
+                    <ImageButton x:Name="volumeIcon" Clicked="OnMute"/>
                 </StackLayout>
                 <StackLayout >
                     <!-- Aqui va el control de volumen de la música-->

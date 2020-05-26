@@ -255,6 +255,12 @@ namespace Twins.Views
             MainPage.EffectsPlayer.Play();
         }
 
+        private void OnMute(object sender, EventArgs e)
+        {
+            volumeIcon.Source = MainPage.Player.GetVolume() != 0.0 ? "Assets/Icons/mute.png" : "Assets/Icons/volume.png";
+            MainPage.Player.Mute();
+        }
+
         private void Volume_ValueChanged(object sender, ValueChangedEventArgs e)
         {
             //here is the control logic volume

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Twins.Components;
 using Twins.Models;
 using Twins.Models.Builders;
@@ -31,7 +32,7 @@ namespace Twins
             InitializeComponent();
         }
 
-        private async void InitPlayerPreferences()
+        private async Task InitPlayerPreferences()
         {
             try
             {
@@ -69,9 +70,10 @@ namespace Twins
             SetDeck(gameBuilder);
         }
 
-        protected override void  OnAppearing()
+        protected async override void OnAppearing()
         {
-            InitPlayerPreferences();
+            await InitPlayerPreferences();
+            volumeIcon.Source = Player.GetVolume() == 0.0 ? "Assets/Icons/mute.png" : "Assets/Icons/volume.png";
         }
 
         private async void OnOption(object sender, EventArgs e)
