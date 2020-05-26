@@ -7,9 +7,9 @@ namespace Twins.Components
 {
     public static class BuiltInDecks
     {
-        public static Lazy<Deck> Animals = new Lazy<Deck>(CreateAnimalsDeck);
-        public static Lazy<Deck> Numbers = new Lazy<Deck>(CreateNumbersDeck);
-        public static Lazy<Deck> Sports = new Lazy<Deck>(CreateSportsDeck);
+        public static readonly Lazy<Deck> Animals = new Lazy<Deck>(CreateAnimalsDeck);
+        public static readonly Lazy<Deck> Numbers = new Lazy<Deck>(CreateNumbersDeck);
+        public static readonly Lazy<Deck> Sports = new Lazy<Deck>(CreateSportsDeck);
 
         private static Deck CreateAnimalsDeck()
         {

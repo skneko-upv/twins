@@ -8,12 +8,8 @@ namespace Twins.Components
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BubblePoint : Grid
     {
-        public double PosX;
-        public double PosY;
-        public double PointOfReferenceX;
-        public double PointOfReferenceY;
-        public double CardWidth;
-        public double CardHeight;
+        double posX;
+        double posY;
 
         public BubblePoint()
         {
@@ -42,24 +38,16 @@ namespace Twins.Components
 
         public async void SetPosition(double x, double y)
         {
-            PosX = x;
-            PosY = y;
+            posX = x;
+            posY = y;
             await this.TranslateTo(x, y, 0);
-        }
-
-        public void setReferences(double pointX, double pointY, double w, double h) 
-        {
-            PointOfReferenceX = pointX;
-            PointOfReferenceY = pointY;
-            CardHeight = h;
-            CardWidth = w;
         }
 
         public async Task GoUp() 
         {
             this.Opacity = 1;
             this.IsVisible = true;
-            await this.TranslateTo(PosX, PosY - 15, 700);
+            await this.TranslateTo(posX, posY - 15, 700);
             await this.FadeTo(0);
             this.IsVisible = false;
         }

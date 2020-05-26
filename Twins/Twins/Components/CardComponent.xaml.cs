@@ -27,8 +27,7 @@ namespace Twins.Components
         public CardComponent(Card card, bool isBlocked = false)
         {
             InitializeComponent();
-
-            Card = card;
+            Card = card ?? throw new ArgumentNullException(nameof(card));
             Flipped = false;
             image.Source = card.Deck.BackImage;
             IsBlocked = isBlocked;

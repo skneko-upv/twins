@@ -54,7 +54,7 @@ namespace Twins
                 EffectsPlayer = new AudioPlayer();
             }
 
-            if (Player.CurrentSong == "")
+            if (string.IsNullOrEmpty(Player.CurrentSong))
             {
                 Player.LoadSong(gameConfiguration.SelectedSong + ".wav");
                 Player.ChangeVolume(gameConfiguration.Volume);
