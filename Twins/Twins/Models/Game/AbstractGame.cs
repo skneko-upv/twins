@@ -10,7 +10,7 @@ using static Twins.Utils.CollectionExtensions;
 
 namespace Twins.Models.Game
 {
-    public abstract class Game : IGame
+    public abstract class AbstractGame : IGame
     {
         private const int GroupSize = 2;
 
@@ -41,7 +41,7 @@ namespace Twins.Models.Game
         public event Action<GameResult> GameEnded;
         public event Action<bool> AttemptedMatch;
 
-        public Game(int height, int width, Deck deck, TimeSpan? timeLimit, TimeSpan? turnLimit, Board.Cell[,] cells = null, int levelNumber = 0)
+        public AbstractGame(int height, int width, Deck deck, TimeSpan? timeLimit, TimeSpan? turnLimit, Board.Cell[,] cells = null, int levelNumber = 0)
         {
             if (timeLimit != null)
             {

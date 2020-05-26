@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Twins.Models.Game
 {
-    public class ReferenceCardGame : Game
+    public class ReferenceCardGame : AbstractGame
     {
         public ReferenceCardGame(int height, int width, Deck deck, TimeSpan timeLimit, TimeSpan turnLimit, Board.Cell[,] cells = null, int level = 0)
             : base(height, width, deck, timeLimit, turnLimit, cells, level)

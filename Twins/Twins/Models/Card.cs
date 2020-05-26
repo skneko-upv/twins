@@ -10,7 +10,7 @@ namespace Twins.Models
 
         public Deck Deck { get; }
 
-        public ISet<Category> Categories;
+        public ISet<Category> Categories { get; }
 
         public ImageSource Image { get; }
 
@@ -29,12 +29,17 @@ namespace Twins.Models
 
         public bool Equals(Card other)
         {
-            return Id == other.Id;
+            return other != null && Id == other.Id;
         }
 
         public object Clone()
         {
             return new Card(Id, Deck, Image, Categories);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Card);
         }
     }
 }
