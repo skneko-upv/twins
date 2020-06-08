@@ -56,7 +56,7 @@ namespace Twins.Models
         public TimeSpan GetTimeSpan()
         {
             TimeSpan elapsedTime = new TimeSpan(0, 0, 0, 0, (int)clock.ElapsedMilliseconds);
-            return IsCountingDown ? timeLimit - elapsedTime : elapsedTime;
+            return IsCountingDown ? TimeLimit - elapsedTime : elapsedTime;
         }
 
 
