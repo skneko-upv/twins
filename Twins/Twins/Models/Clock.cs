@@ -25,14 +25,14 @@ namespace Twins.Models
         public Clock(TimeSpan maxTime) : this()
         {
             IsCountingDown = true;
-            timeLimit = maxTime;
+            TimeLimit = maxTime;
             TimeLeft = new TimeProperty();
 
             eventTimeout = new System.Timers.Timer(500.0);
             eventTimeout.Elapsed += (_0, _1) =>
             {
                 TimeLeft.Time = GetTimeSpan().ToString(@"hh\:mm\:ss");
-                if (clock.ElapsedMilliseconds >= timeLimit.TotalMilliseconds)
+                if (clock.ElapsedMilliseconds >= TimeLimit.TotalMilliseconds)
                 {
                     TimedOut();
                 }
