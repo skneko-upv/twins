@@ -71,7 +71,12 @@ namespace Twins.Views
                 OnScoreChanged(1, board.Game.Score.Value);
             }
 
-            board.Game.GameEnded += OnGameEnded;
+            board.Game.GameEnded += (result) => {
+                Dispatcher.BeginInvokeOnMainThread(() =>
+                {
+                    OnGameEnded(result);
+                });
+            };
 
             referenceCard.Clicked += () => { };
 

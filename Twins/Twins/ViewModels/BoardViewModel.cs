@@ -6,6 +6,7 @@ using Twins.Components;
 using Twins.Models;
 using Twins.Models.Singletons;
 using Twins.Utils;
+using Xamarin.Forms;
 
 namespace Twins.ViewModels
 {
@@ -36,6 +37,8 @@ namespace Twins.ViewModels
         public AudioPlayer FlipEffect { get; private set; }
 
         public AudioPlayer UnflipEffect { get; private set; }
+
+        public AudioPlayer ClockEffect { get; private set; }
 
         private int lastScoreChange;
 
@@ -73,6 +76,28 @@ namespace Twins.ViewModels
 
             Board.Game.Resume();
             InteractionAllowed = true;
+
+            Device.StartTimer(TimeSpan.FromMilliseconds(500.0), () =>
+            {
+                var game = Board.Game;
+                if (int.Parse(game.GameClock.TimeLeft.Time.Substring(0, 2)) == 0 &&
+                     int.Parse(game.GameClock.TimeLeft.Time.Substring(3)) < 10 && ClockEffect == null)
+                {
+                    ClockEffect = new AudioPlayer();
+                    ClockEffect.LoadEffect(preferences.ClockTimerEffect + ".wav");
+                    ClockEffect.Player.Loop = true;
+                    ClockEffect.Play();
+                }
+                return true;
+            });
+            Board.Game.GameClock.Resumed += () =>
+            {
+                if (ClockEffect != null) ClockEffect.Play();
+            };
+            Board.Game.GameClock.Stopped += () =>
+            {
+                if (ClockEffect != null) ClockEffect.Pause();
+            };
         }
 
         private void OnTurnTimedOut()

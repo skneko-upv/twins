@@ -31,8 +31,6 @@ namespace Twins.Models.Game
 
         public Board Board { get; protected set; }
 
-        private AudioPlayer ClockEffect { get; set; }
-
         public int LevelNumber { get; }
 
         public bool IsMultiplayer => false;
@@ -86,20 +84,6 @@ namespace Twins.Models.Game
             Score = new Score();
             TurnTimedOut += () => { Score.DecrementTimedOut(); };
             LevelNumber = levelNumber;
-
-            Device.StartTimer(TimeSpan.FromMilliseconds(500.0), () =>
-            {
-                if (int.Parse(GameClock.TimeLeft.Time.Substring(0, 2)) == 0 &&
-                     int.Parse(GameClock.TimeLeft.Time.Substring(3)) < 10 && ClockEffect == null)
-                {
-                    PlayerPreferences preferences = PlayerPreferences.Instance;
-                    ClockEffect = new AudioPlayer();
-                    ClockEffect.LoadEffect(preferences.ClockTimerEffect + ".wav");
-                    ClockEffect.Player.Loop = true;
-                    ClockEffect.Play();
-                }
-                return true;
-            });
         }
 
         public abstract IEnumerable<Board.Cell> TryMatch();
@@ -120,7 +104,6 @@ namespace Twins.Models.Game
             {
                 GameClock.Start();
                 TurnClock.Start();
-                if (ClockEffect != null) { ClockEffect.Play(); }
             }
         }
 
@@ -128,7 +111,6 @@ namespace Twins.Models.Game
         {
             GameClock.Stop();
             TurnClock.Stop();
-            if (ClockEffect != null) { ClockEffect.Pause(); }
         }
 
         public virtual void EndTurn()
@@ -142,7 +124,6 @@ namespace Twins.Models.Game
         {
             Pause();
             IsFinished = true;
-            if (ClockEffect != null) { ClockEffect.Pause(); }
 
             GameEnded(new GameResult(victory, MatchSuccesses.Value, MatchFailures.Value, LevelNumber, Score.Value, GameClock.GetTimeSpan()));
         }

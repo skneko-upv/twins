@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("TwinsTests")]
+[assembly: InternalsVisibleTo("Twins.Tests")]
 namespace Twins.Models.Singletons
 {
     
