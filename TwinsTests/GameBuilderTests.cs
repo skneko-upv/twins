@@ -10,31 +10,33 @@ namespace TwinsTests
     [TestClass]
     public class GameBuilderTests
     {
-        private const int ExpectedHeight = 4;
-        private const int ExpectedWidth = 6;
-        private const int ExpectedLevel = 0;
+        private const int DefaultHeight = 4;
+        private const int DefaultWidth = 6;
+        private const int DefaultLevel = 0;
 
-        private static readonly Deck ExpectedDeck = BuiltInDecks.Animals.Value;
-        private static readonly Clock ExpectedTimeLimitClock = new Clock(TimeSpan.FromMinutes(1));
-        private static readonly Clock ExpectedTurnTimeLimitClock = new Clock(TimeSpan.FromSeconds(5));
+        private static readonly Deck DefaultDeck = BuiltInDecks.Animals.Value;
+        private static readonly TimeSpan DefaultTimeLimit = TimeSpan.FromMinutes(1);
+        private static readonly TimeSpan DefaultTurnTimeLimit = TimeSpan.FromSeconds(5);
 
         [TestMethod]
-        public void DefaultGameCreatedCorrectly()
+        public void Build_WithDefaultValues_IsCorrect()
         {
-            GameBuilder builder = new GameBuilder(ExpectedHeight, ExpectedWidth);
-            IGame defaultGame = builder.Build();
+            GameBuilder builder = new GameBuilder(DefaultHeight, DefaultWidth);
+            IGame game = builder.Build();
 
-            Assert.AreEqual(ExpectedHeight, builder.Height, "La altura del tablero no es correcta, se esperaba " + ExpectedHeight +
-                ", pero el generado es " + builder.Height);
-            Assert.AreEqual(ExpectedWidth, builder.Width, "La anchura del tablero no es correcta, se esperaba " + ExpectedWidth + 
-                ", pero el generado es " + builder.Width);
+            Assert.AreEqual(DefaultHeight, builder.Height, 
+                $"La altura del tablero no es correcta: se esperaba {DefaultHeight}, pero se ha encontrado {builder.Height}.");
+            Assert.AreEqual(DefaultWidth, builder.Width,
+                $"La anchura del tablero no es correcta: se esperaba {DefaultWidth}, pero se ha encontrado {builder.Width}.");
 
-            Assert.AreEqual(ExpectedDeck, defaultGame.Deck, "La baraja del tablero no es laa que se esperaba," +
-                " se esperaba el deck de Animales");
-            Assert.AreEqual(ExpectedTimeLimitClock, defaultGame.GameClock, "El reloj de juego no es el esperado");
-            Assert.AreEqual(ExpectedTurnTimeLimitClock, defaultGame.TurnClock, "El reloj de turno no es el esperado");
-            Assert.AreEqual(ExpectedLevel, defaultGame.LevelNumber, "El nivel esperado era " + ExpectedLevel +
-                ", pero el generado es " + defaultGame.LevelNumber);
+            Assert.AreEqual(DefaultDeck, game.Deck,
+                "Se esperaba la baraja de animales.");
+            Assert.AreEqual(DefaultTimeLimit, game.GameClock.TimeLimit,
+                "El límite de tiempo de juego no es el esperado.");
+            Assert.AreEqual(DefaultTurnTimeLimit, game.TurnClock.TimeLimit,
+                "El límite de tiempo de turno no es el esperado.");
+            Assert.AreEqual(DefaultLevel, game.LevelNumber,
+                $"El número de nivel no es correcto: se esperaba {DefaultLevel}, pero se ha encontrado {game.LevelNumber}.");
         }
     }
 }

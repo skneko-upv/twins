@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twins.iOS", "Twins\Twins.iO
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Twins", "Twins\Twins\Twins.csproj", "{750C6906-5BA2-43A1-BEB1-5ED12F89C605}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwinsTests", "TwinsTests\TwinsTests.csproj", "{5D775718-6E25-4E67-B246-2681A33A2FAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Twins.Tests", "TwinsTests\Twins.Tests.csproj", "{5D775718-6E25-4E67-B246-2681A33A2FAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
