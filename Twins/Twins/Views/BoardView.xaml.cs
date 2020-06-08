@@ -63,7 +63,11 @@ namespace Twins.Views
             }
             else
             {
-                board.Game.Score.Changed += (old, @new) => OnScoreChanged(1, @new);
+                board.Game.Score.Changed += (old, @new) => {
+                    Dispatcher.BeginInvokeOnMainThread(() =>
+                        OnScoreChanged(1, @new)
+                    );
+                };
                 OnScoreChanged(1, board.Game.Score.Value);
             }
 

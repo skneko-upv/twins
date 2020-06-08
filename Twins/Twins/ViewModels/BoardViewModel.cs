@@ -77,9 +77,12 @@ namespace Twins.ViewModels
 
         private void OnTurnTimedOut()
         {
-            Board.Game.Pause();
-            Board.Game.EndTurn();
-            Board.Game.Resume();
+            Dispatcher.BeginInvokeOnMainThread(() =>
+            {
+                Board.Game.Pause();
+                Board.Game.EndTurn();
+                Board.Game.Resume();
+            });
         }
 
         private void OnCellsMatched(IEnumerable<Board.Cell> cells)

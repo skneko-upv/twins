@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading;
 using Twins.Models.Properties;
 using Xamarin.Forms;
 
@@ -8,14 +9,14 @@ namespace Twins.Models
     //Clase que implementa la funcionalidad de cronómetro y temporizador 
     public class Clock
     {
-        private readonly Stopwatch clock = null;
-
-        // Variable usada por el temporizador
-        private TimeSpan timeLimit;
-        public TimeProperty TimeLeft;
+        public TimeProperty TimeLeft { get; }
         public bool IsCountingDown { get; private set; } = false;
         public event Action TimedOut;
 
+        // Variable usada por el temporizador
+        private readonly Stopwatch clock;
+        private TimeSpan timeLimit;
+        private readonly System.Timers.Timer eventTimeout;
 
         //Inicializa el cronómetro
         public Clock() { clock = new Stopwatch(); }
@@ -26,15 +27,18 @@ namespace Twins.Models
             IsCountingDown = true;
             timeLimit = maxTime;
             TimeLeft = new TimeProperty();
-            Device.StartTimer(TimeSpan.FromMilliseconds(500.0), () =>
+
+            eventTimeout = new System.Timers.Timer(500.0);
+            eventTimeout.Elapsed += (_0, _1) =>
             {
                 TimeLeft.Time = GetTimeSpan().ToString(@"hh\:mm\:ss");
                 if (clock.ElapsedMilliseconds >= timeLimit.TotalMilliseconds)
                 {
                     TimedOut();
                 }
-                return true;
-            });
+            };
+            eventTimeout.AutoReset = true;
+            eventTimeout.Enabled = true;
         }
 
 
