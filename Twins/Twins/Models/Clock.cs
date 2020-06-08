@@ -12,6 +12,9 @@ namespace Twins.Models
         public TimeProperty TimeLeft { get; }
         public bool IsCountingDown { get; private set; } = false;
         public event Action TimedOut;
+        public event Action Resumed;
+        public event Action Stopped;
+
         public TimeSpan TimeLimit { get; }
 
         // Variable usada por el temporizador
@@ -42,13 +45,25 @@ namespace Twins.Models
         }
 
 
-        public void Start() { clock.Start(); }
+        public void Start() { 
+            clock.Start();
+            Resumed?.Invoke();
+        }
 
-        public void Stop() { clock.Stop(); }
+        public void Stop() { 
+            clock.Stop();
+            Stopped?.Invoke();
+        }
 
-        public void Restart() { clock.Restart(); }
+        public void Restart() {
+            clock.Restart();
+            Resumed?.Invoke();
+        }
 
-        public void Reset() { clock.Reset(); }
+        public void Reset() {
+            clock.Reset();
+            Stopped?.Invoke();
+        }
 
         public bool IsRunning() { return clock.IsRunning; }
 
@@ -59,36 +74,5 @@ namespace Twins.Models
             return IsCountingDown ? TimeLimit - elapsedTime : elapsedTime;
         }
 
-
-
-        /*
-        //Necesita un formato MM:SS o MM:SS:mmm
-        public static TimeSpan StringToTimeSpan(String time) {
-            string[] separateNumbers = time.Split(':');
-            if (separateNumbers.Length < 2 || separateNumbers.Length > 3) { throw new FormatException(); }
-
-            return new TimeSpan(0, 0, System.Convert.ToInt32(separateNumbers[0]),
-                System.Convert.ToInt32(separateNumbers[1]), separateNumbers.Length == 2 ? 0 : System.Convert.ToInt32(separateNumbers[2])); 
-        }
-
-        //Transforma un TimeSpan proporcionado a String de formato MM:SS:mmm
-        //Anotación: Acepta un formato HH:MM:SS:mmm, los dias no se cuentan
-        public String TimeSpanToString(TimeSpan tiempo) {
-            String minutesElapsed = ((System.Convert.ToInt32(tiempo.Hours.ToString())) * 60
-                                    + (System.Convert.ToInt32(tiempo.Minutes.ToString())).ToString().Length) < 2 ?
-                                                            "0" + tiempo.Minutes.ToString() : tiempo.Minutes.ToString();
-            String secondsElapsed = tiempo.Seconds.ToString().Length < 2 ? "0" + tiempo.Seconds.ToString() : tiempo.Seconds.ToString();
-            String millisecondsElapsed = tiempo.Milliseconds.ToString();
-
-            return minutesElapsed + ":" + secondsElapsed + ":" + millisecondsElapsed;
-        }
-
-        //Devuelve el tiempo transcurrido o restante dependiendo si es cronómetro o temporizador en MM:SS:mmm
-        public String ToString() {
-            //Para diferenciar si es cronómetro o temporizador se usa la variable 'timeLimit' 
-            // inicializada al MaxValue de TimeSpan para selañar que es un cronómetro
-            return timeSpanToString(timeLimit.Equals(TimeSpan.MaxValue) ? getTimeSpan() : timeLimit - getTimeSpan());
-        }
-        */
     }
 }
