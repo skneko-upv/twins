@@ -12,10 +12,10 @@ namespace Twins.Models
         public TimeProperty TimeLeft { get; }
         public bool IsCountingDown { get; private set; } = false;
         public event Action TimedOut;
+        public TimeSpan TimeLimit { get; }
 
         // Variable usada por el temporizador
         private readonly Stopwatch clock;
-        private TimeSpan timeLimit;
         private readonly System.Timers.Timer eventTimeout;
 
         //Inicializa el cronómetro
