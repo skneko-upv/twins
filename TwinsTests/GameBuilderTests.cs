@@ -78,8 +78,8 @@ namespace Twins.Tests
         [TestMethod]
         public void Build_WithCustomValues_IsCorrect()
         {
-            const int height = 5;
-            const int width = 3;
+            const int height = 4;
+            const int width = 4;
             Deck customDeck = BuiltInDecks.Sports.Value;
             TimeSpan customTimeLimit = TimeSpan.FromMinutes(5);
             TimeSpan customTurnTimeLimit = TimeSpan.FromSeconds(20);
