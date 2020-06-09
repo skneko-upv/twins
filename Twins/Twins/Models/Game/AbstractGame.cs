@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Twins.Models.Properties;
-using Twins.Models.Singletons;
 using Twins.Models.Strategies;
 using Twins.Utils;
-using Xamarin.Forms;
 using static Twins.Utils.CollectionExtensions;
 
 namespace Twins.Models.Game

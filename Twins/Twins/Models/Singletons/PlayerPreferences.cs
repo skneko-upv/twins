@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("Twins.Tests")]
 namespace Twins.Models.Singletons
 {
-    
+
     internal class PlayerPreferences
     {
         public static PlayerPreferences Instance {

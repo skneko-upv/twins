@@ -1,6 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Twins.Components;
@@ -22,7 +21,7 @@ namespace Twins.Tests
         private static readonly StandardGame DefaultGame = new StandardGame(DefaultHeight, DefaultWidth, DefaultDeck,
             DefaultTimeLimit, DefaultTurnTimeLimit);
 
-        private const int CustomtHeight =4;
+        private const int CustomtHeight = 4;
         private const int CustomWidth = 4;
         private static readonly Deck CustomDeck = BuiltInDecks.Sports.Value;
         private static readonly TimeSpan CustomTimeLimit = TimeSpan.FromMinutes(5);
@@ -31,7 +30,7 @@ namespace Twins.Tests
 
         private static readonly Player ExpectedPlayerOne = new Player("P1");
         private static readonly Player ExpectedPlayerTwo = new Player("P2");
-        private static readonly IList<Player> ExpectedPlayersForMultiplayer = new List<Player>() { ExpectedPlayerOne, ExpectedPlayerTwo};
+        private static readonly IList<Player> ExpectedPlayersForMultiplayer = new List<Player>() { ExpectedPlayerOne, ExpectedPlayerTwo };
         private const bool ExpectedMultiplayer = true;
         private static readonly LocalCompetitiveGame ExpectedMultiplayerDefaultGame = new LocalCompetitiveGame(DefaultGame, ExpectedPlayersForMultiplayer.ToArray());
         private static readonly LocalCompetitiveGame ExpectedMultiplayerCustomGame = new LocalCompetitiveGame(CustomKindGame, ExpectedPlayersForMultiplayer.ToArray());
@@ -132,7 +131,7 @@ namespace Twins.Tests
         [TestMethod]
         public void Build_WithInvalidSize_ThrowsException()
         {
-            var builder = new GameBuilder(5, 3)
+            GameBuilder builder = new GameBuilder(5, 3)
                 .WithGroupSize(2);
 
             Assert.ThrowsException<ArgumentException>(builder.Build);

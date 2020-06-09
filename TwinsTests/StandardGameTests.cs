@@ -6,20 +6,19 @@ using Twins.Components;
 using Twins.Models;
 using Twins.Models.Game;
 using Twins.Models.Strategies;
-using Xamarin.Forms;
 
 namespace Twins.Tests
 {
     [TestClass]
     public class StandardGameTests
     {
-        static IGame game;
+        private static IGame game;
 
         [TestInitialize]
         public void CreateGame()
         {
             int height = 2, width = 2;
-            var deck = BuiltInDecks.Animals.Value;
+            Deck deck = BuiltInDecks.Animals.Value;
             game = new StandardGame(
                 height,
                 width,
@@ -55,7 +54,7 @@ namespace Twins.Tests
             game.Board.FlipCell(0, 1);
             Assert.AreEqual(1, game.Board.FlippedCells.Count);
 
-            var cell = game.Board.FlippedCells.First();
+            Board.Cell cell = game.Board.FlippedCells.First();
             Assert.AreEqual(0, cell.Row);
             Assert.AreEqual(1, cell.Column);
         }

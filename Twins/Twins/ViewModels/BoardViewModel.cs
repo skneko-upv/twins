@@ -79,7 +79,7 @@ namespace Twins.ViewModels
 
             Device.StartTimer(TimeSpan.FromMilliseconds(500.0), () =>
             {
-                var game = Board.Game;
+                Models.Game.IGame game = Board.Game;
                 if (int.Parse(game.GameClock.TimeLeft.Time.Substring(0, 2)) == 0 &&
                      int.Parse(game.GameClock.TimeLeft.Time.Substring(3)) < 10 && ClockEffect == null)
                 {
@@ -92,11 +92,17 @@ namespace Twins.ViewModels
             });
             Board.Game.GameClock.Resumed += () =>
             {
-                if (ClockEffect != null) ClockEffect.Play();
+                if (ClockEffect != null)
+                {
+                    ClockEffect.Play();
+                }
             };
             Board.Game.GameClock.Stopped += () =>
             {
-                if (ClockEffect != null) ClockEffect.Pause();
+                if (ClockEffect != null)
+                {
+                    ClockEffect.Pause();
+                }
             };
         }
 

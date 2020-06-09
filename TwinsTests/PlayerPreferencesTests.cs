@@ -62,7 +62,7 @@ namespace Twins.Tests
 
             Assert.AreEqual(ExpectedLoseEffect, playerPreferences.LoseEffect, "El efecto de perder debería ser " + ExpectedLoseEffect +
                 ", pero la seleccionada era " + playerPreferences.LoseEffect);
-            
+
             Assert.AreEqual(ExpectedClockTimerEffect, playerPreferences.ClockTimerEffect, "El efecto del reloj debería ser " + ExpectedClockTimerEffect +
                 ", pero la seleccionada era " + playerPreferences.ClockTimerEffect);
 

@@ -63,7 +63,8 @@ namespace Twins.Views
             }
             else
             {
-                board.Game.Score.Changed += (old, @new) => {
+                board.Game.Score.Changed += (old, @new) =>
+                {
                     Dispatcher.BeginInvokeOnMainThread(() =>
                         OnScoreChanged(1, @new)
                     );
@@ -71,7 +72,8 @@ namespace Twins.Views
                 OnScoreChanged(1, board.Game.Score.Value);
             }
 
-            board.Game.GameEnded += (result) => {
+            board.Game.GameEnded += (result) =>
+            {
                 Dispatcher.BeginInvokeOnMainThread(() =>
                 {
                     OnGameEnded(result);

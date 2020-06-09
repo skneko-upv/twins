@@ -4,7 +4,6 @@ using System.Linq;
 using Twins.Components;
 using Twins.Models.Game;
 using Twins.Models.Strategies;
-using Xamarin.Forms;
 
 namespace Twins.Models.Builders
 {

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Threading;
 using Twins.Models.Properties;
-using Xamarin.Forms;
 
 namespace Twins.Models
 {
@@ -45,22 +43,26 @@ namespace Twins.Models
         }
 
 
-        public void Start() { 
+        public void Start()
+        {
             clock.Start();
             Resumed?.Invoke();
         }
 
-        public void Stop() { 
+        public void Stop()
+        {
             clock.Stop();
             Stopped?.Invoke();
         }
 
-        public void Restart() {
+        public void Restart()
+        {
             clock.Restart();
             Resumed?.Invoke();
         }
 
-        public void Reset() {
+        public void Reset()
+        {
             clock.Reset();
             Stopped?.Invoke();
         }
