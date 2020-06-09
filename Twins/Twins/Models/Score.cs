@@ -48,7 +48,11 @@ namespace Twins.Models
 
         public int CompareTo(Score other)
         {
-            if (other == null) throw new ArgumentNullException(nameof(other));
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+
             return value - other.value;
         }
 
@@ -56,8 +60,8 @@ namespace Twins.Models
         {
             if (other is Score)
             {
-                return this.Value == (other as Score).Value;
-            } 
+                return Value == (other as Score).Value;
+            }
             else
             {
                 return false;

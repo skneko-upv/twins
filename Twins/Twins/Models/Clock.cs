@@ -86,7 +86,10 @@ namespace Twins.Models
 
         protected virtual void Dispose(bool disposing)
         {
-            if (isDisposed) return;
+            if (isDisposed)
+            {
+                return;
+            }
 
             if (disposing)
             {

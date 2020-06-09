@@ -14,7 +14,7 @@ namespace Twins.Models.Properties
             }
         }
         private Color color;
-        
+
         public string Time {
             get => time;
             set {

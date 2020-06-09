@@ -61,7 +61,7 @@
                                   VerticalScrollBarVisibility="Never"
                                   Orientation="Both">
                                     <StackLayout x:Name="deckArea">
-                                      
+
                                     </StackLayout>
                                 </ScrollView>
                                 <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center">
@@ -77,7 +77,7 @@
             </StackLayout>
             <common:ErrorView x:Name="ErrorView" AbsoluteLayout.LayoutBounds=".5,.5" 
                               AbsoluteLayout.LayoutFlags="PositionProportional" IsVisible="False">
-                    <Label Text="No se ha implementado" TextColor="Red" Margin="50,150,0,0"></Label>
+                <Label Text="No se ha implementado" TextColor="Red" Margin="50,150,0,0"></Label>
             </common:ErrorView>
         </AbsoluteLayout>
     </ContentPage.Content>

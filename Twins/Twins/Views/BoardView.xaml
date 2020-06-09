@@ -97,7 +97,7 @@
                         </Grid>
                     </Grid>
                 </Grid>
-            <ScrollView x:Name="boardArea"
+                <ScrollView x:Name="boardArea"
                       VerticalOptions="Center"
                       HorizontalOptions="Center"
                       Orientation="Both"

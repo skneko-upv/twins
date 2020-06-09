@@ -37,27 +37,27 @@
                        BackgroundColor="WhiteSmoke"
                        CornerRadius="0"
                        HasShadow="False">
-                        <StackLayout AbsoluteLayout.LayoutBounds=".5,.5,1,1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="Center" VerticalOptions="Center" Padding="0,-20,0,0" >
-                            <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" Padding="100,10,100,10" Spacing="10">
-                                <StackLayout VerticalOptions="Start" HorizontalOptions="Center">
-                                    <Label Text="Edición de barajas" FontSize="Header" FontAttributes="Bold"/>
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                                    <Label Text="Nombre de la Baraja: "  HorizontalOptions="Center" Padding="0,5,0,0"/>
-                                    <Entry Keyboard="Text" HorizontalOptions="Center" x:Name="DeckName" WidthRequest="150"/>
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                                    <Label Text="Categoría:  "  HorizontalOptions="Center" Padding="0,5,0,0"/>
-                                    <Picker  HorizontalOptions="Center" SelectedIndexChanged="SelectorCategory_SelectedIndexChanged"
+                    <StackLayout AbsoluteLayout.LayoutBounds=".5,.5,1,1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="Center" VerticalOptions="Center" Padding="0,-20,0,0" >
+                        <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" Padding="100,10,100,10" Spacing="10">
+                            <StackLayout VerticalOptions="Start" HorizontalOptions="Center">
+                                <Label Text="Edición de barajas" FontSize="Header" FontAttributes="Bold"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                <Label Text="Nombre de la Baraja: "  HorizontalOptions="Center" Padding="0,5,0,0"/>
+                                <Entry Keyboard="Text" HorizontalOptions="Center" x:Name="DeckName" WidthRequest="150"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                <Label Text="Categoría:  "  HorizontalOptions="Center" Padding="0,5,0,0"/>
+                                <Picker  HorizontalOptions="Center" SelectedIndexChanged="SelectorCategory_SelectedIndexChanged"
                                             x:Name="SelectorCategory" WidthRequest="150"/>
-                                    <ImageButton Source="Assets/Icons/delete.png" Clicked="OnRemoveCategory" />
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                                    <Label Text="Nueva Categoría: " HorizontalOptions="Center" Padding="0,5,0,0" />
-                                    <Entry Keyboard="Text" HorizontalOptions="Center" x:Name="NewCategory" WidthRequest="150"/>
-                                    <ImageButton Source="Assets/Icons/save.png" Clicked="OnAddCategory"/>
-                                </StackLayout>
-                                <!--Aqui va a ir el componente de las imagenes de las cartas-->
+                                <ImageButton Source="Assets/Icons/delete.png" Clicked="OnRemoveCategory" />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                <Label Text="Nueva Categoría: " HorizontalOptions="Center" Padding="0,5,0,0" />
+                                <Entry Keyboard="Text" HorizontalOptions="Center" x:Name="NewCategory" WidthRequest="150"/>
+                                <ImageButton Source="Assets/Icons/save.png" Clicked="OnAddCategory"/>
+                            </StackLayout>
+                            <!--Aqui va a ir el componente de las imagenes de las cartas-->
                             <Frame
                                   Padding="0"
                                   Margin="0,0,0,0"
@@ -76,26 +76,26 @@
                                      WidthRequest="500"
                                      HeightRequest="140"
                                      BackgroundColor="White">
-                                    <StackLayout Orientation="Horizontal" Spacing="5" HeightRequest="140" Padding="10,0,0,0">
-                                        <ImageButton Source="Assets/Icons/Add.png"  Clicked="OnAddCard" x:Name="AddButton" HeightRequest="100" WidthRequest="100"/>
-                                        <StackLayout x:Name="ListCard" Spacing="5" Orientation="Horizontal">
-                                            <!--Aqui han de irse añadiendo las cartas-->
-                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal" Spacing="5" HeightRequest="140" Padding="10,0,0,0">
+                                            <ImageButton Source="Assets/Icons/Add.png"  Clicked="OnAddCard" x:Name="AddButton" HeightRequest="100" WidthRequest="100"/>
+                                            <StackLayout x:Name="ListCard" Spacing="5" Orientation="Horizontal">
+                                                <!--Aqui han de irse añadiendo las cartas-->
+                                            </StackLayout>
                                         </StackLayout>
                                     </ScrollView>
                                 </Frame>
                             </Frame>
                             <StackLayout Orientation="Vertical" HorizontalOptions="Center" Spacing="5">
-                                    <Button  Text="Añadir Imagen Dorso" x:Name="AddButtonBackCard" Style="{StaticResource buttonStyle}" HeightRequest="50" Clicked="OnAddBackCard" />
-                                    <Image x:Name="backImage" WidthRequest="100" HeightRequest="100"/> 
+                                <Button  Text="Añadir Imagen Dorso" x:Name="AddButtonBackCard" Style="{StaticResource buttonStyle}" HeightRequest="50" Clicked="OnAddBackCard" />
+                                <Image x:Name="backImage" WidthRequest="100" HeightRequest="100"/>
 
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center" Margin="0,20,0,0">
-                                    <Button Text="Guardar" Style="{StaticResource buttonStyle}" Clicked="OnSave"/>
-                                    <Button Text="Cancelar" Style="{StaticResource buttonStyle}" Clicked="OnCancel"/>
-                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center" Margin="0,20,0,0">
+                                <Button Text="Guardar" Style="{StaticResource buttonStyle}" Clicked="OnSave"/>
+                                <Button Text="Cancelar" Style="{StaticResource buttonStyle}" Clicked="OnCancel"/>
                             </StackLayout>
                         </StackLayout>
+                    </StackLayout>
                 </Frame>
             </Frame>
             <common:ErrorView x:Name="ErrorView" AbsoluteLayout.LayoutBounds=".5,.5" 

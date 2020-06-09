@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Twins.Views.ErrorView">
-    
+
     <AbsoluteLayout HeightRequest="283" WidthRequest="577">
         <Image Source="Assets/Backgrounds/errorDialogBackground.png" AbsoluteLayout.LayoutFlags="All"
                AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"/>

@@ -8,7 +8,7 @@
              BackgroundImageSource="Assets/Backgrounds/menuprincipal2.png"
              NavigationPage.HasBackButton="False"
              NavigationPage.HasNavigationBar="False">
-  <ContentPage.Resources>
+    <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="buttonStyle" TargetType="Button">
                 <Setter Property="FontSize" Value="15" />
@@ -55,8 +55,8 @@
                        HorizontalOptions="Center"
                        HeightRequest="150"/>
                 <StackLayout HorizontalOptions="Center" Margin="15" Spacing="10" >
-                
-                        <Button 
+
+                    <Button 
                             ClassId="ButtonPlay"
                             Text="NIVELES" 
                             HorizontalOptions="Center" 
@@ -65,7 +65,7 @@
                             Style="{StaticResource buttonStyle}"
                         
                        />
-                        <Button 
+                    <Button 
                             ClassId="ButtonPlay"
                             Text="PARTIDA ESTÁNDAR" 
                             HorizontalOptions="Center" 
@@ -73,7 +73,7 @@
                             Clicked="OnStandardGame"
                             Style="{StaticResource buttonStyle}"
                         />
-                        <Button 
+                    <Button 
                             ClassId="ButtonPlay"
                             Text="PARTIDA POR CARTA" 
                             HorizontalOptions="Center" 
@@ -81,7 +81,7 @@
                             Clicked="OnCardGame"
                             Style="{StaticResource buttonStyle}"
                         />
-                        <Button 
+                    <Button 
                             ClassId="ButtonPlay"
                             Text="PARTIDA POR CATEGORÍA" 
                             HorizontalOptions="Center" 
@@ -105,7 +105,7 @@
                             Clicked="OnDeckList"
                             Style="{StaticResource buttonStyle}"
                         />
-                
+
                 </StackLayout>
             </StackLayout>
         </StackLayout>

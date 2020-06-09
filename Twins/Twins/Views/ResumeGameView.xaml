@@ -29,7 +29,7 @@
         </StackLayout>
         <StackLayout Spacing="15" Orientation="Horizontal">
             <StackLayout Spacing="15">
-                
+
                 <Label Text="Nivel:" FontSize="20" FontAttributes="Bold"/>
                 <Label Text="Puntos:" FontSize="20" FontAttributes="Bold"/>
                 <Label Text="Tiempo:" FontSize="20" FontAttributes="Bold"/>
@@ -40,7 +40,7 @@
                 <StackLayout Orientation="Horizontal" Spacing="2">
                     <Label Text="" x:Name="TimeLabel" FontSize="20" />
                 </StackLayout>
-                
+
             </StackLayout>
         </StackLayout>
         <Grid Margin="20" >
@@ -53,4 +53,4 @@
         </Grid>
     </StackLayout>
 
-    </AbsoluteLayout>
+</AbsoluteLayout>

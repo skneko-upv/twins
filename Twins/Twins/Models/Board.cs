@@ -94,7 +94,10 @@ namespace Twins.Models
         /// </summary>
         public Board(int height, int width, IGame game, Cell[,] cells)
         {
-            if (cells is null) throw new ArgumentNullException(nameof(cells));
+            if (cells is null)
+            {
+                throw new ArgumentNullException(nameof(cells));
+            }
 
             Height = height;
             Width = width;

@@ -37,7 +37,7 @@
                        BackgroundColor="WhiteSmoke"
                        CornerRadius="0"
                        HasShadow="False">
-                        <StackLayout AbsoluteLayout.LayoutBounds=".5,.5,1,1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="Center" VerticalOptions="Center" Padding="0,-20,0,0" >
+                    <StackLayout AbsoluteLayout.LayoutBounds=".5,.5,1,1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="Center" VerticalOptions="Center" Padding="0,-20,0,0" >
                         <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" Padding="100,10,100,10">
                             <StackLayout VerticalOptions="Start" HorizontalOptions="Center">
                                 <Label Text="Opciones" FontSize="Header" FontAttributes="Bold"/>
