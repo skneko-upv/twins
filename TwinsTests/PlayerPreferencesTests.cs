@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using Twins.Models;
 
-namespace TwinsTests
+namespace Twins.Tests
 {
     [TestClass]
     public class PlayerPreferencesTests
