@@ -7,7 +7,7 @@ namespace Twins.Models
     {
         public ImageSource BackImage { get; set; }
 
-        public ISet<Category> Categories = new HashSet<Category>();
+        public ISet<Category> Categories { get; } = new HashSet<Category>();
 
         public IList<Card> Cards { get; } = new List<Card>();
 

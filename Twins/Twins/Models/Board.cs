@@ -86,7 +86,7 @@ namespace Twins.Models
         /// Create a new board populated randomly.
         /// </summary>
         public Board(int height, int width, IGame game, IBoardPopulationStrategy populationStrategy)
-            : this(height, width, game, populationStrategy.Populate(height, width))
+            : this(height, width, game, populationStrategy?.Populate(height, width))
         { }
 
         /// <summary>
@@ -94,6 +94,8 @@ namespace Twins.Models
         /// </summary>
         public Board(int height, int width, IGame game, Cell[,] cells)
         {
+            if (cells is null) throw new ArgumentNullException(nameof(cells));
+
             Height = height;
             Width = width;
             Game = game;
@@ -102,6 +104,7 @@ namespace Twins.Models
             cellMap = new int[height, width];
             Cells = new List<Cell>(height * width);
             int i = 0;
+
             foreach (Cell cell in cells)
             {
                 Cells.Add(cell);

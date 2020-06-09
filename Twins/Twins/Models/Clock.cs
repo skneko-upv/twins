@@ -5,7 +5,7 @@ using Twins.Models.Properties;
 namespace Twins.Models
 {
     //Clase que implementa la funcionalidad de cronómetro y temporizador 
-    public class Clock
+    public class Clock : IDisposable
     {
         public TimeProperty TimeLeft { get; }
         public bool IsCountingDown { get; private set; } = false;
@@ -18,6 +18,8 @@ namespace Twins.Models
         // Variable usada por el temporizador
         private readonly Stopwatch clock;
         private readonly System.Timers.Timer eventTimeout;
+
+        private bool isDisposed;
 
         //Inicializa el cronómetro
         public Clock() { clock = new Stopwatch(); }
@@ -76,5 +78,22 @@ namespace Twins.Models
             return IsCountingDown ? TimeLimit - elapsedTime : elapsedTime;
         }
 
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (isDisposed) return;
+
+            if (disposing)
+            {
+                eventTimeout.Dispose();
+            }
+
+            isDisposed = true;
+        }
     }
 }

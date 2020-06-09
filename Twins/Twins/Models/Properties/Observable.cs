@@ -16,7 +16,7 @@ namespace Twins.Models.Properties
                 OnPropertyChanged(nameof(Value));
             }
         }
-        public T value;
+        private T value;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

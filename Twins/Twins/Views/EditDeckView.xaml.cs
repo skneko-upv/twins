@@ -38,7 +38,7 @@ namespace Twins.Views
 
         private void OnSave(object sender, EventArgs e)
         {
-            if (DeckName.Text != null && !DeckName.Text.Trim().Equals(""))
+            if (DeckName.Text != null && !string.IsNullOrEmpty(DeckName.Text.Trim()))
             {
                 deckEditor.AddName(DeckName.Text);
             }
@@ -65,11 +65,13 @@ namespace Twins.Views
                 ErrorView.IsVisible = true;
             }
         }
+
         private void OnCancel(object sender, EventArgs e)
         {
             Navigation.PopAsync();
         }
-        private async Task<FileData> OpenFileDialog()
+
+        private static async Task<FileData> OpenFileDialog()
         {
             try
             {
@@ -131,7 +133,7 @@ namespace Twins.Views
 
         private void OnAddCategory(object sender, EventArgs e)
         {
-            if (NewCategory.Text != null && !NewCategory.Text.Trim().Equals(""))
+            if (NewCategory.Text != null && !string.IsNullOrEmpty(NewCategory.Text.Trim()))
             {
                 deckEditor.AddCategory(NewCategory.Text.Trim());
             }

@@ -23,7 +23,7 @@ namespace Twins.Models
                 Changed?.Invoke(previous, value);
             }
         }
-        public int value;
+        private int value;
 
         public Score(int value = DefaultStartingScore)
         {
@@ -48,7 +48,60 @@ namespace Twins.Models
 
         public int CompareTo(Score other)
         {
+            if (other == null) throw new ArgumentNullException(nameof(other));
             return value - other.value;
+        }
+
+        public override bool Equals(object other)
+        {
+            if (other is Score)
+            {
+                return this.Value == (other as Score).Value;
+            } 
+            else
+            {
+                return false;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return Value;
+        }
+
+        public static bool operator ==(Score left, Score right)
+        {
+            if (left is null)
+            {
+                return right is null;
+            }
+
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(Score left, Score right)
+        {
+            return !(left == right);
+        }
+
+        public static bool operator <(Score left, Score right)
+        {
+            return left is null ? right is object : left.CompareTo(right) < 0;
+        }
+
+        public static bool operator <=(Score left, Score right)
+        {
+            return left is null || left.CompareTo(right) <= 0;
+        }
+
+        public static bool operator >(Score left, Score right)
+        {
+            return left is object && left.CompareTo(right) > 0;
+        }
+
+        public static bool operator >=(Score left, Score right)
+        {
+            return left is null ? right is null : left.CompareTo(right) >= 0;
         }
     }
 }

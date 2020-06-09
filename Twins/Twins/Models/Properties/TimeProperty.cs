@@ -6,7 +6,6 @@ namespace Twins.Models.Properties
 {
     public class TimeProperty : INotifyPropertyChanged
     {
-        public Color color;
         public Color Color {
             get => color;
             set {
@@ -14,7 +13,8 @@ namespace Twins.Models.Properties
                 OnPropertyChanged(nameof(Color));
             }
         }
-        public string time;
+        private Color color;
+        
         public string Time {
             get => time;
             set {
@@ -31,7 +31,7 @@ namespace Twins.Models.Properties
                 OnPropertyChanged(nameof(Time));
             }
         }
-
+        private string time;
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
 

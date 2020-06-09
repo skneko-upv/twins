@@ -41,5 +41,10 @@ namespace Twins.Models
         {
             return Equals(obj as Card);
         }
+
+        public override int GetHashCode()
+        {
+            return Id;
+        }
     }
 }

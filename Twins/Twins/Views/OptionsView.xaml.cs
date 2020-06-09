@@ -95,7 +95,7 @@ namespace Twins.Views
             }
         }
 
-        private bool CheckSizeboard(int widgt, int height)
+        private static bool CheckBoardSize(int widgt, int height)
         {
             return (widgt * height) > 6 && (widgt * height) % 2 == 0;
 
@@ -143,7 +143,7 @@ namespace Twins.Views
                 {
                     if (DefaultRow.Text != null && DefaultColumn.Text != null)
                     {
-                        if (CheckSizeboard(int.Parse(DefaultColumn.Text), int.Parse(DefaultRow.Text)))
+                        if (CheckBoardSize(int.Parse(DefaultColumn.Text), int.Parse(DefaultRow.Text)))
                         {
                             if (HasTimeLimit.IsChecked && IsTimeLimitCorrect())
                             {
@@ -263,7 +263,7 @@ namespace Twins.Views
             MainPage.EffectsPlayer.Play();
         }
 
-        private async Task UpdateDatabase()
+        private static async Task UpdateDatabase()
         {
             Database database = Database.Instance;
             Persistence.DataTypes.PlayerPreferences playerPreferencesDB = await database.GetPlayerPreferences();

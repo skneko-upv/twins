@@ -32,7 +32,7 @@ namespace Twins.Persistence.DataTypes
         public int IdPlayer { get; }
 
         [OneToMany]
-        public List<Deck> PlayerDecks { get; set; }
+        public List<Deck> PlayerDecks { get; }
 
         public PlayerPreferences()
         {

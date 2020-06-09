@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Twins.Models;
@@ -16,7 +17,7 @@ namespace Twins.Persistence.DataTypes
 
         public Deck()
         {
-            Images = new string[0];
+            Images = Array.Empty<string>();
         }
 
         public Deck(ICollection<string> images, IDictionary<int, ISet<Category>> categories)

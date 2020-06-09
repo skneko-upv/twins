@@ -96,7 +96,7 @@ namespace Twins.Views
         }
 
         //Intentar centralizar
-        private async Task UpdateDatabase()
+        private static async Task UpdateDatabase()
         {
             Database database = Database.Instance;
             Persistence.DataTypes.PlayerPreferences playerPreferencesDB = await database.GetPlayerPreferences();
