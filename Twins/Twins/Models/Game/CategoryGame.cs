@@ -7,7 +7,7 @@ namespace Twins.Models.Game
 {
     public class CategoryGame : AbstractGame
     {
-        public CategoryGame(int height, int width, Deck deck, TimeSpan timeLimit, TimeSpan turnLimit, Board.Cell[,] cells = null, int level = 0)
+        public CategoryGame(int height, int width, Deck deck, TimeSpan? timeLimit, TimeSpan? turnLimit, Board.Cell[,] cells = null, int level = 0)
             : base(height, width, deck, timeLimit, turnLimit, cells, level)
         {
             if (deck.Categories.Count() < 2)
