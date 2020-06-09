@@ -24,7 +24,7 @@ namespace Twins.Tests
             GameBuilder builder = new GameBuilder(height, width);
             IGame game = builder.Build();
 
-            Assert.AreEqual(height, builder.Height, 
+            Assert.AreEqual(height, builder.Height,
                 $"La altura del tablero no es correcta: se esperaba {height}, pero se ha encontrado {builder.Height}.");
             Assert.AreEqual(width, builder.Width,
                 $"La anchura del tablero no es correcta: se esperaba {width}, pero se ha encontrado {builder.Width}.");
@@ -101,6 +101,15 @@ namespace Twins.Tests
                 "El límite de tiempo de turno no es el esperado.");
             Assert.IsInstanceOfType(game, typeof(ReferenceCardGame),
                 $"El tipo de partida que se esperaba era {nameof(ReferenceCardGame)}, pero el juego es de tipo {game.GetType().Name}.");
+        }
+
+        [TestMethod]
+        public void Build_WithInvalidSize_ThrowsException()
+        {
+            var builder = new GameBuilder(5, 3)
+                .WithGroupSize(2);
+
+            Assert.ThrowsException<ArgumentException>(builder.Build);
         }
     }
 }

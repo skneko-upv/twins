@@ -4,6 +4,7 @@ using System.Linq;
 using Twins.Components;
 using Twins.Models.Game;
 using Twins.Models.Strategies;
+using Xamarin.Forms;
 
 namespace Twins.Models.Builders
 {
@@ -105,6 +106,11 @@ namespace Twins.Models.Builders
 
         public IGame Build()
         {
+            if (Height * Width % groupSize != 0)
+            {
+                throw new ArgumentException("Tamaño de tablero ilegal");
+            }
+
             if (players != null && players.Count > 1)
             {
                 return new LocalCompetitiveGame(BuildByKind(), players.ToArray());
