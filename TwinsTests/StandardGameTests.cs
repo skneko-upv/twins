@@ -1,9 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
+using System.Threading;
 using Twins.Components;
+using Twins.Models;
 using Twins.Models.Game;
 using Twins.Models.Strategies;
+using Xamarin.Forms;
 
 namespace Twins.Tests
 {
@@ -63,6 +66,35 @@ namespace Twins.Tests
             game.Board.Cells[0].KeepRevealed = true;
 
             Assert.ThrowsException<InvalidOperationException>(() => game.Board.FlipCell(0, 0));
+        }
+
+        [TestMethod]
+        public void Match_WhenAllRevealed_Victory()
+        {
+            AutoResetEvent barrier = new AutoResetEvent(false);
+            GameResult result = null;
+
+            game.GameEnded += (res) =>
+            {
+                result = res;
+                barrier.Set();
+            };
+
+            game.Board.FlipCell(0, 0);
+            game.Board.FlipCell(0, 1);
+            game.TryMatch();
+            game.Board.UnflipAllCells();
+
+            game.Board.FlipCell(1, 0);
+            game.Board.FlipCell(1, 1);
+            game.TryMatch();
+
+            Assert.IsTrue(barrier.WaitOne(TimeSpan.FromSeconds(5)),
+                "No se ha disparado el evento de final.");
+            Assert.IsNotNull(result,
+                "No se ha obtenido resultado del final.");
+            Assert.IsTrue(result.IsVictory,
+                "El resultado no es de victoria.");
         }
     }
 }
