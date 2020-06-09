@@ -10,17 +10,17 @@ namespace Twins.Tests
     [TestClass]
     public class GameBuilderTests
     {
-        private const int height = 4;
-        private const int width = 6;
-        private const int defaultLevel = 0;
-
-        private static readonly Deck defaultDeck = BuiltInDecks.Animals.Value;
-        private static readonly TimeSpan defaultTimeLimit = TimeSpan.FromMinutes(1);
-        private static readonly TimeSpan defaultTurnTimeLimit = TimeSpan.FromSeconds(5);
-
         [TestMethod]
         public void Build_WithDefaultValues_IsCorrect()
         {
+            const int height = 4;
+            const int width = 6;
+            const int defaultLevel = 0;
+
+            Deck defaultDeck = BuiltInDecks.Animals.Value;
+            TimeSpan defaultTimeLimit = TimeSpan.FromMinutes(1);
+            TimeSpan defaultTurnTimeLimit = TimeSpan.FromSeconds(5);
+
             GameBuilder builder = new GameBuilder(height, width);
             IGame game = builder.Build();
 
@@ -37,6 +37,8 @@ namespace Twins.Tests
                 "El límite de tiempo de turno no es el esperado.");
             Assert.AreEqual(defaultLevel, game.LevelNumber,
                 $"El número de nivel no es correcto: se esperaba {defaultLevel}, pero se ha encontrado {game.LevelNumber}.");
+            Assert.IsInstanceOfType(game, typeof(StandardGame),
+                $"El tipo de partida que se esperaba era {nameof(StandardGame)}, pero el juego es de tipo {game.GetType().Name}.");
         }
 
         [TestMethod]
@@ -45,7 +47,7 @@ namespace Twins.Tests
             const string namePlayer1 = "Alice";
             const string namePlayer2 = "Bob";
 
-            IGame game = new GameBuilder(height, width)
+            IGame game = new GameBuilder(2, 2)
                 .WithPlayer(new Player(namePlayer1))
                 .WithPlayer(new Player(namePlayer2))
                 .Build();
@@ -65,12 +67,40 @@ namespace Twins.Tests
         [TestMethod]
         public void Build_WithOnePlayer_IsSingleplayer()
         {
-            IGame game = new GameBuilder(height, width)
+            IGame game = new GameBuilder(2, 2)
                 .WithPlayer(new Player("Mark"))
                 .Build();
 
             Assert.IsFalse(game.IsMultiplayer,
                 "El juego es multijugador, se esperaba configuración para un jugador.");
+        }
+
+        [TestMethod]
+        public void Build_WithCustomValues_IsCorrect()
+        {
+            const int height = 5;
+            const int width = 3;
+            Deck customDeck = BuiltInDecks.Sports.Value;
+            TimeSpan customTimeLimit = TimeSpan.FromMinutes(5);
+            TimeSpan customTurnTimeLimit = TimeSpan.FromSeconds(20);
+
+            GameBuilder builder = new GameBuilder(height, width);
+            IGame game = builder.WithDeck(customDeck).WithTimeLimit(customTimeLimit).
+                WithTurnTimeLimit(customTurnTimeLimit).OfKind(GameBuilder.GameKind.ReferenceCard).Build();
+
+            Assert.AreEqual(height, builder.Height,
+                $"La altura del tablero no es correcta: se esperaba {height}, pero se ha encontrado {builder.Height}.");
+            Assert.AreEqual(width, builder.Width,
+                $"La anchura del tablero no es correcta: se esperaba {width}, pero se ha encontrado {builder.Width}.");
+
+            Assert.AreEqual(customDeck, game.Deck,
+                "Se esperaba la baraja de animales.");
+            Assert.AreEqual(customTimeLimit, game.GameClock.TimeLimit,
+                "El límite de tiempo de juego no es el esperado.");
+            Assert.AreEqual(customTurnTimeLimit, game.TurnClock.TimeLimit,
+                "El límite de tiempo de turno no es el esperado.");
+            Assert.IsInstanceOfType(game, typeof(ReferenceCardGame),
+                $"El tipo de partida que se esperaba era {nameof(ReferenceCardGame)}, pero el juego es de tipo {game.GetType().Name}.");
         }
     }
 }
