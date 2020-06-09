@@ -26,7 +26,7 @@ namespace TwinsTests
         private static readonly TimeSpan ExpectedTurnTime = TimeSpan.Parse("0:00:05");
 
         [TestMethod]
-        private void PlayerPreferencesDefaultCorrectly()
+        public void PlayerPreferencesDefaultCorrectly()
         {
             Twins.Models.Singletons.PlayerPreferences playerPreferences = Twins.Models.Singletons.PlayerPreferences.Instance;
 
@@ -36,10 +36,10 @@ namespace TwinsTests
             Assert.AreEqual(ExpectedRow, playerPreferences.Row, "Se esperaba como valor de filas " + ExpectedRow
                 + ", pero se obtuvo en su lugar " + playerPreferences.Row);
 
-            Assert.AreEqual(ExpectedBuiltInDecks, playerPreferences.BuiltInDecks, "La lista de barajas pre-hechas es " +
+            Assert.AreEqual(ExpectedBuiltInDecks.Count, playerPreferences.BuiltInDecks.Count, "La lista de barajas pre-hechas es " +
                 "diferente a la esperada");
 
-            Assert.AreEqual(ExpectedPlayerDecks, playerPreferences.PlayerDecks, "La lista de barajas del jugador debería" +
+            Assert.AreEqual(ExpectedPlayerDecks.Count, playerPreferences.PlayerDecks.Count, "La lista de barajas del jugador debería" +
                 " de estar vacía e inicializada");
 
             Assert.AreEqual(ExpectedSelectedDeck, playerPreferences.SelectedDeck, "La baraja seleccionada no es la esperada, " +
